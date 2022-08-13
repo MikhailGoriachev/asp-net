@@ -1,0 +1,35 @@
+﻿@page
+@model OneToManyEfCore.Pages.SelectModel
+@{
+}
+
+<h3>@Model.Task</h3>
+
+@* вывод коллекции данных в соответствии с запросом на выборку данных *@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Индекс</th>
+        <th>Категория</th>
+        <th>Название</th>
+        <th>Цена 1 экз., руб.</th>
+        <th>Дата начала</th>
+        <th>Длительность, мес.</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model.Publications)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.PubIndex</td>
+            <td>@user.Category.CategoryName</td>
+            <td>@user.Title</td>
+            <td>@user.Cost</td>
+            <td>@($"{user.Start:dd/MM/yyyy}")</td>
+            <td>@user.Duration</td>
+        </tr>
+    }
+    </tbody>
+</table>

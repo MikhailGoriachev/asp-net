@@ -1,0 +1,38 @@
+﻿@page
+
+@model BindingPropsToParams.Pages.Binding02Model
+@{
+}
+
+<h3>Привязка к сложным объектам</h3>
+
+<h3>
+    @if (@Request.Method == "GET")
+    {
+        @Model.Message
+    }
+    else
+    {
+        @: Обрабатывается запрос с методом @Request.Method
+    }
+</h3>
+<form method="post">
+    <p>
+        <label>Имя:</label><br />
+        <input type="text" name="name" />
+    </p>
+    <p>
+        <label>Возраст:</label><br />
+        <input type="number" name="age" />
+    </p>
+    <input type="submit" value="Отправить" />
+</form>
+
+@* вывод данных, полученных из формы *@
+@if (Request.Method == "POST")
+{
+    <h3>Полученные данные</h3>
+    <p>Name: @Model.Admin?.Name</p>
+    <p>Age: @Model.Admin?.Age</p>
+    <p>@Model.Message</p>
+}

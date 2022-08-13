@@ -1,0 +1,15 @@
+﻿@*
+маршрут набираем руками в адресной строке браузера
+/api/Values/List
+*@
+<p>
+    Controller: ValuesController <br />
+    View: List
+</p>
+
+<ul>
+    @foreach (string item in Model) {
+        <li>@item</li>
+    }
+</ul>
+

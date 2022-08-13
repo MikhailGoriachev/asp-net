@@ -1,0 +1,90 @@
+﻿@page
+@model Home_Work.Pages.SailingFleetModel
+@namespace Home_Work.Models
+@{
+    ViewData["title"] = "Страница sailingFleet";
+    ViewData["pageHeader"] = "СТРАНИЦА ПАРУСНЫХ КОРАБЛЕЙ";
+   
+    ViewBag.IsActive = 2;
+}
+
+<section>
+
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+            Имя страницы <b>Book.cshtml</b>. В ответ на GET-запрос клиента <b>/Book</b> сформировать представление
+            со сведениями об учебнике по программированию на Python (используйте модель): автор Бриггс Дж.;
+            название «Python для детей. Самоучитель по программированию», год издания 2017.
+        </div>
+    </details>
+
+    <!--Форма изменения-->
+    <form method="post">
+        <fieldset class="fields-ships">
+
+            @for (int i = 0; i < 3; i++)
+            {
+
+                <div class="separate-ship @(i<2?"div-float":"")">
+
+                    <input type="hidden"  value=@SailingShip.PicNames[i] name="Ships[@i].Image">
+                    <div>
+                        <label>Название и тип корабля</label>
+
+                        <input placeholder="Введите название и тип" type="text" value=@Model.SailingShips[i].ShipName name="Ships[@i].ShipName" >
+                    </div>
+
+
+                    <div>
+                        <label>Длины корабля</label>
+                        <input type="number" step="any" placeholder="Введите длину" value=@Math.Round(Model.SailingShips[i].Length,2) name="Ships[@i].Length" >
+                    </div>
+                    
+
+                    <div>
+                        <label>Ширины корабля</label>
+                        <input type="number" placeholder="Введите ширину" value=@Math.Round(Model.SailingShips[i].Width,2)  name=Ships[@i].Width >
+                    </div>
+                    
+
+                    <div>
+                        <label>Водоизмещение корабля</label>
+                        <input type="number" placeholder="Введите водоизмещение" value=@Model.SailingShips[i].Weight name=Ships[@i].Weight >
+                    </div>
+                    
+
+                    <div>
+                        <label>Годы производства корабля</label>
+                        <input type="number" placeholder="Введите год спуска на воду" value=@Model.SailingShips[i].ProdYear  name="Ships[@i].ProdYear" >
+                    </div>
+                </div>
+                
+            }       
+
+            
+        <div class="form-buttons">
+            <input type="submit" value="Отавить" id="btnAdd">
+        </div>
+
+        </fieldset>
+
+    </form>
+
+    @*Вывод сформированной коллецкии*@
+    <div class="cards-container">
+        @foreach (var ship in Model.SailingShips)
+        {
+            <div class="card">
+                <img src="~/images/ships/@ship.Image" alt="@ship.ShipName" />
+                <div>Название: <b>@ship.ShipName</b></div>
+                <div>Длина корабля: <b>@($"{ship.Length:f1}")</b></div>
+                <div>Ширина корабля: <b>@($"{ship.Width:f1}")</b></div>
+                <div>Ширина корабля: <b>@($"{ship.Width:f1}")</b></div>
+                <div>Водоизмещение: <b>@ship.Weight</b></div>
+                <div>Год выпуска: <b>@ship.ProdYear</b></div>
+            </div>
+        }
+    </div>
+
+</section>

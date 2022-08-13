@@ -1,0 +1,115 @@
+﻿@page "{handler?}"
+@model Homework.Pages.Clients
+
+@{
+    ViewBag.Header = "Данные о клиентах";
+    
+    // Флаг отображения формы при загрузке страницы
+    ViewBag.InvokeForm = Request.Method is "GET" && RouteData.Values["handler"] is "Edit";
+}
+
+
+
+@if (Model.ErrMsg != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+        <b>Ошибка!</b> @Model.ErrMsg
+    </div>
+}
+
+<button type="button" class="btn btn-sm btn-outline-dark ms-2 mb-4"
+        data-bs-toggle="modal" data-bs-target="#modalForm">
+    Добавить клиента
+</button>
+
+@* Таблица с данными *@
+<table class="table text-start">
+    <thead class="fw-bold align-top">
+    <tr>
+        <td>Фамилия</td>
+        <td>Имя</td>
+        <td>Отчество</td>
+        <td>Паспорт</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.DisplayClients is not null && Model.DisplayClients.AsEnumerable().Any()){
+        @foreach (var client in Model.DisplayClients){
+            <tr>
+                <td>@client.Surname</td>
+                <td>@client.Name</td>
+                <td>@client.Patronymic</td>
+                <td>@client.Passport</td>
+                <td class="w-100-px px-0">
+                    <form class="d-inline-block" method="post" asp-page-handler="Delete" asp-route-id="@client.Id">
+                        <a class="btn btn-sm btn-outline-primary me-2" asp-page-handler="Edit"
+                           asp-route-id="@client.Id" title="Редактировать данные">
+                            <i class="fa-solid fa-pen-to-square"></i></a>
+                    </form>
+                </td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="5" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>
+
+
+@* Форма ввода данных в модальном диалоге *@
+<div class="modal @(ViewBag.InvokeForm ? "show d-block" : "")" id="modalForm" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Введите данные поездки</h5>
+                @if (ViewBag.InvokeForm){
+                    <button asp-page="@nameof(Travels)" form="clientForm" class="btn-close" formnovalidate></button>
+                }else{
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                }
+            </div>
+
+            <div class="modal-body">
+                <form class="mb-4 p-0" method="post" enctype="multipart/form-data" id="clientForm">
+                    <div class="row">
+
+                        <input asp-for="Client!.Id" type="hidden"/>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client!.Surname" required/>
+                            <label class="form-label mx-2" asp-for="Client!.Surname">Фамилия клиента: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client!.Name" required/>
+                            <label class="form-label mx-2" asp-for="Client!.Name">Имя клиента: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client!.Patronymic" required/>
+                            <label class="form-label mx-2" asp-for="Client!.Patronymic">Отчество клиента: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client!.Passport" required/>
+                            <label class="form-label mx-2" asp-for="Client!.Passport">Паспорт клиента: </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                @if (ViewBag.InvokeForm){
+                    <input asp-page-handler="Edit" form="clientForm" class="btn btn-primary" type="submit" value="Изменить">
+                    <button asp-page="@(nameof(Travels))" form="clientForm" class="col-3 btn btn-outline-secondary ms-2"
+                            formnovalidate>Отмена</button>
+                }else{
+                    <input asp-page-handler="Add" form="clientForm" class="btn btn-primary" type="submit" value="Добавить">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

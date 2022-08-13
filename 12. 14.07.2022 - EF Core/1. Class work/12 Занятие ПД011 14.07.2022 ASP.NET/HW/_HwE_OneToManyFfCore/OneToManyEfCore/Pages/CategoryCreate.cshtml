@@ -1,0 +1,15 @@
+﻿@page
+@model OneToManyEfCore.Pages.CategoryCreateModel
+@{
+}
+
+<h3>Добавление нового вида издания</h3>
+
+<form class="w-25" method="post">
+    <div class="mb-3">
+        <label class="form-label" asp-for="Category.CategoryName">Название вида издания:</label>
+        <input class="form-control" asp-for="Category.CategoryName" type="text"/>
+    </div>
+    
+    <input class="btn btn-success" type="submit" value="Добавить"/>
+</form>

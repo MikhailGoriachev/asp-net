@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Values";
+}
+
+<ul>
+    @foreach (var vegetable in @Model) {
+        <li>@vegetable</li>
+    }
+</ul>
+
+<div>
+    <a asp-controller="Home">На главную</a>
+</div>

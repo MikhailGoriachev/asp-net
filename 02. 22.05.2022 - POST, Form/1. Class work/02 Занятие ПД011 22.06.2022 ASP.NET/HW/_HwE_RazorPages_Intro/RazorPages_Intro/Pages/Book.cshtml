@@ -1,0 +1,19 @@
+﻿@page
+@model RazorPages_Intro.Pages.BookModel
+@{
+    ViewBag.Title = "Задача 1";
+    ViewBag.Active = "Book";
+    ViewBag.Header = "Вывод сведений о книге";
+}
+
+<h3>Сведения о книге по программированию</h3>
+<div class="card-info">
+    <figure class="align-center">
+        <img src="@Model.BookData.Cover" width="240" alt="Обложка книги '@Model.BookData.Title'" />
+    </figure>
+    <ul>
+        <li><b>Автор:</b> @Model.BookData.Author</li>
+        <li><b>Название:</b> @Model.BookData.Title</li>
+        <li><b>Год издания:</b> @Model.BookData.Year</li>
+    </ul>
+</div>

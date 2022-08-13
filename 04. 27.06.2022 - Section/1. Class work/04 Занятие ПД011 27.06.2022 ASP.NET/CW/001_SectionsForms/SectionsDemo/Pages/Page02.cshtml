@@ -1,0 +1,38 @@
+﻿@page
+@model SectionsDemo.Pages.Page02Model
+@{
+    ViewBag.Title = "Страница 2";
+}
+
+<h3>@ViewBag.Title</h3>
+
+@* Ввдение в тег-хелперы форм *@
+<h3>@Model.Message</h3>
+<form method="post" asp-antiforgery="true">
+    @* тег-хелперы asp-for для привязки к полям модели, приязка двухсторонняя *@
+    <p>
+        <label asp-for="Product.Name">Название</label><br/>
+        <input type="text" asp-for="Product.Name"/>
+    </p>
+    <p>
+        <label asp-for="Product.Price">Цена</label><br/>
+        <input asp-for="Product.Price"/>
+    </p>
+    <p>
+        <label asp-for="Product.Company">Производитель</label><br/>
+        <input type="text" asp-for="Product.Company"/>
+    </p>
+    <input type="submit" value="Отправить"/>
+    <input type="reset" value="Отмена"/>
+</form>
+
+@* --------------------------------------------------------------- *@
+@if (Request.Method == "POST")
+{
+    <h3>Вы ввели данные о товаре:</h3>
+    <ul>
+        <li>Наименование: @Model.Product.Name</li>
+        <li>Цена: @Model.Product.Price</li>
+        <li>Производитель: @Model.Product.Company</li>
+    </ul>
+}

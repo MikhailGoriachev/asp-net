@@ -1,0 +1,151 @@
+﻿@page "{handler?}"
+@model Homework.Pages.Travels
+
+@{
+    ViewBag.Header = "Данные о поездках";
+    
+    // Флаг отображения формы при загрузке страницы
+    ViewBag.InvokeForm = Request.Method is "GET" && RouteData.Values["handler"] is "Edit";
+}
+
+<button type="button" class="btn btn-sm btn-outline-dark ms-2 mb-4"
+        data-bs-toggle="modal" data-bs-target="#modalForm">
+    Добавить издание
+</button>
+
+@if (Model.ErrMsg != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+        <b>Ошибка!</b> @Model.ErrMsg
+    </div>
+}
+
+@* Таблица с данными *@
+<table class="table text-center" xmlns="http://www.w3.org/1999/html">
+    <thead class="fw-bold align-top">
+    <tr>
+        <td>Фамилия И.О<br/> клиента</td>
+        <td>Паспорт</td>
+        <td>Страна</td>
+        <td>Цель поездки</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td>Стоимость транспотных<br/> услуг</td>
+        <td>Стоимость оформления<br/> визы</td>
+        <td>Дата начала<br/> пребывания</td>
+        <td>Кол-во дней</td>
+        <td>Стоимость (полная)</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.DisplayTravels is not null && Model.DisplayTravels.AsEnumerable().Any()){
+        @foreach (var travel in Model.DisplayTravels){
+            <tr>
+                <td class="text-start text-nowrap">@travel.Client!.FullName</td>
+                <td>@travel.Client.Passport</td>
+                <td>@travel.Route!.Country!.Name</td>
+                <td>@travel.Route!.Purpose!.Name</td>
+                <td>@(travel.Route.DailyCost + travel.Route.Country.DailyCost)</td>
+                <td>@(travel.Route.Country.TransferCost)</td>
+                <td>@(travel.Route.Country.VisaCost)</td>
+                <td>@($"{travel.StartDate:dd.MM.yy}")</td>
+                <td>@travel.Duration</td>
+                <td>@(Math.Floor((travel.Duration * (travel.Route!.DailyCost + travel.Route!.Country!.DailyCost)
+                                  + travel.Route.Country.TransferCost + travel.Route.Country.VisaCost) * 1.03))
+                </td>
+                <td class="w-100-px px-0">
+                    <form class="d-inline-block" method="post" asp-page-handler="Delete" asp-route-id="@travel.Id">
+                        <a class="btn btn-sm btn-outline-primary me-2" asp-page-handler="Edit"
+                           asp-route-id="@travel.Id" title="Редактировать данные">
+                            <i class="fa-solid fa-pen-to-square"></i></a>
+                        <button class="btn btn-sm btn-outline-danger" type="submit" title="Удалить данные">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="11" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>
+
+
+@* Форма ввода данных в модальном диалоге *@
+<div class="modal @(ViewBag.InvokeForm ? "show d-block" : "")" id="modalForm" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Введите данные поездки</h5>
+                @if (ViewBag.InvokeForm){
+                    <button asp-page="@nameof(Travels)" form="travelForm" class="btn-close"formnovalidate></button>
+                }else{
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                }
+            </div>
+
+            <div class="modal-body">
+                <form class="mb-4 p-0" method="post" enctype="multipart/form-data" id="travelForm">
+                    <div class="row">
+
+                        <input asp-for="Travel.Id" type="hidden"/>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client.Surname" required/>
+                            <label class="form-label mx-2" asp-for="Client.Surname">Фамилия клиента: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client.Name" required/>
+                            <label class="form-label mx-2" asp-for="Client.Name">Имя клиента: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client.Patronymic" required/>
+                            <label class="form-label mx-2" asp-for="Client.Patronymic">Отчество клиента: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Client.Passport" required/>
+                            <label class="form-label mx-2" asp-for="Client.Passport">Паспорт клиента: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" asp-for="SelectedCountryId" asp-items="Model.CountriesList"></select>
+                            <label class="form-label mx-2" asp-for="SelectedCountryId" >Страна назначения:</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <select class="form-select" asp-for="SelectedPurposeId" asp-items="Model.PurposesList"></select>
+                            <label class="form-label mx-2" asp-for="SelectedPurposeId">Причина поездки: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="date" asp-for="Travel.StartDate" required/>
+                            <label class="form-label mx-2" asp-for="Travel.StartDate">Дата начала пребывания: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="number" asp-for="Travel.Duration" min="1"
+                                   required/>
+                            <label class="form-label mx-2" asp-for="Travel.Duration">Количество дней пребывания:</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                @if (ViewBag.InvokeForm){
+                    <input asp-page-handler="Edit" form="travelForm" class="btn btn-primary" type="submit" value="Изменить">
+                    <button asp-page="@(nameof(Travels))" form="travelForm" class="col-3 btn btn-outline-secondary ms-2"
+                            formnovalidate>Отмена</button>
+                }else{
+                    <input asp-page-handler="Add" form="travelForm" class="btn btn-primary" type="submit" value="Добавить">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

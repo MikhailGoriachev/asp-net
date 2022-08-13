@@ -1,0 +1,39 @@
+﻿@page
+@model RazorPagesSyntaxPost.Pages.Post04Model
+@{
+}
+
+<form method="post">
+    <p>
+        Person1 Name:<br/> 
+        <input name="people[0].name" /><br/>
+        Person1 Age:<br/>
+        <input name="people[0].age" />
+    </p>
+    <p>
+        Person2 Name:<br/> 
+        <input name="people[1].name" /><br/>
+        Person2 Age:<br/>
+        <input name="people[1].age" />
+    </p>
+    <p>
+        Person3 Name:<br/> 
+        <input name="people[2].name" /><br/>
+        Person3 Age:<br/>
+        <input name="people[2].age" />
+    </p>
+    <input type="submit" value="Отправить" />
+</form>
+
+@* вывод сотрудников *@
+@if (Model.People.Length > 0)
+{
+    <h3>Список сотрудников</h3>
+    <ul>
+        @foreach (var person in Model.People)
+        {
+            <li>@person.Name (возраст, лет: @person.Age)</li>
+        }
+    </ul>
+}
+

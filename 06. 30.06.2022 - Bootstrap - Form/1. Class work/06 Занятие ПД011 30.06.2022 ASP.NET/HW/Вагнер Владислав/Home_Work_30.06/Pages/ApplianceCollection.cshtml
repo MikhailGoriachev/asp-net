@@ -1,0 +1,83 @@
+﻿@page
+@model Home_Work.Pages.ApplianceCollectionModel
+@namespace Home_Work.Models
+@using Home_Work.Utilities;
+@{
+    ViewData["title"] = "Страница 1";
+    ViewData["pageHeader"] = "СТРАНИЦА 1";
+   
+    ViewBag.IsActive = 1;
+}
+@functions{
+    @*public void showCollection(List<Appliance> AppCollection)
+    {
+        foreach (var appliance in AppCollection)
+            {
+                <div class="card">
+                                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                                <div><span>Наименование: @appliance.Name</span></div>
+                                <div><span>Артикул:  @appliance.Article</span></div>
+                                <div><span>Цена:  @appliance.Price</span></div>
+                                <div><span>Количество:  @appliance.Quantity</span></div>
+                </div>
+
+            }
+    }*@
+}
+
+
+<section>
+    
+@section Styles {
+    <link rel="stylesheet" href="~/styles/task1.css">
+}
+
+    <!--Задание-->
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+        <p>
+            Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, 
+            тип техники, артикул, цена, количество, изображение). В коллекции должно 
+            быть не менее 12 элементов. Коллекцию инициируйте набором записей, 
+            храните коллекцию в файле формата JSON в папке App_Data проекта. 
+            По кнопкам submit, размещенным на странице вызывайте обработчики запросов POST:
+        </p>
+
+        <ul>
+            <li>вывод коллекции, упорядоченной по наименованию</li>
+            <li>вывод коллекции, упорядоченной по убыванию цены</li>
+            <li><i>добавление новой записи о товаре, файл с изображением формируйте по типу товара, не загружайте его на сервер</i> </li>
+            <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+            <li>вывод части коллекции – товары с ценой, попадающей в заданный диапазон</li>
+        </ul>
+        </div>
+    </details>
+
+   
+    <!--Кнопки-->
+
+  <div class="btn-group-md gap-3">
+      <a asp-page-handler="SortByName" class="col-lg-4 btn btn-primary me-2">Упорядочить по наименованию</a>
+      <a asp-page-handler="SortByPrice"  class="col-lg-3 btn btn-primary my-2 me-2">Упорядочить убыванию цены</a>
+      <a asp-page-handler="SortByQuantity"  class="col-lg-4 btn btn-primary my-2 me-2">Упорядочить по возрастанию количества</a>
+      <a asp-page-handler="AddAppliance"  class="col-lg-2 btn btn-info my-2 me-2">Добавить прибор</a>
+  </div>
+
+  <div class="row my-4">
+      @foreach (var appliance in @Model.appliances)
+      {
+          <div class="card col-sm-3 border-dark mx-3 mt-2 mb-2">
+              <div><img class="card-img-top" src="../images/appliances/@appliance.Image"/ alt=@appliance.Image></div>
+              
+              <div class="card-header">
+                  <div><span>Наименование: @appliance.Name</span></div>
+              </div>
+              <div ><span>Артикул:  @appliance.VendorCode</span></div>
+              <div><span>Цена:  @appliance.Price</span></div>
+              <div><span>Количество:  @appliance.Quantity</span></div>
+          </div>
+      }
+  </div>
+
+</section>

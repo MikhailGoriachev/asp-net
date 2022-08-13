@@ -1,0 +1,195 @@
+﻿/*Задание общего стиля*/
+body, head {
+    font-size: 10pt;
+    font-family: 'Open Sans','Roboto Thin', 'sans-serif';
+    padding: 0;
+    margin: 0;
+}
+
+.text-Big {
+    font-size: 1.2rem;
+}
+
+/*Главный блок*/
+main {
+    background: rgba(255, 255, 255,1);
+    margin-left: 14.7rem;
+    margin-top: 3.5rem;
+    margin-right: 1.5rem;
+    min-height: 90vh;
+    overflow: auto;
+}
+
+/*Блок с заголовком*/
+header {
+    /*Создание размытого фона*/
+    background: rgba(140, 154, 255,0.45);
+    backdrop-filter: blur(12px);
+    box-shadow: 1px -1px 7px 0px #0d0c0c;
+    text-align: center;
+    height: 3.5rem;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+    header h1 {
+        margin-top: 0.6rem;
+        font-weight: normal;
+        line-height: 0.89;
+    }
+
+/*region Кнопки и блок навигации*/
+
+/*Блок навигации по страницам*/
+nav {
+    background: rgba(153, 158, 194);
+    /*background: linear-gradient(rgb(153, 158, 194) 15%, rgb(79, 91, 175));*/
+    width: 14.06rem;
+    height: 100%;
+    margin-top: 3.5rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Размер шрифта для кнопки*/
+.link-text {
+    font-size: 1.2rem;
+}
+
+.current {
+    background: white;
+    color: black;
+    border: 2px solid white;
+}
+
+/*endregion*/
+
+/*Подвал*/
+footer {
+    position: relative;
+    z-index: 3;
+    padding: 1.2%;
+    padding-right: 0;
+    /*height: 4.5rem;*/
+    width: 98.8%;
+    background: rgba(177, 179, 199);
+}
+
+/*region Стили для кнопки "вверх"*/
+.up-link {
+    position: fixed;
+    right: 3rem;
+    bottom: 0;
+    z-index: 5;
+    text-decoration: none;
+    display: block;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-style: normal;
+    border-radius: 13px;
+    background: rgba(140, 154, 255,0.42);
+    backdrop-filter: blur(10px);
+    margin-bottom: 1rem;
+}
+
+.up-link:hover {
+    background: royalblue;
+    color: white;
+}
+
+.up-link img {
+    width: 1.5rem;
+}
+/*endregion*/
+
+/*region Стили для details*/
+details {
+    margin-left: 1rem;
+}
+
+    details > summary {
+        font-size: 1.1rem;
+    }
+
+summary::marker {
+    color: rgb(113, 119, 152);
+}
+
+summary {
+    cursor: pointer;
+    background: rgba(255, 255, 255,1);
+}
+
+details.task-details {
+    /*margin: 0.5rem 0;*/
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    width: 80%;
+    background: rgb(240, 240, 240);
+    border-radius: 18px;
+}
+
+.task-details div {
+    padding: 1rem;
+}
+/*endregion*/
+
+/*region Дополнительно по текстам*/
+.text-bigger {
+    font-size: 1rem;
+}
+
+/*Стили для списков*/
+.text-size-bigger, p, ul > li {
+    font-size: 1.04rem;
+}
+/*endregion*/
+
+.btn-group-md a:hover {
+    background: rgb(239 239 239);
+    color: black;
+}
+
+/*Фон формы*/
+details .row form {
+    background: rgb(150, 150, 150,0.39);
+}
+
+/*Настройка выпадающего списка кнопки*/
+.card{
+    position: static;
+}
+
+/*Ширина навигационной кнопки*/
+.dropdown a{
+    width: 86%;
+}
+
+.card .list-group-item{
+    position: inherit;
+}
+
+.dropdown-item.add-elem-item{
+    padding: 0 1rem 0 1rem;
+    transition: 10ms;
+}
+
+.dropdown-item.add-elem-item:hover{
+    background: transparent;!important;
+}
+
+.add-elem-item a{
+    transition: 500ms;
+}
+
+.add-elem-item a:hover{
+    background: rgb(159, 159, 159);
+    color: black;
+}
+

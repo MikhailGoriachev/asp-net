@@ -1,0 +1,192 @@
+﻿@page
+@model HomeWork.Pages.SailingFleetModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 2;
+
+    // название страницы
+    ViewData["Header"] = "Задача 2. Корабли";
+}
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Задача 2. Корабли</h2>
+        </summary>
+
+        <!-- #region Задача 2 -->
+        <p>
+            <b>Задача 2.</b> Имя страницы <b>SailingFleet.cshtml</b>. В ответ на GET-запрос клиента <b>/SailingFleet</b>
+            сформировать
+            представление с формой для ввода в массив сведений о трех парусных кораблях (длина в метрах, ширина в
+            метрах, водоизмещение в тоннах, название, год постройки, изображение): линейный корабль «Виктория», чайный
+            клиппер «Катти Сарк» и барк «Крузенштерн». Используйте модель, коллекцию. Изображение задавайте
+            присваиванием заранее известного имени файла в соответствующее поле элемента массива (хард-код). Метод
+            обработки формы – POST, массив выводите на этой же странице.
+        </p>
+        <!-- #endregion -->
+
+    </details>
+</article>
+
+<article>
+
+
+    <!-- Форма для ввода данных -->
+    <form method="post" class="form-grid">
+        <h2 class="form-grid-header text-align-center">Добавление кораблей</h2>
+
+        <!-- Первый корабль -->
+        <div>
+
+            <!-- Изображение -->
+            <input type="hidden" name="ships[0].FileName" value="victory.jpeg">
+
+            <!-- Название -->
+            <div class="field">
+                <label for="nameId0" class="field-label">Название:</label>
+                <input type="text" id="nameId0" name="ships[0].Name" class="text-field-input"
+                    placeholder="Название корабля" value="линейный корабль «Виктория»" required readonly>
+            </div>
+
+            <!-- Длина -->
+            <div class="field">
+                <label for="lengthId0" class="field-label">Длина:</label>
+                <input type="number" id="lengthId0" name="ships[0].Length" class="text-field-input"
+                    placeholder="Длина корабля (м)" min="0" value="46" required>
+            </div>
+
+            <!-- Ширина -->
+            <div class="field">
+                <label for="WidthId0" class="field-label">Ширина:</label>
+                <input type="number" id="WidthId0" name="ships[0].Width" class="text-field-input"
+                    placeholder="Ширина корабля (м)" min="0" value="12" required>
+            </div>
+
+            <!-- Водоизмещение -->
+            <div class="field">
+                <label for="displacementId0" class="field-label">Водоизмещение:</label>
+                <input type="number" id="displacementId0" name="ships[0].Displacement" class="text-field-input"
+                    placeholder="Водоизмещение корабля (т)" min="0" value="1300" required>
+            </div>
+
+            <!-- Год постройки -->
+            <div class="field">
+                <label for="yearId0" class="field-label">Год постройки:</label>
+                <input type="number" id="yearId0" name="ships[0].Year" class="text-field-input"
+                    placeholder="Год постройки корабля" min="500" value="1721" required>
+            </div>
+
+        </div>
+
+        <!-- Второй корабль -->
+        <div>
+
+            <!-- Изображение -->
+            <input type="hidden" name="ships[1].FileName" value="sark.png">
+
+            <!-- Название -->
+            <div class="field">
+                <label for="nameId0" class="field-label">Название:</label>
+                <input type="text" id="nameId0" name="ships[1].Name" class="text-field-input"
+                    placeholder="Название корабля" value="чайный клиппер «Катти Сарк»" required readonly>
+            </div>
+
+            <!-- Длина -->
+            <div class="field">
+                <label for="lengthId0" class="field-label">Длина:</label>
+                <input type="number" id="lengthId0" name="ships[1].Length" class="text-field-input"
+                    placeholder="Длина корабля (м)" min="0" value="85" required>
+            </div>
+
+            <!-- Ширина -->
+            <div class="field">
+                <label for="WidthId0" class="field-label">Ширина:</label>
+                <input type="number" id="WidthId0" name="ships[1].Width" class="text-field-input"
+                    placeholder="Ширина корабля (м)" min="0" value="11" required>
+            </div>
+
+            <!-- Водоизмещение -->
+            <div class="field">
+                <label for="displacementId0" class="field-label">Водоизмещение:</label>
+                <input type="number" id="displacementId0" name="ships[1].Displacement" class="text-field-input"
+                    placeholder="Водоизмещение корабля (т)" min="0" value="936" required>
+            </div>
+
+            <!-- Год постройки -->
+            <div class="field">
+                <label for="yearId0" class="field-label">Год постройки:</label>
+                <input type="number" id="yearId0" name="ships[1].Year" class="text-field-input"
+                    placeholder="Год постройки корабля" min="500" value="1869" required>
+            </div>
+
+        </div>
+
+        <!-- Трейтий корабль -->
+        <div>
+
+            <!-- Изображение -->
+            <input type="hidden" name="ships[2].FileName" value="krusenstern.jpg">
+
+            <!-- Название -->
+            <div class="field">
+                <label for="nameId0" class="field-label">Название:</label>
+                <input type="text" id="nameId0" name="ships[2].Name" class="text-field-input"
+                    placeholder="Название корабля" value="барк «Крузенштерн»" required readonly>
+            </div>
+
+            <!-- Длина -->
+            <div class="field">
+                <label for="lengthId0" class="field-label">Длина:</label>
+                <input type="number" id="lengthId0" name="ships[2].Length" class="text-field-input"
+                    placeholder="Длина корабля (м)" min="0" value="46" required>
+            </div>
+
+            <!-- Ширина -->
+            <div class="field">
+                <label for="WidthId0" class="field-label">Ширина:</label>
+                <input type="number" id="WidthId0" name="ships[2].Width" class="text-field-input"
+                    placeholder="Ширина корабля (м)" min="0" value="14" required>
+            </div>
+
+            <!-- Водоизмещение -->
+            <div class="field">
+                <label for="displacementId0" class="field-label">Водоизмещение:</label>
+                <input type="number" id="displacementId0" name="ships[2].Displacement" class="text-field-input"
+                    placeholder="Водоизмещение корабля (т)" min="0" value="5805" required>
+            </div>
+
+            <!-- Год постройки -->
+            <div class="field">
+                <label for="yearId0" class="field-label">Год постройки:</label>
+                <input type="number" id="yearId0" name="ships[2].Year" class="text-field-input"
+                    placeholder="Год постройки корабля" min="500" value="1926" required>
+            </div>
+        </div>
+
+
+        <!-- Кнопки управления -->
+        <div class="form-grid-controls">
+            <input class="width-normal" type="submit" value="Добавить" />
+        </div>
+    </form>
+
+    <!-- Корабли -->
+    <div class="container">
+        @foreach (var item in @Model.ShipList)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="~/images/@item.FileName" alt="корабль">
+                </div>
+
+                <div>Название: <b>@item.Name</b></div>
+                <div>Длина: <b>@item.Length м</b></div>
+                <div>Ширина: <b>@item.Width м</b></div>
+                <div>Водоизмещение: <b>@item.Displacement т</b></div>
+                <div>Год постройки: <b>@item.Year</b></div>
+            </div>
+        }
+    </div>
+</article>

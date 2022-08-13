@@ -1,0 +1,24 @@
+﻿/*Кнопка удаления файла*/
+/*.delete-file*/
+.nav-form input[value="Удалить файл" i] {
+    width: 19.3rem;
+}
+
+.nav-form input[type="submit" i] {
+    width: 21.3rem;
+}
+
+
+
+.form-details {
+    margin-top: 1.2rem;
+}
+
+/*Выпадающий список*/
+select {
+    width: 16.1rem;
+}
+
+form input[type="number" i] {
+    width: 15.6rem;
+}

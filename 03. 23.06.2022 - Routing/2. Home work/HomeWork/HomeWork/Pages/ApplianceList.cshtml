@@ -1,0 +1,111 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.ApplianceList
+@{
+    // индекс страницы
+    ViewBag.indexTab = 2;
+
+    // название страницы
+    ViewData["Header"] = "Задача 2. Список техники";
+}
+
+@functions {
+    // вывод бытовой техники
+    private void ShowAppliance(Appliance appliance)
+    {
+        if (appliance != null)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="/images/appliances/@appliance.FileName" alt="Бытовая техника">
+                </div>
+
+                <div>Наименование: <b>@appliance.Name</b></div>
+                <div>Тип техники: <b>@appliance.Type</b></div>
+                <div>Артикул: <b>@appliance.VendorCode</b></div>
+                <div>Цена: <b>@appliance.Price &#8381;</b></div>
+                <div>Количество: <b>@appliance.Amount шт.</b></div>
+            </div>
+        }
+    }
+
+    // вывод коллекции бытовой техники
+    private void ShowApplianceList(List<Appliance> appliances)
+    {
+        <div class="container">@{
+                appliances.ForEach(a => ShowAppliance(a));
+            }</div>
+    }
+}
+
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Задача 2. Список техники</h2>
+        </summary>
+
+        <!-- #region Задача 2 -->
+        <p>
+            <b>Задача 2.</b> Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип техники,
+            артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов. Коллекцию
+            инициируйте набором записей, хранить коллекцию в файле не требуется. По ссылкам, размещенным на странице
+            вызывайте обработчики запросов GET:
+        </p>
+
+        <ul>
+            <li>вывод коллекции, упорядоченной по наименованию</li>
+            <li>вывод коллекции, упорядоченной по убыванию цены</li>
+            <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+        </ul>
+
+        <p>
+            В форме задайте диапазон цены, по кнопке submit выводите часть коллекции – товары с ценой, попадающей в
+            заданный диапазон.
+        </p>
+        <!-- #endregion -->
+
+    </details>
+</article>
+
+<article>
+
+
+    <!-- Форма для ввода данных -->
+    <form method="get" asp-page-handler="SelectByPriceRange" class="width-normal">
+
+        <!-- Цена -->
+        <div class="field">
+            <label for="priceMinId" class="field-label">Выборка по диапазону цен:</label>
+
+            <input type="number" id="priceMinId" name="MinPrice" min="0" class="text-field-input"
+                placeholder="Минимум (&#8381;)" required>
+
+            <input type="number" id="priceMaxId" name="MaxPrice" min="0" class="text-field-input"
+                placeholder="Максимум (&#8381;)" required>
+        </div>
+
+        <!-- Кнопки управления -->
+        <div class="form-grid-controls">
+            <input class="width-normal" type="submit" value="Показать" />
+        </div>
+    </form>
+
+    <!-- Сортировки -->
+    <h3>Сортировки</h3>
+    <div>
+        <a asp-page="/Appliancelist" class="link-button width-normal">По умоланию</a>
+        <a asp-page-handler="OrderByName" class="link-button width-normal">По наименованию</a>
+        <a asp-page-handler="OrderByDescPrice" class="link-button width-normal">По цене</a>
+        <a asp-page-handler="OrderByAmount" class="link-button width-normal">По количеству</a>
+    </div>
+
+    <h2 class="text-align-center">@Model.NameHandler</h2>
+
+
+    <!-- Вывод бытовой техники -->
+    @{
+        ShowApplianceList(Model.CurrentAppliances);
+    }
+</article>

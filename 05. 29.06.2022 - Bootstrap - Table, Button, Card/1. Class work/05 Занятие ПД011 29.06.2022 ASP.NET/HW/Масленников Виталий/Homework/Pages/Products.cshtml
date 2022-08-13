@@ -1,0 +1,104 @@
+﻿@page "{handler?}"
+@model Homework.Pages.AppliancesListModel
+@{
+	ViewBag.Header = "Бытовая техника";
+}
+
+@section styles{
+	<link rel="stylesheet" href="~/css/table.css">
+}
+
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary>
+		<p>Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип техники,
+		артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов. Коллекцию инициируйте
+		набором записей, храните коллекцию в файле формата JSON в папке App_Data проекта.
+		По кнопкам <b>submit</b>, размещенным на странице вызывайте обработчики запросов POST:</p>
+
+		<ul>
+			<li>вывод коллекции, упорядоченной по наименованию</li>
+			<li>вывод коллекции, упорядоченной по убыванию цены</li>
+			<li>вывод коллекции, упорядоченной по возрастанию количества</li>
+			<li><i>добавление новой записи о товаре, файл с изображением формируйте по типу товара, не загружайте его на сервер</i></li>
+			<li>вывод части коллекции – товары с ценой, попадающей в заданный диапазон.</li>
+		</ul>
+
+		<p>В форме задайте диапазон цены, по кнопке submit выводите часть коллекции – товары с ценой, попадающей в заданный диапазон. </p>
+	</details>
+</div>
+
+
+<div class="indented">
+
+	<div class="v-indent-20">
+		<form method="post">
+			<div>
+			Упорядочить по:
+			<input type="submit" asp-page-handler="OrderBy" asp-route-prop="Name" class="btn-blue" value="наименованию">
+			<input type="submit" asp-page-handler="OrderBy" asp-route-prop="Price" class="btn-blue" value="стоимости">
+			<input type="submit" asp-page-handler="OrderBy" asp-route-prop="Amount" asp-route-order="Desc" class="btn-blue" value="убыванию количества">
+			</div>
+			С ценой в диапазоне
+			<input class="t-input" type="number" name="priceFrom"/> — <input class="t-input" type="number" name="priceTo"/> р.
+
+			<input asp-page-handler="filter" class="btn-blue" type="submit" value="Показать">
+		</form>
+	</div>
+	
+	<div class="v-indent-20">
+		<form method="post">
+			<fieldset>
+				<legend>Введите данные о бытовой технике:</legend>
+
+				<div class="field"><label class="w2" asp-for="Product.Type">Тип: </label>
+					<select asp-for="Product.Type" asp-items="Model.Types"></select> </div>
+			
+				<div class="field"><label class="w2" asp-for="Product.Name">Наименование: </label>
+					<input type="text" asp-for="Product.Name" required/></div>
+			
+				<div class="field"><label class="w2" asp-for="Product.VendorCode">Артикул:</label>
+					<input type="text" asp-for="Product.VendorCode" required/></div>
+			
+				<div class="field"><label class="w2" asp-for="Product.Price">Цена:</label>
+					<input class="t-input" type="number"  asp-for="Product.Price" required/></div>
+			
+				<div class="field"><label class="w2" asp-for="Product.Amount">Количество: </label>
+					<input class="t-input" type="number"  asp-for="Product.Amount" required/></div>
+
+				<div><input asp-page-handler="Add" class="btn-blue" type="submit" value="Добавить"></div>
+			</fieldset>
+		</form>
+		
+	</div>
+
+	<table>
+		<thead>
+		<th>№</th>
+		<th>Фото</th>
+		<th>Название</th>
+		<th>Тип</th>
+		<th>Артикул</th>
+		<th>Цена</th>
+		<th>Количество</th>
+		</thead>
+
+		@{
+			var i = 1;
+			foreach (var item in Model.DisplayProducts!)
+			{
+						<tr>
+							<td>@(i++)</td>
+							<td><img class="img-200" src="@Model.ImageFolder/@item.Image" alt="Бытовая техника"/></td>
+							<td class="align-left">@item.Name</td>
+							<td class="align-left">@item.Type</td>
+							<td class="align-left">@item.VendorCode</td>
+							<td>@item.Price</td>
+							<td>@item.Amount</td>
+						</tr>
+			}
+		}
+
+	</table>
+</div>

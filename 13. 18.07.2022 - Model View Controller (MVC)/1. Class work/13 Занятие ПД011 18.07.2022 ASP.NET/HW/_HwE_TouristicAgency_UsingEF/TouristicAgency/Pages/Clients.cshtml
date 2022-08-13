@@ -1,0 +1,31 @@
+﻿@page
+@model TouristicAgency.Pages.ClientsModel
+@{
+    ViewBag.Title = "Клиенты";
+}
+
+<h3>@ViewBag.Title туристического агентства</h3>
+
+<table class="table table-hover">
+    <theader>
+        <tr>
+            <th>Ид</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Паспорт</th>
+        </tr>
+    </theader>
+    <tbody>
+    @foreach (var client in Model.Clients)
+    {
+        <tr>
+            <td>@client.Id</td>
+            <td>@client.Surname</td>
+            <td>@client.Name</td>
+            <td>@client.Patronymic</td>
+            <td>@client.Passport</td>
+        </tr>
+    }
+    </tbody>
+</table>

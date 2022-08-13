@@ -1,0 +1,21 @@
+﻿@page
+@model DemoEf.Pages.CreateModel
+@{
+}
+
+<h3>Добавление нового пользователя</h3>
+
+<form class="w-25" method="post">
+    <div class="mb-3">
+        <label class="form-label" asp-for="Person!.Name">Имя:</label>
+        <input class="form-control" asp-for="Person!.Name" type="text" />
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label" asp-for="Person!.Age">Возраст:</label>
+        <input class="form-control" asp-for="Person!.Age" type="number" />
+    </div>
+
+    <input class="btn btn-success" type="submit" value="Добавить" />
+
+</form>

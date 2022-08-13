@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "Image": "cover1.jpg",
+    "Author": "Рэй Брэдбери",
+    "Title": "451° по Фаренгейту",
+    "Year": 1953,
+    "Amount": 12
+  },
+  {
+    "Id": 9,
+    "Image": "cover2.jpg",
+    "Author": "К. Бейтс",
+    "Title": "Изучаем Java",
+    "Year": 2019,
+    "Amount": 19
+  },
+  {
+    "Id": 10,
+    "Image": "cover4.jpg",
+    "Author": "Радченко Н.А.",
+    "Title": "1С: Предприятие. Практическое пособие разработчика",
+    "Year": 2012,
+    "Amount": 2
+  },
+  {
+    "Id": 11,
+    "Image": "cover3.jpg",
+    "Author": "Васильев А.Н.",
+    "Title": "Программирование на JavaScript",
+    "Year": 2019,
+    "Amount": 13
+  },
+  {
+    "Id": 12,
+    "Image": "cover2.jpg",
+    "Author": "К. Бейтс",
+    "Title": "Изучаем Java",
+    "Year": 2019,
+    "Amount": 3
+  }
+]

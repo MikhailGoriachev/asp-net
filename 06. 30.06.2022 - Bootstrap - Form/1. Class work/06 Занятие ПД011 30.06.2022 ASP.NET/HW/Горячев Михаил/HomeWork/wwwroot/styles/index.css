@@ -1,0 +1,37 @@
+/* Стиль страницы "Главная" (index.html) */
+
+/* статья */
+article {
+    font-family: Calibri, sans-serif;
+    font-size: 1.4rem;
+}
+
+/* заголовки h2 */
+summary h2 {
+    display: inline;
+
+    font-family: 'Calibri Light', sans-serif;
+    font-size: 1.6rem;
+    color: #2e74b5;
+}
+
+/* заголовки */
+summary {
+    margin-top: 1.2rem;
+}
+
+/* элементы после summary */
+summary + * {
+    margin: 0 0 0.8rem;
+}
+
+details > ul {
+    margin-left: 0.64cm;
+}
+
+/* зелёная ссылка */
+a.link-green {
+    text-decoration: none;
+    font-weight: bold;
+    color: #168253;
+}

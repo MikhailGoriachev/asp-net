@@ -1,0 +1,92 @@
+[
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Triangle, H_W6ASP_NET",
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 3.0,
+      "Item2": 3.0,
+      "Item3": 3.0
+    },
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Square, H_W6ASP_NET",
+    "A": 0.0,
+    "Type": "квадрат",
+    "Image": "kvadrat.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Square, H_W6ASP_NET",
+    "A": 0.0,
+    "Type": "квадрат",
+    "Image": "kvadrat.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Rectangle, H_W6ASP_NET",
+    "A": 0.0,
+    "B": 0.0,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Rectangle, H_W6ASP_NET",
+    "A": 0.0,
+    "B": 0.0,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Triangle, H_W6ASP_NET",
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 2.0,
+      "Item2": 3.0,
+      "Item3": 4.0
+    },
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Triangle, H_W6ASP_NET",
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 4.0,
+      "Item2": 7.0,
+      "Item3": 8.0
+    },
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Square, H_W6ASP_NET",
+    "A": 0.0,
+    "Type": "квадрат",
+    "Image": "kvadrat.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Rectangle, H_W6ASP_NET",
+    "A": 0.0,
+    "B": 0.0,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Rectangle, H_W6ASP_NET",
+    "A": 0.0,
+    "B": 0.0,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "H_W6ASP_NET.Models.Task02.Triangle, H_W6ASP_NET",
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 3.0,
+      "Item2": 4.0,
+      "Item3": 5.0
+    },
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  }
+]

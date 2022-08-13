@@ -1,0 +1,68 @@
+﻿@page "{handler?}/{id?}"
+@model HomeWork.Pages.Forms.ClientForm
+
+@{
+    ViewBag.Title = Model.IsAdd ? "Добавление клиента" : "Редактирование клиента";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <hr/>
+
+    <!-- #region Форма для записи -->
+    <form method="post" asp-antiforgery="true" class="mx-auto w-50">
+
+        <!-- Вывод сообщения об ошибке -->
+        @if (@Model.ErrorMessage != null)
+        {
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div>@Model.ErrorMessage</div>
+            </div>
+        }
+
+        <!-- Статус формы -->
+        <input type="hidden" asp-for="IsAdd">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="ClientItem!.Id">
+
+        <!-- Фамилия -->
+        <div class="form-floating my-3">
+            <input type="text" asp-for="ClientItem!.Surname" placeholder="Фамилия" class="form-control"
+                   required>
+            <label asp-for="ClientItem!.Surname">Фамилия</label>
+        </div>
+
+        <!-- Имя -->
+        <div class="form-floating my-3">
+            <input type="text" asp-for="ClientItem!.Name" placeholder="Имя" class="form-control"
+                   required>
+            <label asp-for="ClientItem!.Name">Имя</label>
+        </div>
+
+        <!-- Отчество -->
+        <div class="form-floating my-3">
+            <input type="text" asp-for="ClientItem!.Patronymic" placeholder="Отчество" class="form-control"
+                   required>
+            <label asp-for="ClientItem!.Patronymic">Отчество</label>
+        </div>
+
+        <!-- Паспорт -->
+        <div class="form-floating my-3">
+            <input type="text" asp-for="ClientItem!.Passport" placeholder="Паспорт" class="form-control"
+                   required>
+            <label asp-for="ClientItem!.Passport">Паспорт</label>
+        </div>
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               asp-page="/Forms/ClientForm"
+               asp-page-handler="Save"
+               type="submit" value="@(Model.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger" asp-page="/Data/ClientList">Выход</a>
+
+    </form>
+    <!-- #endregion -->
+
+</section>

@@ -1,0 +1,102 @@
+[
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Triangle, BootstrapIntro",
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Triangle, BootstrapIntro",
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Triangle, BootstrapIntro",
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Rectangle, BootstrapIntro",
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Triangle, BootstrapIntro",
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Triangle, BootstrapIntro",
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Rectangle, BootstrapIntro",
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Rectangle, BootstrapIntro",
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Triangle, BootstrapIntro",
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Rectangle, BootstrapIntro",
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Rectangle, BootstrapIntro",
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Rectangle, BootstrapIntro",
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapIntro.Models.Task02.Square, BootstrapIntro",
+    "Type": "квадрат",
+    "Image": "square.png"
+  }
+]

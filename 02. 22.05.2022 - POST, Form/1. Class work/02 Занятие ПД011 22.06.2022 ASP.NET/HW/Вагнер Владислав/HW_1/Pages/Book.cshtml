@@ -1,0 +1,26 @@
+﻿@page
+@model HW_1.Pages.BookModel
+@{
+    ViewData["title"] = "Страница boook";
+    ViewData["pageHeader"] = "СТРАНИЦА BOOK";
+}
+
+<section>
+
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+            Имя страницы Book.cshtml. В ответ на GET-запрос клиента /Book сформировать представление
+            со сведениями об учебнике по программированию на Python (используйте модель): автор Бриггс Дж.;
+            название «Python для детей. Самоучитель по программированию», год издания 2017.
+        </div>
+    </details>
+
+    <div class="card">
+        <div><img src="~/wwroot/images/book_cover.jpeg" alt="Обложка" /></div>
+        <div><span>Название: @Model.Book.BookName</span></div>
+        <div><span>Автор:  @Model.Book.Author</span></div>
+        <div><span>Год издания:  @Model.Book.PubYear</span></div>
+    </div>
+
+</section> 

@@ -1,0 +1,74 @@
+﻿@page "{handler?}"
+@model Homework.Pages.Groups
+
+@{
+    ViewBag.Header = "Периодические издания";
+}
+
+@if(Model.GroupedMinMaxPrice is not null){
+    <table class="table text-center">
+        <thead class="fw-bold">
+        <tr>
+            <td>Тип издания</td>
+            <td>Минимальная цена</td>
+            <td>Максимальная цена</td>
+            <td>Количество</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach(var group in Model.GroupedMinMaxPrice!)
+        {
+            <tr>
+                <td>@group.Type</td>
+                <td>@group.MinPrice</td>
+                <td>@group.MaxPrice</td>
+                <td>@group.Amount</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@if(Model.GroupedAvgPrice is not null){
+    <table class="table text-center">
+        <thead class="fw-bold">
+        <tr>
+            <td>Тип издания</td>
+            <td>Средняя цена</td>
+            <td>Количество</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach(var group in Model.GroupedAvgPrice!)
+        {
+            <tr>
+                <td>@group.Type</td>
+                <td>@group.AvgPrice.ToString(".#")</td>
+                <td>@group.Amount</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+@if(Model.GroupedDurAvgPrice is not null){
+    <table class="table text-center">
+        <thead class="fw-bold">
+        <tr>
+            <td>Длительность подписки</td>
+            <td>Средняя цена</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach(var group in Model.GroupedDurAvgPrice!)
+        {
+            <tr>
+                <td>@group.Duration</td>
+                <td>@group.AvgPrice.ToString(".#")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+

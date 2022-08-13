@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Homework.Models.Book>
+
+@{
+    ViewBag.Header = "Книги";
+}
+
+<h3 class="color-2 mb-4">@ViewBag.Title</h3>
+
+@* вывод карточек книг *@
+<div class="row">
+    @foreach (var book in Model!)
+    {
+        <div class="col-md-auto mb-4">
+            <div class="card h-100 w-240-px">
+                <div class="card-header h-220-px bg-body border-0 p-0 text-center">
+                    <img class="m1 mh-100 img-fluid" src="/images/@book.Image"
+                         alt="Фото @book.Title">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title color-2">@book.Title</h5>
+                    <p class="card-text color-1">@book.Author</p>
+                </div>
+                <div class="card-footer bg-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item color-1">Год издания: <span class="color-3">@book.Year)</span></li>
+                        <li class="list-group-item color-1">Количество: <span class="color-3">@book.Amount</span></li>
+                        <li class="list-group-item color-1">
+                            <a asp-controller="Library" asp-action="RemoveBook" asp-route-id="@book.Id"
+                                    class="btn btn-sm btn-outline-danger" type="submit" title="Удалить данные">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

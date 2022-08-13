@@ -1,0 +1,7 @@
+﻿/* Стиль для страницы "Задача 1. Список техники" */
+
+img.card-img-top {
+    max-height: 15rem;
+    width: auto;
+    margin: 1rem auto;
+}

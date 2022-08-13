@@ -1,0 +1,49 @@
+﻿@page
+@model RazorPages_Post.Pages.SailingFleetModel
+@{
+    ViewBag.Title = "Страница 2";
+    ViewBag.Active = "SailingFleet";
+    ViewBag.Header = "Ввод и отображение коллекции сведений о знаменитых парусных кораблях";
+}
+
+<!-- Условие задачи -->
+<details>
+    <summary><b>Страница 2.</b> @ViewBag.Header</summary>
+    <p>
+        Имя страницы <b>SailingFleet.cshtml.</b> В ответ на
+        GET-запрос клиента <b>/SailingFleet</b> сформировать представление с 
+        формой для ввода в массив сведений о трех парусных кораблях (длина в 
+        метрах, ширина в метрах, водоизмещение в тоннах, название, год постройки,
+        изображение): линейный корабль «Виктория», чайный клиппер «Катти Сарк» и 
+        барк «Крузенштерн». Используйте модель, коллекцию. Изображение задавайте 
+        присваиванием заранее известного имени файла в соответствующее поле 
+        элемента массива (хард-код). Метод обработки формы – POST, массив выводите 
+        на этой же странице.
+    </p>
+</details>
+
+<h3 class="align-center">Знаменитые парусные корабли</h3>
+
+<div class="container">
+    
+    @* Рендеринг форм для массива кданных о кораблях *@
+
+    @foreach (var ship in Model.Fleet)
+    {
+        <div class="card-info">
+            <figure class="align-center">
+                <img src="@ship.Image" alt="@ship.Name - изображение" height="280"/>
+            </figure>
+            <ul>
+                <li><b>Тип:</b> @ship.Type</li>
+                <li><b>Название:</b> @ship.Name</li>
+                <li><b>Длина, м: </b>@ship.Length</li>
+                <li><b>Ширина, м: </b>@ship.Width</li>
+                <li><b>Водоизмещение, т: </b>@ship.Displacement</li>
+                <li><b>Год постройки: </b>@ship.Year</li>
+            </ul>
+        </div>
+    }
+
+    @* форма ввлода массива объектов Sail - fleet *@
+</div>

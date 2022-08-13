@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewData["Header"]</title>
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="~/styles/style.css" />
+    <link rel="stylesheet" href="~/styles/tile.css" />
+    <link rel="stylesheet" href="~/styles/buttons.css" />
+    <link rel="stylesheet" href="~/styles/control-block.css" />
+    <!-- #endregion -->
+
+    <!-- #region Шрифты -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet" />
+    <!-- #endregion -->
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="~/images/logo.png" type="image/x-icon" />
+</head>
+
+<body>
+
+    <!-- #region Заголовок-->
+    <header>
+        <a asp-page="Index">
+            <img class="logo" src="~/images/logo.png" alt="logo" />
+            <h2>Home Work</h2>
+        </a>
+    </header>
+    <!-- #endregion -->
+
+    <!-- #region Контент страницы -->
+    <main>
+        <!-- #region Навигация -->
+        <nav>
+            <!-- Главная -->
+            <a class="@(ViewBag.indexTab == 0 ? "select-tab" : "")" asp-page="/Index">
+                <img src="images/home.svg" />
+                Главная
+            </a>
+
+            <!-- Задача 1. Учебник -->
+            <a class="@(ViewBag.indexTab == 1 ? "select-tab" : "")" asp-page="/Book">
+                <img src="images/one.svg" />
+                Задача 1. Учебник
+            </a>
+
+            <!-- Задача 2. Корабли -->
+            <a class="@(ViewBag.indexTab == 2 ? "select-tab" : "")" asp-page="/SailingFleet">
+                <img src="images/two.svg" />
+                Задача 2. Корабли
+            </a>
+
+            <!-- Задача 3. Города -->
+            <a class="@(ViewBag.indexTab == 3 ? "select-tab" : "")" asp-page="/Cities">
+                <img src="images/three.svg" />
+                Задача 3. Города
+            </a>
+        </nav>
+        <!-- #endregion -->
+
+        <!-- #region Контент -->
+        <section class="content">
+            @RenderBody()
+        </section>
+        <!-- #endregion -->
+    </main>
+    <!-- #endregion -->
+
+    <!-- #region Подвал страницы -->
+    <footer>
+        <!-- <span>Сведения о странице:</span> -->
+        <div>
+            Разработчик:
+            <a href="https://github.com/MikhailGoriachev" target="_bank"> Горячев Михаил </a>
+        </div>
+        <div>Группа: ПД011</div>
+        <div>Город: Донецк</div>
+        <div>Год создания: 2022</div>
+        <div>
+            Поддержка:
+            <a href="mailto:goriachevmichael@gmail.com">goriachevmichael@gmail.com</a>
+        </div>
+    </footer>
+    <!-- #endregion -->
+</body>
+
+</html>

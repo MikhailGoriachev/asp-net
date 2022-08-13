@@ -1,0 +1,41 @@
+﻿@page "{id?}"
+
+@model DemoEf.Pages.GetAllModel
+@{
+}
+
+<h3>Список пользователей</h3>
+<div><a class="btn btn-success" asp-page="/Create">Добавить пользователя</a></div>
+
+@* вывод коллекции данных о пользователях *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Age</td>
+                @* управление: переход на редактирование записи, удаление записи
+                    идентификатор записи передаем параметром маршрута 
+                *@
+                <td>
+                    <form class="form-check-inline" method="post" asp-page-handler="Delete" asp-route-id="@user.Id">
+                        <a class="btn btn-sm btn-outline-warning" asp-page="/Edit" asp-route-id="@user.Id">Редактировать</a>
+                        <button class="btn btn-sm btn-outline-danger" type="submit">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+﻿@page
+@model HomeWork.Pages.Data.ObjectiveList
+
+@{
+    ViewBag.Title = "Цели поездки";
+    ViewBag.PageName = "/Data";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h3 class="display-6 text-center">Цели поездки</h3>
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var objective in Model.Objectives)
+        {
+            <tr>
+                <th>@objective.Id</th>
+                <td>@objective.Name</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

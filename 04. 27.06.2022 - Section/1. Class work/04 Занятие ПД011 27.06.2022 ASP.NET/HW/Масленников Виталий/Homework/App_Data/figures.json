@@ -1,0 +1,133 @@
+[
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 5.934840193923284,
+    "Area": 35.222328127407366,
+    "Perimeter": 23.739360775693136
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "SideA": 9.105403159484515,
+    "SideB": 6.171957433869606,
+    "SideC": 9.94737799620812,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 9.105403159484515,
+      "Item2": 6.171957433869606,
+      "Item3": 9.94737799620812
+    },
+    "Area": 180.9504758517544,
+    "Perimeter": 25.224738589562243
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 3.821923579363927,
+    "SideB": 3.958369508606915,
+    "Area": 15.12858576077997,
+    "Perimeter": 15.287694317455708
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 8.694693796506225,
+    "Area": 75.59770021500384,
+    "Perimeter": 34.7787751860249
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 2.0393260433927645,
+    "Area": 4.158850711259987,
+    "Perimeter": 8.157304173571058
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "SideA": 7.0729788900788995,
+    "SideB": 1.1181408520614609,
+    "SideC": 7.789378995142359,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 7.0729788900788995,
+      "Item2": 1.1181408520614609,
+      "Item3": 7.789378995142359
+    },
+    "Area": 53.43064403379259,
+    "Perimeter": 15.98049873728272
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 5.192267443970423,
+    "SideB": 8.79468661075894,
+    "Area": 45.66436496896623,
+    "Perimeter": 20.769069775881693
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 7.761031507975072,
+    "Area": 60.23361006778182,
+    "Perimeter": 31.044126031900287
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 2.6522358503359067,
+    "Area": 7.03435500580703,
+    "Perimeter": 10.608943401343627
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 9.590747978338598,
+    "SideB": 5.905167539339311,
+    "Area": 56.634973639669205,
+    "Perimeter": 38.36299191335439
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "SideA": 6.152357582057945,
+    "SideB": 6.432246999456563,
+    "SideC": 6.8473035445309565,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 6.152357582057945,
+      "Item2": 6.432246999456563,
+      "Item3": 6.8473035445309565
+    },
+    "Area": 117.64750901011493,
+    "Perimeter": 19.431908126045464
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "SideA": 6.103543196349468,
+    "SideB": 5.561237044967278,
+    "SideC": 5.138171668341729,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 6.103543196349468,
+      "Item2": 5.561237044967278,
+      "Item3": 5.138171668341729
+    },
+    "Area": 95.54515064260443,
+    "Perimeter": 16.802951909658475
+  }
+]

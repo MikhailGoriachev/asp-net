@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- подключение bootstrap через CDN: Content Delivery Network -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
+
+  <!-- подключение bootstrap локально -->
+  <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+  <script src="lib/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-3">
+
+  <h3>Базовый класс таблицы</h3>
+  <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Таблица с "чередующимися" строками</h3>
+  <p>Класс .table-striped добавляет "чередование" к стилям оформления таблицы:</p>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Таблица с границами</h3>
+  <p>Класс .table-bordered добавляет границы к строкам и ячейкам таблицы:</p>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Строки с реакцией на наведение курсора мыши (hover)</h3>
+  <p>Класс .table-hover добавляет реакцию строки на наведение мыши на строку (серый фон,
+    когда курсор мыши проходит над строкой):</p>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+    <h3>Несколько классов, примененных к таблице</h3>
+  <table class="table table-primary table-hover table-bordered">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Темная таблица</h3>
+  <p>Класс .table-dark создает таблицу с черным фоном:</p>
+  <table class="table table-dark">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Темная таблица с чередованием и ховером</h3>
+  <p>Классы .table-striped и .table-hover добавляют эффекты "чередования" и выделения строки:</p>
+  <table class="table table-dark table-striped table-hover table-bordered">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    <tr>
+      <td>Tim</td>
+      <td>Yanson</td>
+      <td>tim@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Таблица без границ</h3>
+  <p>Класс .table-borderless убирает границы строк и ячеек таблицы:</p>
+  <table class="table table-borderless">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Контекстые классы для цвета текста</h3>
+  <p>Контекстные классы м.б. использованы для строк или ячеек. Классы: .table-primary, .table-success, .table-info,
+    .table-warning, .table-danger, .table-active, .table-secondary, .table-light and .table-dark:</p>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Default</td>
+      <td>Defaultson</td>
+      <td>def@somemail.com</td>
+    </tr>
+    <tr class="table-primary">
+      <td>Primary</td>
+      <td>Joe</td>
+      <td>joe@example.com</td>
+    </tr>
+    <tr class="table-success">
+      <td>Success</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr class="table-danger">
+      <td>Danger</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr class="table-info">
+      <td>Info</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    <tr class="table-warning">
+      <td>Warning</td>
+      <td>Refs</td>
+      <td>bo@example.com</td>
+    </tr>
+    <tr class="table-active">
+      <td>Active</td>
+      <td>Activeson</td>
+      <td>act@example.com</td>
+    </tr>
+    <tr class="table-secondary">
+      <td>Secondary</td>
+      <td>Secondson</td>
+      <td>sec@example.com</td>
+    </tr>
+    <tr class="table-light">
+      <td>Light</td>
+      <td>Angie</td>
+      <td>angie@example.com</td>
+    </tr>
+    <tr class="table-dark">
+      <td>Dark</td>
+      <td>Bo</td>
+      <td>bo@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <h3>Цвет заголовка таблицы</h3>
+  <p>Можно использовать любой из контекстных цветов только для заголовка таблицы:</p>
+  <table class="table">
+    <thead class="table-primary">
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tfoot class="table-secondary">
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tfoot>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Еще одна таблица с цветным заголовком</h3>
+  <table class="table">
+    <thead class="table-success">
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Компактная таблица</h3>
+  <p>Класс .table-sm class делает таблицу компактнее, уменьшая внутренние отступы на половину:</p>
+  <table class="table table-bordered table-sm">
+    <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>john@example.com</td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>Moe</td>
+      <td>mary@example.com</td>
+    </tr>
+    <tr>
+      <td>July</td>
+      <td>Dooley</td>
+      <td>july@example.com</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Адаптивная таблица</h3>
+  <p>Класс .table-responsive при необходимости добавляет таблице полосу прокрутки:</p>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+      <tr class="table-primary">
+        <th>#</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Sex</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>Anna</td>
+        <td>Pitt</td>
+        <td>35</td>
+        <td>New York</td>
+        <td>USA</td>
+        <td>Female</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Anna</td>
+        <td>Pitt</td>
+        <td>35</td>
+        <td>New York</td>
+        <td>USA</td>
+        <td>Female</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Anna</td>
+        <td>Pitt</td>
+        <td>35</td>
+        <td>New York</td>
+        <td>USA</td>
+        <td>Female</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Класс .table-responsive-sm создает адаптивную таблицу с прокруткой, добавляемой при ширине окна браузера
+    меньше 576px</p>
+  <p>Изменяйте размер окна браузера (например, за счет изменения размера окна средств разработчика) чтобы увидеть эффект</p>
+  <div class="table-responsive-sm">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Sex</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+        <th>Example</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>Anna</td>
+        <td>Pitt</td>
+        <td>35</td>
+        <td>New York</td>
+        <td>USA</td>
+        <td>Female</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Anna</td>
+        <td>Pitt</td>
+        <td>35</td>
+        <td>New York</td>
+        <td>USA</td>
+        <td>Female</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Anna</td>
+        <td>Pitt</td>
+        <td>35</td>
+        <td>New York</td>
+        <td>USA</td>
+        <td>Female</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

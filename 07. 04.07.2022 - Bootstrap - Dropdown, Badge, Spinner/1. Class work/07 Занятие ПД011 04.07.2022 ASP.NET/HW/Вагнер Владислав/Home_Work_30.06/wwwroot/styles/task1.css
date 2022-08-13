@@ -1,0 +1,15 @@
+﻿/*Выделение карточки*/
+.card:hover {
+    border: 2px solid rgb(71, 76, 101);
+}
+
+/*Для всех блоков карточки*/
+.card div {
+    margin: 0.5rem 0;
+    height: 70%;
+}
+
+
+.card span {
+    font-size: 1.1rem;
+}

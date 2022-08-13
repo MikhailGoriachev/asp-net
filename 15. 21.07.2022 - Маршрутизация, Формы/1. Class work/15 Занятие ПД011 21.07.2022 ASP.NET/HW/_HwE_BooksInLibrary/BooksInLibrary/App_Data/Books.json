@@ -1,0 +1,92 @@
+﻿[
+  {
+    "Id": 12,
+    "Author": "Файн Я.В.",
+    "Title": "Angular и TypeScript. Сайтостроение для профессионалов",
+    "PubYear": 2020,
+    "Quantity": 3,
+    "Cost": 890,
+    "Cover": "cover012.jpg"
+  },
+  {
+    "Id": 2,
+    "Author": "Васильев А.Н.",
+    "Title": "Как программировать на JavaScript",
+    "PubYear": 2019,
+    "Quantity": 2,
+    "Cost": 780,
+    "Cover": "cover002.jpg"
+  },
+  {
+    "Id": 4,
+    "Author": "Гальярди В.",
+    "Title": "Раздельный Django",
+    "PubYear": 2022,
+    "Quantity": 6,
+    "Cost": 630,
+    "Cover": "cover004.jpg"
+  },
+  {
+    "Id": 5,
+    "Author": "Троелсен Э.",
+    "Title": "Язык C# 9. Платформа .NET 5",
+    "PubYear": 2021,
+    "Quantity": 8,
+    "Cost": 1200,
+    "Cover": "cover005.jpg"
+  },
+  {
+    "Id": 6,
+    "Author": "Боон К.",
+    "Title": "Pascal для всех",
+    "PubYear": 2003,
+    "Quantity": 2,
+    "Cost": 250,
+    "Cover": "cover006.jpg"
+  },
+  {
+    "Id": 7,
+    "Author": "Фаронов В.В.",
+    "Title": "Delphi 3",
+    "PubYear": 2003,
+    "Quantity": 8,
+    "Cost": 250,
+    "Cover": "cover007.jpg"
+  },
+  {
+    "Id": 8,
+    "Author": "Кузнецов В.М.",
+    "Title": "PHP 7. Самоучитель",
+    "PubYear": 2019,
+    "Quantity": 1,
+    "Cost": 900,
+    "Cover": "cover008.jpg"
+  },
+  {
+    "Id": 9,
+    "Author": "Постолит А.",
+    "Title": "Основы искусственного интеллекта в примерах на Python",
+    "PubYear": 2021,
+    "Quantity": 5,
+    "Cost": 690,
+    "Cover": "cover009.jpg"
+  },
+  {
+    "Id": 10,
+    "Author": "МакФарланд Д.",
+    "Title": "JavaScript и jQuery",
+    "PubYear": 2022,
+    "Quantity": 9,
+    "Cost": 980,
+    "Cover": "cover010.jpg"
+  },
+  {
+    "Id": 11,
+    "Author": "Блинов Н.Н.",
+    "Title": "Java. Методы программирования",
+    "PubYear": 2013,
+    "Quantity": 6,
+    "Cost": 450,
+    "Cover": "cover011.jpg"
+  }
+]

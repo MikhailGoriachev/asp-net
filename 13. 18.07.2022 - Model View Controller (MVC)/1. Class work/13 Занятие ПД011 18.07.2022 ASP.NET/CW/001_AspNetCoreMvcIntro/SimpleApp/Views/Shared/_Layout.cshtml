@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="~/images/emotion_smile.png" type="image/x-icon">
+
+    <!-- подключение стилей -->
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <nav>
+        <a asp-controller="Home" asp-action="Index">Index</a> |
+        <a asp-controller="Home" asp-action="Number">Number</a> |
+        <a asp-controller="Home" asp-action="Driver">Driver</a> |
+        <a asp-controller="Home" asp-action="Products">Products</a> |
+        <a asp-controller="Home" asp-action="Other">Other</a> 
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+    <footer></footer>
+</body>
+</html>

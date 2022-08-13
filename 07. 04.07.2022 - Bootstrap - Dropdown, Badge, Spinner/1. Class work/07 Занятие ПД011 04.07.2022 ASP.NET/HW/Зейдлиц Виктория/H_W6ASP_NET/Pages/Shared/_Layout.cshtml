@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/style/index.css" rel="stylesheet" />
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="~/img/program-64.png" type="image/x-icon" />
+
+   <!-- подключение bootstrap локально -->
+   <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+   <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("style", false)
+</head>
+<body class="body">
+    <header class="container-fluid">
+     <div class="pt-2 pb-2 ps-1 text-center"><h3 class="fw-bold">@ViewBag.Header</h3></div>
+    </header>
+ <main >
+     <div class="container-fluid">
+     <div class="row">
+            <!-- ссылки на страницы -->
+        <nav class="a col-2 col-md-2 mt-3">
+              <div class="btn-group-vertical gap-2">
+                  <a class="btn btn-lg 
+                     @(ViewBag.indexTab == 0 ? "select-tab" : "")" asp-page="/Index" style="font-size:medium">На главную</a>
+                  <a class="btn btn-lg
+                     @(ViewBag.indexTab == 1 ? "select-tab" : "")" asp-page="/Appliances" style="font-size:medium">Страница 1</a>
+                  <a class="btn btn-lg
+                     @(ViewBag.indexTab == 2 ? "select-tab" : "")" asp-page="/Figures" style="font-size:medium">Страница 2</a>
+             </div>
+               @RenderSection("Menu", false)
+        </nav>
+
+        <section class="col-10 col-md-10 mt-3">
+            @RenderBody()
+        </section>
+       </div>
+       </div>
+ </main>
+
+        <!-- подвал страницы-->
+    <footer class="container-fluid ">
+        <div id="footer" class="row col-12">
+                <h3>Данные о разработчике:</h3>               
+                <p>
+                     группа:<b> ПД011 г.Донецк 2022г.</b><br>студент: <b>Зейдлиц Виктория</b>
+                </p>
+        </div>
+    </footer>
+</body>
+</html>

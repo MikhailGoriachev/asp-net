@@ -1,0 +1,242 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.ApplianceList
+@{
+    ViewBag.Title = "Задание 1. Список техники";
+}
+
+@functions {
+    // вывод бытовой техники
+    void ShowAppliance(Appliance appliance)
+    {
+        <div class="col-3 p-2">
+            <div class="card shadow-sm p-0 h-100">
+                <div class="card-header d-flex h-20rem">
+                    <img src="/images/appliances/@appliance.FileName" class="my-auto mx-auto d-block mh-100 mw-100"
+                         alt="Бытовая техника">
+                </div>
+                <div class="card-body">
+                    <ul class="list-group-flush p-0 m-0">
+                        <li class="list-group-item">Наименование: <b>@appliance.Name</b></li>
+                        <li class="list-group-item">Тип техники: <b>@appliance.Type</b></li>
+                        <li class="list-group-item">Артикул: <b>@appliance.VendorCode</b></li>
+                    </ul>
+
+                </div>
+                <div class="card-footer">
+                    <ul class="list-group-flush p-0 m-0">
+                        <li class="list-group-item">Цена: <b>@appliance.Price &#8381;</b></li>
+                        <li class="list-group-item">Количество: <b>@appliance.Amount шт.</b></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+
+    // вывод коллекции бытовой техники
+    void ShowApplianceList(List<Appliance> appliances)
+    {
+        appliances.ForEach(a => ShowAppliance(a));
+    }
+
+}
+
+<!-- #region Задание 1 -->
+<div id="taskInfoModalId" class="modal fade">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Заголовок -->
+            <div class="modal-header h5">
+                Задание 1. Список техники
+            </div>
+
+            <!-- Контент -->
+            <div class="modal-body">
+                <p>
+                    <b>Страница 1</b>. Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип техники,
+                    артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов. Коллекцию инициируйте
+                    набором записей, храните коллекцию в файле формата JSON в папке App_Data проекта.
+                </p>
+
+                <p>
+                    По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:
+                </p>
+
+                <ul>
+                    <li>вывод коллекции, упорядоченной по наименованию</li>
+                    <li>вывод коллекции, упорядоченной по убыванию цены</li>
+                    <li>вывод коллекции, упорядоченной по возрастанию количества </li>
+                    <li>
+                        форма добавления элемента в коллекцию.  Предусмотрите возможность загрузки изображения на сервер
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Подвал -->
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+<!-- #region Модальное окно для формы добавления техники -->
+<div id="applianceFormModalId" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Заголовок окна -->
+            <div class="modal-header">
+                <h5>Добавление бытовой техники</h5>
+            </div>
+
+            <!-- #region Форма для доабавления техники -->
+            <form id="applianceFormId" enctype="multipart/form-data" method="post" asp-antiforgery="true" class="mx-5">
+
+                <!-- Наименование -->
+                <div class="form-floating my-3">
+                    <input type="text" asp-for="ApplianceItem.Name" placeholder="Наименование" class="form-control"
+                           required>
+                    <label asp-for="ApplianceItem.Name">Наименование</label>
+                </div>
+
+                <!-- Тип техники -->
+                <div class="form-floating my-3">
+                    <select id="typeId" asp-for="ApplianceItem.Type" class="form-select" required>
+                        <option value="холодильник" selected>холодильник</option>
+                        <option value="мультиварка">мультиварка</option>
+                        <option value="пылесос">пылесос</option>
+                    </select>
+                    <label asp-for="ApplianceItem.Type">Тип техники</label>
+                </div>
+
+                <!-- Артикул -->
+                <div class="form-floating my-3">
+                    <input type="text" asp-for="ApplianceItem.VendorCode" placeholder="Артикул" class="form-control"
+                           required>
+                    <label asp-for="ApplianceItem.VendorCode">Артикул</label>
+                </div>
+
+                <!-- Цена -->
+                <div class="form-floating my-3">
+                    <input type="number" asp-for="ApplianceItem.Price" min="0" class="form-control"
+                           placeholder="Цена (&#8381;)" required>
+                    <label asp-for="ApplianceItem.Price">Цена (&#8381;)</label>
+                </div>
+
+                <!-- Количество -->
+                <div class="form-floating my-3">
+                    <input type="number" asp-for="ApplianceItem.Amount" min="0" class="form-control"
+                           placeholder="Количество (шт.)" required>
+                    <label asp-for="ApplianceItem.Amount">Количество</label>
+                </div>
+
+                <!-- Файл изображения -->
+                <div class="my-3">
+                    <label asp-for="FileImage" class="form-label">Файл изображения:</label>
+                    <input type="file" asp-for="FileImage" class="form-control" required>
+                </div>
+
+            </form>
+            <!-- #endregion -->
+
+            <!-- Подвал модального окна -->
+            <div class="modal-footer">
+                <!-- Кнопки управления -->
+                <input form="applianceFormId" class="btn btn-success me-2"
+                       asp-page-handler="AddAppliance"
+                       type="submit" value="Добавить"/>
+                <input form="applianceFormId" class="btn btn-danger" data-bs-dismiss="modal"
+                       type="reset" value="Отмена"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+<!-- #region Управление коллекцией -->
+<div class="container-fluid px-5 my-4">
+    <div class="row m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-4 ps-0 pe-3">
+                <div class="container mx-auto bg-light shadow-sm border rounded-3 py-3">
+
+                    <h5 class="text-center">@ViewBag.Title</h5>
+
+                    <hr/>
+
+                    <div class="row">
+
+                        <!-- Условия задания -->
+                        <button type="button"
+                                class="col btn btn-success d-block mx-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#taskInfoModalId">
+                            Условия задания...
+                        </button>
+
+
+                        <!-- Добавление корабля -->
+                        <button type="button"
+                                class="col btn btn-primary d-block mx-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#applianceFormModalId">
+                            Добавить технику...
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #region Сортировка техники -->
+            <div class="col-8 ps-3 pe-0">
+                <div class="container mx-auto bg-light shadow-sm border rounded-3 py-3">
+                    <h5 class="text-center">Сортировка техники</h5>
+
+                    <hr/>
+
+                    <div class="row">
+                        <!-- По умоланию -->
+                        <a class="col btn btn-success d-block mx-3" asp-page="/Appliancelist">По умоланию</a>
+
+                        <!-- По наименованию -->
+                        <a class="col btn btn-primary d-block mx-3" asp-page-handler="OrderByName">
+                            По наименованию
+                        </a>
+
+                        <!-- По цене -->
+                        <a class="col btn btn-primary d-block mx-3" asp-page-handler="OrderByDescPrice">По цене</a>
+
+                        <!-- По количеству -->
+                        <a class="col btn btn-primary d-block mx-3" asp-page-handler="OrderByAmount">
+                            По
+                            количеству
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+<!-- #region Список техники -->
+<section class="my-4 mx-5 bg-light shadow-sm border rounded-3 p-3">
+    <h5 class="text-center">@Model.NameHandler</h5>
+
+    <hr>
+
+    <div class="container-sm mt-3">
+        <div class="row">
+            <!-- Вывод бытовой техники -->
+            @{
+                ShowApplianceList(Model.CurrentAppliances);
+            }
+        </div>
+    </div>
+</section>
+<!-- #endregion -->

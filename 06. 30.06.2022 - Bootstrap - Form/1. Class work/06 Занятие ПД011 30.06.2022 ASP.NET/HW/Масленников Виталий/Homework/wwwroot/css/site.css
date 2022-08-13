@@ -1,0 +1,115 @@
+﻿:root {
+	--text-color-1: #2E74B5;
+	--text-color-2: #2471A3;
+	--text-color-3: #808B96;
+}
+
+
+html, body {
+	/*font-family: Calibri, sans-serif;*/
+	font-size: 12pt;
+}
+
+header { background-color: #80bdff; }
+nav { max-width: 260px !important}
+
+.brief { font-size: 18px }
+
+.brief h2 { color: var(--text-color-1); }
+
+details, summary {
+	font-size: 1.1rem;
+	margin-bottom: 10px;
+}
+
+.img-h-200 {
+	height: 200px !important;
+	width: auto !important;
+	object-fit: contain !important;
+}
+
+.img-h-100 {
+	height: 100px !important;
+	width: auto !important;
+	object-fit: contain !important;
+}
+
+.f-20 { font-size: 20px; }
+
+.color-1 { color: var(--text-color-1); }
+.color-2 { color: var(--text-color-2); }
+.color-3 { color: var(--text-color-3); }
+
+.h-100 { height: 100px !important}
+
+
+/* стиль в хедере */
+/*header h1 {
+	margin: 0 0 0 4rem;
+	padding: 1rem;
+	font-size: 2.4rem;
+	color: steelblue;
+}*/
+
+/* стиль в футере */
+/*footer h4 {
+	margin: 0;
+	text-align: center;
+	font-size: 1rem;
+}*/
+
+
+/* region Стили для оформления контента */
+/*main h2 {
+	font-size: 1.6rem;
+	text-align: left;
+	color: #2E74B5
+}
+
+main p {
+	text-align: justify;
+	font-size: 1.4rem;
+}
+
+article > h2 {
+	margin-top: 1.2rem;
+	margin-bottom: 0;
+}
+
+article > p {
+	margin-top: 0;
+	margin-bottom: 0.8rem;
+}
+
+article > ul ul {
+	list-style: disc;
+}
+
+article li {
+	margin-bottom: 5px;
+}
+
+main ul {
+	margin-top: 0;
+	margin-bottom: 0.8rem;
+}
+
+main li {
+	text-align: justify;
+	font-size: 1.4rem;
+}
+
+.img-centered {
+	display: block;
+	margin: 10px auto;
+}
+
+summary {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #2E74B5;
+	cursor: pointer;
+}
+
+*/
+

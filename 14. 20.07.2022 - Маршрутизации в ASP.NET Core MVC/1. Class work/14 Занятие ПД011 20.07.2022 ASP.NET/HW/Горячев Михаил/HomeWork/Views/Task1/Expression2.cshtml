@@ -1,0 +1,29 @@
+﻿@model HomeWork.Models.Expression2
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h2>@ViewBag.Title</h2>
+
+    <hr>
+
+    @* условия задания *@
+    <img src="~/images/image2.png" alt="image2">
+
+    <hr>
+
+    @* исходные данные *@
+    <h5>Дано:</h5>
+    <ul>
+        <li>X: <b>@($"{Model.X:f7}")</b></li>
+        <li>Y: <b>@($"{Model.Y:f7}")</b></li>
+        <li>Z: <b>@($"{Model.Z:f7}")</b></li>
+    </ul>
+
+    <hr>
+
+    @* вычисление результата *@
+    <h5>Ответ:</h5>
+    <ul>
+        <li>A: <b>@($"{Model.A:f6}")</b></li>
+        <li>B: <b>@($"{Model.B:f7}")</b></li>
+    </ul>
+</section>

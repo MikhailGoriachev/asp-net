@@ -1,0 +1,114 @@
+﻿@page
+@model BootstrapIntro.Pages.Page2Model
+@{
+    ViewBag.Title = "Страница 2";
+    ViewBag.Active = "Page2";
+    ViewBag.Header = "Обработка коллекции плоских геометрических фигур";
+    
+    // TODO: вынести повторяющиеся функции в общий класс
+    // подсветить кнопку, в ответ на клик по которой выполняется обработка
+    string Active(string mode) => (string)ViewData["Mode"] == mode ? "" : "outline-";
+}
+
+@* Дополнительные пункты меню - обработчики для страницы *@
+@section PageProcessing {
+    <hr />
+
+    <!-- вертикальная группа кнопок - навигационных ссылок -->
+    <div class="btn-group-vertical gap-3">
+        <a class="btn btn-success" asp-page="/Page2" asp-page-handler="CreateFigure"
+           title="Добавление фигуры в коллекцию">
+            Добавить фигуру
+        </a>
+        
+        @* обрабатываемый в данный момент режим выделяем стилем *@
+        <a class="btn btn-@Active("source")secondary" asp-page="/Page2"
+           title="Вывод всей коллекции в исходном порядке">
+            Исходный набор
+        </a>
+        <a class="btn btn-@Active("squares")secondary" asp-page="/Page2" asp-page-handler="SquaresOnly"
+           title="Вывод только квадратов, упорядоченных по убыванию площади">
+            Только квадраты
+        </a>
+        <a class="btn btn-@Active("rectangles")secondary" asp-page="/Page2" asp-page-handler="RectanglesOnly"
+           title="Вывод только прямоугольников, упорядоченных по возрастанию периметров">
+            Только прямоугольники
+        </a>
+        <a class="btn btn-@Active("triangles")secondary" asp-page="/Page2" asp-page-handler="TrianglesOnly"
+           title="Вывод только треугольников, в обратном порядке, по отношению к порядку в коллекции">
+            Только треугольники
+        </a>
+        <a class="btn btn-@Active("areas")secondary" asp-page="/Page2" asp-page-handler="OrderByAreaDesc"
+           title="Вывод всей коллекции по убыванию площади">
+            По убыванию площади
+        </a>
+        <a class="btn btn-@Active("types")secondary" asp-page="/Page2" asp-page-handler="OrderByFigType"
+           title="Вывод всей коллекции, упорядоченной по типу фигур">
+            По типу фигур
+        </a>
+    </div>
+}
+
+    @* Контент страницы *@
+    <details>
+        <summary><b>Страница 2.</b> @ViewBag.Header</summary>
+        <p>
+            Требуется хранить в файле формата JSON в папке App_Data
+            проекта коллекцию плоских геометрических фигур: квадраты, прямоугольники,
+            разносторонние треугольники. Инициализация коллекции должна проводиться при
+            отсутствии файла (формируйте не менее 10 фигур). По кнопке-ссылке (метод
+            GET) формируйте фигуру, случайным образом выбирая ее тип и размер.
+        </p>
+        <p>
+            Добавляйте фигуры в коллекцию, сохраняйте коллекцию. Отображайте коллекцию
+            на этой же странице в таблице, стилизованной классами Bootstrap (в ячейке
+            таблицы также выводите изображение фигуры).
+        </p>
+        <p>
+            По ссылкам на этой странице (кнопкам в стиле Bootstrap) вызывайте
+            обработчики запросов GET:
+        </p>
+        <ul>
+            <li>вывод всей коллекции в исходном порядке</li>
+            <li>вывод только квадратов, по убыванию площади</li>
+            <li>вывод только прямоугольников, по возрастанию периметра</li>
+            <li>
+                вывод только треугольников, в обратном порядке по отношению
+                к порядку в коллекции
+            </li>
+            <li>вывод всей коллекции по убыванию площади</li>
+            <li>вывод всей коллекции, упорядоченной по типу фигур</li>
+
+        </ul>
+    </details>
+
+    <!-- Таблица с коллекцией фигур -->
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Тип фигуры</th>
+                <th>Изображение фигуры</th>
+                <th>Размеры фигуры</th>
+                <th>Периметр фигуры</th>
+                <th>Площадь фигуры</th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            // номер строки таблицы для вывода
+            var row = 1;
+            foreach (var figure in Model.Figures) {
+                <tr>
+                    <td>@(row++)</td>
+                    <td>@figure.Type</td>
+                    <td class="text-center"><img src="~/images/task02/@(figure.Image)" /></td>
+                    <td>@figure</td>
+                    <td>@($"{figure.Perimeter():f3}")</td>
+                    <td>@($"{figure.Area():f3}")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

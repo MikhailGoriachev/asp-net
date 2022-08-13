@@ -1,0 +1,47 @@
+﻿@page
+@model H_W1ASP.NET.Pages.CitiesModel
+@{
+    ViewData["Title"] = "Homework";
+}
+
+
+
+     <header>
+       <h2>Страница №3</h2>
+     </header>
+<main>
+     <nav>
+     <!-- ссылки на страницы -->
+        <ul class="aside-menu">
+         <li><a href="/Index">На главную</a></li>
+         <li><a href="/Book">Страница №1</a></li>
+         <li><a href="/SailingFleet">Страница №2</a></li>
+         <li><a href="/Cities">Страница №3</a></li>
+      </ul>
+     </nav>
+
+     <section>
+            <details class="indented">
+                <summary> Сведения о городах</summary>
+                    <b>Страница 3.</b> Имя страницы <b>Cities.cshtml.</b> В ответ на Get-запрос клиента <b>/Cities</b> сформировать
+                    представление со сведениями о пяти городах по Вашему выбору. Используйте модель, коллекцию. По каждому
+                    городу требуется выводить: название, год основания, герб, население на текущий момент, площадь.
+            </details>
+
+         <div class="for-blocks">
+              @foreach (var city in @Model.Cities)
+              {
+                  <div class="object-block"> <p><img src="~/img/emblem.png" width="180" height="180" alt="фото 002" /><br>
+                        Город: @city.NameCity<br>
+                        Площадь: @($"{city.Square:n2}") км<br>
+                        Год основания: @city.Year г.<br>
+                        Население: @city.Population чел.</p>
+                  </div>
+              }
+         </div>
+
+     </section>
+
+
+</main>
+

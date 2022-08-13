@@ -1,0 +1,48 @@
+﻿
+/*Контейнер карточек*/
+.contaner{
+    display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+
+.form-block {
+    width: 43rem;
+    /*background: rgb(239, 239, 239);*/
+    border-radius: 5px;
+    border: 0;
+    background: rgb(255 255 255 / 0)
+}
+
+/*Поля формы*/
+form input[type="number" i] {
+    font-size: 1rem;
+    width: 12.6rem;
+    height: 1.8rem;
+
+    margin: 0.8rem 0.8rem 0 0;
+
+    border-radius: 5px;
+    border: 1px solid rgb(136, 140, 173);
+
+    color: rgb(21, 21, 21);
+
+    cursor: pointer;
+}
+
+
+
+/*Кнопки формы*/
+form input[type="submit" i] {
+    font-size: 1rem;
+    width: 10rem;
+    height: 1.95rem;
+
+    margin: 0.8rem 0 0 0;
+
+    border-radius: 5px;
+    border: 1px solid rgb(136, 140, 173);
+    color: rgb(21, 21, 21);
+    cursor: pointer;
+    
+}

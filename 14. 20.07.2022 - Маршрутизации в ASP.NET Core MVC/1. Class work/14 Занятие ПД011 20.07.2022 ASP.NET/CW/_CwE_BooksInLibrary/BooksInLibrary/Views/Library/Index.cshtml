@@ -1,0 +1,42 @@
+﻿@* представление для вывода коллекции книг в библиотеке *@
+@model IEnumerable<Book>
+@{
+    ViewBag.Title = "Библиотека";
+}
+
+<h4>@ViewBag.Header</h4>
+
+@* Вывод коллекции сведений о книгах *@
+<table class="table table-borderless table-hover w-100 mx-auto">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Обложка</th>
+        <th>Автор</th>
+        <th>Название</th>
+        <th>Год издания</th>
+        <th>Количество</th>
+        <th>
+            <a class="btn btn-success" asp-controller="Library" asp-action="AddBook">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Id</td>
+            <td><img src="~/images/covers/@book.Cover" alt="обложка книги ид: @book.Id" height="80"/></td>
+            <td>@book.Author</td>
+            <td>@book.Title</td>
+            <td>@book.PubYear</td>
+            <td>@book.Quantity</td>
+            <td><a class="btn btn-outline-danger" asp-controller="Library" asp-action="DeleteById" asp-route-id="@book.Id">
+                Удалить
+            </a></td>
+        </tr>
+    }
+    </tbody>
+</table>

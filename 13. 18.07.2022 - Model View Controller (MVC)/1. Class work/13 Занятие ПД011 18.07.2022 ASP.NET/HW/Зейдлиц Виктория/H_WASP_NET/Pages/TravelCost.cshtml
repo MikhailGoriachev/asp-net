@@ -1,0 +1,35 @@
+﻿@page
+@model H_WASP_NET.Pages.TravelCostModel
+@{
+    ViewBag.Title = "Homework";
+    ViewBag.PageName = "TravelCost";
+}
+
+
+<h3 class="text-center">Полная стоимость поездки </h3>
+
+@* вывод в соответствии с запросом на выборку данных *@
+<table class="table">
+<thead>
+    <tr>
+        <th>Страна</th>
+        <th>Цель поездки</th>
+        <th>Дата поездки</th>
+        <th>Стоимость трансп., руб.</th>
+        <th>Длительность, дн.</th>
+        <th>Стоимость поездки, руб.</th>
+    </tr>
+</thead>
+<tbody>
+@*@foreach(var item in Model.CalculateTravels)
+{
+    <tr>
+        <td>@item.City</td>
+        <td>@item.Purpose</td>
+        <td>@($"{item.StartTravel:dd/MM/yyyy}")</td>
+        <td class="text-center">@item.Duration</td>
+        <td>@item.Amount</td>
+    </tr>
+}*@
+</tbody>
+</table>

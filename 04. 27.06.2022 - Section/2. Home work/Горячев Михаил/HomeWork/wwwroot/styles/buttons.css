@@ -1,0 +1,134 @@
+/* Стиль кнопок */
+
+/* Обычная кнопка */
+button,
+input[type='button'],
+input[type='submit'],
+input[type='reset'] {
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 0;
+
+    background-color: rgb(38, 98, 226);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 1rem 1rem 1rem 0;
+}
+
+/* наведение на кнопку */
+button:hover,
+input[type='button']:hover,
+input[type='submit']:hover,
+input[type='reset']:hover {
+    background-color: rgb(34, 63, 226);
+}
+
+/* нажатие на кнопку */
+button:active,
+input[type='button']:active,
+input[type='submit']:active,
+input[type='reset']:active {
+    background-color: rgb(21, 45, 180);
+}
+
+/* ширина */
+button.width-small,
+input[type='button'].width-small,
+input[type='submit'].width-small,
+input[type='reset'].width-small,
+a.width-small {
+    width: 10rem;
+}
+
+/* ширина */
+button.width-normal,
+input[type='button'].width-normal,
+input[type='submit'].width-normal,
+input[type='reset'].width-normal,
+a.width-normal
+{
+    width: 15rem;
+}
+
+/* ширина */
+button.width-big,
+input[type='button'].width-big,
+input[type='submit'].width-big,
+input[type='reset'].width-big,
+a.width-big {
+    width: 25rem;
+}
+
+/* стиль ссылки в виде кнопки */
+.link-button {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 0;
+
+    background-color: rgb(30, 203, 64);
+    color: white;
+    cursor: pointer;
+
+    transition: all 0.3s;
+
+    margin: 1rem 0;
+}
+
+/* наведение на ссылку */
+.link-button:hover {
+    background-color: rgb(26, 190, 58);
+}
+
+/* нажатие на ссылку */
+.link-button:active {
+    background-color: rgb(28, 165, 56);
+}
+
+/* кнопка редактирования */
+button.edit,
+input[type='button'].edit,
+input[type='submit'].edit,
+input[type='reset'].edit {
+    background-color: rgb(217, 204, 17);
+}
+
+button.edit:hover,
+input[type='button'].edit:hover,
+input[type='submit'].edit:hover,
+input[type='reset'].edit:hover {
+    background-color: rgb(200, 188, 25);
+}
+
+button.edit:active,
+input[type='button'].edit:active,
+input[type='submit'].edit:active,
+input[type='reset'].edit:active {
+    background-color: rgb(172, 162, 24);
+}
+
+/* кнопка удаления */
+button.remove,
+input[type='button'].remove,
+input[type='submit'].remove,
+input[type='reset'].remove {
+    background-color: rgb(232, 126, 13);
+}
+
+button.remove:hover,
+input[type='button'].remove:hover,
+input[type='submit'].remove:hover,
+input[type='reset'].remove:hover {
+    background-color: rgb(211, 117, 18);
+}
+
+button.remove:active,
+input[type='button'].remove:active,
+input[type='submit'].remove:active,
+input[type='reset'].remove:active {
+    background-color: rgb(188, 107, 20);
+}

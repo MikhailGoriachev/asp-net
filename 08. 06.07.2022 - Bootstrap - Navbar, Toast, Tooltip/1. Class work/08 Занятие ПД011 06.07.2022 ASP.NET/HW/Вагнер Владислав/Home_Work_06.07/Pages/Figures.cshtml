@@ -1,0 +1,344 @@
+﻿@page
+@model Home_Work.Pages.Figures
+@using Home_Work.Models.Figures
+@using Home_Work.Utilities
+@using System.Net
+@{
+    ViewData["title"] = "Страница 2";
+    ViewData["pageHeader"] = "СТРАНИЦА 2";
+   
+    ViewBag.PageName = "Figures";
+}
+@functions{
+    @*public void showCollection(List<Appliance> AppCollection)
+    {
+        foreach (var appliance in AppCollection)
+            {
+                <div class="card">
+                                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                                <div><span>Наименование: @appliance.Name</span></div>
+                                <div><span>Артикул:  @appliance.Article</span></div>
+                                <div><span>Цена:  @appliance.Price</span></div>
+                                <div><span>Количество:  @appliance.Quantity</span></div>
+                </div>
+
+            }
+    }*@
+    
+
+}
+
+
+<section>
+    @section Styles{
+        <link rel="stylesheet" href="~/styles/task2.css">
+    }
+
+    <!--Задание-->
+    <details class="task-details">
+        <summary><b>Задача 2.</b></summary>
+        <div>
+        <p>
+            <b>Страница 2. </b>Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских 
+            геометрических фигур: квадраты, прямоугольники, разносторонние треугольники. 
+            Инициализация коллекции должна проводиться при отсутствии файла 
+            (формируйте не менее 10 фигур). 
+        </p>
+
+        <p>
+            В форме на странице выбирайте тип фигуры, и по кнопке «Создать» формируйте еще одну форму 
+            (на этой же странице) для ввода параметров фигуры. При рендеринге формы для параметров 
+            форму для выбора типа фигуры рендерить не надо. Все формы должны быть стилизованы классами Bootstsap.
+        </p>
+
+        <p>Отображайте коллекцию на этой же странице в таблице, стилизованной классами Bootstrap 
+            (в ячейке таблицы также выводите изображение фигуры).</p>
+
+        <p>
+            По ссылкам на этой странице вызывайте обработчики запросов GET:
+        </p>
+    
+        <ul>
+            <li>вывод только квадратов, по убыванию площади</li>
+            <li>вывод только прямоугольников, по возрастанию периметра</li>
+            <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+            <li>вывод всей коллекции в исходном порядке</li>
+            <li>вывод всей коллекции по убыванию площади</li>
+            <li>Вывод всей коллекции, упорядоченной по типу фигур</li>
+        </ul>
+        </div>
+    </details>
+
+    @section NavButtons
+    {
+        <a class="btn btn-outline-light mx-3 mt-3 text-black text-center text-decoration-none text-xl-center" 
+           asp-page="/Index">Главная страница</a>
+        
+        <a class="btn btn-outline-light mx-3 mt-3 text-black text-center text-decoration-none text-xl-center"  asp-page="/Appliances">Первая страница</a>
+        
+        <div class="dropdown">
+            <a class="btn btn-outline-light bg-white dropdown-toggle mx-3 mt-3 text-black text-center text-decoration-none text-xl-center" 
+               data-bs-toggle="dropdown" asp-page="/Figures">Вторая страница</a>
+            
+            @*Выпадающий список кнопок*@
+            <ul class="dropdown-menu border-2 border-dark mt-2 shadow-lg">
+                <li class="dropdown-item text-center">
+                    <a asp-page-handler="ShowDefault" lass="btn text-center me-2">Исходная коллекция</a>
+                </li>
+                <li class="dropdown-item text-center">
+                    <a asp-page-handler="SortSquaresByArea" class="btn text-center me-2">Квадраты по убыванию площади</a>
+                </li>
+                <li class="dropdown-item text-center">
+                    <a asp-page-handler="SortRectanglesByPerimeter" class="btn text-center me-2 my-2">Прямоугольники по возрастанию периметра</a>
+                </li>
+                <li class="dropdown-item text-center">
+                    <a asp-page-handler="ReverseTriangles" class="btn text-center me-2 my-2">Треугольники в обратном порядке</a>
+                </li>
+                <li class="dropdown-item text-center">
+                    <a asp-page-handler="SortBySquare" class="btn text-center me-2 my-2">Упорядочить по убыванию площади</a>
+                </li>
+                <li class="dropdown-item text-center">
+                    <a asp-page-handler="SortByType" class="btn text-center me-2 my-2">Упорядочить по типу</a>
+                </li>
+                <li class="dropdown-item add-elem-item text-center">
+                    <a data-bs-toggle="modal"  data-bs-target="#figureTypeModalForm" class="btn text-center btn-info my-2 me-2">Добавить фигуру</a>
+                </li>
+                <li class="dropdown-item add-elem-item text-center">
+                    <a asp-page-handler="DeleteFile" class="btn text-center btn-warning my-2 me-2">Удалить файл</a>
+                </li>
+            </ul>
+        </div>
+    
+    }
+
+<!--Модальные окна-->
+@*Тип фигуры*@
+<div class="modal fade" id="figureTypeModalForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <!--Заголовок окна-->
+            <div class="modal-header">
+                <h3>Форма выбора типа фигуры</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <!--Основной контент окна-->
+            <div class="modal-body">
+                <form method="post" class="rounded-3 mt-2" id="chooseType">
+                    <fieldset class="fieldset-width">
+                        <div class="mt-2 col-8">
+                            <label class="form-label">Выберите тип фигуры</label>
+
+                            <select class="form-select" name="figureType">
+                                <option value="Квадрат" selected>Квадрат</option>
+                                <option value="Прямоугольник">Прямоугольник</option>
+                                <option value="Треугольник">Треугольник</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <!--Submit-->
+                <div class="row">
+                    <input asp-page-handler="SelectType" 
+                           form="#chooseType"
+                           class="btn btn-info my-3 mt-4 mx-3 col-10" type="submit"
+                           value="Выбрать">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(Model.FormType.Contains("parameters")){
+    @*Ввод параметров*@
+    <div class="modal fade show d-block" id="figureParametersModalForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <!--Заголовок окна-->
+            <div class="modal-header">
+                <h3>Введите параметры для @($"{Model.AddingFigure.FigureType}a") a</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <!--Основной контент окна-->
+            <div class="modal-body">
+                <!--Выбор параметров фигуры-->
+                <form method="post" class="main-form was-validated col-5 rounded-3 px-3 mt-2">
+                    <fieldset class="form-block">
+                            <div class="text-center my-3">
+                                <label class="w-25 my-auto text-Big">@Model.AddingFigure.FigureType</label>
+                            </div>
+                            <div>
+                                <label class="form-label">Введите сторону A</label>
+                                <input class="form-control" required type="number" placeholder="Сторона A" name="SideA" step="any">
+    
+                                @*Сообщение валидации*@
+                                <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                            </div>
+    
+                            @if (Model.AddingFigure.FigureType.ToLower() != "квадрат")
+                            {
+                                <div>
+                                    <label class="form-label">Введите сторону B</label>
+                                    <input class="form-control" required type="number" placeholder="Сторона B" name="SideB" step="any">
+    
+                                    @*Сообщение валидации*@
+                                    <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                                </div>
+                            }
+                            
+                            @if (Model.AddingFigure.FigureType.ToLower() == "треугольник" )
+                            {
+                                <div>
+                                    <label class="form-label">Введите сторону C</label>
+                                    <input class="form-control" required type="number"
+                                           placeholder="Сторона C"  name="SideC" step="any">
+    
+                                    @*Сообщение валидации*@
+                                    <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                                </div>
+                                
+                            }
+    
+                            <!--Submit-->
+                            <div class="row">
+                                <input asp-page-handler="AddParameters" data-bs-dismiss="modal"  class="btn btn-info my-3 mt-4 mx-3 col-11" type="submit"
+                                       value="Добавить">
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+}
+<script>
+    document.getElementById("button1")
+</script>
+
+<!--Форма-->
+    @*<details class="mt-3" open>
+        <summary>Форма добавления</summary>
+
+        <!--Выбор типа фигуры-->
+            @if (Model.FormType.Contains("drop"))
+            {
+                <form method="post" class="col-4 rounded-3 mt-2">
+                    <fieldset class="fieldset-width">
+                        <div class="row">
+                            <div class="mt-2 col-8">
+                                <label class="form-label">Выберите тип фигуры</label>
+
+                                <select class="form-select" asp-items="Model.types" name="figureType">
+
+                                </select>
+                            </div>
+                            <!--Submit-->
+                            <div class="col-sm-3 row">
+                                <input asp-page-handler="SelectType" class="type-submit btn btn-info w-100 "
+                                       type="submit"
+                                       value="Создать">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            }
+        else{
+                <!--Выбор параметров фигуры-->
+                <form method="post" class="main-form was-validated col-5 rounded-3 px-3 mt-2">
+                    <fieldset class="form-block">
+                        <div class="text-center my-3">
+                            <label class="w-25 my-auto text-Big">@Model.AddingFigure.FigureType</label>
+                        </div>
+                        <div>
+                            <label class="form-label">Введите сторону A</label>
+                            <input class="form-control" required type="number" placeholder="Сторона A" name="SideA" step="any">
+
+                            $1$Сообщение валидации#1#
+                            <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                        </div>
+
+                        @if (Model.AddingFigure.FigureType.ToLower() == "треугольник" || Model.AddingFigure.FigureType.ToLower() == "прямоугольник")
+                        {
+                            <div>
+                                <label class="form-label">Введите сторону B</label>
+                                <input class="form-control" required type="number" placeholder="Сторона B" name="SideB" step="any">
+
+                                $1$Сообщение валидации#1#
+                                <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                            </div>
+                        }
+                        
+                        @if (Model.AddingFigure.FigureType.ToLower() == "треугольник" )
+                        {
+                            <div>
+                                <label class="form-label">Введите сторону C</label>
+                                <input class="form-control" required type="number"
+                                       placeholder="Сторона C"  name="SideC" step="any">
+
+                                $1$Сообщение валидации#1#
+                                <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                            </div>
+                            
+                        }
+
+                        <!--Submit-->
+                        <div class="row">
+                            <input asp-page-handler="AddParameters" class="btn btn-info my-3 mt-4 mx-3 col-11" type="submit"
+                                   value="Добавить">
+                        </div>
+                    </fieldset>
+                </form>
+            }
+    </details>*@
+
+    <!--Вывод коллекции-->
+    <div class="container my-4">
+
+        <!--Таблица-->
+        <table class="table table-responsive-md table-bordered border-2 table-hover">
+        <thead>
+            <th>Id</th>
+            <th>Изображение</th>
+            <th>Тип</th>
+            <th>Размеры</th>
+            <th>Площадь</th>
+            <th>Периметр</th>
+        </thead>
+
+        @foreach (var figure in @Model.figures)
+        {
+            <tr>
+                <td class="text-center align-middle">@figure.Id</td>
+                <td class="text-center align-middle w-25">
+                    <img src="../images/figures/@Utils.Icons[figure.FigureType]" alt=@figure.FigureType>
+                </td>
+                <td class="text-center align-middle">
+                    @figure.FigureType
+                </td>
+                <td class="text-center align-middle">
+                    @Html.Raw(figure.GetSize())
+                </td>
+                <td class="text-center align-middle">
+                    @($"{figure.Area():f2}") см<sup>2</sup>
+                    
+                </td>
+                <td class="text-center align-middle">
+                    @($"{figure.Perimeter():f2}") см
+                    
+                </td>
+            </tr>
+        }
+    </table>
+
+    @*@showCollection(Model.Appliances)*@
+    
+    </div>
+
+</section>

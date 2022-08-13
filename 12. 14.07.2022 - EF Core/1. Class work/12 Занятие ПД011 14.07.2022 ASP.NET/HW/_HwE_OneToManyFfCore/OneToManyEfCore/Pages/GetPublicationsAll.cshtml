@@ -1,0 +1,207 @@
+﻿@page "{id?}"
+
+@model OneToManyEfCore.Pages.GetPublicationsAllModel
+@{
+}
+
+<h3>Подписки на <u>@($"{DateTime.Now:dd/MM/yyyy}")</u></h3>
+
+<div class="btn-group w-25">
+    <a class="btn btn-success me-3" asp-page="/Create">Добавить</a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Выборки по заданию</button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#selectQuery01">По индексу</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#selectQuery02">По цене</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#selectQuery03">По длительности</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#selectQuery04">По категории</a></li>
+        </ul>
+    </div>
+</div>
+
+@* вывод коллекции данных о подписных изданиях и подписках *@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>Индекс</th>
+            <th>Категория</th>
+            <th>Название</th>
+            <th>Цена 1 экз., руб.</th>
+            <th>Дата начала</th>
+            <th>Длительность, мес.</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var publication in Model.Publications)
+        {
+            <tr>
+                <td>@publication.Id</td>
+                <td>@publication.PubIndex</td>
+                <td>@publication.Category.CategoryName</td>
+                <td>@publication.Title</td>
+                <td>@publication.Cost</td>
+                <td>@($"{publication.Start:dd/MM/yyyy}")</td>
+                <td>@publication.Duration</td>
+
+                @* управление: переход на редактирование записи, удаление записи
+                   идентификатор записи передаем параметром маршрута
+                *@
+                <td>
+                    <form class="form-check-inline" method="post" asp-page-handler="Delete" asp-route-id="@publication.Id">
+                        <a class="btn btn-sm btn-outline-warning" asp-page="/Edit" asp-route-id="@publication.Id">Редактировать</a>
+                        <button class="btn btn-sm btn-outline-danger" type="submit">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*
+    Рендерим форму ввода параметра запроса 1 - индекс
+    Форма модальная, т.е. ее разметка может быть размещена
+    в произвольном месте, форма вызывается на клиенте, за
+    счет JS-кода Bootstrap, по клику на кнопку в навигационной
+    панели
+    *@
+<div id="selectQuery01" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Параметр запроса на выборку 1
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-1" method="post" asp-page="/Select" asp-page-handler="Query01">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="pubIndex" asp-items="@Model.PubIndeces">
+                        </select>
+                        <label class="form-label">Индекс издания:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-1" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*
+    Рендерим форму ввода параметра запроса 2 - диапазон цен
+    Форма модальная, т.е. ее разметка может быть размещена
+    в произвольном месте, форма вызывается на клиенте, за
+    счет JS-кода Bootstrap, по клику на кнопку в навигационной
+    панели
+*@
+<div id="selectQuery02" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Параметр запроса на выборку 2
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-2" method="post" asp-page="/Select" asp-page-handler="Query02">
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="нижняя цена" name="costFrom" value="0">
+                        <label>Нижнее значение цены, руб.:</label>
+                    </div>
+
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="верхняя цена" name="costTo" value="0">
+                        <label>Верхнее значение цены, руб.:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-2" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    Рендерим форму ввода параметра запроса 3 - диапазон длительности подписки
+    Форма модальная, т.е. ее разметка может быть размещена
+    в произвольном месте, форма вызывается на клиенте, за
+    счет JS-кода Bootstrap, по клику на кнопку в навигационной
+    панели
+*@
+<div id="selectQuery03" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Параметр запроса на выборку 3
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-3" method="post" asp-page="/Select" asp-page-handler="Query02">
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="нижняя длительность" name="durationFrom" value="0">
+                        <label>Нижнее значение длительности подписки, мес.:</label>
+                    </div>
+
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="верхняя длительность" name="durationTo" value="0">
+                        <label>Верхнее значение длительности подписки, мес.:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-3" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    Рендерим форму ввода параметра запроса 4 - вид издания
+    Форма модальная, т.е. ее разметка может быть размещена
+    в произвольном месте, форма вызывается на клиенте, за
+    счет JS-кода Bootstrap, по клику на кнопку в навигационной
+    панели
+*@
+<div id="selectQuery04" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Параметр запроса на выборку 4
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-4" method="post" asp-page="/Select" asp-page-handler="Query04">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="categoryName" asp-items="@Model.CategoryNames">
+                        </select>
+                        <label class="form-label">Вид издания:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-4" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>

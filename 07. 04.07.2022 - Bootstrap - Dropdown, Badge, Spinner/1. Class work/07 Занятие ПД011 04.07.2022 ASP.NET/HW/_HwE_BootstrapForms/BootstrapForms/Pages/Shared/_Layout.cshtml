@@ -1,0 +1,62 @@
+﻿@functions {
+    string Active(string page) => ViewBag.Active == page ? "primary" : "secondary";
+}
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Задание на 30.06.2022 - @ViewBag.Title</title>
+
+    <!-- внешнее подключение стилей  -->
+    <link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- картинка для отображения в заголовке вкладки браузера -->
+    <link rel="icon" href="/images/blimp.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/blimp.png" type="image/x-icon" />
+
+    <!-- скрипты для Bootstrap -->
+    <script src="lib/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <header class="container-fluid bg-dark text-white text-center">
+        <h3>@ViewBag.Header</h3>
+    </header>
+
+    <main class="container">
+        <div class="row pt-2">
+            <!-- левая часть контейнера-->
+            <div class="offset-1 col-2">
+                <div class="btn-group-vertical gap-2">
+                    <a class="btn btn-@Active("Index")" asp-page="/Index">
+                        Главная страница
+                    </a>
+                    <a class="btn btn-@Active("Page1")" asp-page="/Page1"
+                       title="Обработка коллекции сведений о бытовой технике">
+                        Страница 1
+                    </a>
+                    <a class="btn btn-@Active("Page2")" asp-page="/Page2"
+                       title="Обработка коллекции сведений о плоских геометрических фигурах">
+                        Страница 2
+                    </a>
+                </div>
+
+                @* Обработки страниц, не обязательная секция *@
+                @RenderSection("PageProcessing", false)
+            </div>
+
+            <!-- контент -->
+            <div class="col-8">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+
+    <footer class="container-fluid bg-dark text-white-50 text-center">
+        <h5>Студент Программер, ПД011, Донецк, 2022</h5>
+    </footer>
+</body>
+</html>

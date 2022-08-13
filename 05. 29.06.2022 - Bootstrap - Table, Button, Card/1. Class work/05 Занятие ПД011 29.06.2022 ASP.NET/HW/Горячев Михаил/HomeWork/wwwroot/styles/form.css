@@ -1,0 +1,170 @@
+/* Стиль формы */
+
+.form {
+    font-size: 1.2rem;
+    width: 20rem;
+    border: 0.5rem solid #eee;
+    padding: 3rem 3rem 1rem;
+    border-radius: 1rem;
+    background-color: #fff;
+
+    margin: 2rem 3rem 1rem 1rem;
+
+    min-width: 15rem;
+    max-width: 40rem;
+
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+
+    box-shadow: 0 0 0.7rem 0.5rem rgba(0, 0, 0, 0.15);
+    /* position: fixed; */
+
+    align-self: flex-start;
+}
+
+.form * {
+    box-sizing: border-box;
+}
+
+/* наведение на поле */
+
+/* поле ввода */
+.field {
+    margin-bottom: 1rem;
+}
+
+/* наименование поля */
+.field-label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* текстовое поле ввода */
+.text-field-input {
+    display: block;
+    width: 100%;
+    /* height: calc(2.25rem + 2px); */
+    height: 3rem;
+    padding: 0.4rem 0.7rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* надпись подсказка текстового поля вводв */
+.text-field-input::placeholder {
+    color: #212529;
+    opacity: 0.4;
+}
+
+/* выбранное поле ввода */
+.text-field-input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
+
+/* неактивные/только для чтения поля ввода */
+.text-field-input:disabled,
+.text-field-input[readonly] {
+    background-color: #f5f5f5;
+    opacity: 1;
+}
+
+/* маленькая шириина поля */
+
+*.width-small {
+    width: 10rem;
+}
+
+/* средняя шириина поля */
+*.width-normal {
+    width: 15rem;
+}
+
+/* большая шириина поля */
+*.width-big {
+    width: 25rem;
+}
+
+/* разметка ключ - значение  */
+.field-grid-list {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    grid-gap: 0.5rem;
+}
+
+/* ключ */
+.field-grid-list-key {
+    grid-column: 1;
+}
+.field-grid-list-value {
+    grid-column: 2;
+}
+
+/* блок управления */
+.controls {
+    display: flex;
+}
+
+/* выравнивание по правому краю */
+.controls.right {
+    justify-content: right;
+}
+
+/* выравнивание по центру краю */
+.controls.center {
+    justify-content: center;
+}
+
+/* выравнивание по левому краю */
+.controls.left {
+    justify-content: left;
+}
+
+/* табличая форма */
+.form-grid {
+    display: grid;
+
+    font-size: 1.2rem;
+    /* width: 100%; */
+    border: 0.5rem solid #eee;
+    padding: 3rem 3rem 1rem;
+    border-radius: 1rem;
+    background-color: #fff;
+
+    margin: 2rem;
+
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+
+    box-shadow: 0 0 0.7rem 0.5rem rgba(0, 0, 0, 0.15);
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+
+    gap: 1rem 5rem;
+}
+
+/* заголовок */
+.form-grid-header {
+    grid-column: 1/4;
+}
+
+/* кнопки упралвения */
+.form-grid-controls {
+    grid-column: 1/4;
+
+    display: flex;
+    justify-content: center;
+}
+
+.field .width-normal {
+    width: 20rem;
+}

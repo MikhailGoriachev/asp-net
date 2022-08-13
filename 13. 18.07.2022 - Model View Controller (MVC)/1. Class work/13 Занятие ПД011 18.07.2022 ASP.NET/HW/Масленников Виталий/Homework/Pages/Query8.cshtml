@@ -1,0 +1,28 @@
+﻿@page
+@model Homework.Pages.Query8
+
+@{
+    ViewBag.Header = "Итоговый запрос";
+}
+
+@* Таблица с данными *@
+<table class="table text-center">
+    <thead class="fw-bold align-top">
+    <tr>
+        <td>Страна</td>
+        <td>Стоимость транспортных услуг</td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.QueryResult is not null && Model.QueryResult.Any()){
+        @foreach (var result in Model.QueryResult){
+            <tr>
+                <td>@result.Country</td>
+                <td>@($"{result.TransferAvg:.#}")</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="5" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

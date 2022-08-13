@@ -1,0 +1,48 @@
+﻿@page
+@model Homework.Pages.Query5
+@{
+    ViewBag.Header = "Запрос на выборку";
+}
+
+@* фильтр по стране с ценой визы в указанном диапазоне *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+        
+        <label class="form-label me-1 lead" for="inpMinPrice"> Стоимость визы от: </label>
+        <input class="form-control-sm w-80-px" type="text" asp-for="MinPrice" id=inpMinPrice/>
+      
+        <label class="form-label me-1 lead" for="inpMaxPrice"> до: </label>
+        <input class="form-control-sm w-80-px" type="text" asp-for="MaxPrice" id=inpMaxPrice/>
+        
+        <button class="btn btn-sm btn-outline-secondary ms-1 align-baseline" type="submit">Показать</button>
+    </form>
+    
+    <a class="btn btn-sm btn-outline-secondary ms-2 align-baseline" asp-page="@nameof(Query5)">Исходные данные</a>
+</div>
+
+@* Таблица с данными *@
+<table class="table text-center mt-3">
+    <thead class="fw-bold align-top">
+    <tr class="align-top">
+        <td>Название</td>
+        <td>Стоимость визы</td>
+        <td>Стоимость транспортных<br/> услуг</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.DisplayCountries is not null && Model.DisplayCountries.AsEnumerable().Any()){
+        @foreach (var country in Model.DisplayCountries){
+            <tr>
+                <td>@country.Name</td>
+                <td>@country.VisaCost</td>
+                <td>@country.TransferCost</td>
+                <td>@country.DailyCost</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="4" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

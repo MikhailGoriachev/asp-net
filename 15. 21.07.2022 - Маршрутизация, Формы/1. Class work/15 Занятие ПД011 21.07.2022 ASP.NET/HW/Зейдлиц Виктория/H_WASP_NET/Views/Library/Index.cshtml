@@ -1,0 +1,47 @@
+﻿@model IEnumerable<H_WASP_NET.Models.Book>
+
+@{
+}
+
+<h4>@ViewBag.Title</h4>
+
+@* вывод данных *@
+<table class="table">
+<thead>
+    <tr>
+        <th>Ид</th>
+        <th></th>
+        <th>Автор</th>
+        <th>Название</th>
+        <th>Год издания</th>
+        <th>Количество</th>
+        <th>Цена, руб.</th>
+        <th>
+            <a class="btn btn-success" asp-controller="Library" asp-action="Addbook">
+                Добавить
+            </a>
+        </th>
+    </tr>
+</thead>
+<tbody>
+@foreach(var item in Model)
+{
+    <tr>
+        <td>@item.Id</td>
+        <td>
+           <img src="~/img/covers/@item.FileName" alt="@item.FileName" height="80"/>
+        </td>
+        <td>@item.Autor</td>
+        <td>@item.Title</td>
+        <td class="text-center">@item.PubYear</td>
+        <td class="text-center">@item.Quantity</td>
+        <td class="text-center">@item.Price</td>
+        <td>
+           <a class="btn btn-outline-danger" asp-controller="Library" asp-action="RemoveBook" asp-route-id="@item.Id">
+              <i class="bi bi-eraser-fill"></i>
+           </a>
+        </td>
+    </tr>
+}
+</tbody>
+</table>

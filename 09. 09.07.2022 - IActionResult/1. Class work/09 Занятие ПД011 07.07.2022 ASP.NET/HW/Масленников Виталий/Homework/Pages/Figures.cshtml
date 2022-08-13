@@ -1,0 +1,188 @@
+﻿@page "{handler?}"
+@using Homework.Models.Figures
+@using Microsoft.Extensions.Primitives
+@model Homework.Pages.FiguresModel
+@{
+    ViewBag.Header = "Геометрические фигуры";
+
+    string IsActive(string actionId) =>
+        Request.Query["ActionId"] != StringValues.Empty && Request.Query["ActionId"] == actionId ? "active" : "";
+}
+
+
+@section Controls{
+    <div class="navbar">
+        <div class="container-fluid justify-content-start gap-2">
+
+            <form method="post">
+                <div class="d-flex gap-2 ms-5">
+                    <select asp-for="FigureType" asp-items="Model.Types" class="form-select-sm"></select>
+                    <input asp-page-handler="AddForm" type="submit" class="btn btn-sm btn-outline-secondary" value="Добавить"/>
+                </div>
+            </form>
+
+            <div class="ms-3 vl"></div>
+
+            <a asp-page="Figures"
+               asp-route-ActionId="1"
+               class="btn btn-sm btn-outline-secondary ms-3 @IsActive("1")"
+               title="вывод коллекции в исходном порядке">
+                в исходном порядке
+            </a>
+
+            <a asp-page-handler="Filter"
+               asp-route-sort="@nameof(IFigure.Area)"
+               asp-route-order="Desc"
+               asp-route-ActionId="2"
+               class="btn btn-sm btn-outline-secondary @IsActive("2")"
+               title="вывод коллекции по убыванию площади">
+                по убыванию площади
+            </a>
+
+            <a asp-page-handler="Filter"
+               asp-route-sort="@nameof(IFigure.Name)"
+               asp-route-ActionId="3"
+               class="btn btn-sm btn-outline-secondary @IsActive("3")"
+               title="вывод коллекции упорядоченной по типу фигур">
+                по типу фигур
+            </a>
+
+            <a asp-page-handler="Filter"
+               asp-route-figure="Квадрат"
+               asp-route-sort="@nameof(IFigure.Area)"
+               asp-route-order="Desc"
+               asp-route-ActionId="4"
+               class="btn btn-sm btn-outline-secondary @IsActive("4")"
+               title="вывод квадратов, по убыванию площади">
+                <span class="ms-auto">квадраты</span>
+                <span class="badge bg-primary rounded-pill">@Model.AmountOf("Квадрат")</span>
+            </a>
+
+            <a asp-page-handler="Filter"
+               asp-route-figure="Прямоугольник"
+               asp-route-sort="@nameof(IFigure.Perimeter)"
+               asp-route-ActionId="5"
+               class="btn btn-sm btn-outline-secondary @IsActive("5")"
+               title="вывод прямоугольников, по возрастанию периметра">
+                <span class="ms-auto">прямоугольники</span>
+                <span class="badge bg-primary rounded-pill">@Model.AmountOf("Прямоугольник")</span>
+            </a>
+
+            <a asp-page-handler="Filter"
+               asp-route-figure="Треугольник"
+               asp-route-order="Reverse"
+               asp-route-ActionId="6"
+               class="btn btn-sm btn-outline-secondary  @IsActive("6")"
+               title="вывод треугольников, в обратном порядке">
+                <span class="ms-auto">треугольники</span>
+                <span class="badge bg-primary rounded-pill">@Model.AmountOf("Треугольник")</span>
+            </a>
+        </div>
+    </div>
+   
+}
+
+<!-- Форма ввода параметров новой фигуры-->
+@if (RouteData.Values["handler"] is "AddForm")
+{
+    <div class="modal show d-block" aria-hidden="false" id="modalForm">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-light">
+                <div class="modal-header">
+                    <h5 class="modal-title">Введите параметры для фигуры "@Model.FigureType"</h5>
+                    <button asp-page="Figures/" form="figureForm" class="btn-close" formnovalidate></button>
+                </div>
+                <div class="modal-body">
+                    <form class="mb-4 p-0" method="post" id="figureForm">
+                        <div class="row mt-3 align-items-center">
+                            <div class="col-md-auto">
+                                <label class="form-label" asp-for="FigureInput!.A"> Сторона a:</label>
+                            </div>
+                            <div class="col-md-auto">
+                                <input class="form-control text-end" type="number" asp-for="FigureInput!.A" step="any" value="1" required/>
+                            </div>
+                        </div>
+
+                        @if (Model.FigureType is not "Квадрат")
+                        {
+                            <div class="row mt-3 align-items-center">
+                                <div class="col-md-auto">
+                                    <label class="form-label" asp-for="FigureInput!.B"> Сторона b: </label>
+                                </div>
+                                <div class="col-md-auto">
+                                    <input class="form-control text-end" type="number" asp-for="FigureInput!.B" step="any" value="1" required/>
+                                </div>
+                            </div>
+                        }
+
+                        @if (Model.FigureType is "Треугольник")
+                        {
+                            <div class="row mt-3 align-items-center">
+                                <div class="col-md-auto">
+                                    <label class="form-label" asp-for="FigureInput!.C"> Сторона c: </label>
+                                </div>
+                                <div class="col-md-auto">
+                                    <input class="form-control text-end" type="number" asp-for="FigureInput!.C" step="any" value="1" required/>
+                                </div>
+                            </div>
+                        }
+
+                        <input type="hidden" asp-for="FigureType"/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input asp-page-handler="AddFigure" form="figureForm" class="col-3 ms-3 btn btn-outline-primary" type="submit" value="Добавить">
+                    <button asp-page="Figures/" form="figureForm" class="col-3 btn btn-outline-secondary ms-2" formnovalidate> Отмена </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.ErrMsg != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+        <b>Ошибка!</b> @Model.ErrMsg
+    </div>
+}
+
+<div class="my-3"> @(Model.Message ?? "") </div>
+
+@*вывод карточек фигур*@
+<div class="row">
+    @foreach (var item in Model.DisplayFigures!)
+    {
+        <div class="col-md-auto mb-3">
+            <div class="card mb-4 h-100" style="width: 200px">
+
+                <img class="card-img-top m-1 card-img-100" src="@Model.ImageFolder/@item.Image" alt="Фигура">
+
+                <div class="card-header text-center bg-body">
+                    <h5 class="card-title color-2">@item.Name</h5>
+                </div>
+
+                <div class="card-body bg-body mb-0 pb-0">
+                    <div class="color-1">Параметры сторон:</div>
+                    @foreach (var p in item.Parameters)
+                    {
+                        <div class="color-1">
+                            @p.Key = <span class="color-3"> @($"{p.Value:.###}")</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer bg-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <span class="color-1">Периметр: </span><span class="color-3"> @($"{item.Perimeter:.###}")</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="color-1">Площадь: </span><span class="color-3"> @($"{item.Area:.###}")</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>

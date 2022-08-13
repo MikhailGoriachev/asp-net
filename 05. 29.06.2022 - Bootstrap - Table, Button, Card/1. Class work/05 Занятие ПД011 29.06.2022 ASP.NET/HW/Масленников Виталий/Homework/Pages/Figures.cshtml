@@ -1,0 +1,144 @@
+﻿@page "{handler?}"
+@using Homework.Models.Figures
+@using System.Globalization
+@model Homework.Pages.FiguresModel
+@{
+	ViewBag.Header = "Геометрические фигуры";
+}
+
+@section styles{
+	<link rel="stylesheet" href="~/css/table.css">
+}
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary><p>
+			Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских геометрических фигур: квадраты,
+			прямоугольники, разносторонние треугольники. <i>Инициализация коллекции должна проводиться при отсутствии файла,
+				формируйте не менее 10 фигур.</i> По кнопке <b>submit</b> (метод POST) формируйте фигуру, случайным образом выбирая ее тип 
+			и размер. <b>Создайте форму для ввода параметров фигуры. Загружать изображение не требуется, формируйте его по типу
+				фигуры. Добавляйте фигуры в коллекцию, сохраняйте коллекцию.</b> Отображайте коллекцию на этой же странице, выводите 
+			также изображение фигуры.</p>
+
+		<p>По ссылкам на этой странице вызывайте обработчики запросов GET:</p>
+
+		<ul>
+			<li>вывод только квадратов, по убыванию площади</li>
+			<li>вывод только прямоугольников, по возрастанию периметра</li>
+			<li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+			<li>вывод всей коллекции в исходном порядке</li>
+			<li>вывод всей коллекции по убыванию площади</li>
+			<li><i>вывод всей коллекции, упорядоченной по типу фигур</i></li>
+		</ul>
+	</details>
+</div>
+
+
+<div class="font-14">
+	Вывод:
+	<ul class="menu-links">
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Квадрат"
+			   asp-route-sort="@nameof(IFigure.Area)"
+			   asp-route-order="Desc">
+				квадратов, по убыванию площади
+			</a></li>
+
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Прямоугольник"
+			   asp-route-sort="@nameof(IFigure.Perimeter)">
+				прямоугольников, по возрастанию периметра
+			</a></li>
+
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Треугольник"
+			   asp-route-order="Reverse">
+				треугольников, в обратном порядке по отношению к порядку в коллекции
+			</a></li>
+
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-sort="@nameof(IFigure.Area)"
+			   asp-route-order="Desc">коллекции по убыванию площади</a></li>
+
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-sort="@nameof(IFigure.Name)"
+			   asp-route-order="Desc">коллекции, упорядоченной по типу фигур</a></li>
+
+		<li><a asp-page="Figures">коллекции в исходном порядке</a></li></ul>
+</div>
+
+<form method="post">
+	<fieldset style="margin-top: 10px">
+		<legend>Добавить фигуру:</legend>
+		
+		<div class="field"><label class="w2">Тип:</label>
+			<select asp-for="FigureInput.Type" asp-items="Model.Types" style="font-size: 15px" id="selType">
+			</select> </div>
+
+		<div class="field"><label class="w2" asp-for="FigureInput.A"> Сторона a:</label>
+			<input class="t-input" type="number" asp-for="FigureInput.A" min="0.0001" step="any"/></div>
+			
+		<div class="field"><label class="w2" asp-for="FigureInput.B"> Сторона b: </label>
+			<input class="t-input" type="number" asp-for="FigureInput.B" min="0.0001" step="any" id="inpB" disabled="@Model.StateForInputB()"/></div> 
+	
+		<div class="field"><label class="w2" asp-for="FigureInput.C"> Сторона c: </label>
+			<input class="t-input" type="number" asp-for="FigureInput.C" min="0.0001" step="any" id="inpC" disabled="@Model.StateForInputC()"/></div>
+
+		<div><input asp-page-handler="add" class="btn-blue" type="submit" value="Добавить">
+			<input asp-page-handler="addRand" class="btn-blue" type="submit" value="Добавить случайную"/>
+		</div>
+		
+		@if (Request.Method == "POST" && Model.Message is not null)
+		{
+			<div style="color: red; font-size: 17px; margin-top: 5px">
+				@Model.Message
+			</div>
+		}
+	</fieldset>
+</form>
+
+
+<table>
+	<thead>
+	<th>№</th>
+	<th>Изображение</th>
+	<th>Тип</th>
+	<th>Параметры</th>
+	<th>Периметр</th>
+	<th>Площадь</th>
+	</thead>
+
+@{
+	var i = 1;
+	foreach (var item in Model.DisplayFigures!)
+	{
+		<tr>
+		<td class="align-center">@(i++)</td>
+		<td><img class="img-200" src="@Model.ImageFolder/@item.Image" alt="Фигура"/></td>
+		<td class="align-left">@item.Name</td>
+			<td class="align-left">
+				<ul style="padding: 0; list-style-type: none">
+					@foreach (var p in item.Parameters)
+					{
+						<li style="font-size: 16px">@p.Key = @($"{p.Value:.###}")</li>
+					}
+				</ul>
+			</td>
+		<td>@($"{item.Perimeter:.###}")</td>
+		<td>@($"{item.Area:.###}")</td>
+		</tr>
+	}
+}
+</table>
+
+<script>
+	document.getElementById("selType").addEventListener("change", function() {
+		document.getElementById("inpB").disabled = this.value !== "Прямоугольник" && this.value !== "Треугольник";
+		document.getElementById("inpC").disabled = this.value !== "Треугольник";
+	});
+</script>

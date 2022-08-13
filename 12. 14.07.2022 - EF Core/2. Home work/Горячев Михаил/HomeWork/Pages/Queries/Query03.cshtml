@@ -1,0 +1,62 @@
+﻿@page "{handler?}"
+@model HomeWork.Pages.Queries.Query03
+
+@{
+    ViewBag.Title = "Запрос 3";
+    ViewBag.PageName = "/Queries";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <div class="d-lg-flex justify-content-between">
+
+        <h3 class="display-6">Запрос 3. @Model.TitleList</h3>
+
+        <form method="post" class="d-flex align-items-center">
+
+            <div class="form-floating w-15rem">
+                <input type="number" asp-for="Duration" class="form-control" placeholder="Длительность (день)" required>
+                <label asp-for="Duration">Длительность (день)</label>
+            </div>
+
+            <input class="btn btn-primary mx-3" type="submit" asp-page-handler="Selection" value="Выбрать">
+            <a class="btn btn-warning" asp-page="/Queries/Query03">Сбросить</a>
+        </form>
+
+    </div>
+
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Паспорт</th>
+            <th>
+                <a class="btn btn-success" asp-page-handler="Add" asp-page="/Forms/ClientForm">
+                    <i class="bi bi-plus-lg"></i> Добавить
+                </a>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var client in Model.Clients)
+        {
+            <tr>
+                <th>@client.Id</th>
+                <td>@client.Surname</td>
+                <td>@client.Name</td>
+                <td>@client.Patronymic</td>
+                <td>@client.Passport</td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-page-handler="Edit" asp-page="/Forms/ClientForm" asp-route-id="@client.Id">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

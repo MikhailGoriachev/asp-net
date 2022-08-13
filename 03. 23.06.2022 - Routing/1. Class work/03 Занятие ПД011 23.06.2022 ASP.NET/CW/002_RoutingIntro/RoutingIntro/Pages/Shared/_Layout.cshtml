@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <a asp-page="/Index">Главная</a> |
+        <a href="/Page01/42" title="Маршрут с одним обязательным параметром">Маршрут-1</a> |
+        <a href="/Page02/100" title="Маршрут с одним обязательным параметром, привязка в коде">Маршрут-2</a> |
+        <a asp-page="/Page03" title="Маршрут с одним необязательным параметром">Маршрут-3</a> |
+        <a href="/Page03/122" title="Маршрут с одним необязательным параметром, привязка в коде">Маршрут-3а</a> |
+        <a href="/Page04/100/Ratmir/23000" title="Маршрут с несколькими обязательными параметрами, привязка в коде">Маршрут-4</a> |
+        
+        @* asp-route-segmentName="value" *@
+        <a asp-page="/Page04" asp-route-id="152" asp-route-name="Евгения" asp-route-salary="59000">Маршрут-4а</a> |
+        
+        <a asp-page="/Page04" asp-page-handler="NameToUpper" asp-route-id="152" asp-route-name="Евгения" asp-route-salary="59000">Маршрут-4б</a>
+        <hr />
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <footer>
+        <hr />
+        <p>Донецк, 2022, ASP.NET</p>
+    </footer>
+</body>
+</html>

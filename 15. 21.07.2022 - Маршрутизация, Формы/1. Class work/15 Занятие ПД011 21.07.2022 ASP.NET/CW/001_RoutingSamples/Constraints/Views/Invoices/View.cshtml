@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Invoices. View";
+}
+
+<div>
+    Просмотр документа <b>@Model</b>
+</div>
+
+<div>
+    @* возврат на главную страницу, ид формируем из текущего значения секунд *@
+    <a asp-controller="Home" asp-action="Index" asp-route-id="@DateTime.Now.Second">на главную</a>
+</div>
+

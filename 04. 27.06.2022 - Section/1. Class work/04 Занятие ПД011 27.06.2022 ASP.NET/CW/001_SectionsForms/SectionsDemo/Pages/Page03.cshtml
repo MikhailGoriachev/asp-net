@@ -1,0 +1,33 @@
+﻿@page
+@model SectionsDemo.Pages.Page03Model
+@{
+    ViewBag.Title = "Страница 3";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<h3>@Model.Message</h3>
+<form method="post" asp-antiforgery="true">
+    <p>
+        <label asp-for="Goods.Name">Название</label><br />
+        <input type="text" asp-for="Goods.Name" />
+    </p>
+    <p>
+        <label asp-for="Goods.Price">Цена</label><br />
+        <input asp-for="Goods.Price" />
+    </p>
+    <p>
+        <label asp-for="Goods.EnterpriseId">Производитель</label><br />
+        <select asp-for="Goods.EnterpriseId" asp-items="Model.Companies"></select>
+    </p>
+    @* значение для отображения по умолчанию м.б. задано так *@
+    @*
+	<p>
+	<select asp-for="CompanyId" asp-items="ViewBag.Companies">
+         <option selected="selected" disabled="disabled">Выберите компанию</option>
+    </select>
+	</p>
+	*@
+    <input type="submit" value="Отправить" />
+    <input type="reset" value="Отмена" />
+</form>

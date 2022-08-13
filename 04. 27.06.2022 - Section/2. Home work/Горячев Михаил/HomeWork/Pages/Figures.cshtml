@@ -1,0 +1,167 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.FiguresModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 2;
+
+    // название страницы
+    ViewData["Header"] = "Задача 2. Фигуры";
+}
+
+@functions {
+    // вывод бытовой техники
+    private void ShowFigure(IFigure figure)
+    {
+        if (figure != null)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="/images/figures/@figure.Image" alt="Фигура">
+                </div>
+
+                <div>Наименование: <b>@figure.Name</b></div>
+                @foreach (var item in figure.ParamAndValue)
+                {
+                    <div>@item.Key: <b>@($"{item.Value:f5}")</b></div>
+                }
+                <div>Периметр: <b>@($"{figure.Perimeter:f5}")</b></div>
+                <div>Площадь: <b>@($"{figure.Area:f5}")</b></div>
+            </div>
+        }
+    }
+
+    // вывод коллекции бытовой техники
+    private void ShowFigureList(List<IFigure> figures)
+    {
+        <div class="container">@{
+                figures.ForEach(a => ShowFigure(a));
+            }</div>
+    }
+}
+
+@section Head {
+<link rel="stylesheet" href="../styles/tile.css" />
+<link rel="stylesheet" href="../styles/buttons.css" />
+<link rel="stylesheet" href="../styles/form.css" />
+<link rel="stylesheet" href="../styles/control-block.css" />
+}
+
+@* Блок управления *@
+@section Navigate
+{
+<!-- Блок управления -->
+<div class="control-block">
+
+    <p class="text-align-center control-block-header">Параметры обработки</p>
+
+    <!-- #region Управление коллекцией -->
+
+    <p class="control-block-subheader">Управление коллекцией</p>
+
+    <!-- Добавление фигуры -->
+    <form method="post" asp-page-handler="AddRandFigure">
+        <input class="control-block-button" type="submit" value="Добавить фигуру" />
+    </form>
+
+    <!-- #endregion -->
+
+    <hr />
+
+    <!-- #region Сортировка фигур -->
+
+    <p class="control-block-subheader">Сортировка фигур</p>
+
+    <!-- По умоланию -->
+    <a asp-page="/Figures" class="link-button control-block-button">По умоланию</a>
+
+    <!-- По убыванию площади -->
+    <a asp-page-handler="OrderByDescArea" class="link-button control-block-button">По убыванию площади</a>
+
+    <!-- По типу -->
+    <a asp-page-handler="OrderByName" class="link-button control-block-button">По типу</a>
+
+    <hr />
+
+    <!-- #endregion -->
+
+    <!-- #region Выборка фигур -->
+
+    <p class="control-block-subheader">Выборка фигур</p>
+
+    <!-- Только квадраты -->
+    <a asp-page-handler="SelectBySquare" class="link-button control-block-button"
+        title="Вывод только квадратов, по убыванию площади">Только квадраты</a>
+
+    <!-- Только прямоугольники -->
+    <a asp-page-handler="SelectByRect" class="link-button control-block-button"
+        title="Вывод только прямоугольников, по возрастанию периметра">Только прямоугольники</a>
+
+    <!-- Только треугольники -->
+    <a asp-page-handler="SelectByTriangle" class="link-button control-block-button"
+        title="Вывод только треугольников, в обратном порядке по отношению к порядку в коллекции">Только
+        треугольники</a>
+</div>
+}
+
+
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Форма для добавления</h2>
+        </summary>
+
+        <!-- Форма для ввода данных -->
+        <form method="post" asp-antiforgery="true" class="form">
+
+            <h2 class="text-align-center">Добавление фиуры</h2>
+
+            <!-- Тип фигуры -->
+            <div class="field">
+                <label asp-for="FigureType" class="field-label">Тип фигуры:</label>
+                <select asp-for="FigureType" asp-items="Model.TypesFigure" class="text-field-input" required>
+                </select>
+            </div>
+
+            <!-- Сторона A -->
+            <div class="field">
+                <label asp-for="SideA" class="field-label">Сторона A:</label>
+                <input type="number" asp-for="SideA" class="text-field-input" min="0" step="any" required>
+            </div>
+
+            <!-- Сторона B -->
+            <div class="field">
+                <label asp-for="SideA" class="field-label">Сторона B:</label>
+                <input type="number" asp-for="SideB" class="text-field-input" min="0" step="any" required>
+            </div>
+
+            <!-- Сторона C -->
+            <div class="field">
+                <label asp-for="SideA" class="field-label">Сторона C:</label>
+                <input type="number" asp-for="SideC" class="text-field-input" min="0" step="any" required>
+            </div>
+
+            <!-- Кнопки управления -->
+            <div class="controls center">
+                <input asp-page-handler="AddFigure" class="width-normal" type="submit" value="Добавить" />
+                <input class="width-normal" type="reset" value="Отмена" />
+            </div>
+        </form>
+    </details>
+</article>
+
+
+<article>
+
+    <h2 class="text-align-center">@Model.NameHandler</h2>
+
+
+    <!-- Вывод бытовой техники -->
+    @{
+        ShowFigureList(Model.CurrentFigures);
+    }
+
+
+</article>

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\images\cities\**" />
+    <Compile Remove="wwwroot\images\fleets\**" />
+    <Content Remove="wwwroot\images\cities\**" />
+    <Content Remove="wwwroot\images\fleets\**" />
+    <EmbeddedResource Remove="wwwroot\images\cities\**" />
+    <EmbeddedResource Remove="wwwroot\images\fleets\**" />
+    <None Remove="wwwroot\images\cities\**" />
+    <None Remove="wwwroot\images\fleets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+
+</Project>

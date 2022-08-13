@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Задание на 22.06.2022 - @ViewBag.Title</title>
+
+      <!-- внешнее подключение стилевого файла  -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/table.css">
+
+    <!-- еще один пример внешнего подключения -->
+    <link rel="icon" href="/images/blimp.png" type="image/x-icon">
+    <!-- картинка для отображения в заголовке вкладки браузера -->
+    <link rel="shortcut icon" href="/images/blimp.png" type="image/x-icon" />
+</head>
+
+<body>
+<header>
+    <h1>@ViewBag.Header</h1>
+</header>
+
+<div class="container">
+    <!-- левая часть контейнера-->
+    <aside>
+        <nav>
+            <ul class="menu-list">
+                <li class="menu-list-li"><a class="link @(ViewBag.Active == "Index"?"active":"")" asp-page="/Index">Главная страница</a></li>
+                <li class="menu-list-li">
+                    <a class="link @(ViewBag.Active == "Book"?"active":"")" asp-page="/Book" title="Книга о программировании на Python">
+                    Задача 1</a></li>
+                <li class="menu-list-li">
+                    <a class="link  @(ViewBag.Active == "SailingFleet"?"active":"")" asp-page="/SailingFleet" title="Знаменитые парусные корабли">
+                    Задача 2
+                </a></li>
+                <li class="menu-list-li">
+                    <a class="link  @(ViewBag.Active == "Cities"?"active":"")" asp-page="/Cities" title="Города ДНР">
+                    Задача 3
+                </a></li>
+
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- контент -->
+    <main>
+        @RenderBody()
+    </main>
+</div>
+
+<footer>
+    <h4 class="header-footer">Студент Программер, ПД011, Донецк, 2022</h4>
+</footer>
+</body>
+</html>

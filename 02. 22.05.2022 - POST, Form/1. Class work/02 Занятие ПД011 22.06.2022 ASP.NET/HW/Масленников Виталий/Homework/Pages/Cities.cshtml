@@ -1,0 +1,53 @@
+﻿@page
+@model Homework.Pages.CitiesModel
+@{
+	ViewBag.Title = "Города - Домашняя Работа";
+	ViewBag.Header = "Города";
+}
+
+
+
+<link rel="stylesheet" href="css/table.css">
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary>
+		<p>
+			Имя страницы <b>Cities.cshtml</b>. В ответ на Get-запрос клиента /Cities сформировать
+			представление со сведениями о пяти городах по Вашему выбору. Используйте модель, коллекцию. По
+			каждому городу требуется выводить: название, год основания, герб, население на текущий момент,
+			площадь.
+		</p>
+	</details>
+	
+	
+	<table>
+		<thead>
+		<th>№</th>
+		<th>Название</th>
+		<th>Герб</th>
+		<th>Год основания</th>
+		<th>Площадь, км²</th>
+		<th>Население, чел.</th>
+		</thead>
+		
+		@{
+			var i = 1;
+			foreach (var city in Model.Cities!)
+			{
+				<tr>
+					<td>@(i++)</td>
+					<td class="align-left">@city.Name</td>
+					<td><img src="images/cities/@city.CoatOfArms" alt="Герб"/></td>
+					<td>@city.FoundationYear</td>
+					<td>@city.Area</td>
+					<td>@city.Population</td>
+				</tr>
+			}
+		}
+
+	</table>
+
+</div>
+
+

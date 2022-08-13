@@ -1,0 +1,52 @@
+﻿@page
+@model H_WASP_NET.Pages.TravelCreateModel
+@{
+}
+
+<h3 class="text-center">Добавление новой поездки</h3>
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <form class="w-50" method="post">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel.Client.Surname">Фамилия клиента:</label>
+                <input class="form-control" asp-for="Travel.Client.Surname" type="text" required="required" />
+            </div>
+    
+            <div class="form-floating mb-3">
+                <div class="form-floating mb-3">
+                    <select class="form-select" asp-for="Travel.Route.Country.NameCountry" asp-items="Model.Countries">
+                    </select>
+                    <label asp-for="Travel.Route.Country.NameCountry" class="form-label">Страна отправления:</label>
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <div class="form-floating mb-3">
+                    <select class="form-select" asp-for="Travel.Route.PurposeTravel.NamePurpTravel" asp-items="Model.NamePurpose">
+                    </select>
+                    <label asp-for="Travel.Route.PurposeTravel.NamePurpTravel" class="form-label">Цель поездки:</label>
+                </div>
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel.Route.CostDayStay">Стоимость 1дн. пребывания :</label>
+                <input class="form-control" asp-for="Travel.Route.CostDayStay" type="number"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel.StartTravel">Дата поездки:</label>
+                <input class="form-control" asp-for="Travel.StartTravel" type="date"/>
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel.Duration">Длительность поездки, дн.:</label>
+                <input class="form-control" asp-for="Travel.Duration" type="number" min="6" value="6"/>
+            </div>
+
+            <input class="btn btn-success" type="submit" value="Добавить"/>
+
+        </form>
+    </div>
+</div>

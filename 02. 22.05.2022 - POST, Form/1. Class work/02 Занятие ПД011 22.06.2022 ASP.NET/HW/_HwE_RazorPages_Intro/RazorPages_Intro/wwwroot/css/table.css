@@ -1,0 +1,50 @@
+/* стиль для таблицы */
+table {
+    width: 80%;
+    height: 70%;
+    border-collapse: collapse;
+    border-spacing: 5px;
+    border: 1px solid black;
+    margin: 20px auto;
+    empty-cells: show;
+}
+
+caption {
+    font-family: Tahoma, serif;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+td, th{
+    border: 1px solid black;
+    font-family: Tahoma, serif;
+    font-size: 12pt;
+    padding: 5px;
+}
+
+
+td {
+    text-align: right;
+}
+
+
+.width-400 {
+    width: 400px;
+}
+
+.width-600 {
+    width: 600px;
+}
+
+.width-800 {
+    width: 800px;
+}
+
+.width-900 {
+    width: 900px;
+}
+
+/* ячейка с шириной 100px */
+.tdw-100 {
+    width: 100px;
+}

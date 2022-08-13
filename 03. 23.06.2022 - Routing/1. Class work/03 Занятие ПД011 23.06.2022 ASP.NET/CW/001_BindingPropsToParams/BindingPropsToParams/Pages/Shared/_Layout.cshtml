@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <a asp-page="/Index">Привязка-1</a> |
+        <a asp-page="/Binding02" title="привязка к сложным объектам">Привязка-2</a> |
+        
+        @* ссылки нужны для демонстрации передачи параметров методом GET *@
+        <a href="/Binding03?name=Omar Apps&salary=123000" title="Получение данных из GET-запроса">Привязка-3</a> |
+        <a href="/Binding04?eman=Родион Щедрин&age=33&earn=78000" title="Переименование параметров">Привязка-4</a> 
+        <hr />
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <footer>
+        <hr />
+        <p>Донецк, 2022, ASP.NET</p>
+    </footer>
+</body>
+</html>

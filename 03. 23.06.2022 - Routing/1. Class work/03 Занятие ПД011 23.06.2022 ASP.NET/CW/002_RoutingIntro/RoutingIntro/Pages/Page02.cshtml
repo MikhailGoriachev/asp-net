@@ -1,0 +1,11 @@
+﻿@page "{id}"
+@model RoutingIntro.Pages.Shared.Page02Model
+@{
+    ViewBag.Title = "Страница 2";
+}
+
+<h3>@ViewBag.Title</h3>
+
+@* RouteData - словарь с параметрами маршрутов *@
+<p>Получен параметр на странице: @RouteData.Values["id"]</p>
+<p>Получен параметр в коде: @Model.Id</p>

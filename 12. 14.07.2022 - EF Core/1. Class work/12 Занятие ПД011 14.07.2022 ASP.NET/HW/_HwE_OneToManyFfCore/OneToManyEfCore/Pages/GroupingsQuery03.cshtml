@@ -1,0 +1,27 @@
+﻿@page
+@model OneToManyEfCore.Pages.GroupingsQuery03Model
+@{
+}
+
+<h3>@Model.Task</h3>
+
+@* вывод в соответствии с запросом на выборку данных *@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Длительность подписки, мес.</th>
+        <th>Средняя цена 1 экз., руб.</th>
+        <th>Количество подписок</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var result in Model.Results)
+    {
+        <tr>
+            <td>@result.Duration</td>
+            <td>@($"{result.AvgCost:n2}")</td>
+            <td>@result.Amount</td>
+        </tr>
+    }
+    </tbody>
+</table>

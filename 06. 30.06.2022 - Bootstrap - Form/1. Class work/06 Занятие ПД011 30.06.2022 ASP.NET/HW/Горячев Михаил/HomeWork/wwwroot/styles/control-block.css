@@ -1,0 +1,46 @@
+/* Стиль блока управления под поанелью навигации слева */
+
+/* блок */
+.control-block {
+    /* position: absolute; */
+    box-sizing: border-box;
+
+    /* padding: 3rem;
+ */
+    display: flex;
+
+    flex-direction: column;
+
+    font-size: 1.1rem;
+
+    padding: 1rem;
+    margin: 2rem 0.3rem;
+
+    border-radius: 1rem;
+    border: 2px solid #92aaff;
+    color: white;
+
+    box-sizing: border-box;
+
+    transition: all 0.5s 0s ease-out;
+}
+
+/* полоса - сепаратор */
+.control-block hr {
+    width: 100%;
+    height: 1px;
+    background-color: #92aaff;
+    margin: 0.5rem 0;
+
+    border-radius: 5px;
+}
+
+/* поле */
+.control-block-field {
+    padding: 1rem;
+    margin: 0.3rem;
+
+    border-radius: 1rem;
+    border: 2px solid #92aaff;
+    color: white;
+}

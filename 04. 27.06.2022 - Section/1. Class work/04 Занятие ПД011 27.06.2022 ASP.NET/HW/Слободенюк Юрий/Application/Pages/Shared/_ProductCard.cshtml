@@ -1,0 +1,25 @@
+﻿@model Application.Entities.Product
+
+
+<div class="card mb-3">
+    <div class="row g-0">
+        @if (string.IsNullOrWhiteSpace(Model.Image) == false)
+        {
+            <div class="col">
+                <img src="~/images/@Model.Image" class="img-fluid rounded-start" alt="...">
+            </div>
+        }
+
+        <div class="col">
+            <div class="card-body">
+                <h4 class="card-title">Сведения</h4>
+                <p class="mt-3">
+                    Название: @Model.Name <br/>
+                    Артикул: @Model.Code <br/>
+                    Цена: @Model.Price <br/>
+                    Количество: @Model.Count
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

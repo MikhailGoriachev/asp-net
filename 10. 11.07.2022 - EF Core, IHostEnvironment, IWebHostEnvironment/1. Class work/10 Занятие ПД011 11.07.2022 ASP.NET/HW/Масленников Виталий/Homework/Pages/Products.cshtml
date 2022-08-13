@@ -1,0 +1,128 @@
+﻿@page "{handler?}"
+@using Microsoft.Extensions.Primitives
+@model Homework.Pages.ProductsModel
+@{
+    ViewBag.Header = "Бытовая техника";
+
+    string IsActive(string actionId) =>
+        Request.Query["ActionId"] != StringValues.Empty && Request.Query["ActionId"] == actionId ? "active" : "";
+}
+
+@*панель управления*@
+
+@section Controls{
+    <div class="navbar">
+        <div class="container-fluid justify-content-start gap-2 ">
+            <button type="button" class="btn btn-sm btn-outline-dark ms-5"
+                    data-bs-toggle="modal" data-bs-target="#modalForm">
+                Добавить товар
+            </button>
+
+            <div class="ms-3 vl"></div>
+            <a asp-page-handler="OrderBy" asp-route-prop="Name" asp-route-ActionId="1"
+               class="btn btn-sm btn-outline-secondary ms-3 @IsActive("1")">
+                по наименованию
+            </a>
+
+            <a asp-page-handler="OrderBy" asp-route-prop="Price" asp-route-ActionId="2"
+               class="btn btn-sm btn-outline-secondary @IsActive("2")">
+                по стоимости
+            </a>
+
+            <a asp-page-handler="OrderBy" asp-route-prop="Amount" asp-route-order="Desc" asp-route-ActionId="3"
+               class="btn btn-sm btn-outline-secondary @IsActive("3")">
+                по убыванию количества
+            </a>
+        </div>
+    </div>
+}
+
+
+<div class="modal" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Введите информацию о технике</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                @*форма ввода для товара*@
+                <form class="mb-4 p-0" method="post" enctype="multipart/form-data" id="prodForm">
+                    <div class="row">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" asp-for="Product.Type" asp-items="Model.Types"></select>
+                            <label class="form-label mx-2" asp-for="Product.Type">Тип: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Product.Name" required/>
+                            <label class="form-label mx-2" asp-for="Product.Name">Наименование: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Product.VendorCode" required/>
+                            <label class="form-label mx-2" asp-for="Product.VendorCode">Артикул:</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Product.Price" required/>
+                            <label class="form-label mx-2" asp-for="Product.Price">Цена:</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Product.Amount" required/>
+                            <label class="form-label mx-2" asp-for="Product.Amount">Количество: </label>
+                        </div>
+                        
+                        <div class="form-floating">
+                            <input class="form-control form-control-sm mt-2 ps-3" accept=".png,.jpg,.jpeg"
+                                   type="file" asp-for="Upload">
+                            <label class="form-label mt-1 mx-2" asp-for="Product.Type">Загрузить фото (до 2Mb): </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <div>
+                    <input asp-page-handler="Add" form="prodForm" class="btn btn-primary" type="submit" value="Добавить">
+                </div>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.ErrMsg != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+        <b>Ошибка!</b> @Model.ErrMsg
+    </div>
+}
+
+@*вывод карточек товаров*@
+<div class="row">
+    @foreach (var item in Model.DisplayProducts!)
+    {
+        <div class="col-md-auto mb-4">
+            <div class="card h-100 w-240-px">
+                <div class="card-header h-200-px bg-body border-0 p-0 text-center">
+                    <img class="m-1 mh-100 img-fluid" src="@Model.GetImagePath(@item.Image!)" alt="Бытовая 
+                техника">
+                    </div>
+                <div class="card-body">
+                    <h5 class="card-title color-2">@item.Name</h5>
+                    <p class="card-text color-1">@item.Type</p>
+                </div>
+                <div class="card-footer bg-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item color-1">Арт.: <span class="color-3">@item.VendorCode</span></li>
+                        <li class="list-group-item color-1">Цена: <span class="color-3">@item.Price</span></li>
+                        <li class="list-group-item color-1">Количество: <span class="color-3">@item.Amount</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>

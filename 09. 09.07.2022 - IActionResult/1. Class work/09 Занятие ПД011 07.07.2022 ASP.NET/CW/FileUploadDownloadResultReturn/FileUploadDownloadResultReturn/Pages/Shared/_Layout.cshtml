@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="~/images/emotion_smile.png" type="image/x-icon">
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-page="/Index">ПД011</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#appNavbar-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="appNavbar-1">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/UploadFile">Загрузка файлов</a>
+                    </li>
+					
+					@* примеры возвращаемых результатов *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Возвращение результата</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-page="/ResultReturn">По умолчанию</a></li>
+                            <li><a class="dropdown-item" asp-page="/ResultReturn" asp-page-handler="Content">Content()</a></li>
+                            <li><a class="dropdown-item" asp-page="/ResultReturn" asp-page-handler="Page">Page()</a></li>
+                            <li><a class="dropdown-item" asp-page="/ResultReturn" asp-page-handler="Redirect">Redirect()</a></li>
+                            <li><a class="dropdown-item" asp-page="/ResultReturn" asp-page-handler="StatusCode">StatusCode()</a></li>
+                        </ul>
+                    </li>
+                    
+					@* скачивание файла с сервера *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Скачивание файла</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-page="/FileResult">По умолчанию</a></li>
+                            <li><a class="dropdown-item" asp-page="/FileResult" asp-page-handler="PhysicalFile">PhysicalFile</a></li>
+                            <li><a class="dropdown-item" asp-page="/FileResult" asp-page-handler="BytesArray">BytesArray</a></li>
+                            <li><a class="dropdown-item" asp-page="/FileResult" asp-page-handler="FileStream">FileStream</a></li>
+                            <li><a class="dropdown-item" asp-page="/FileResult" asp-page-handler="VirtualFile">VirtualFile</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="mt-5 p-1 bg-dark text-white text-center">
+        <h5>КА Шаг, ПД011, Донецк, 2022</h5>
+    </footer>
+</body>
+</html>

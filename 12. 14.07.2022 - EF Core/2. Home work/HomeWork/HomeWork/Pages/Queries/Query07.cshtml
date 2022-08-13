@@ -1,0 +1,36 @@
+﻿@page
+@model HomeWork.Pages.Queries.Query07
+
+@{
+    ViewBag.Title = "Запрос 7. Цели поездки";
+    ViewBag.PageName = "/Queries";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h3 class="display-6 text-center">Запрос 7. Цели поездки</h3>
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Минимальная стоим. 1 дня (&#8381;)</th>
+            <th>Средняя стоим. 1 дня (&#8381;)</th>
+            <th>Максимальная стоим. 1 дня (&#8381;)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var result in Model.Results)
+        {
+            <tr>
+                <th>@result.Objective.Id</th>
+                <td>@result.Objective.Name</td>
+                <td>@(result.MinDailyCost != null ? $"{result.MinDailyCost:n2}" : "нет данных")</td>
+                <td>@(result.AvgDailyCost != null ? $"{result.AvgDailyCost:n2}" : "нет данных")</td>
+                <td>@(result.MaxDailyCost != null ? $"{result.MaxDailyCost:n2}" : "нет данных")</td>
+                <td>@(result.Count != null ? $"{result.Count:n2}" : "нет данных")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

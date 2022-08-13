@@ -1,0 +1,38 @@
+﻿@page
+@model Homework.Pages.ProductsPhotos
+
+@{
+    ViewBag.Header = "Фото бытовой техники";
+}
+
+@if (Model.Images.Length > 0)
+{
+    <div id="carousel" class="carousel carousel-dark slide w-75 mx-auto mt-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @for (var i = 0; i < Model.Images.Length; i++)
+            {
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="@i" 
+                        class=@(i == 0 ? "active" : "")></button>
+            }
+        </div>
+        
+        <div class="carousel-inner">
+            @{
+                var active = Model.Images.First();
+                foreach (var img in Model.Images)
+                {
+                    <div class="carousel-item h-400-px text-center @(img == active ? "active" : "")">
+                         <img src="@img" alt="Бытовая техника" class="mh-100 img-fluid"> @*d-block carousel-img mx-auto*@
+                    </div>
+                }
+            }
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+}

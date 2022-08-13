@@ -1,0 +1,247 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.ShipList
+@{
+    ViewBag.Title = "Задание 2. Корабли";
+}
+
+@functions
+{
+    // вывод корабля
+    void ShowShip(Ship ship)
+    {
+        <div class="col-3 p-2">
+            <div class="card shadow-sm p-0 h-100">
+                <div class="card-header d-flex h-11rem">
+                    <img src="/images/ships/@ship.ImageFile" class="my-auto mx-auto d-block mh-100 mw-100"
+                         alt="@ship.ImageFile">
+                </div>
+                <div class="card-body">
+                    <ul class="list-group-flush p-0 m-0">
+                        <li class="list-group-item">Название: <b>@ship.Name</b></li>
+                        <li class="list-group-item">Тип: <b>@ship.TypeShip</b></li>
+                    </ul>
+
+                </div>
+                <div class="card-footer">
+                    <ul class="list-group-flush p-0 m-0">
+                        <li class="list-group-item">Длина: <b>@ship.Length м</b></li>
+                        <li class="list-group-item">Ширина: <b>@ship.Width м</b></li>
+                        <li class="list-group-item">Водоизмещение: <b>@ship.Displacement т</b></li>
+                        <li class="list-group-item">Год постройки: <b>@ship.Year</b></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+
+    // вывод списка кораблей
+    void ShowShipList(List<Ship> ships)
+    {
+        ships.ForEach(s => ShowShip(s));
+    }
+}
+
+
+<!-- #region Задание 2 -->
+<div id="taskInfoModalId" class="modal fade">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Заголовок -->
+            <div class="modal-header h5">
+                Задание 2. Корабли
+            </div>
+
+            <!-- Контент -->
+            <div class="modal-body">
+                <p>
+                    <b>Страница 2</b>. Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию сведений о
+                    кораблях: тип, название, длина, ширина, водоизмещение, год постройки, фото корабля. Инициализация коллекции
+                    сведений о кораблях должна проводиться при отсутствии файла (формируйте не менее 10 записей).
+                </p>
+
+                <p>Функционал для разработки:</p>
+
+                <ul>
+                    <li>вывод всей коллекции в исходном порядке</li>
+                    <li>вывод коллекции, упорядоченной по возрастанию года изготовления</li>
+                    <li>вывод коллекции, упорядоченной по убыванию водоизмещения</li>
+                    <li>вывод коллекции, упорядоченной по названиям кораблей</li>
+                    <li>добавление корабля в коллекцию (естественно, с сохранением измененной коллекции в файле)</li>
+                </ul>
+
+            </div>
+
+            <!-- Подвал -->
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+<!-- #region Модальное окно для формы добавления корабля -->
+<div id="shipFormModalId" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Заголовок окна -->
+            <div class="modal-header">
+                <h5>Добавление корабля</h5>
+            </div>
+
+            <!-- #region Форма для доабавления корабля -->
+            <form id="shipFormId" enctype="multipart/form-data" method="post" asp-antiforgery="true" class="mx-5">
+
+                <!-- Название -->
+                <div class="form-floating my-3">
+                    <input type="text" asp-for="ShipItem!.Name" placeholder="Название" class="form-control"
+                           required>
+                    <label asp-for="ShipItem!.Name">Название</label>
+                </div>
+
+                <!-- Тип техники -->
+                <div class="form-floating my-3">
+                    <select id="typeId" asp-for="ShipItem!.TypeShip" asp-items="Model.TypesShip" class="form-select" required>
+                    </select>
+                    <label asp-for="ShipItem!.TypeShip">Тип техники</label>
+                </div>
+
+                <!-- Длина -->
+                <div class="form-floating my-3">
+                    <input type="number" asp-for="ShipItem!.Length" min="0" step="any" class="form-control"
+                           placeholder="Длина (м)" required>
+                    <label asp-for="ShipItem!.Length">Длина (м)</label>
+                </div>
+
+                <!-- Ширина -->
+                <div class="form-floating my-3">
+                    <input type="number" asp-for="ShipItem!.Width" min="0" step="any" class="form-control"
+                           placeholder="Ширина (м)" required>
+                    <label asp-for="ShipItem!.Width">Ширина (м)</label>
+                </div>
+
+                <!-- Водоизмещение -->
+                <div class="form-floating my-3">
+                    <input type="number" asp-for="ShipItem!.Displacement" min="0" step="any" class="form-control"
+                           placeholder="Водоизмещение (т)" required>
+                    <label asp-for="ShipItem!.Displacement">Водоизмещение (т)</label>
+                </div>
+
+                <!-- Год постройки -->
+                <div class="form-floating my-3">
+                    <input type="number" asp-for="ShipItem!.Year" min="1600" class="form-control"
+                           placeholder="Год постройки" required>
+                    <label asp-for="ShipItem!.Year">Год постройки</label>
+                </div>
+
+                <!-- Файл изображения -->
+                <div class="my-3">
+                    <label class="form-label" asp-for="FileImage">Файл изображения:</label>
+                    <input type="file" asp-for="FileImage" class="form-control"
+                           placeholder="Файл изображения" required>
+                </div>
+
+            </form>
+            <!-- #endregion -->
+
+            <!-- Подвал модального окна -->
+            <div class="modal-footer">
+                <!-- Кнопки управления -->
+                <input form="shipFormId" class="btn btn-success me-2"
+                       asp-page-handler="AddShip"
+                       type="submit" value="Добавить"/>
+                <input form="shipFormId" class="btn btn-danger" data-bs-dismiss="modal"
+                       type="reset" value="Отмена"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+<!-- #region Общий контейнер контента -->
+<div class="container-fluid px-5 my-4">
+    <div class="row m-0 p-0">
+        <div class="row m-0 p-0">
+            <div class="col-4 ps-0 pe-3">
+                <div class="container mx-auto bg-light shadow-sm border rounded-3 py-3">
+
+                    <h5 class="text-center">@ViewBag.Title</h5>
+
+                    <hr/>
+
+                    <div class="row">
+
+                        <!-- Условия задания -->
+                        <button type="button"
+                                class="col btn btn-success d-block mx-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#taskInfoModalId">
+                            Условия задания...
+                        </button>
+
+                        <!-- Добавление корабля -->
+                        <button type="button"
+                                class="col btn btn-primary d-block mx-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#shipFormModalId">
+                            Добавить корабль...
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- #region Сортировка кораблей -->
+            <div class="col-8 ps-3 pe-0">
+                <div class="container mx-auto bg-light shadow-sm border rounded-3 py-3">
+                    <h5 class="text-center">Сортировка кораблей</h5>
+
+                    <hr/>
+
+                    <div class="row">
+
+                        <!-- По умоланию -->
+                        <a class="col btn btn-success d-block mx-3" asp-page="/ShipList">По умоланию</a>
+
+                        <!-- Упорядочивание по возрастанию года изготовления -->
+                        <a class="col btn btn-primary d-block mx-3" asp-page-handler="OrderByAscYear">
+                            По году изготовления
+                        </a>
+
+                        <!-- Упорядочивание по убыванию водоизмещения -->
+                        <a class="col btn btn-primary d-block mx-3" asp-page-handler="OrderByDescDisplacement">По водоизмещению</a>
+
+                        <!-- Упорядочивание по названиям -->
+                        <a class="col btn btn-primary d-block mx-3" asp-page-handler="OrderByName">
+                            По названию
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+<!-- #region Список кораблей -->
+<section class="my-4 mx-5 bg-light shadow-sm border rounded-3 p-3">
+    <h5 class="text-center">@Model.NameHandler</h5>
+
+    <hr>
+
+    <div class="container-sm mt-3">
+        <div class="row">
+            <!-- Вывод списка кораблей -->
+            @{
+                ShowShipList(Model.CurrentShips);
+            }
+        </div>
+    </div>
+</section>

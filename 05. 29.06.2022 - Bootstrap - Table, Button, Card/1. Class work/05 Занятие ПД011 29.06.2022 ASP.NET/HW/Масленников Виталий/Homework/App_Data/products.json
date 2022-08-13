@@ -1,0 +1,114 @@
+[
+  {
+    "Name": "Аэрогриль",
+    "VendorCode": "ART001",
+    "Type": "Аэрогриль",
+    "Price": 3200,
+    "Amount": 2,
+    "Image": "air_fryer.jpeg"
+  },
+  {
+    "Name": "Шашлычница",
+    "VendorCode": "ART002",
+    "Type": "Шашлычница",
+    "Price": 6100,
+    "Amount": 5,
+    "Image": "brazier.jpeg"
+  },
+  {
+    "Name": "Хлебопечка",
+    "VendorCode": "ART003",
+    "Type": "Хлебопечка",
+    "Price": 3400,
+    "Amount": 4,
+    "Image": "breadmaker.jpeg"
+  },
+  {
+    "Name": "Пылесос",
+    "VendorCode": "ART004",
+    "Type": "Пылесос",
+    "Price": 6100,
+    "Amount": 6,
+    "Image": "cleaner.jpeg"
+  },
+  {
+    "Name": "Кухонная вытяжка",
+    "VendorCode": "ART005",
+    "Type": "Вытяжка",
+    "Price": 2200,
+    "Amount": 2,
+    "Image": "cooker_hood.jpeg"
+  },
+  {
+    "Name": "Фритюрница",
+    "VendorCode": "ART006",
+    "Type": "Фритюрница",
+    "Price": 1540,
+    "Amount": 1,
+    "Image": "fryer.jpeg"
+  },
+  {
+    "Name": "Утюг",
+    "VendorCode": "ART007",
+    "Type": "Утюг",
+    "Price": 700,
+    "Amount": 8,
+    "Image": "iron.jpeg"
+  },
+  {
+    "Name": "Микроволновая печь",
+    "VendorCode": "ART008",
+    "Type": "Печь",
+    "Price": 11100,
+    "Amount": 4,
+    "Image": "microwave_oven.jpeg"
+  },
+  {
+    "Name": "Мини печь",
+    "VendorCode": "ART009",
+    "Type": "Печь",
+    "Price": 6000,
+    "Amount": 2,
+    "Image": "mini_oven.jpeg"
+  },
+  {
+    "Name": "Мультиварка",
+    "VendorCode": "ART010",
+    "Type": "Мультиварка",
+    "Price": 7700,
+    "Amount": 5,
+    "Image": "multicooker.jpeg"
+  },
+  {
+    "Name": "Плита кухонная",
+    "VendorCode": "ART011",
+    "Type": "Плита",
+    "Price": 16400,
+    "Amount": 1,
+    "Image": "plate.jpeg"
+  },
+  {
+    "Name": "Холодильник",
+    "VendorCode": "ART012",
+    "Type": "Холодильник",
+    "Price": 23800,
+    "Amount": 6,
+    "Image": "refrigerator.jpeg"
+  },
+  {
+    "Name": "Пароварка",
+    "VendorCode": "ART013",
+    "Type": "Пароварка",
+    "Price": 5500,
+    "Amount": 2,
+    "Image": "steamer.jpeg"
+  },
+  {
+    "Name": "Стиральная машина",
+    "VendorCode": "ART014",
+    "Type": "Стиральная машина",
+    "Price": 23100,
+    "Amount": 8,
+    "Image": "washing_machine.jpeg"
+  }
+]

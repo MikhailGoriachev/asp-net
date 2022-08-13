@@ -1,0 +1,14 @@
+﻿@* Маршрут Page01/42 *@
+@* ожидается один обязательный параметр *@
+@page "{id}"  
+
+@model RoutingIntro.Pages.Page01Model
+@{
+    ViewBag.Title = "Страница 1";
+}
+
+<h3>@ViewBag.Title</h3>
+
+@* RouteData - словарь с параметрами маршрутов *@
+<p>Получен параметр на странице: @RouteData.Values["id"]</p>
+<p>Получен параметр в кодое: @Model.Id</p>

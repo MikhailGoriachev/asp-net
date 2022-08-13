@@ -1,0 +1,47 @@
+﻿@page
+@model HomeWork.Pages.CitiesModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 3;
+
+    // название страницы
+    ViewData["Header"] = "Задача 3. Города";
+}
+<article>
+    <details>
+
+        <summary>
+            <h2>Задача 3. Города</h2>
+        </summary>
+
+        <!-- #region Задача 3 -->
+        <p>
+            <b>Задача 3.</b> Имя страницы <b>Cities.cshtml</b>. В ответ на Get-запрос клиента <b>/Cities</b>
+            сформировать представление со сведениями о пяти городах по Вашему выбору. Используйте
+            модель, коллекцию. По каждому городу требуется выводить: название, год основания, герб,
+            население на текущий момент, площадь.
+        </p>
+        <!-- #endregion -->
+
+    </details>
+</article>
+
+<article>
+
+    @* Города *@
+    <div class="container">
+        @foreach (var item in @Model.CityList)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="~/images/@item.EmblemFile" alt="герб">
+                </div>
+
+                <div>Название: <b>@item.Name</b></div>
+                <div>Основан: <b>@item.Year г</b></div>
+                <div>Население: <b>@($"{item.Population:n}") чел</b></div>
+                <div>Площаль: <b>@item.Area км<sup>2</sup></b></div>
+            </div>
+        }
+    </div>
+</article>

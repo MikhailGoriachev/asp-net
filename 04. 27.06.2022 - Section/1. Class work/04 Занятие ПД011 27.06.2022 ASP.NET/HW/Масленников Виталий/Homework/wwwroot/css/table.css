@@ -1,0 +1,48 @@
+﻿table {
+	/*width: 100%;*/
+	min-width: 900px;
+	border-collapse: collapse;
+	border-spacing: 5px;
+	border: 1px solid #39739d;
+	margin: 20px 0 0;
+	empty-cells: show;
+}
+
+caption {
+	font-family: Tahoma, serif;
+	font-size: 14pt;
+	margin-bottom: 4px;
+	font-weight: bold;
+	text-align: left;
+}
+
+thead th {
+	font-weight: bold;
+	text-align: center;
+	background-color: lightsteelblue;
+}
+
+td, th {
+	border: 1px solid #39739d;
+	font-family: Tahoma, serif;
+	font-size: 12pt;
+	padding: 4px 10px;
+	text-align: right;
+}
+
+td {
+	color: #2c5777;
+	vertical-align: top;
+}
+
+td img {
+	width: 200px;
+}
+
+/*tr:nth-of-type(even) {
+	background-color: aliceblue;
+}
+
+tr:nth-of-type(odd) {
+	background-color: white;
+}*/

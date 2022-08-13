@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["title"]</title>
+    
+    <!--Подключение стилей-->
+
+    <link rel="stylesheet" href="~/styles/styles.css">
+    @RenderSection("Styles",false);
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="../libs/css/bootstrap.min.css">
+    <script src="../libs/js/bootstrap.bundle.min.js"></script>
+
+    <!--Подключение удалённого шрифта через репозиторий Google Fonts-->
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap'>
+</head>
+<body>
+    <header>
+        <h1>@ViewData["pageHeader"]</h1>
+    </header>
+
+    <nav>
+        <a class="btn btn-outline-light mx-3 mt-3 text-black text-center text-decoration-none text-xl-center @(ViewBag.IsActive == 0?"current":"")" asp-page="/Index">Главная страница</a> 
+        <a class="btn btn-outline-light mx-3 mt-3 text-black text-center text-decoration-none text-xl-center @(ViewBag.IsActive == 1?"current":"")" asp-page="/Appliances">Первая страница</a> 
+        <a class="btn btn-outline-light mx-3 mt-3 text-black text-center text-decoration-none text-xl-center @(ViewBag.IsActive == 2?"current":"")" asp-page="/Figures">Вторая страница</a>
+
+    </nav>
+
+    <main id="top">
+        @RenderBody()
+    </main>  
+    <!--Ссылка для перехода к верхнему блоку-->
+    <a href="#top" class="up-link">
+        <img src="~/images/up-arrow.svg">
+    </a>
+
+    <footer>
+        <b>Разработчик:</b> Вагнер Владислав
+        <b><br>Группа:</b> ПД011
+        <b><br>Город:</b> Донецкая область,Макеевка.
+        <b><br>Год разработки:</b> 2022
+    </footer>
+</body>
+</html>

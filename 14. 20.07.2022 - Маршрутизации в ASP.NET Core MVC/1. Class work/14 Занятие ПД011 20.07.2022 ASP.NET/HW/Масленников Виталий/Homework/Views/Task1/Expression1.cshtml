@@ -1,0 +1,17 @@
+﻿@model Homework.Models.Task1.ExpressionResult
+
+@{
+    ViewBag.Header = "Уравнение №1";
+}
+
+<img class="my-4 w-auto" src="/images/task1_equation1.png" alt="Уравнение 1"/>
+
+<div class="row">
+    <div class="col-auto">
+        <ul class="list-group">
+            <li class="list-group-item fw-bold">Результат:</li>
+            <li class="list-group-item">a = @($"{Model?.A:f6}")</li>
+            <li class="list-group-item">b = @($"{Model?.B:f6}")</li>
+        </ul>
+    </div>
+</div>

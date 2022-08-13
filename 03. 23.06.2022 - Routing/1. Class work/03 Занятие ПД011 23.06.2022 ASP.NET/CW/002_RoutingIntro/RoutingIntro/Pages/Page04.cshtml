@@ -1,0 +1,15 @@
+﻿@page "{id}/{name}/{salary}"
+
+@model RoutingIntro.Pages.Page04Model
+@{
+    ViewBag.Title = "Страница 4";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<ul>
+    <li>@Model.Id</li>
+    <li>@Model.Name</li>
+    <li>@Model.Salary</li>
+</ul>
+

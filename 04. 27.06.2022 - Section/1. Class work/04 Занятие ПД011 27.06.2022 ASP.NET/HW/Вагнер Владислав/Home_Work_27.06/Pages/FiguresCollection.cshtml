@@ -1,0 +1,118 @@
+﻿@page
+@model Home_Work.Pages.FiguresCollectionModel
+@using Home_Work.Models.Figures
+@using Home_Work.Utilities
+@using System.Net
+@{
+    ViewData["title"] = "Страница 3";
+    ViewData["pageHeader"] = "СТРАНИЦА 3";
+   
+    ViewBag.IsActive = 3;
+}
+@functions{
+    @*public void showCollection(List<Appliance> AppCollection)
+    {
+        foreach (var appliance in AppCollection)
+            {
+                <div class="card">
+                                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                                <div><span>Наименование: @appliance.Name</span></div>
+                                <div><span>Артикул:  @appliance.Article</span></div>
+                                <div><span>Цена:  @appliance.Price</span></div>
+                                <div><span>Количество:  @appliance.Quantity</span></div>
+                </div>
+
+            }
+    }*@
+}
+
+
+<section>
+    
+    <link rel="stylesheet" href="~/styles/task1.css?v=<?= time(); ?>">
+    <link rel="stylesheet" href="~/styles/task2.css?v=<?= time(); ?>">
+
+    <!--Задание-->
+    <details class="task-details">
+        <summary><b>Задача 3.</b></summary>
+        <div>
+            <p>
+                Имя страницы <b>Cities.cshtml</b>. В ответ на Get-запрос клиента <b>/Cities</b> сформировать представление со сведениями о пяти 
+                городах по Вашему выбору. Используйте модель, коллекцию. По каждому городу требуется выводить: название, 
+                год основания, герб, население на текущий момент, площадь.
+            </p>
+
+            <p>
+                По ссылкам на этой странице вызывайте обработчики запросов GET:
+            </p>
+    
+            <ul>
+                <li>вывод только квадратов, по убыванию площади</li>
+                <li>вывод только прямоугольников, по возрастанию периметра</li>
+                <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+                <li>вывод всей коллекции в исходном порядке</li>
+                <li>вывод всей коллекции по убыванию площади</li>
+            </ul>
+        </div>
+    </details>
+
+    
+    <!--Кнопки-->
+    <div class="contaner">
+        <a asp-page-handler="SortSquaresByArea">Квадраты по убыванию площади</a>
+        <a asp-page-handler="SortRectanglesByPerimeter">Прямоугольники по возрастанию периметра</a>
+        <a asp-page-handler="ReverseTriangles">Треугольники в обратном порядке</a>
+        <a asp-page-handler="SortBySquare">Упорядочить по возрастанию площади</a>
+        <a asp-page-handler="">Исходная коллекция</a>
+    </div>
+
+
+    <!--Форма задания диапазона-->
+    <form method="post">
+        <fieldset class="form-block">
+            <div class="contaner">
+                <input class="add-figure" type="submit" value="Добавить запись">
+            </div>
+        </fieldset>
+    </form>
+    
+    
+    <!--Вывод исходной коллекции, либо её копии-->
+    @if (Request.Method.ToLower() == "get")
+    {
+        <div class="contaner">
+            @foreach (var figure in @Model.IsDefault?Model.Figures:Model.FiguresCopy)
+            {
+                <div class="card">
+                    <div class="divImg"><img src="~/images/figures/@Utils.Icons[figure.FigureType]" alt=@figure.FigureType /></div>
+                    <div><span>Тип фигуры: @figure.FigureType</span></div>
+                    <div><span>Размеры:  @Html.Raw(figure.GetSize())</span></div>
+                    <div><span>Площадь:  @figure.Area()</span></div>
+                    <div><span>Периметр:  @figure.Perimeter()</span></div>
+                </div>
+            }
+
+        @*@showCollection(Model.Appliances)*@
+        
+        </div>
+    }
+    
+    <!--Добавление и вывод записей-->
+    @if (Request.Method.ToLower() == "post")
+    {
+        @*В зависимости от сосотояния вывода задаёмразные коллекции*@
+        <div class="contaner">
+            @foreach (var figure in @Model.IsDefault?Model.Figures:Model.FiguresCopy)
+            {
+                <div class="card">
+                    <div class="divImg"><img src="~/images/figures/@Utils.Icons[figure.FigureType]" alt=@figure.FigureType /></div>
+                    <div><span>Тип фигуры: @figure.FigureType</span></div>
+                    <div><span>Размеры:  @Html.Raw(figure.GetSize())</span></div>
+                    <div><span>Площадь:  @figure.Area()</span></div>
+                    <div><span>Периметр:  @figure.Perimeter()</span></div>
+                </div>
+            }
+        </div>
+    }
+
+</section>

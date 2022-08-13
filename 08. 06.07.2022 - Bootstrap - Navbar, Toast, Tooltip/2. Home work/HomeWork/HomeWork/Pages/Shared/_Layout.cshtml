@@ -1,0 +1,89 @@
+﻿@functions {
+    // получить стиль
+    string ActiveStyle(string pageName) => ViewBag.PageName == pageName ? "active" : "";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>@ViewBag.Title</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/icon.svg">
+
+    <!-- подключение дополнительных стилей и скриптов -->
+    @RenderSection("Head", false)
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" asp-page="/Index">
+            <img class="logo" src="~/images/icon.svg" alt="logo">
+            @* HomeWork *@
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- #region Ссылки на страницы -->
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("Index") mx-3" asp-page="/Index">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("ApplianceList") mx-3" asp-page="/Appliancelist">Задание 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("Figures") mx-3" asp-page="/Figures">Задание 2</a>
+                </li>
+                <!-- #endregion -->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+    @RenderBody()
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

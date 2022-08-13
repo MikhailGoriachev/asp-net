@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="~/images/emotion_smile.png" type="image/x-icon">
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-page="/Index">ПД011</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#appNavbar-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="appNavbar-1">
+                <ul class="navbar-nav">
+                    @* операции с таблицей КЛИЕНТЫ *@
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Clients">Клиенты</a>
+                    </li>
+                    
+                    @* операции с таблицей ПОЕЗДКИ *@
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Travels">Поездки</a>
+                    </li>
+
+                    @* выборки по заданию *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Выборки</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-page="/Query01">Выборка 1</a></li>
+                            <li><a class="dropdown-item" asp-page="/Query02">Выборка 2</a></li>
+                            <li><a class="dropdown-item" asp-page="/Query03">Выборка 3</a></li>
+                            <li><a class="dropdown-item" asp-page="/Query04">Выборка 4</a></li>
+                            <li><a class="dropdown-item" asp-page="/Query05">Выборка 5</a></li>
+                            <li><a class="dropdown-item" asp-page="/Query06">Выборка 6</a></li>
+                        </ul>
+                    </li>
+                    
+                    @* отчеты по заданию *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Отчеты</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-page="/Report01">Отчет 1</a></li>
+                            <li><a class="dropdown-item" asp-page="/Report02">Отчет 2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="mt-5 p-1 bg-dark text-white text-center">
+        <h5>КА Шаг, ПД011, Донецк, 2022</h5>
+    </footer>
+</body>
+</html>

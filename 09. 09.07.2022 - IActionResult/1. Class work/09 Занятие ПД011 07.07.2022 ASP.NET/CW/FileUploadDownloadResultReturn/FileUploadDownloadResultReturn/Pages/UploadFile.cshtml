@@ -1,0 +1,35 @@
+﻿@page
+@model FileUploadDownloadResultReturn.Pages.UploadFileModel
+@{
+    ViewBag.Title = "Загрузка файла";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<h4>Cинхронная загрузка файла на сервер</h4>
+@* Форма для выбора файла и отправки его на сервер
+    1. Метод post
+    2. enctype="multipart/form-data"
+*@
+<form method="post" enctype="multipart/form-data" asp-page="/UploadFile">
+    <div class="form-floating mt-3 mb-3">
+        <input type="file" class="form-control" asp-for="Upload">
+        <label asp-for="Upload">Файл для загрузки:</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+
+<h4 class="mt-3">Асинхронная загрузка файла на сервер</h4>
+<form method="post" enctype="multipart/form-data" asp-page="/UploadFile" asp-page-handler="Demo">
+    <div class="form-floating mt-3 mb-3">
+        <input type="file" class="form-control" asp-for="Upload">
+        <label asp-for="Upload">Файл для загрузки:</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить асинхронно</button>
+</form>
+
+<hr class="my-5"/>
+
+<h4>@ViewData["Message"]</h4>

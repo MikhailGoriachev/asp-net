@@ -1,0 +1,35 @@
+﻿@page
+@model HW_1.Pages.SailingFleetModel
+@{
+    ViewData["title"] = "Страница sailingFleet";
+    ViewData["pageHeader"] = "СТРАНИЦА ПАРУСНЫХ КОРАБЛЕЙ";
+}
+
+<section>
+
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+            Имя страницы <b>Book.cshtml</b>. В ответ на GET-запрос клиента <b>/Book</b> сформировать представление
+            со сведениями об учебнике по программированию на Python (используйте модель): автор Бриггс Дж.;
+            название «Python для детей. Самоучитель по программированию», год издания 2017.
+        </div>
+    </details>
+
+    @*Вывод сформированной коллецкии*@
+    <div class="cards-container">
+        @foreach (var ship in Model.sailingShips)
+        {
+            <div class="card">
+                <img src="@ship.Image" alt="@ship.ShipName" />
+                <div>Название: <b>@ship.ShipName</b></div>
+                <div>Длина корабля: <b>@($"{ship.Length:f1}")</b></div>
+                <div>Ширина корабля: <b>@($"{ship.Width:f1}")</b></div>
+                <div>Ширина корабля: <b>@($"{ship.Width:f1}")</b></div>
+                <div>Водоизмещение: <b>@ship.Weight</b></div>
+                <div>Год выпуска: <b>@ship.ProdYear</b></div>
+            </div>
+        }
+    </div>
+
+</section>

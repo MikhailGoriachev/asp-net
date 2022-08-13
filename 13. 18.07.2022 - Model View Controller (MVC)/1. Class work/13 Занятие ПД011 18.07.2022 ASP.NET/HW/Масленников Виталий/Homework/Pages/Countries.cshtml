@@ -1,0 +1,33 @@
+﻿@page
+@model Homework.Pages.Countries
+
+@{
+    ViewBag.Header = "Данные по странам";
+}
+
+@* Таблица с данными *@
+<table class="table text-center mt-3">
+    <thead class="fw-bold align-top">
+    <tr class="align-top">
+        <td>Название</td>
+        <td>Стоимость визы</td>
+        <td>Стоимость транспортных<br/> услуг</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.DisplayCountries is not null && Model.DisplayCountries.AsEnumerable().Any()){
+        @foreach (var country in Model.DisplayCountries){
+            <tr>
+                <td>@country.Name</td>
+                <td>@country.VisaCost</td>
+                <td>@country.TransferCost</td>
+                <td>@country.DailyCost</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="4" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

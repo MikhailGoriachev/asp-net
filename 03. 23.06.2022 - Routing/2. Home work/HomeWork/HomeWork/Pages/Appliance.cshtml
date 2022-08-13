@@ -1,0 +1,108 @@
+﻿@page
+@using HomeWork.Models
+@model HomeWork.Pages.ApplianceModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 1;
+
+    // название страницы
+    ViewData["Header"] = "Задача 1. Бытовая техника";
+}
+
+@functions {
+    // вывод бытовой техники
+    private void ShowAppliance(Appliance appliance)
+    {
+        if (appliance != null)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="/images/appliances/@appliance.FileName" alt="Бытовая техника">
+                </div>
+
+                <div>Наименование: <b>@appliance.Name</b></div>
+                <div>Тип техники: <b>@appliance.Type</b></div>
+                <div>Артикул: <b>@appliance.VendorCode</b></div>
+                <div>Цена: <b>@appliance.Price &#8381;</b></div>
+                <div>Количество: <b>@appliance.Amount шт.</b></div>
+            </div>
+        }
+    }
+}
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Задача 1. Бытовая техника</h2>
+        </summary>
+
+        <!-- #region Задача 1-->
+        <p>
+            <b>Задача 1.</b> В форме вводите данные о бытовой технике на оптовом складе (наименование, артикул, цена,
+            количество, изображение). Используйте привязку параметров формы к свойствам модели страницы. Введенные
+            данные отображайте на этой же странице.
+        </p>
+        <!-- #endregion -->
+
+    </details>
+</article>
+
+<article>
+    <div class="container">
+
+        <!-- Форма для ввода данных -->
+        <form method="post" class="form">
+
+            <h2 class="text-align-center">Добавление бытовой техники</h2>
+
+            <!-- Наименование -->
+            <div class="field">
+                <label for="nameId" class="field-label">Наименование:</label>
+                <input type="text" id="nameId" name="name" class="text-field-input"
+                    placeholder="Наименование бытовой техники" required>
+            </div>
+
+            <!-- Тип техники -->
+            <div class="field">
+                <label for="typeId" class="field-label">Тип техники:</label>
+                <select id="typeId" name="type" class="text-field-input" required>
+                    <option value="холодильник" selected>холодильник</option>
+                    <option value="мультиварка">мультиварка</option>
+                    <option value="пылесос">пылесос</option>
+                </select>
+            </div>
+
+            <!-- Артикул -->
+            <div class="field">
+                <label for="vendorCodeId" class="field-label">Артикул:</label>
+                <input type="text" id="vendorCodeId" name="vendorCode" class="text-field-input" placeholder="Артикул"
+                    required>
+            </div>
+
+            <!-- Цена -->
+            <div class="field">
+                <label for="priceId" class="field-label">Цена:</label>
+                <input type="number" id="priceId" name="price" min="0" class="text-field-input"
+                    placeholder="Цена (&#8381;)" required>
+            </div>
+
+            <!-- Количество -->
+            <div class="field">
+                <label for="amountId" class="field-label">Количество:</label>
+                <input type="number" id="amountId" name="amount" min="0" class="text-field-input"
+                    placeholder="Количество (шт.)" required>
+            </div>
+
+            <!-- Кнопки управления -->
+            <div class="controls center">
+                <input class="width-normal" type="submit" value="Добавить" />
+            </div>
+        </form>
+
+        @{
+            ShowAppliance(@Model?.ApplianceItem);
+        }
+
+    </div>
+</article>

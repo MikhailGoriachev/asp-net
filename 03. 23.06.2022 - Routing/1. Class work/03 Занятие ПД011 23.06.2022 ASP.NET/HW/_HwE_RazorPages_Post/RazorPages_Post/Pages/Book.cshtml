@@ -1,0 +1,75 @@
+﻿@page
+@model RazorPages_Post.Pages.BookModel
+@{
+    ViewBag.Title = "Страница 1";
+    ViewBag.Active = "Book";
+    ViewBag.Header = "Ввод и отобржение сведений о книге";
+}
+
+<!-- Условие задачи -->
+<details>
+    <summary><b>Страница 1.</b> @ViewBag.Header</summary>
+    <p>
+        Имя страницы <b>Book.cshtml</b>. В ответ на GET-запрос
+        клиента <b>/Book</b> выводите представление с формой для ввода сведений
+        о книге (используйте модель): автор, название, год издания, цена.
+        Метод обработки формы – POST, данные книги выводите на этой же странице.
+    </p>
+    <br />
+    <figure class="align-center">
+        <img src="~/images/task01/cover1.jpg" alt="Обложка книги по Python" height="240" />
+    </figure>
+</details>
+
+<div class="container">
+    <form class="border-single form-add-edit height-35" method="post" name="book" id="idBook">
+        <h3 class="form-header">Ввод сведений о книге</h3>
+
+        <!-- Автор -->
+        <div class="form-group">
+            <label class="form-label" for="idAuthor">Автор:</label>
+            <input class="form-text" type="text" name="author" id="idAuthor">
+        </div>
+
+        <!-- Название -->
+        <div class="form-group">
+            <label class="form-label" for="idTitle">Название:</label>
+            <input class="form-text" type="text" name="title" id="idTitle">
+        </div>
+
+        <!-- Год издания -->
+        <div class="form-group">
+            <label class="form-label" for="idYear">Год издания:</label>
+            <input class="form-number" type="number" name="year" id="idYear">
+        </div>
+
+        <!-- Цена -->
+        <div class="form-group">
+            <label class="form-label" for="idPrice">Цена:</label>
+            <input class="form-number" type="number" name="price" id="idPrice">
+        </div>
+
+        <!-- кнопки отправки формы на сервер, очистки полей формы -->
+        <div class="form-group">
+            <input class="form-button" type="submit" value="Сохранить">
+            <input class="form-button" type="reset" value="Отмена">
+        </div>
+    </form>
+
+
+    <div class="card-info height-35">
+
+        <h3 class="form-header">Сведения о книге</h3>
+        <figure class="align-center">
+            <img src="@Model.BookData.Cover" height="240"
+                 alt="Обложка книги" />
+        </figure>
+        <ul>
+            <li><b>Автор:</b> @Model.BookData.Author</li>
+            <li><b>Название:</b> @Model.BookData.Title</li>
+            <li><b>Год издания:</b> @Model.BookData.Year</li>
+            <li><b>Цена:</b> @Model.BookData.Price</li>
+        </ul>
+
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- подключение bootstrap через CDN: Content Delivery Network -->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
+
+        <!-- подключение bootstrap локально -->
+        <link rel="stylesheet" href="lib/css/bootstrap.min.css" />
+        <script src="lib/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+        <div class="container mt-3">
+            <h2>Image</h2>
+
+            <h3>Image Shapes</h3>
+            <div class="row mt-3">
+                <div class="col">
+                    <h4>Rounded Corners</h4>
+                    <p>The .rounded class adds rounded corners to an image:</p>
+                    <img
+                        src="/images/cinqueterre.jpg"
+                        class="rounded"
+                        alt="Cinque Terre"
+                        width="304"
+                        height="236"
+                    />
+                </div>
+
+                <div class="col">
+                    <h4>Circle</h4>
+                    <p>
+                        The .rounded-circle class shapes the image to a circle:
+                    </p>
+                    <img
+                        src="/images/cinqueterre.jpg"
+                        class="rounded-circle"
+                        alt="Cinque Terre"
+                        width="304"
+                        height="236"
+                    />
+                </div>
+
+                <div class="col">
+                    <h4>Thumbnail</h4>
+                    <p>
+                        The .img-thumbnail class creates a thumbnail of the
+                        image:
+                    </p>
+                    <!-- картинка масштабируется при измененеии размера окна браузера -->
+                    <img
+                        src="/images/cinqueterre.jpg"
+                        class="img-thumbnail"
+                        alt="Cinque Terre"
+                        width="304"
+                        height="236"
+                    />
+                </div>
+            </div>
+
+            <!--    <h3 class="mt-3">Aligning images</h3>-->
+            <!--    <p>Use the float classes to float the image to the left or to the right:</p>-->
+            <!--    <div class="row mt-3">-->
+            <!--        <img src="/images/paris.jpg" class="float-start" alt="Paris" width="304" height="236">-->
+            <!--        <img src="/images/paris.jpg" class="float-end" alt="Paris" width="304" height="236">-->
+            <!--    </div>-->
+
+            <div class="container mt-3">
+                <h3>Centered Image</h3>
+                <p>
+                    Center an image by adding the utility classes .mx-auto
+                    (margin:auto) and .d-block (display:block) to the image:
+                </p>
+                <img
+                    src="/images/paris.jpg"
+                    class="mx-auto d-block"
+                    style="width: 304px"
+                />
+            </div>
+
+            <div class="row mt-3">
+                <h3>Responsive image</h3>
+                <p>
+                    The .img-fluid class makes the image scale nicely to the
+                    parent element (resize the browser window to see the
+                    effect):
+                </p>
+                <img
+                    class="img-fluid"
+                    src="/images/ny.jpg"
+                    alt="New York"
+                    width="1100"
+                    height="500"
+                />
+            </div>
+        </div>
+    </body>
+</html>

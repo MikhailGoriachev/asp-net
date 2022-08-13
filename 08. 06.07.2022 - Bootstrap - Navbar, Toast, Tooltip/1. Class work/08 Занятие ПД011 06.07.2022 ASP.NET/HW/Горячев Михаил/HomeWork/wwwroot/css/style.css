@@ -1,0 +1,21 @@
+/* Общий стиль*/
+
+/* панель навигации */
+nav {
+    height: 5rem;
+}
+
+/* контент */
+main {
+    min-height: 100vh;
+}
+
+/* логотип */
+.logo {
+    transition: all 0.3s ease-out;
+}
+
+/* наведение на логотип */
+.logo:hover {
+    transform: scale(1.4);
+}

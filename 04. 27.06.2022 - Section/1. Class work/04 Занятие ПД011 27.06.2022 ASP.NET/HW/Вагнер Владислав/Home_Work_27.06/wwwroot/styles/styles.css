@@ -1,0 +1,237 @@
+﻿/*Задание общего стиля*/
+body, head {
+    font-size: 10pt;
+    font-family: 'Open Sans','Roboto Thin', 'sans-serif';
+    padding: 0;
+    margin: 0;
+}
+
+.text-Big {
+    font-size: 1.2rem;
+}
+
+/*Главный блок*/
+main {
+    background: rgba(255, 255, 255,1);
+    margin-left: 14.7rem;
+    margin-top: 3.5rem;
+    margin-right: 1.5rem;
+    min-height: 90vh;
+    overflow: auto;
+}
+/*Отступ последней секции в коде*/
+section:last-of-type {
+    margin-bottom: 1rem;
+}
+
+/*Блок с заголовком*/
+header {
+    /*Создание размытого фона*/
+    background: rgba(140, 154, 255,0.45);
+    backdrop-filter: blur(12px);
+    box-shadow: 1px -1px 7px 0px #0d0c0c;
+    text-align: center;
+    height: 3.5rem;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+header h1 {
+    margin-top: 0.6rem;
+    font-weight: normal;
+}
+
+/*region Кнопки и блок навигации*/
+
+/*Блок навигации по страницам*/
+nav {
+    background: rgba(153, 158, 194);
+    /*background: linear-gradient(rgb(153, 158, 194) 15%, rgb(79, 91, 175));*/
+    width: 14.06rem;
+    height: 100%;
+    margin-top: 3.5rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+nav > a {
+        text-decoration: none;
+        /*display: block;*/
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-top: 0.9rem;
+
+        font-size: 1.2rem;
+        text-align: center;
+        font-weight: lighter;
+
+        color: rgb(43, 43, 43);
+
+        padding: 8px;
+
+        border: 1px solid black;
+        border-radius: 5px;
+
+        transition: all 500ms ease-in-out;
+    }
+
+/*Выделение при наведении*/
+nav > a:hover {
+            background: white;
+            color: black;
+            border: 1px solid white;
+            /*transform: translate(10px);*/
+        }
+
+nav > a.current {
+            background: white;
+            color: black;
+            border: 2px solid white;
+        }
+
+/*endregion*/
+
+/*Подвал*/
+footer {
+    position: relative;
+    z-index: 3;
+    padding: 1.2%;
+    padding-right: 0;
+    height: 4.5rem;
+    width: 98.8%;
+    background: rgba(177, 179, 199);
+}
+
+/*region Стили для кнопки "вверх"*/
+.up-link {
+    position: fixed;
+    right: 3rem;
+    bottom: 0;
+    z-index: 5;
+    text-decoration: none;
+    display: block;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-style: normal;
+    border-radius: 13px;
+    background: rgba(140, 154, 255,0.42);
+    backdrop-filter: blur(10px);
+    /*box-shadow: 0px 0px 10px 0px #0d0c0c;*/
+    margin-bottom: 1rem;
+}
+
+.up-link:hover {
+        background: royalblue;
+        color: white;
+    }
+
+.up-link img {
+        width: 1.5rem;
+    }
+/*endregion*/
+
+/*Для таблиц вывода результатов обработки*/
+.info-cell {
+    width: 12%;
+    font-size: 1.1rem;
+    padding: 0 0.4rem;
+}
+
+/*Для выделения определённых элементов массива*/
+.highlightElems {
+    background-color: rgb(170, 147, 255);
+}
+
+/*Общая настройка для абзацев*/
+p.paragraph-settings {
+    margin-left: 5%;
+    font-size: 1.04rem;
+}
+
+/*region Стили для details*/
+details {
+    margin-left: 1rem;
+}
+
+details > summary {
+        font-size: 1.1rem;
+    }
+
+summary::marker {
+    color: rgb(113, 119, 152);
+}
+
+summary {
+    cursor: pointer;
+    background: rgba(255, 255, 255,1);
+}
+
+details.task-details {
+    /*margin: 0.5rem 0;*/
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    width: 80%;
+    background: rgb(240, 240, 240);
+    border-radius: 18px;
+}
+
+.task-details div {
+    padding: 1rem;
+}
+/*endregion*/
+
+.text-bigger {
+    font-size: 1rem;
+}
+
+
+/*Стили для списков*/
+.text-size-bigger, p, ul > li {
+    font-size: 1.04rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 2rem 0 2rem;
+    padding: 1rem;
+    width: 18rem;
+    border-radius: 5px;
+    border: 2px solid rgb(71, 76, 101);
+    font-size: 1.1rem;
+}
+
+/*Для всех блоков карточки*/
+.card div {
+    margin: 0.5rem 0;
+    height: 70%;
+}
+@import url('file:///D:\STEP – studying\Home works\2022\June 2022\16.06.22 - result (JS. JQuery. Animate. Effects. Animation queue. JQuery UI)\Вагнер Владислав\styles\styles.css');
+.cards-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*region Кнопки обработок*/
+.contaner > a {
+    margin: 0.8rem 0.3rem 0 0.5rem;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid rgb(152, 157, 193);
+    transition: all 100ms;
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: rgb(241, 241, 241);
+    color: black;
+}
+
+.contaner > a:hover {
+    background: rgb(211, 211, 211);
+}

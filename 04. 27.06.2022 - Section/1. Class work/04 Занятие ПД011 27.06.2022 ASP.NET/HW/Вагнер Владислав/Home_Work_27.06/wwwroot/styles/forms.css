@@ -1,0 +1,89 @@
+﻿/*region Форма*/
+
+form > fieldset {
+    /*Для сообщения - 52rem*/
+    width: 27rem;
+    background: rgb(239, 239, 239);
+    border-radius: 5px;
+    border: 1px solid rgb(136, 140, 173);
+
+}
+
+fieldset > div > div {
+    margin: 0.5rem 0 0 0;
+} 
+
+
+/*Подсказки справа*/
+fieldset > div > label {
+    font-size: 1rem;
+    margin: 0 0 0 0.8rem;
+}
+
+.form-summary {
+    margin: 3rem 2rem 0 0;
+    width: 60%;
+    font-size: 1.3rem;
+    padding: 1rem 0 1rem 0;
+}
+
+/*Заголовок*/
+details {
+    width: 70%;
+}
+
+/*Поля формы*/
+form input[type="text" i],form input[type="number" i],select{
+    font-size: 1rem;
+    width: 43%;
+    height: 1.8rem;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(136, 140, 173);
+    color: rgb(21, 21, 21);
+    cursor: pointer;
+}
+form input[type="number" i] {
+    width: 55%;
+} 
+select {
+    width: 56.5%;
+}
+
+
+
+/*Кнопки формы*/
+form input[type="submit" i] {
+    font-size: 1rem;
+    width: 43%;
+    height: 1.8rem;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(136, 140, 173);
+    color: rgb(21, 21, 21);
+    background: rgb(228 231 255);
+    cursor: pointer;
+
+    transition: all 200ms ease-in-out;
+}
+
+form input[type="submit" i]:hover {
+    background: rgb(239 239 239);
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.div-float {
+    float: left;
+}
+
+.add-figure {
+    width: 12rem;
+}
+
+/*endregion*/

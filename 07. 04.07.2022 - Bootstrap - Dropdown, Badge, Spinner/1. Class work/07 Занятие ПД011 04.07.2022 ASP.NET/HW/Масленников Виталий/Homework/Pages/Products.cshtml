@@ -1,0 +1,117 @@
+﻿@page "{handler?}"
+@using Microsoft.Extensions.Primitives
+@model Homework.Pages.AppliancesListModel
+@{
+	ViewBag.Header = "Бытовая техника";
+
+	string IsActive(string actionId) => 
+		Request.Query["ActionId"] != StringValues.Empty && Request.Query["ActionId"] == actionId ? "active" : "";
+}
+
+
+<div class="mb-3">
+	<details>
+		<summary>Задание</summary>
+		<p> Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип
+			техники, артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов.
+			Коллекцию инициируйте набором записей, храните коллекцию в файле формата JSON в папке App_Data
+			проекта.
+		</p>
+
+		<p>Отображение данных одного элемента бытовой техники выполняйте при помощи карточки, стилизованной
+			соответствующими классами Bootstrap.</p>
+
+		<p>По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:</p>
+
+
+		<ul>
+			<li>вывод коллекции, упорядоченной по наименованию</li>
+			<li>вывод коллекции, упорядоченной по убыванию цены</li>
+			<li>вывод коллекции, упорядоченной по возрастанию количества</li>
+			<li>добавление элемента в коллекцию, параметры вводить в форму, стилизованную классами Bootstrap,
+				сохраняйте измененную коллекцию в файле в формате JSON, как было сказано ранее, в папке App_Data проекта </li>
+		</ul>
+	</details>
+</div>
+
+
+@*кнопки сортировки*@
+<div class="row">
+	<span class="col-md-auto lead">Упорядочить по:</span>
+
+	<div class="col-md-auto btn-group mb-4 gap-1">
+		<a asp-page-handler="OrderBy" asp-route-prop="Name" asp-route-ActionId="1"
+		   class="btn btn-sm btn-outline-secondary @IsActive("1")">
+			наименованию
+		</a>
+
+		<a asp-page-handler="OrderBy" asp-route-prop="Price" asp-route-ActionId="2"
+		   class="btn btn-sm btn-outline-secondary @IsActive("2")">
+			стоимости
+		</a>
+
+		<a asp-page-handler="OrderBy" asp-route-prop="Amount" asp-route-order="Desc" asp-route-ActionId="3"
+		   class="btn btn-sm btn-outline-secondary @IsActive("3")">
+			убыванию количества
+		</a>
+	</div>
+</div>
+
+
+@*форма ввода для товара*@
+<details class="mb-3">
+	<summary class="mb-2">Добавить товар</summary>
+	<form class="mb-4 p-0" method="post">
+		<div class="row">
+			<fieldset class="col-md-auto">
+				<legend>Введите информацию о технике:</legend>
+				<div class="form-floating mb-3">
+					<select class="form-select" asp-for="Product.Type" asp-items="Model.Types"></select>
+					<label class="form-label" asp-for="Product.Type">Тип: </label>
+				</div>
+
+				<div class="form-floating mb-3">
+					<input class="form-control" type="text" asp-for="Product.Name" required/>
+					<label class="form-label" asp-for="Product.Name">Наименование: </label>
+				</div>
+
+				<div class="form-floating mb-3">
+					<input class="form-control" type="text" asp-for="Product.VendorCode" required/>
+					<label class="form-label" asp-for="Product.VendorCode">Артикул:</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input class="form-control text-end" type="number" asp-for="Product.Price" required/>
+					<label class="form-label" asp-for="Product.Price">Цена:</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input class="form-control text-end" type="number" asp-for="Product.Amount" required/>
+					<label class="form-label" asp-for="Product.Amount">Количество: </label>
+				</div>
+
+				<div><input asp-page-handler="Add" class="btn btn-primary" type="submit" value="Добавить"></div>
+			</fieldset>
+		</div>
+	</form>
+</details>
+	
+
+@*вывод карточек товаров*@
+<div class="row">
+	@foreach (var item in Model.DisplayProducts!)
+	{
+		<div class="col-md-auto">
+			<div class="card mb-4 w-240-px" style="width: 240px">
+				<img class="card-img-top m-1 card-img-200" src="@Model.ImageFolder/@item.Image" alt="Бытовая техника"> 
+				<div class="card-body">
+					<h5 class="card-title color-2">@item.Name</h5>
+					<p class="card-text color-1">@item.Type</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item color-1">Арт.: <span class="color-3">@item.VendorCode</span></li>
+					<li class="list-group-item color-1">Цена: <span class="color-3">@item.Price</span></li>
+					<li class="list-group-item color-1">Количество: <span class="color-3">@item.Amount</span></li>
+				</ul>
+			</div>
+		</div>
+	}
+</div>

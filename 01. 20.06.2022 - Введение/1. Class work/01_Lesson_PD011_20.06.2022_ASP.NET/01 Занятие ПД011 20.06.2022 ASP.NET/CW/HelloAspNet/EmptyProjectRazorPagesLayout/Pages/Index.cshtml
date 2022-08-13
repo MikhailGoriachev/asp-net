@@ -1,0 +1,69 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model EmptyProjectRazorPages.Pages.IndexModel
+@{
+    ViewData["Title"] = "Привет, мир";
+
+    // свойство ViewBag динамического типа dynamic :)
+    ViewBag.Header = "Привет из Razor Page";
+
+    // переменные для работы на странице
+    int a = 42;
+
+    List<string> names = new List<string>(new[] {
+        "Варвара", "Олег", "Шариф", "Алексей", "Николай", "Кристина"});
+}
+
+
+<h3>@ViewBag.Header</h3>
+<h4>Привет, мир ASP.NET <u>Razor Pages</u></h4>
+
+<!-- доступ к свойству модели страницы -->
+<h4>@Model.Message</h4>
+
+<!-- вывод значения переменной -->
+<ul>
+    <li>Переменная a = <u>@a</u></li>
+    <li>Дата и время на сервере: @DateTime.Now</li>
+    <li>Еще пример выражения: @(a + 100)</li>
+</ul>
+
+<!-- Пример логического оператора -->
+@if (DateTime.Now.Second >= 30)
+{
+    @* картинка 1 *@
+    <img src="~/images/photo001.jpg" width="480" alt="фото 0001" />
+}
+else
+{
+    @* картинка 1 *@
+    <img src="~/images/photo002.jpg" width="480" alt="фото 0001" />
+}
+
+@* Циклы в Razor *@
+<h3>Отчет по количеству колес автомобилей фирмы</h3>
+<ul>
+    @for (int i = 3; i <= 6; i++)
+    {
+        <li>Автомобиль @(i - 2). Количество колес: @i</li>
+    }
+</ul>
+
+<h3>Список гостей тур. фирмы</h3>
+<ul>
+    @foreach (var name in names)
+    {
+        <li>@name</li>
+    }
+</ul>
+<h3>Водители:</h3>
+<ol>
+    @{
+        a = 0;
+    }
+    @while (a < @Model.Drivers.Count)
+    {
+        <li>@Model.Drivers[a++])</li>
+    }
+</ol>

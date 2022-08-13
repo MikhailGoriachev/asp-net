@@ -1,0 +1,89 @@
+﻿@page "{target?}"
+
+@model BootstrapIntro.Pages.Page1Model
+@{
+    ViewBag.Title = "Страница 1";
+    ViewBag.Active = "Page1";
+    ViewBag.Header = "Обработка коллекции бытовой техники";
+
+    // TODO: вынести повторяющиеся функции в общий класс
+    // подсветить кнопку, в ответ на клик по которой выполняется обработка
+    string Active(string mode) => (string)ViewData["Mode"] == mode ? "" : "outline-";
+}
+
+@* Дополнительные пункты меню - обработчики для страницы *@
+@section PageProcessing {
+    <hr />
+
+    <!-- вертикальная группа кнопок - навигационных ссылок -->
+    <div class="btn-group-vertical gap-3">
+        <a class="btn btn-@Active("source")secondary" asp-page="/Page1"
+           title="Вывод всей коллекции в исходном порядке">
+            Исходный набор
+        </a>
+        
+        @* режим сортировки передаем через параметр маршрута *@
+        <a class="btn btn-@Active("name")secondary" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="name"
+           title="Вывод коллекции, упорядоченной по наименованию">
+            По наименованию
+        </a>
+        <a class="btn btn-@Active("price")secondary" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="price"
+           title="Вывод коллекции, упорядоченной по убыванию цены">
+            По убыванию цены
+        </a>
+        <a class="btn btn-@Active("quantity")secondary" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="quantity"
+           title="Вывод коллекции, упорядоченной по возрастанию количества">
+            По возрастанию количества
+        </a>
+    </div>
+}
+
+<!-- Условие задачи -->
+<details>
+    <summary><b>Страница 1.</b> @ViewBag.Header</summary>
+    <p>
+        <b>Страница 1.</b>
+        Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип техники,
+        артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов.
+        Коллекцию инициируйте набором записей, храните коллекцию в файле формата JSON в папке
+        App_Data проекта.
+    </p>
+    <p>
+        Отображение данных одного элемента бытовой техники выполняйте при помощи карточки,
+        стилизованной соответствующими классами Bootstrap.
+    </p>
+    <p>По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:</p>
+    <ul>
+        <li>вывод коллекции, упорядоченной по наименованию</li>
+        <li>вывод коллекции, упорядоченной по убыванию цены</li>
+        <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+    </ul>
+</details>
+
+@* Ренедринг коллекции в формате карточек *@
+@* 
+    поскольку требуется размещение в несколько рядов - рендерим карточки в "строке" системы сеток,
+    а строка должна находиться в контейнере
+*@
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var goods in Model.DisplayGoods) {
+            <div class="card m-1 w-25">
+                <img class="card-img-top app-img-card" src="~/images/task01/@(goods.Image)" alt="Card image">
+                <div class="card-header">
+                    <p>@goods.Name</p>
+                </div>
+                <div class="card-body bg-light">
+                    <ul class="list-unstyled">
+                        <li>артикул: @goods.VendorCode</li>
+                        <li>@goods.Type</li>
+                        <li>Цена: @($"{goods.Price:n2}") руб.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <p>Количество: @goods.Quantity</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Homework.Models.Task2.Worker>
+
+@{
+    ViewBag.Header = "Работники";
+}
+
+<h3 class="color-2 mb-4">@ViewBag.Title</h3>
+
+@* вывод карточек работников *@
+<div class="row">
+    @foreach (var worker in Model!)
+    {
+        <div class="col-md-auto mb-4">
+            <div class="card h-100 w-200-px">
+                <div class="card-header h-200-px bg-body border-0 p-0 text-center">
+                    <img class="card-img-top mh-100 img-fluid" src="/images/workers/@worker.Image"
+                         alt="Фото @worker.FullName">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title color-2">@worker.FullName</h5>
+                </div>
+                <div class="card-footer bg-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item color-1">Работает с: <span class="color-3">@($"{worker.StartDate:dd.MM.yy}")</span></li>
+                        <li class="list-group-item color-1">Стаж: <span class="color-3">@worker.LengthOfService</span></li>
+                        <li class="list-group-item color-1">Оклад: <span class="color-3">@worker.Salary</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>

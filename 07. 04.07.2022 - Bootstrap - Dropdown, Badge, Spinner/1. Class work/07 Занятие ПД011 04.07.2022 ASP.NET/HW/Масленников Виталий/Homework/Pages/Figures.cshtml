@@ -1,0 +1,199 @@
+﻿@page "{handler?}"
+@using Homework.Models.Figures
+@using Microsoft.Extensions.Primitives
+@model Homework.Pages.FiguresModel
+@{
+	ViewBag.Header = "Геометрические фигуры";
+
+	string IsActive(string actionId) => 
+		Request.Query["ActionId"] != StringValues.Empty && Request.Query["ActionId"] == actionId ? "active" : "";
+}
+
+
+<div class="mb-3">
+	<details>
+		<summary>Задание</summary><p>
+			Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских геометрических
+			фигур:
+			квадраты, прямоугольники, разносторонние треугольники. Инициализация коллекции должна проводиться
+			при
+			отсутствии файла (формируйте не менее 10 фигур).
+		</p>
+		<p>По кнопке-ссылке (метод GET) формируйте фигуру,
+			случайным образом выбирая ее тип и размер. Добавляйте фигуры в коллекцию, сохраняйте коллекцию.
+			Отображайте коллекцию на этой же странице в таблице, стилизованной классами Bootstrap (в ячейке
+			таблицы
+			также выводите изображение фигуры).
+		</p>
+	
+		<p>В форме на странице выбирайте тип фигуры, и по кнопке «Создать» формируйте еще одну форму (на 
+			этой же странице) для ввода параметров фигуры. При рендеринге формы для параметров форму для
+			выбора типа фигуры рендерить не надо. Все формы должны быть стилизованы классами Bootstsap. </p>
+		
+		<p>Отображайте коллекцию на этой же странице в таблице, стилизованной классами Bootstrap (в ячейке
+			таблицы также выводите изображение фигуры).</p>
+
+		<p>По ссылкам на этой странице (кнопкам в стиле Bootstrap) вызывайте обработчики запросов GET:</p>
+
+		<ul>
+			<li>вывод всей коллекции в исходном порядке</li>
+			<li>вывод только квадратов, по убыванию площади</li>
+			<li>вывод только прямоугольников, по возрастанию периметра</li>
+			<li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+			<li>вывод всей коллекции по убыванию площади</li>
+			<li>вывод всей коллекции, упорядоченной по типу фигур</li>
+		</ul>
+	</details>
+</div>
+
+
+@section Controls{
+	<div class="mt-4 ps-2" style="max-width: 250px">
+
+		<span class="lead mb-2 d-block">Вывод:</span>
+
+		<div class="d-grid gap-2">
+			<a asp-page="Figures"
+			   asp-route-ActionId="1"
+			   class="btn btn-sm btn-outline-secondary @IsActive("1")">
+				коллекция в исходном порядке
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Квадрат"
+			   asp-route-sort="@nameof(IFigure.Area)"
+			   asp-route-order="Desc"
+			   asp-route-ActionId="2"
+			   class="btn btn-sm btn-outline-secondary @IsActive("2")">
+				квадраты, по убыванию площади
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Прямоугольник"
+			   asp-route-sort="@nameof(IFigure.Perimeter)"
+			   asp-route-ActionId="3"
+			   class="btn btn-sm btn-outline-secondary @IsActive("3")">
+				прямоугольники, по возрастанию периметра
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Треугольник"
+			   asp-route-order="Reverse"
+			   asp-route-ActionId="4"
+			   class="btn btn-sm btn-outline-secondary @IsActive("4")">
+				треугольники, в обратном порядке
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-sort="@nameof(IFigure.Area)"
+			   asp-route-order="Desc"
+			   asp-route-ActionId="5"
+			   class="btn btn-sm btn-outline-secondary @IsActive("5")">
+				коллекция по убыванию площади
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-sort="@nameof(IFigure.Name)"
+			   asp-route-order="Desc"
+			   asp-route-ActionId="6"
+			   class="btn btn-sm btn-outline-secondary @IsActive("6")">
+				коллекция, упорядоченная по типу фигур
+			</a>
+
+		</div>
+	</div>
+}
+
+
+<!-- Форма выбора типа фигуры для добавления -->
+@if (RouteData.Values["handler"] is not "AddForm" and not "AddFigure")
+{
+	<form method="post">
+		<div class="row my-3 align-items-center">
+			<div class="col-md-auto"><label asp-for="FigureType" class="form-label">Добавить фигуру: </label></div>
+			<div class="col-md-auto"><select asp-for="FigureType" asp-items="Model.Types" class="form-select"></select></div>
+			<div class="col-md-auto"><input asp-page-handler="AddForm" type="submit" class="btn btn-sm btn-outline-secondary" value="Добавить"/></div>
+		</div>
+	</form>
+}
+
+<!-- Форма ввода параметров новой фигуры-->
+@if (RouteData.Values["handler"] is "AddForm" or "AddFigure")
+{
+<form class="mb-4 p-0" method="post">
+	<div class="row">
+		<fieldset class="col-md-auto">
+			<legend>Введите параметры для фигуры "@Model.FigureType":</legend>
+			
+			<div class="row mb-3 align-items-center">
+				<div class="col-md-auto"><label class="form-label" asp-for="FigureInput.A"> Сторона a:</label></div>
+				<div class="col-md-auto"><input class="form-control text-end" type="number" asp-for="FigureInput.A" min="0.0001" step="any"/></div>
+			</div>
+
+			@if(Model.FigureType is "Прямоугольник" or "Треугольник")
+			{
+				<div class="row mb-3 align-items-center">
+					<div class="col-md-auto"><label class="form-label" asp-for="FigureInput.B"> Сторона b: </label></div>
+					<div class="col-md-auto"><input class="form-control text-end" type="number" asp-for="FigureInput.B" min="0.0001" step="any"/></div>
+				</div>
+			}
+			
+			@if(Model.FigureType == "Треугольник")
+			{
+				<div class="row mb-3 align-items-center">
+					<div class="col-md-auto"><label class="form-label" asp-for="FigureInput.C"> Сторона c: </label></div>
+					<div class="col-md-auto"><input class="form-control text-end" type="number" asp-for="FigureInput.C" min="0.0001" step="any"/></div>
+				</div>
+			}
+			
+			<input type="hidden" asp-for="FigureType"/>
+
+			<div class="row">
+				<input asp-page-handler="AddFigure" class="col-3 ms-3 btn btn-outline-primary" type="submit" value="Добавить">
+				<button asp-page="Figures/" class="col-3 btn btn-outline-secondary ms-2" formnovalidate> Назад </button>
+			</div>
+		</fieldset>
+	</div>
+
+</form>
+}
+
+@if (Model.Message is not null)
+{
+	<div class="my-3">
+		@Model.Message
+	</div>
+}
+
+<table class="table text-center">
+	<thead>
+	<th>№</th>
+	<th>Изображение</th>
+	<th>Тип</th>
+	<th>Параметры</th>
+	<th>Периметр</th>
+	<th>Площадь</th>
+	</thead>
+
+	@{
+		var i = 1;
+		foreach (var item in Model.DisplayFigures!)
+		{
+			<tr>
+			<td>@(i++)</td>
+			<td><img class="card-img-100" src="@Model.ImageFolder/@item.Image" alt="Фигура"/></td>
+			<td>@item.Name</td>
+				<td>
+					<ul class="list-unstyled">
+					@foreach (var p in item.Parameters)
+					{
+						<li style="font-size: 16px">@p.Key = @($"{p.Value:.###}")</li>
+					}
+					</ul>
+				</td>
+			<td>@($"{item.Perimeter:.###}")</td>
+			<td>@($"{item.Area:.###}")</td>
+			</tr>
+		}
+	}
+</table>

@@ -1,0 +1,134 @@
+﻿@page "{target?}"
+
+@model BootstrapFileUpload.Pages.Page1Model
+@{
+    ViewBag.Title = "Страница 1";
+    ViewBag.Active = "Page1";
+    ViewBag.Header = "Обработка коллекции бытовой техники";
+}
+
+@*
+   Дополнительный пункт меню - добавление товара в коллекцию при помощи
+   формы ввода характеристик товара
+*@
+<a class="btn btn-success w-25 me-3" data-bs-toggle="modal" data-bs-target="#addProduct"
+   title="Добавление товара в коллекцию">
+    Добавить товар
+</a>
+
+
+<!-- Условие задачи -->
+<a href="#task-1" class="btn btn-outline-secondary text-start w-30" data-bs-toggle="collapse"><b>Страница 1.</b> @ViewBag.Header</a>
+<div id="task-1" class="collapse">
+    <p class="mt-3">
+        Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип
+        техники, артикул, цена, количество, изображение). В коллекции должно быть не менее
+        12 элементов. Коллекцию инициируйте набором записей, храните коллекцию в файле формата
+        JSON в папке App_Data проекта.
+    </p>
+    <p>
+        По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:
+    </p>
+    <ul>
+        <li>вывод коллекции, упорядоченной по наименованию</li>
+        <li>вывод коллекции, упорядоченной по убыванию цены</li>
+        <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+        <li>
+            форма добавления элемента в коллекцию.  Предусмотрите возможность загрузки
+            изображения на сервер
+        </li>
+    </ul>
+
+</div>
+
+@* Ренедринг коллекции в формате карточек *@
+@*
+    поскольку требуется размещение в несколько рядов - рендерим карточки в "строке" системы сеток,
+    а строка должна находиться в контейнере
+*@
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var goods in Model.DisplayGoods)
+        {
+            <div class="card m-1 w-25">
+                <img class="card-img-top app-img-card" src="@(Model.ImageDir)@(goods.Image)" alt="Card image">
+                <div class="card-header">
+                    <p>@goods.Name</p>
+                </div>
+                <div class="card-body bg-light">
+                    <ul class="list-unstyled">
+                        <li>артикул: @goods.VendorCode</li>
+                        <li>@goods.Type</li>
+                        <li>Цена: @($"{goods.Price:n2}") руб.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <p>Количество: @goods.Quantity</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@*
+Рендерим форму ввода характеристик товара
+Форма модальная, т.е. ее разметка может быть размещена\
+в произвольном месте, форма вызывается на клиенте, за
+счет JS-кода Bootstrap, по клику на кнопку в навигационной
+панели
+*@
+<div id="addProduct" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Характеристики добавляемого товара
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-add-goods" method="post" asp-page="/Page1">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" asp-for="Goods.Type">
+                            <option>холодильник</option>
+                            <option>микроволновая печь</option>
+                            <option>блинница</option>
+                            <option>пылесос-робот</option>
+                            <option>стиральная машина</option>
+                        </select>
+                        <label asp-for="Goods.Type" class="form-label">Категория товара:</label>
+                    </div>
+
+                    @* Наименование товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="text" class="form-control" placeholder="наименование" asp-for="Goods.Name" value="">
+                        <label asp-for="Goods.Name">Наименование товара:</label>
+                    </div>
+
+                    @* Артикул товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="text" class="form-control" placeholder="артикул" asp-for="Goods.VendorCode" value="">
+                        <label asp-for="Goods.VendorCode">Артикул товара:</label>
+                    </div>
+
+                    @* Цена товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="цена" asp-for="Goods.Price" value="0">
+                        <label asp-for="Goods.Price">Цена товара:</label>
+                    </div>
+
+                    @* Количество товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="количество" asp-for="Goods.Quantity" value="0">
+                        <label asp-for="Goods.Quantity">Количество товара:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-add-goods" class="btn btn-primary">Сохранить</button>                                       <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>

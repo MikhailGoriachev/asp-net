@@ -1,0 +1,182 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.ApplianceList
+@{
+    // индекс страницы
+    ViewBag.indexTab = 1;
+
+    // название страницы
+    ViewData["Header"] = "Задача 1. Список техники";
+}
+
+@section Head {
+<link rel="stylesheet" href="../styles/tile.css" />
+<link rel="stylesheet" href="../styles/buttons.css" />
+<link rel="stylesheet" href="../styles/form.css" />
+<link rel="stylesheet" href="../styles/control-block.css" />
+}
+
+@functions {
+    // вывод бытовой техники
+    private void ShowAppliance(Appliance appliance)
+    {
+        if (appliance != null)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="/images/appliances/@appliance.FileName" alt="Бытовая техника">
+                </div>
+
+                <div>Наименование: <b>@appliance.Name</b></div>
+                <div>Тип техники: <b>@appliance.Type</b></div>
+                <div>Артикул: <b>@appliance.VendorCode</b></div>
+                <div>Цена: <b>@appliance.Price &#8381;</b></div>
+                <div>Количество: <b>@appliance.Amount шт.</b></div>
+            </div>
+        }
+    }
+
+    // вывод коллекции бытовой техники
+    private void ShowApplianceList(List<Appliance> appliances)
+    {
+        <div class="container">@{
+                appliances.ForEach(a => ShowAppliance(a));
+            }</div>
+    }
+}
+
+
+@* Блок управления *@
+@section Navigate
+{
+<!-- Блок управления -->
+<div class="control-block">
+
+    <p class="text-align-center control-block-header">Параметры обработки</p>
+
+    <!-- #region Управление коллекцией -->
+
+    <p class="control-block-subheader">Управление коллекцией</p>
+
+    <!-- Добавление прибора -->
+    <form method="post" asp-page-handler="AddRandFigure">
+        <input class="control-block-button" type="submit" value="Добавить фигуру" />
+    </form>
+
+    <!-- #endregion -->
+
+    <hr />
+
+    <!-- #region Сортировка приборов -->
+
+    <p class="control-block-subheader">Сортировка приборов</p>
+
+    <!-- По умоланию -->
+    <a asp-page="/Appliancelist" class="link-button">По умоланию</a>
+
+    <!-- По наименованию -->
+    <a asp-page-handler="OrderByName" class="link-button">По наименованию</a>
+
+    <!-- По цене -->
+    <a asp-page-handler="OrderByDescPrice" class="link-button">По цене</a>
+
+    <!-- По количеству -->
+    <a asp-page-handler="OrderByAmount" class="link-button">По количеству</a>
+
+
+    <hr />
+
+    <!-- #endregion -->
+
+    <!-- #region Выборка приборов -->
+
+    <p class="control-block-subheader">Выборка приборов</p>
+
+    <!-- Цена -->
+    <form method="get" asp-page-handler="SelectByPriceRange">
+
+        <div class="field">
+            <label for="priceMinId" class="field-label">Выборка по диапазону цен:</label>
+
+            <input type="number" id="priceMinId" name="MinPrice" min="0" placeholder="Минимум (&#8381;)" required>
+
+            <input type="number" id="priceMaxId" name="MaxPrice" min="0" placeholder="Максимум (&#8381;)" required>
+        </div>
+
+        <!-- Кнопки управления -->
+        <div class="form-grid-controls">
+            <input class="control-block-button" type="submit" value="Показать" />
+        </div>
+    </form>
+
+    <h2 class="text-align-center">@Model.NameHandler</h2>
+
+
+</div>
+}
+
+
+
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Форма для добавления</h2>
+        </summary>
+
+        <!-- Форма для ввода данных -->
+        <form method="post" asp-antiforgery="true" class="form">
+
+            <h2 class="text-align-center">Добавление бытовой техники</h2>
+
+            <!-- Наименование -->
+            <div class="field">
+                <label asp-for="ApplianceItem.Name" class="field-label">Наименование:</label>
+                <input asp-for="ApplianceItem.Name" class="text-field-input" placeholder="Наименование бытовой техники"
+                    required>
+            </div>
+
+            <!-- Тип техники -->
+            <div class="field">
+                <label asp-for="ApplianceItem.Type" class="field-label">Тип техники:</label>
+                <select asp-for="ApplianceItem.Type" asp-items="Model.TypesAppliance" class="text-field-input" required>
+                </select>
+            </div>
+
+            <!-- Артикул -->
+            <div class="field">
+                <label asp-for="ApplianceItem.VendorCode" class="field-label">Артикул:</label>
+                <input asp-for="ApplianceItem.VendorCode" class="text-field-input" placeholder="Артикул" required>
+            </div>
+
+            <!-- Цена -->
+            <div class="field">
+                <label asp-for="ApplianceItem.Price" class="field-label">Цена:</label>
+                <input asp-for="ApplianceItem.Price" min="0" class="text-field-input" placeholder="Цена (&#8381;)"
+                    required>
+            </div>
+
+            <!-- Количество -->
+            <div class="field">
+                <label asp-for="ApplianceItem.Amount" class="field-label">Количество:</label>
+                <input asp-for="ApplianceItem.Amount" min="0" class="text-field-input" placeholder="Количество (шт.)"
+                    required>
+            </div>
+
+            <!-- Кнопки управления -->
+            <div class="controls center">
+                <input asp-page-handler="AddAppliance" class="width-normal" type="submit" value="Добавить" />
+                <input class="width-normal" type="reset" value="Отмена" />
+            </div>
+        </form>
+    </details>
+</article>
+
+<article>
+
+    <!-- Вывод бытовой техники -->
+    @{
+        ShowApplianceList(Model.CurrentAppliances);
+    }
+</article>

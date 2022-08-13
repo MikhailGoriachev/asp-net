@@ -1,0 +1,104 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model EmptyProjectRazorPages.Pages.IndexModel
+
+@* таких блоков может несколько *@
+@{
+    ViewData["Title"] = "Синтаксис Razor Pages";
+
+    // свойство ViewBag динамического типа dynamic :)
+    ViewBag.Header = "Привет из Razor Page";
+
+    // переменные для работы на странице
+    int a = 42;
+
+    List<string> names = new List<string>(new[] {
+        "Варвара", "Олег", "Шариф", "Алексей", "Николай", "Кристина"});
+
+    // формирование случайного значения логического типа
+    bool isEnabled = new Random().Next(0, 2) == 1;
+}
+
+@* вывод блока текста *@
+<h3>Вывод блока текста  @@:</h3>
+<p>
+    Результат: <b>
+        @if (isEnabled)
+        {
+            @: Истина
+        }
+        else
+        {
+            @: Ложь
+        }
+    </b>
+</p>
+<hr />
+
+@* Директива @functions позволяет определить функции, 
+    которые могут применяться в представлении
+    Ф-ии рекомендуется использовать для рендернига
+*@
+<h3>Директива @@functions</h3>
+@functions
+{
+    public int Sum(int a, int b) {
+        return a + b;
+    }
+
+    public double Qubic(double x) => Math.Pow(x, 1d / 3d);
+}
+<p>Сумма 5 и 4: <b> @Sum(5, 4)</b></p>
+<p>Корень кубический из 27: <b>@Qubic(27)</b></p>
+<hr />
+
+@* Локальные функции *@
+<h3>Локальные функции</h3>
+@{
+    // функция м.б определена также в @functions {}
+    void RenderName(string name) {
+        <p>Покупатель: <b>@name</b></p>
+    }
+
+    // вызов локальной функции
+    RenderName("Василиса Премудрая");
+    RenderName("Полуэкт Кошель");
+}
+
+<div>
+    <p>Какой-то контент</p>
+    @{
+        // вызов локальной функции в разметке
+        RenderName("Никанор Лермонтов");
+    }
+    <p>Какой-то контент</p>
+</div>
+<hr />
+
+<h3> try...catch</h3>
+<p>
+    Конструкция try...catch...finally, как и в C#, позволяет обработать
+    исключение, которое может возникнуть при выполнение кода:
+</p>
+@try
+{
+    <p>Какой-то контент</p>
+    a++;
+    <p>Значение a: @(a)</p>
+
+    // пример выброса искючения в Razor
+    throw new InvalidOperationException("Something wrong");
+}
+catch (Exception ex)
+{
+    <p>Исключение, секция catch: @ex.Message</p>
+    <img src="images/photo001.jpg" width="240"/>
+    <br/>
+}
+finally
+{
+    <p>Исключение, секция finally</p>
+    <img src="images/photo002.jpg" width="240"/>
+    <br/>
+}

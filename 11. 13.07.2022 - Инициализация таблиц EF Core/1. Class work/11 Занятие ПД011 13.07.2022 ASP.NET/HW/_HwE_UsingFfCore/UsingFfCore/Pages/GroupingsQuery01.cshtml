@@ -1,0 +1,27 @@
+﻿@page
+@model UsingFfCore.Pages.GroupingsQuery01Model
+@{
+}
+
+<h3>@Model.Task</h3>
+
+@* вывод в соответствии с запросом на выборку данных *@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Категория</th>
+        <th>Средняя цена 1 экз., руб.</th>
+        <th>Количество в категории</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var result in Model.Results)
+    {
+        <tr>
+            <td>@result.Category</td>
+            <td>@($"{result.AvgCost:n2}")</td>
+            <td>@result.Amount</td>
+        </tr>
+    }
+    </tbody>
+</table>

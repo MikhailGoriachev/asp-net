@@ -1,0 +1,29 @@
+﻿@page
+@model TouristicAgency.Pages.Report02Model
+@{
+    ViewBag.Title = "Отчет 2";
+}
+
+<h3>@ViewBag.Title</h3>
+<h3>@Model.Task</h3>
+
+@* вывод в соответствии с запросом на выборку данных *@
+<table class="table table-hover">
+    <theader>
+        <tr>
+            <th>Страна поездки</th>
+            <th>Средняя стоимость, руб.</th>
+            <th>Количество записей</th>
+        </tr>
+    </theader>
+    <tbody>
+    @foreach (var row in Model.Rows) {
+        <tr>
+            <td>@row.Country</td>
+            <td>@($"{row.AvgCost:n2}")</td>
+            <td>@row.Amount</td>
+        </tr>
+    }
+    </tbody>
+</table>
+

@@ -1,0 +1,285 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.FiguresModel
+@{
+    ViewBag.Title = "Задача 2. Фигуры";
+    ViewBag.PageName = "Figures";
+}
+
+@functions {
+    // вывод фигуры
+    void ShowFigure(IFigure figure)
+    {
+        <div class="card col-sm-3 me-3 mb-3 shadow-sm p-0" style="width: 18rem;">
+            <div class="card-header d-flex" style="height: 150px;">
+                <img src="/images/figures/@figure.Image" class="my-auto mx-auto d-block mh-100 mw-100"
+                     alt="Бытовая техника">
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item">Тип фигуры: <b>@figure.Name</b></li>
+                    @foreach (var item in figure.ParamAndValue)
+                    {
+                        <li class="list-group-item">Сторона <span class="text-uppercase">@item.Key</span>: <b>@($"{item.Value:f5}")</b></li>
+                    }
+                </ul>
+
+            </div>
+            <div class="card-footer">
+                <ul class="list-group">
+                    <li class="list-group-item">Периметр: <b>@($"{figure.Perimeter:f5}")</b></li>
+                    <li class="list-group-item">Площадь: <b>@($"{figure.Area:f5}")</b></li>
+                </ul>
+            </div>
+        </div>
+    }
+
+    // вывод коллекции фтигур
+    void ShowFigureList(List<IFigure> figures)
+    {
+        Model.CurrentFigures.ForEach(f => ShowFigure(f));
+    }
+
+    // нужно ли отображать поле для ввода
+    // получает номер стороны
+    bool IsVisible(int sideNum)
+    {
+        return Model.FigureType switch
+        {
+            "Квадрат" => sideNum <= 1,
+            "Прямоугольник" => sideNum <= 2,
+            "Треугольник" => sideNum <= 3,
+            _ => true
+            };
+    }
+
+}
+
+
+<!-- #region Задание 2 -->
+<div id="taskInfoModalId" class="modal fade">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header h5">
+                Задание 2. Фигуры
+            </div>
+            <div class="modal-body">
+                <p>
+                    <b>Страница 2</b>. Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских
+                    геометрических фигур: квадраты, прямоугольники, разносторонние треугольники. Инициализация коллекции
+                    должна проводиться при отсутствии файла (формируйте не менее 10 фигур).
+                </p>
+
+                <p>
+                    В форме на странице выбирайте тип фигуры, и по кнопке «Создать» формируйте еще одну форму (на этой же
+                    странице) для ввода параметров фигуры. При рендеринге формы для параметров форму для выбора типа фигуры
+                    рендерить не надо. Все формы должны быть стилизованы классами Bootstrap. Рекомендуется форму реализовать
+                    модальным окном. <i>Требуется валидация, сообщения об ошибках выводите при помощи alert</i>.
+                </p>
+
+                <p>
+                    Отображайте коллекцию на этой же странице в виде карточек, стилизованной классами Bootstrap
+                    (<i>используйте list groups</i>).
+                </p>
+
+                <p>
+                    По ссылкам на этой странице (кнопкам в стиле Bootstrap) вызывайте обработчики запросов GET (
+                    <i>
+                        на соответствующих кнопках разместите количество квадратов, прямоугольников, треугольников в виде маркера
+                        (bage)
+                    </i>):
+                </p>
+
+                <ul>
+                    <li>вывод всей коллекции в исходном порядке </li>
+                    <li>вывод только квадратов, по убыванию площади</li>
+                    <li>вывод только прямоугольников, по возрастанию периметра</li>
+                    <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+                    <li>вывод всей коллекции по убыванию площади</li>
+                    <li>вывод всей коллекции, упорядоченной по типу фигур</li>
+                </ul>
+
+            </div>
+=
+            <!-- Подвал -->
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+@if (Model.FigureType != null)
+{
+    <!-- #region Форма для добавления фигуры -->
+    <section class="mx-sm-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <details open>
+            <summary class="h5 text-primary">
+                Форма для добавления фигуры
+            </summary>
+            <form method="post" asp-antiforgery="true" class="mx-auto w-50">
+
+                <!-- Вывод ошибки -->
+                @if (Model.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>Ошибка добавления!</strong> @Model.ErrorMessage
+                    </div>
+                }
+
+                <h5 class="text-center">Добавление фигуры: @Model.FigureType</h5>
+
+                <hr>
+
+                <!-- Тип фигуры -->
+                <input type="hidden" asp-for="FigureType" value="@Model.FigureType">
+
+                <!-- Сторона A -->
+                <div class="form-floating my-3">
+                    <input type="number" asp-for="SideA" class="form-control" min="0" step="any" required>
+                    <label asp-for="SideA">Сторона A:</label>
+                </div>
+
+                <!-- Сторона B -->
+                @if (IsVisible(2))
+                {
+                    <div class="form-floating my-3">
+                        <input type="number" asp-for="SideB" class="form-control" min="0" step="any" required>
+                        <label asp-for="SideB" class="field-label">Сторона B:</label>
+                    </div>
+                }
+
+                <!-- Сторона C -->
+                @if (IsVisible(3))
+                {
+                    <div class="form-floating my-3">
+                        <input type="number" asp-for="SideC" class="form-control" min="0" step="any" required>
+                        <label asp-for="SideC" class="field-label">Сторона C:</label>
+                    </div>
+                }
+
+                <!-- Кнопки управления -->
+                <div class="d-flex justify-content-end">
+                    <input class="btn btn-success me-2 w-25" asp-page-handler="AddFigure" type="submit" value="Добавить"/>
+                    <input class="btn btn-danger w-25" asp-page-handler="CancelAddFigure" type="submit" value="Отмена"/>
+                </div>
+
+            </form>
+        </details>
+    </section>
+    <!-- #endregion -->
+}
+
+<!-- #region Общий контейнер контента -->
+<div class="container-fluid my-5">
+    <div class="row">
+
+        <!-- #region Управление коллекцией-->
+        <section class="col-sm-3 ms-5 me-5 bg-light shadow-sm border rounded-3 p-3">
+
+            <h5 class="text-center">@ViewBag.Title</h5>
+
+            <hr/>
+
+            <button type="button"
+                    class="btn btn-success d-block my-3 w-100"
+                    data-bs-toggle="modal"
+                    data-bs-target="#taskInfoModalId">
+                Условия задания...
+            </button>
+
+            <hr>
+
+            <!-- Форма для выбора типа фигуры -->
+            @* @if (Model.FigureType == null) *@
+            @* { *@
+            <p class="text-center">Добавление фигуры</p>
+
+            <form method="post" asp-antiforgery="true">
+
+                <!-- Выбор типа фигуры -->
+                <div class="form-floating my-3">
+                    <select class="form-select" asp-for="FigureType" required>
+                        <option value="Квадрат" selected>Квадрат</option>
+                        <option value="Прямоугольник">Прямоугольник</option>
+                        <option value="Треугольник">Треугольник</option>
+                    </select>
+                    <label asp-for="FigureType">Тип фигуры</label>
+                </div>
+
+                <!-- Отправка запроса -->
+                <input type="submit" asp-page-handler="OpenFigureForm" class="btn btn-success d-block my-3 w-100"
+                       value="Создать...">
+
+            </form>
+
+            <hr>
+            @* } *@
+
+            <!-- #region Сортировка фигур -->
+            <p class="text-center">Сортировка фигур</p>
+
+            <!-- По умоланию -->
+            <a asp-page="/Figures" class="btn btn-success d-block my-3 w-100">По умоланию</a>
+
+            <!-- По убыванию площади -->
+            <a asp-page-handler="OrderByDescArea" class="btn btn-primary d-block my-3 w-100">По убыванию площади</a>
+
+            <!-- По типу -->
+            <a asp-page-handler="OrderByName" class="btn btn-primary d-block my-3 w-100">По типу</a>
+
+            <hr/>
+
+            <!-- #endregion -->
+
+            <!-- #region Выборка фигур -->
+
+            <p class="text-center">Выборка фигур</p>
+
+            <!-- Только квадраты -->
+            <a asp-page-handler="SelectBySquare" class="btn btn-primary d-block my-3 w-100"
+               title="Вывод только квадратов, по убыванию площади">
+                Только квадраты <span class="badge bg-info">@Model.FigureSource.Squares.Count</span>
+            </a>
+
+            <!-- Только прямоугольники -->
+            <a asp-page-handler="SelectByRect" class="btn btn-primary d-block my-3 w-100"
+               title="Вывод только прямоугольников, по возрастанию периметра">
+                Только прямоугольники <span class="badge bg-info">@Model.FigureSource.Rectangles.Count</span>
+            </a>
+
+            <!-- Только треугольники -->
+            <a asp-page-handler="SelectByTriangle" class="btn btn-primary d-block my-3 w-100"
+               title="Вывод только треугольников, в обратном порядке по отношению к порядку в коллекции">
+                Только треугольники <span class="badge bg-info">@Model.FigureSource.Triangles.Count</span>
+            </a>
+
+            <!-- #endregion -->
+
+            <hr/>
+
+        </section>
+        <!-- #endregion -->
+
+        <!-- #region Список фигур -->
+        <section class="col me-5 bg-light shadow-sm border rounded-3 p-3">
+            <h5 class="text-center">@Model.NameHandler</h5>
+
+            <hr>
+            <div class="container-sm mt-3">
+                <div class="row m-auto">
+                    <!-- Вывод фигур -->
+                    @{
+                        ShowFigureList(Model.CurrentFigures);
+                    }
+                </div>
+            </div>
+        </section>
+        <!-- #endregion -->
+    </div>
+</div>
+<!-- #endregion -->

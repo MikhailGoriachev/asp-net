@@ -1,0 +1,132 @@
+﻿@page
+@model Home_Work.Pages.FiguresCollectionModel
+@using Home_Work.Models.Figures
+@using Home_Work.Utilities
+@using System.Net
+@{
+    ViewData["title"] = "Страница 2";
+    ViewData["pageHeader"] = "СТРАНИЦА 2";
+   
+    ViewBag.IsActive = 2;
+}
+@functions{
+    @*public void showCollection(List<Appliance> AppCollection)
+    {
+        foreach (var appliance in AppCollection)
+            {
+                <div class="card">
+                                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                                <div><span>Наименование: @appliance.Name</span></div>
+                                <div><span>Артикул:  @appliance.Article</span></div>
+                                <div><span>Цена:  @appliance.Price</span></div>
+                                <div><span>Количество:  @appliance.Quantity</span></div>
+                </div>
+
+            }
+    }*@
+}
+
+
+<section>
+    @section Styles{
+        <link rel="stylesheet" href="~/styles/task2.css">
+        <link rel="stylesheet" href="~/styles/task3.css">
+    }
+
+    <!--Задание-->
+    <details class="task-details">
+        <summary><b>Задача 2.</b></summary>
+        <div>
+            <p>
+                Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских 
+                геометрических фигур: квадраты, прямоугольники, разносторонние треугольники. 
+                Инициализация коллекции должна проводиться при отсутствии файла, формируйте не менее 10 фигур. 
+                По кнопке <b>submit</b> (метод POST) формируйте фигуру, случайным образом выбирая ее тип и размер. 
+                <i>Создайте форму для ввода параметров фигуры. Загружать изображение не требуется, 
+                формируйте его по типу фигуры. Добавляйте фигуры в коллекцию, сохраняйте коллекцию.</i> 
+                Отображайте коллекцию на этой же странице, выводите также изображение фигуры.
+            </p>
+
+            <p>
+                По ссылкам на этой странице вызывайте обработчики запросов GET:
+            </p>
+            
+            <ul>
+                <li>вывод только квадратов, по убыванию площади</li>
+                <li>вывод только прямоугольников, по возрастанию периметра</li>
+                <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+                <li>вывод всей коллекции в исходном порядке</li>
+                <li>вывод всей коллекции по убыванию площади</li>
+                <li><i>вывод всей коллекции, упорядоченной по типу фигур</i></li>
+            </ul>
+        </div>
+    </details>
+
+     <!--Кнопки-->
+    <form method="post" class="nav-form">
+        <fieldset class="form-block">
+            <div class="contaner">
+                <input asp-page-handler="ShowDefault"  type="submit" value="Исходная коллекция"/>
+                <input asp-page-handler="SortSquaresByArea"  type="submit" value="Квадраты по убыванию площади"/>
+                <input asp-page-handler="SortRectanglesByPerimeter"    type="submit" value="Прямоугольники по возрастанию периметра"/>
+                <input asp-page-handler="ReverseTriangles" type="submit" value="Треугольники в обратном порядке"/>
+                <input asp-page-handler="SortBySquare" type="submit" value="Упорядочить по убыванию площади"/>
+                <input asp-page-handler="SortByType" type="submit" value="Упорядочить по типу"/>
+                <input asp-page-handler="AddFigure" type="submit" value="Добавить фигуру"/>
+                <input class="delete-file" asp-page-handler="DeleteFile" type="submit" value="Удалить файл"/>
+            </div>
+        </fieldset>
+    </form>
+
+    
+    <!--Форма добавления фигуры-->
+    <details class="form-details">
+    <summary>Форма добавления</summary>
+
+        <form method="post">
+           <fieldset class="form-block">
+                <div>
+                <select asp-items="Model.types" name="Type" >
+
+                </select>
+                <label>Тип фигуры</label>
+                </div>
+                <div>
+                    <input type="number" name="SideA" value="0">
+                    <label>Сторона A</label>
+                </div>
+                <div>
+                    <input type="number" name="SideB" value="0">
+                    <label>Сторона B</label>
+                </div>
+                <div>
+                    <input type="number" name="SideC" value="0">
+                    <label>Сторона C</label>
+                </div>
+
+                <div>
+                    <input asp-page-handler="AddFigureForm" type="submit" value="Добавить">
+                </div>
+            </fieldset>
+        </form>
+    </details>
+    
+    <!--Вывод коллекции-->
+    <div class="contaner">
+        @foreach (var figure in @Model.Figures)
+        {
+            <div class="card">
+                <div class="divImg"><img src="~/images/figures/@Utils.Icons[figure.FigureType]" alt=@figure.FigureType /></div>
+                <div><span>Тип фигуры: @figure.FigureType</span></div>
+                <div><span>Размеры:  @Html.Raw(figure.GetSize())</span></div>
+                <div><span>Площадь:  @figure.Area()</span></div>
+                <div><span>Периметр:  @figure.Perimeter()</span></div>
+                <div><span>Id:  @figure.Id</span></div>
+            </div>
+        }
+
+    @*@showCollection(Model.Appliances)*@
+    
+    </div>
+
+</section>

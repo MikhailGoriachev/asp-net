@@ -1,0 +1,41 @@
+﻿@page
+@model Home_Work.Pages.Equation
+@{
+    ViewData["title"] = "Страница уравнения";
+    ViewData["pageHeader"] = "СТРАНИЦА: УРАВНЕНИЕ";
+    ViewBag.IsActive = 3;
+}
+
+<section>
+
+    <details class="task-details">
+        <summary><b>Задача 3.</b></summary>
+        <div>
+
+        </div>
+    </details>
+    
+    <!--Форма изменения-->
+    <form method="post">
+        <fieldset class="form-block">
+            <div>
+                <input  required type="number" step="any" name="A">
+                <label>A</label>
+            </div>
+            <div>
+                <input required type="number"  step="any" name="B">
+                <label>B</label>=
+            <div>
+                <input type="submit" value="Отправить" >
+            </div>
+        </fieldset>
+    </form>
+
+    @if(Request.Method.ToLower() == "post")
+    {
+        <div>
+            <div>Z1: @Model.Equate.Result.z1</div>
+            <div>Z2: @Model.Equate.Result.z2</div>
+        </div>
+    }
+</section>

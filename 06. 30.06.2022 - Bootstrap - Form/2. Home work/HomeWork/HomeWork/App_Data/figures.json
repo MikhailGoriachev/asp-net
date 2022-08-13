@@ -1,0 +1,175 @@
+[
+  {
+    "$type": "HomeWork.Models.Triangle, HomeWork",
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 10.207148271676894,
+      "Item2": 10.280789410400493,
+      "Item3": 10.236604474948935
+    },
+    "Perimeter": 30.72454215702632,
+    "Area": 45.41690954035973,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 10.207148271676894,
+      "b": 10.280789410400493,
+      "c": 10.236604474948935
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Square, HomeWork",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Side": 15.620041203028078,
+    "Perimeter": 62.480164812112314,
+    "Area": 243.98568718429485,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 15.620041203028078
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Rectangle, HomeWork",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 10.097156947339526,
+    "SideB": 10.649824895590884,
+    "Perimeter": 41.49396368586082,
+    "Area": 107.53295343246494,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 10.097156947339526,
+      "b": 10.649824895590884
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Square, HomeWork",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Side": 15.744584446253798,
+    "Perimeter": 62.97833778501519,
+    "Area": 247.89193938521703,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 15.744584446253798
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Square, HomeWork",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Side": 16.003080189258753,
+    "Perimeter": 64.01232075703501,
+    "Area": 256.098575543846,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 16.003080189258753
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Rectangle, HomeWork",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 10.563168053338805,
+    "SideB": 10.760589829081926,
+    "Perimeter": 42.64751576484146,
+    "Area": 113.66591871764066,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 10.563168053338805,
+      "b": 10.760589829081926
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Rectangle, HomeWork",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 10.014299704585811,
+    "SideB": 10.304464671451605,
+    "Perimeter": 40.63752875207483,
+    "Area": 103.19199751523274,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 10.014299704585811,
+      "b": 10.304464671451605
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Triangle, HomeWork",
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 10.830283290242253,
+      "Item2": 10.865445388439005,
+      "Item3": 10.554022653790266
+    },
+    "Perimeter": 32.24975133247152,
+    "Area": 50.01435279479707,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 10.830283290242253,
+      "b": 10.865445388439005,
+      "c": 10.554022653790266
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Square, HomeWork",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Side": 12.591329547122488,
+    "Perimeter": 50.36531818848995,
+    "Area": 158.5415797642398,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 12.591329547122488
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Triangle, HomeWork",
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 10.43813466355015,
+      "Item2": 10.151091567124979,
+      "Item3": 10.935565200650466
+    },
+    "Perimeter": 31.524791431325596,
+    "Area": 47.67642836405803,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 10.43813466355015,
+      "b": 10.151091567124979,
+      "c": 10.935565200650466
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Rectangle, HomeWork",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 10.621445251770298,
+    "SideB": 10.180898036756645,
+    "Perimeter": 41.60468657705388,
+    "Area": 108.13585111126642,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 10.621445251770298,
+      "b": 10.180898036756645
+    }
+  },
+  {
+    "$type": "HomeWork.Models.Square, HomeWork",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Side": 17.523530094816923,
+    "Perimeter": 70.0941203792677,
+    "Area": 307.0741069839544,
+    "ParamAndValue": {
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "a": 17.523530094816923
+    }
+  }
+]

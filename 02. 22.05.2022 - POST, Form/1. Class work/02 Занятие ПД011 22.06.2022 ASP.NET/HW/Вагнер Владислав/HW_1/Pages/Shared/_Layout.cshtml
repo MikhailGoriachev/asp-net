@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["title"]</title>
+    
+    <!--Подключение стилей-->
+
+    <link rel="stylesheet" href="~/styles/styles.css">
+
+    <!--Подключение удалённого шрифта через репозиторий Google Fonts-->
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap'>
+</head>
+<body>
+    <header>
+        <h1>@ViewData["pageHeader"]</h1>
+    </header>
+
+    <nav>
+        <a asp-page="/Index">Главная страница</a> 
+        <a asp-page="/Book">Первая страница</a> 
+        <a asp-page="/SailingFleet">Вторая страница</a>
+        <a asp-page="/Cities">Третья страница</a>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <b>Разработчик:</b> Вагнер Владислав
+        <b><br>Группа:</b> ПД011
+        <b><br>Город:</b> Донецкая область,Макеевка.
+        <b><br>Год разработки:</b> 2022
+    </footer>
+</body>
+</html>

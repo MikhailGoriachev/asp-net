@@ -1,0 +1,50 @@
+﻿:root {
+	--text-color-1: #2E74B5;
+	--text-color-2: #2471A3;
+	--text-color-3: #808B96;
+}
+
+html, body { font-size: 12pt; }
+
+header { background-color: #80bdff; }
+nav { max-width: 260px !important}
+
+.brief { font-size: 18px }
+.brief h2 { color: var(--text-color-1); }
+
+details, summary { font-size: 1.1rem; }
+
+.card-img-200 {
+	height: 200px;
+	width: auto;
+	object-fit: contain;
+}
+
+.card-img-100 {
+	height: 100px;
+	width: auto;
+	object-fit: contain ;
+}
+
+.color-1 { color: var(--text-color-1); }
+.color-2 { color: var(--text-color-2); }
+.color-3 { color: var(--text-color-3); }
+
+.h-100-px { height: 100px !important }
+.h-200-px { height: 200px !important }
+.w-115-px { width: 130px !important; }
+
+fieldset {
+	border: solid 1px rgba(0, 0, 0, 0.175);
+	border-radius: 6px;
+	padding-top: 12px;
+	padding-bottom: 15px;
+	margin-left: 12px;
+}
+
+legend {
+	float: none;
+	width: inherit;
+	font-size: 18px;
+	margin-right: 20px;
+}

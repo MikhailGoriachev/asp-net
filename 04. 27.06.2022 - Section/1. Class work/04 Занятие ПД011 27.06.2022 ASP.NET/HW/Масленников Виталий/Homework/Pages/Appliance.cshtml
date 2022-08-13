@@ -1,0 +1,49 @@
+﻿@page
+@model Homework.Pages.ApplianceModel
+@{
+	ViewBag.Header = "Бытовая техника";
+}
+
+
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary>
+		<p>
+			В форме вводите данные о бытовой технике на оптовом складе (наименование, артикул, цена, количество, 
+			изображение). Используйте привязку параметров формы к свойствам модели страницы. Введенные данные отображайте на этой же
+			странице.
+		</p>
+	</details>
+</div>
+
+<div class="v-indent-20">
+	<form method="post">
+		<fieldset>
+			<legend>Введите данные о бытовой технике:</legend>
+			<div class="field"><label class="w2">Наименование: </label>
+				<input type="text" name="name" /></div>
+			
+			<div class="field"><label class="w2">Артикул:</label>
+				<input type="text" name="article" /></div>
+			
+			<div class="field"><label class="w2">Цена:</label>
+				<input class="t-input" type="number" name="price"/></div>
+			
+			<div class="field"><label class="w2">Количество: </label>
+				<input class="t-input" type="number" name="amount"/></div>
+
+			<div><input class="btn-blue" type="submit" value="Отправить"></div>
+		</fieldset>
+	</form>
+
+	@if(Request.Method == "POST")
+	{
+		<div class="block">
+		<p><b>Наименование:</b> @Model.Appliance!.Name</p>
+		<p><b>Артикул:</b> @Model.Appliance.Article</p>
+		<p><b>Цена:</b> @Model.Appliance.Price</p>
+		<p><b>Количество:</b> @Model.Appliance.Amount</p>
+		</div>
+	}
+</div>

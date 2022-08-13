@@ -1,0 +1,212 @@
+Секции
+Кроме метода RenderBody(), который вставляет освновное содержимое страниц Razor, 
+файлы layout также могут использовать специальный метод RenderSection() для вставки 
+секций. Мастер-страница может иметь несколько секций, куда страницы Razor могут 
+поместить свое содержимое. Например, добавим к мастер-странице _Layout.cshtml секцию 
+с именем "footer":
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>METANIT.COM | @ViewBag.Title</title>
+</head>
+<body>
+    <h2>@ViewBag.Title</h2>
+    <div><a href="/">Home</a> | <a href="About">About</a></div>
+    <div>
+        @RenderBody()
+    </div>
+	
+	@* второй параметр указывает на необязательность секции*@
+    <footer>@RenderSection("Footer", false)</footer>
+
+</body>
+</html>
+
+Еще один вариант - со значением по умолчанию
+<footer>
+    @if (IsSectionDefined("Footer"))
+    {
+        @RenderSection("Footer")
+    }
+    else
+    {
+        <span>Содержание элемента footer по умолчанию.</span>
+    }
+</footer>
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+Работа с формами
+
+public class IndexModel : PageModel
+    {
+        [BindProperty]
+        public Product Product { get; set; } = new("", 0, "");
+        public string Message { get; private set; } = "Добавление товара";
+ 
+        public void OnPost()
+        {
+            Message = $"Добавлен новый товар: {Product.Name} ({Product.Company})";
+        }
+    }
+ 
+    public record class Product(string Name, int Price, string Company);
+	
+************************************************************************************
+
+<h2>@Model.Message</h2>
+<form method="post" asp-antiforgery="true">
+    <p>
+        <label asp-for="Product.Name">Название</label><br />
+        <input type="text" asp-for="Product.Name" />
+    </p>
+    <p>
+        <label asp-for="Product.Price">Цена</label><br />
+        <input asp-for="Product.Price" />
+    </p>
+    <p>
+        <label asp-for="Product.Company">Производитель</label><br />
+        <input type="text" asp-for="Product.Company" />
+    </p>
+    <input type="submit" value="Отправить" />
+</form>
+
+****************************************************************************	
+
+Класс FormTagHelper может принимать следующие атрибуты:
+
+asp-controller: указывает на контроллер, которому предназначен запрос
+asp-action    : указывает на действие контроллера
+asp-area      : указывает на название области, в которой будет вызываться контроллер для обработки формы
+
+asp-antiforgery: если имеет значение true, то для этой формы будет генерироваться antiforgery token
+asp-route      : указывает на название маршрута
+asp-all-route-data: устанавливает набор значений для параметров
+asp-route-[название параметра]: определяет значение для определенного параметра
+
+asp-page        : указывает на страницу RazorPage, которая будет обрабатывать запрос
+asp-page-handler: указывает на обработчик страницы RazorPage, который применяется для обработки запроса
+
+asp-fragment: указывает фрагмент, который добавляется к запрашиваемому адресу после символа #.
+
+**********************************************************************public class IndexModel : PageModel
+    public class PageModel : PageModel {
+        // условные данные
+        static List<Company> companies { get; } = new()
+        {
+            new Company(1, "Apple"),
+            new Company(2, "Samsung"),
+            new Company(3, "Google")
+        };
+        public SelectList Companies { get; } = new SelectList(companies, "Id", "Name");
+        [BindProperty]
+        public Product Product { get; set; } = new("", 1000, 0);
+        public string Message { get; private set; } = "Добавление товара";
+ 
+        public void OnPost()
+        {
+            // получаем производителя товара
+            Company? company = companies.FirstOrDefault(c => c.Id == Product.CompanyId);
+            Message = $"Добавлен новый товар: {Product.Name} ({company?.Name})";
+        }
+    }
+    public record class Product(string Name, int Price, int CompanyId);
+    public record class Company(int Id, string Name);
+
+**********************************************
+
+@page 
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model RazorPagesApp.Pages.PageModel
+ 
+<h2>@Model.Message</h2>
+<form method="post" asp-antiforgery="true">
+    <p>
+        <label asp-for="Product.Name">Название</label><br />
+        <input type="text" asp-for="Product.Name" />
+    </p>
+    <p>
+        <label asp-for="Product.Price">Цена</label><br />
+        <input asp-for="Product.Price" />
+    </p>
+    <p>
+        <label asp-for="Product.CompanyId">Производитель</label><br />
+        <select asp-for="Product.CompanyId" asp-items="Model.Companies"></select>
+    </p>
+	@* значение для отображения по умолчанию м.б. задано так *@
+	@*
+	<p>
+	<select asp-for="CompanyId" asp-items="ViewBag.Companies">
+         <option selected="selected" disabled="disabled">Выберите компанию</option>
+    </select>
+	</p>
+	*@
+    <input type="submit" value="Отправить" />
+</form>
+
+Обработка форм и обработчики страниц razor
+Razor Pages также позволяет отправлять форму различным обработчикам одной
+и той же страницы. Для этого у тега формы можно указать нужный обработчик 
+с помощью параметра asp-page-handler. Более того можно указать у отдельных 
+кнопок, на какой обработчик они отправятся данные формы.
+
+public class PageModel : PageModel
+    {
+        // условные данные
+        IEnumerable<Person> people = new List<Person>
+       {
+            new ("Tom", 37),
+            new ("Sam", 28),
+            new ("Bob", 41),
+            new ("Tim", 25)
+        };
+        public IEnumerable<Person> DisplayedPeople { get; private set; } = new List<Person>();
+        
+		
+		public void OnGet()
+        {
+            DisplayedPeople = people;
+        }
+		
+		
+        public void OnPostGreaterThan(int age)
+        {
+            DisplayedPeople = people.Where(p => p.Age > age);
+        }
+		
+		
+        public void OnPostLessThan(int age)
+        {
+            DisplayedPeople = people.Where(p => p.Age < age);
+        }
+    }
+	
+	public record class Person(string Name, int Age);
+	
+	*************************************************************
+	
+@page "{handler?}"
+ 
+@model PageModel
+@using RazorPagesApp.Models
+ 
+<h2>Список пользователей</h2>
+<form method="POST">
+    <input type="number" name="age" />
+    <input type="submit" asp-page-handler="GreaterThan" value="Старше" />
+    <input type="submit" asp-page-handler="LessThan" value="Младше" />
+</form>
+<table class="table">
+    <tr><th>Name</th><th>Age</th></tr>
+    @foreach(Person person in Model.DisplayedPeople)
+    {
+        <tr>
+            <td>@person.Name</td>
+            <td>@person.Age</td>
+        </tr>
+    }
+</table>	
+	

@@ -1,0 +1,68 @@
+﻿@page "{handler?}/{id?}"
+@using HomeWork.Models
+@model HomeWork.Pages.Forms.VisitForm
+
+@{
+    ViewBag.Title = Model.IsAdd ? "Добавление поездки" : "Редактирование поездки";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <hr/>
+
+    <!-- #region Форма для записи -->
+    <form method="post" asp-antiforgery="true" class="mx-auto w-50">
+
+        <!-- Вывод сообщения об ошибке -->
+        @if (@Model.ErrorMessage != null)
+        {
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div>@Model.ErrorMessage</div>
+            </div>
+        }
+
+        <!-- Статус формы -->
+        <input type="hidden" asp-for="IsAdd">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="VisitItem!.Id">
+
+        <!-- Клиент -->
+        <div class="form-floating my-3">
+            <select asp-for="VisitItem!.ClientId" asp-items="Model.CLients" class="form-control" placeholder="Клиент" required></select>
+            <label asp-for="VisitItem!.ClientId">Клиент</label>
+        </div>
+
+        <!-- Маршрут -->
+        <div class="form-floating my-3">
+            <select asp-for="VisitItem!.RouteId" asp-items="Model.Routes" class="form-control" placeholder="Муршрут" required></select>
+            <label asp-for="VisitItem!.RouteId">Маршрут</label>
+        </div>
+
+        <!-- Дата начала поездки -->
+        <div class="form-floating my-3">
+            <input type="date" asp-for="VisitItem!.DateStart" placeholder="Дата поездки"
+                   value="@($"{DateTime.Now:yyyy-MM-dd}")" class="form-control"
+                   required>
+            <label asp-for="VisitItem!.DateStart">Дата поездки</label>
+        </div>
+
+        <!-- Длительность поездки -->
+        <div class="form-floating my-3">
+            <input type="number" asp-for="VisitItem!.Duration" placeholder="Длительность поездки" min="1" max="60" class="form-control"
+                   required>
+            <label asp-for="VisitItem!.Duration">Длительность поездки</label>
+        </div>
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               asp-page="/Forms/VisitForm"
+               asp-page-handler="Save"
+               type="submit" value="@(Model.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger" asp-page="/Data/VisitList">Выход</a>
+
+    </form>
+    <!-- #endregion -->
+
+</section>

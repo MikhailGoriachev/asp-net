@@ -1,0 +1,31 @@
+﻿@page
+@model H_WASP_NET.Pages.ClientCreateModel
+@{
+}
+
+<h3 class="text-center">Добавление клиента</h3>
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <form class="w-50" method="post">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Client!.Surname">Фамилия клиента:</label>
+                <input class="form-control" asp-for="Client!.Surname" type="text"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Client!.Name">Имя клиента:</label>
+                <input class="form-control" asp-for="Client!.Name" type="text"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Client!.Patronymic">Отчество клиента:</label>
+                <input class="form-control" asp-for="Client!.Patronymic" type="text"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Client!.Passport">Паспортные данные:</label>
+                <input class="form-control" asp-for="Client!.Passport" type="text"/>
+            </div>
+    
+            <input class="btn btn-success" type="submit" value="Добавить"/>
+        </form>
+    </div>
+</div>

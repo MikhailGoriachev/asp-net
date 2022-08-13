@@ -1,0 +1,41 @@
+﻿@page
+@model RazorPages_Intro.Pages.CitiesModel
+@{
+    ViewBag.Title = "Задача 3";
+    ViewBag.Active = "Cities";
+    ViewBag.Header = "Вывод коллекции сведений о городах в таблицном виде";
+
+    // номер строки таблицы
+    int row = 1;
+}
+
+
+@* Вывод коллекции сведений о городах *@
+<h3 class="align-center">Города Донецкой Народной Республики</h3>
+<div class="container">
+    
+    <table class="width-800">
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Герб</th>
+            <th>Название</th>
+            <th>Основан</th>
+            <th>Население</th>
+            <th>Площадь, км<sup>2</sup></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var city in Model.Cities){
+            <tr>
+                <td>@(row++)</td>
+                <td class="align-center"><img src="@city.Arms" alt="Герб города '@city.Name'" height="64"/></td>
+                <td class="align-left">@city.Name</td>
+                <td>@city.Year</td>
+                <td>@city.Population</td>
+                <td>@city.Area</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

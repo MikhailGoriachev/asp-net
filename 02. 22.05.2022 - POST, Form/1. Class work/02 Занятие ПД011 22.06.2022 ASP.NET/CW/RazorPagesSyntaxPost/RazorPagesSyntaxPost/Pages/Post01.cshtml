@@ -1,0 +1,16 @@
+﻿@page
+@* простейшая форма  *@
+
+@model RazorSyntaxContinue.Pages.Post01
+@{
+    ViewData["Title"] = "POST-метод передачи";
+}
+
+<h2>@Model.Message</h2>
+
+<form method="post" >
+    <input type="text" name="username" placeholder="Имя пользователя" />
+    <input type="submit" value="Отправить" />
+</form>
+
+<p>Вы ввели @Model.UserName</p>

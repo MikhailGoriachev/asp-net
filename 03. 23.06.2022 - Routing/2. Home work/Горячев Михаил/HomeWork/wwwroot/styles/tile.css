@@ -1,0 +1,80 @@
+/* Стиль вывода элементов в стиле "плиток" */
+
+/* контейнер */
+.container {
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-items: flex-end;
+}
+
+/* элемент */
+.tile {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 22rem;
+
+    padding: 1rem;
+
+    background-color: #e8e8e8;
+    border: 1px solid #bbbbbb;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+    margin: 2rem 2rem 2rem 0;
+
+    cursor: pointer;
+}
+
+/* наведение на элемент */
+.tile:hover {
+    box-shadow: 0 0 0.7rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* поля */
+.tile div {
+    box-sizing: border-box;
+    padding: 0.5rem 0;
+}
+
+/* изображение элемента  */
+.tile-image {
+    display: flex;
+
+    justify-content: center;
+}
+
+.tile-image img {
+    /* height: 100%; */
+    width: 100%;
+}
+
+/* маленькое изображение элемента  */
+.tile-image {
+    align-self: center;
+}
+
+.tile-image.small img {
+    /* height: 100%; */
+    width: 5rem;
+}
+
+.tile-image.normal img {
+    /* height: 100%; */
+    /*width: 25rem;*/
+    height: 25rem;
+}
+
+/* значение полей */
+.tile span {
+    font-weight: bold;
+}
+
+/* заголовок */
+.tile-header {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+}

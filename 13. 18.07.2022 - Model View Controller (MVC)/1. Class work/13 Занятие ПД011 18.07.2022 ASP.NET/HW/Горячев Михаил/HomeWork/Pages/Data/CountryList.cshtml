@@ -1,0 +1,33 @@
+﻿@page
+@model HomeWork.Pages.Data.CountryList
+
+@{
+    ViewBag.Title = "Страны";
+    ViewBag.PageName = "/Data";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h3 class="display-6 text-center">Страны</h3>
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Транспортные услуги (&#8381;)</th>
+            <th>Оформление визы (&#8381;)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var country in Model.Countries)
+        {
+            <tr>
+                <th>@country.Id</th>
+                <td>@country.Name</td>
+                <td>@($"{country.CostService:n2}")</td>
+                <td>@($"{country.CostVisa:n2}")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

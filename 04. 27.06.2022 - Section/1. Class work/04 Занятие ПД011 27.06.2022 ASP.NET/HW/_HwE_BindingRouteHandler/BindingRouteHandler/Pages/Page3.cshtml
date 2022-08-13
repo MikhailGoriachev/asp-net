@@ -1,0 +1,91 @@
+﻿@page
+@model BindingRouteHandler.Pages.Page3Model
+@{
+    ViewBag.Title = "Страница 3";
+    ViewBag.Active = "Page3";
+    ViewBag.Header = "Обработка коллекции плоских геометрических фигур";
+
+    // номер строки таблицы для вывода
+    int row;
+}
+
+<!-- Условие задачи -->
+<details>
+    <summary><b>Страница 3.</b> @ViewBag.Header</summary>
+    <p>
+        Требуется хранить коллекцию плоских геометрических фигур: 
+        квадраты, прямоугольники, разносторонние треугольники. По кнопке submit 
+        (метод POST) формируйте фигуру, случайным образом выбирая ее тип и размер. 
+        Добавляйте эту фигуру в коллекцию. Отображайте коллекцию на этой же странице, 
+        выводите также изображение фигуры.
+    </p>
+    <p>
+        По ссылкам на этой странице вызывайте обработчики запросов GET:
+    </p>
+    <ul>
+        <li>вывод только квадратов, по убыванию площади</li>
+        <li>вывод только прямоугольников, по возрастанию периметра</li>
+        <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+        <li>вывод всей коллекции в исходном порядке</li>
+        <li>вывод всей коллекции по убыванию площади</li>
+    </ul>
+</details>
+
+<div class="container">
+      <!-- блок кнопок -->
+      <div class="controls width-400">
+          <form method="post">
+              <input id="btAdd" class="form-button" type="submit" value="Добавить" ttle="Добавить элемент в коллекцию">
+          </form>
+          <ul class="menu-list">
+              <li class="menu-list-li">
+                  <a id="btnSrcData" class="link" asp-page="/Page3">Исходный набор</a>
+              </li>
+              <li class="menu-list-li">
+                  <a id="btnSquresOnly" class="link" asp-page="Page3/" asp-page-handler="SquaresOnly"
+                     title="Вывод только квадратов, упорядоченных по убыванию площади">Только квадраты</a>
+              </li>
+              <li class="menu-list-li">
+                  <a id="btnRectanglesOnly" class="link" asp-page="/Page3" asp-page-handler="RectanglesOnly"
+                     title="Вывод только прямоугольников, упорядоченных по возрастанию периметров">Только прямоугольники</a>
+              </li>
+              <li class="menu-list-li">
+                  <a id="btnTringlesOnly" class="link" asp-page="Page3/" asp-page-handler="TrianglesOnly"
+                     title="Вывод только треугольников, в обратном порядке, по отношению к порядку в коллекции">Только треугольники</a>
+              </li>
+              <li class="menu-list-li">
+                  <a id="btnAreasDesc" class="link" asp-page="Page3/" asp-page-handler="OrderByAreaDesc"
+                     title="Вывод коллекции по убыванию площади">По убыванию площади</a>
+              </li>
+          </ul>
+      </div>
+      
+      <!-- Таблица с коллекцией фигур -->
+      <table class="width-800">
+          <thead>
+          <tr>
+              <th>Номер</th>
+              <th>Тип фигуры</th>
+              <th>Изображение фигуры</th>
+              <th>Размеры фигуры</th>
+              <th>Периметр фигуры</th>
+              <th>Площадь фигуры</th>
+          </tr>
+          </thead>
+          <tbody>
+          @{
+              row = 1;
+              foreach (var figure in Model.Figures) {
+                  <tr>
+                      <td>@(row++)</td>
+                      <td class="align-left">@figure.Type</td>
+                      <td class="align-center"><img src="~/images/task03/@(figure.Image)"/></td>
+                      <td class="align-left">@figure</td>
+                      <td>@($"{figure.Perimeter():f3}")</td>
+                      <td>@($"{figure.Area():f3}")</td>
+                  </tr>
+              }
+          }
+          </tbody>
+      </table>
+</div>

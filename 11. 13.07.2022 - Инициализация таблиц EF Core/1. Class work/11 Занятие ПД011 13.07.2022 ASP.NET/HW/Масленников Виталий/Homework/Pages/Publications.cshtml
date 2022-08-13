@@ -1,0 +1,164 @@
+﻿@page "{handler?}"
+@using Homework.Models
+@model Homework.Pages.Publications
+
+@{
+    ViewBag.Header = "Периодические издания";
+    
+    // Флаг отображения формы при загрузке страницы
+    ViewBag.InvokeForm = Request.Method == "GET" && RouteData.Values["handler"] is "Edit";
+}
+
+@* Панель элементов управления *@
+
+<div class="list-group-horizontal my-4">
+    <button type="button" class="btn btn-sm btn-outline-dark ms-2 align-baseline"
+            data-bs-toggle="modal" data-bs-target="#modalForm">
+        Добавить издание
+    </button>
+
+    <div class="vl ms-3 align-bottom"></div>
+
+    <form class="d-inline-block ms-3" method="post">
+        <label class="form-label me-1 lead" for="inpIndex">Индекс: </label>
+        <input class="form-control-sm w-80-px" type="text" asp-for="SearchIndex" id="inpIndex"/>
+        <button class="btn btn-sm btn-outline-secondary ms-2" type="submit" asp-page-handler="FindIndex">Найти</button>
+    </form>
+
+    <form class="d-inline-block ms-3" method="post">
+        <label class="form-label me-1 lead" for="inpPrice">Цена: </label>
+        <input class="form-control-sm w-80-px" type="number" asp-for="PriceFrom" id="inpPrice"/> —
+        <input class="form-control-sm w-80-px" type="number" asp-for="PriceTo"/>
+        <button class="btn btn-sm btn-outline-secondary ms-2" type="submit" asp-page-handler="FilterPrice">Показать</button>
+    </form>
+    <form class="d-inline-block ms-3" method="post">
+        <label class="form-label me-1 lead" for="inpDur">Длительность: </label>
+        <input class="form-control-sm w-80-px" type="number" asp-for="DurationFrom" id="inpDur"/> —
+        <input class="form-control-sm w-80-px" type="number" asp-for="DurationTo"/>
+        <button class="btn btn-sm btn-outline-secondary ms-2" type="submit" asp-page-handler="FilterDuration">Показать</button>
+    </form>
+
+    <div class="vl ms-3 align-bottom"></div>
+
+    <a asp-page="@nameof(Publications)" class="btn btn-sm btn-outline-secondary ms-3">Сбросить фильтр</a>
+</div>
+
+@* Таблица с данными *@
+
+<table class="table text-center">
+    <thead class="fw-bold">
+    <tr>
+        <td>Индекс</td>
+        <td>Тип издания</td>
+        <td>Название</td>
+        <td>Цена, р.</td>
+        <td>Дата начала подписки</td>
+        <td>Длительность подписки, мес.</td>
+        <td>Управление</td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.DisplayPublications is not null && Model.DisplayPublications.Count > 0){
+        @foreach (var pub in Model.DisplayPublications){
+            <tr>
+                <td>@pub.PubIndex</td>
+                <td>@pub.PubType</td>
+                <td class="text-start">@pub.Title</td>
+                <td>@pub.Price</td>
+                <td>@pub.StartDate.ToString("dd.MM.yy")</td>
+                <td>@pub.Duration</td>
+                <td>
+                    <form class="d-inline-block" method="post" asp-page-handler="Delete" asp-route-id="@pub.PublicationId">
+                        <a class="btn btn-sm btn-outline-primary me-2" asp-page-handler="Edit" asp-route-id="@pub.PublicationId">Редактировать</a>
+                        <button class="btn btn-sm btn-outline-danger" type="submit">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }else{
+        <tr>
+            <td colspan="7" class="text-primary text-center">Нет данных для отображения</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@* Форма ввода данных в модальном диалоге *@
+
+<div class="modal @(ViewBag.InvokeForm ? "show d-block" : "")" id="modalForm" data-bs-backdrop="static"
+     data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Введите данные издания</h5>
+                @if (ViewBag.InvokeForm){
+                    <button asp-page="@nameof(Publications)" form="pubForm" class="btn-close"
+                            formnovalidate>
+                    </button>
+                }else{
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                }
+            </div>
+
+            <div class="modal-body">
+                <form class="mb-4 p-0" method="post" enctype="multipart/form-data" id="pubForm">
+                    <div class="row">
+
+                        <input asp-for="Publication.PublicationId" type="hidden"/>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Publication.Title" required/>
+                            <label class="form-label mx-2" asp-for="Publication.Title">Название: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Publication.PubType" required/>
+                            <label class="form-label mx-2" asp-for="Publication.PubType">Тип издания: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Publication.PubIndex" required/>
+                            <label class="form-label mx-2" asp-for="Publication.PubIndex">Индекс издания: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Publication.Price" min="0"
+                                   required/>
+                            <label class="form-label mx-2" asp-for="Publication.Price">Цена (р.):</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="date" asp-for="Publication.StartDate" required/>
+                            <label class="form-label mx-2" asp-for="Publication.StartDate">
+                                Дата начала подписки:
+                            </label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Publication.Duration"
+                                   min="1" required/>
+                            <label class="form-label mx-2" asp-for="Publication.Duration">Длительность подписки (мес.):</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                @if (ViewBag.InvokeForm){
+                    <input asp-page-handler="Edit" form="pubForm" class="btn btn-primary" type="submit"
+                           value="Изменить">
+                    <button asp-page="@(nameof(Publications))" form="pubForm" class="col-3 btn btn-outline-secondary ms-2"
+                            formnovalidate>
+                        Отмена
+                    </button>
+                }else{
+                    <input asp-page-handler="Add" form="pubForm" class="btn btn-primary" type="submit"
+                           value="Добавить">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

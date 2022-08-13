@@ -1,0 +1,13 @@
+﻿
+<div>
+    Controller: HomeController <br />
+    View: Index
+</div>
+
+@* хотя это и возмодно, но все-таки не стоит использовать URL для переходов *@
+@* правильнее использовать тег-хелперы *@
+<div>
+    <a asp-controller="Home" asp-action="Calc" asp-route-x="10" asp-route-y="20">Переход по тег-хелперам</a> | 
+    <a href="home/calc/30/40">Переход по URL</a><br/>
+</div>
+

@@ -1,0 +1,35 @@
+﻿@*
+    Строго типиированное представление
+*@
+@model AspNetCoreMvcFirst.Models.Task2.Enterprise
+@{
+    ViewBag.Title = "Задача 2";
+}
+
+@* Вывод данных о предприятии *@
+<h4>@ViewBag.Header</h4>
+
+<table class="table table-bordered table-hover">
+    <theader>
+        <tr class="bg-gradient">
+            <th>Ид</th>
+            <th>Фото</th>
+            <th>Фамилия И.О.</th>
+            <th>Работает с</th>
+            <th>Оклад, руб.</th>
+            <th>Стаж, полных лет</th>
+        </tr>
+    </theader>
+    <tbody>
+    @foreach (var worker in Model.Workers) {
+        <tr>
+            <td>@worker.Id</td>
+            <td><img src="~/images/@worker.Photo" alt="@worker.Fullname" width="84"/></td>
+            <td>@worker.Fullname</td>
+            <td>@($"{worker.JoinDate:dd/MM/yyyy}")</td>
+            <td>@($"{worker.Salary:n2}")</td>
+            <td>@worker.Expirience()</td>
+        </tr>
+    }
+    </tbody>
+</table>

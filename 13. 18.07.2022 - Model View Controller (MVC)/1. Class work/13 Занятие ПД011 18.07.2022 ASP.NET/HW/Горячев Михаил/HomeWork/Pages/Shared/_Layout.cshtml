@@ -1,0 +1,177 @@
+﻿@functions {
+    // получить стиль
+    string ActiveStyle(string pageName)
+    {
+        if (ViewBag.PageName == null)
+            return Url.ActionContext.ActionDescriptor.DisplayName == pageName ? "active" : "";
+
+        return ViewBag.PageName == pageName ? "active" : "";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>@ViewBag.Title</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/icon.svg">
+
+    <!-- подключение дополнительных стилей и скриптов -->
+    @await RenderSectionAsync("Head", false)
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center ">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" asp-page="/Index">
+            <img class="logo" src="~/images/icon.svg" alt="logo">
+            @* HomeWork *@
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- #region Ссылки на страницы -->
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("/Index") mx-3" asp-page="/Index">Главная</a>
+                </li>
+
+                <!-- Данные -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("/Data")" href="#"
+                       id="navbarDataId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Данные
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDataId">
+
+                        <!-- Клиенты -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Data/ClientList">Клиенты</a>
+                        </li>
+
+                        <!-- Страны -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Data/CountryList">Страны</a>
+                        </li>
+
+                        <!-- Цели поездки -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Data/ObjectiveList">Цели поездки</a>
+                        </li>
+
+                        <!-- Маршруты -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Data/RouteList">Маршруты</a>
+                        </li>
+
+                        <!-- Поездки -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Data/VisitList">Поездки</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Запросы -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("/Selection")" href="#"
+                       id="navbarQueryId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Запросы
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarQueryId">
+
+                        <!-- Запрос 1 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query01">Запрос 1</a>
+                        </li>
+
+                        <!-- Запрос 2 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query02">Запрос 2</a>
+                        </li>
+
+                        <!-- Запрос 3 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query03">Запрос 3</a>
+                        </li>
+
+                        <!-- Запрос 4 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query04">Запрос 4</a>
+                        </li>
+
+                        <!-- Запрос 5 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query05">Запрос 5</a>
+                        </li>
+
+                        <!-- Запрос 6 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query06">Запрос 6</a>
+                        </li>
+
+                        <!-- Запрос 7 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query07">Запрос 7</a>
+                        </li>
+
+                        <!-- Запрос 8 -->
+                        <li>
+                            <a class="dropdown-item" asp-page="/Queries/Query08">Запрос 8</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+    @RenderBody()
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

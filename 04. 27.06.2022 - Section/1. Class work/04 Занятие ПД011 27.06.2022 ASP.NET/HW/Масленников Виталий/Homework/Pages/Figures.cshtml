@@ -1,0 +1,92 @@
+﻿@page "{handler?}"
+@model Homework.Pages.FiguresModel
+@{
+	ViewBag.Header = "Геометрические фигуры";
+}
+
+@section styles{
+	<link rel="stylesheet" href="~/css/table.css">
+}
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary><p>
+		Требуется хранить коллекцию плоских геометрических фигур: квадраты, прямоугольники, разносторонние треугольники. По
+		кнопке submit (метод POST) формируйте фигуру, случайным образом выбирая ее тип и размер. Добавляйте эту фигуру в 
+		коллекцию. Отображайте коллекцию на этой же странице, выводите также изображение фигуры.</p>
+
+		<p>По ссылкам на этой странице вызывайте обработчики запросов GET:</p>
+
+		<ul>
+			<li>вывод только квадратов, по убыванию площади</li>
+			<li>вывод только прямоугольников, по возрастанию периметра</li>
+			<li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+			<li>вывод всей коллекции в исходном порядке</li>
+			<li>вывод всей коллекции по убыванию площади</li>
+		</ul>
+	</details>
+</div>
+
+
+<div class="font-14">
+	Вывод:
+	<ul class="menu-links">
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Square"
+			   asp-route-sort="Area"
+			   asp-route-order="Desc">
+				квадратов, по убыванию площади
+			</a></li>
+
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Rectangle"
+			   asp-route-sort="Perimeter">
+				прямоугольников, по возрастанию периметра
+			</a></li>
+
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Triangle"
+			   asp-route-order="Reverse">
+				треугольников, в обратном порядке по отношению к порядку в коллекции
+			</a></li>
+
+		<li>
+			<a asp-page-handler="Filter"
+			   asp-route-sort="Area"
+			   asp-route-order="Desc">коллекции по убыванию площади</a></li>
+
+		<li><a asp-page="Figures">коллекции в исходном порядке</a></li></ul>
+
+	<form class="inline" asp-page-handler="add" method="post">
+		<input class="btn-blue" type="submit" value="Добавить фигуру"/>
+	</form>
+
+	<form class="inline" asp-page-handler="generate" method="post">
+		<input class="btn-blue" type="submit" value="Сгенерировать данные"/>
+	</form>
+
+</div>
+
+<table>
+<thead>
+<th>№</th>
+<th>Изображение</th>
+<th>Тип</th>
+<th>Параметры</th>
+<th>Периметр</th>
+<th>Площадь</th>
+</thead>
+
+@{
+	var i = 1;
+	foreach (var item in Model.DisplayFigures!)
+	{
+		@* читерство детектед :( *@
+		@Html.Raw(item.ToTableRow(i++, Model.ImageFolder));
+	}
+}
+
+</table>

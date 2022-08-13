@@ -1,0 +1,76 @@
+﻿@functions
+{
+    private string IsActive(string page) =>
+        Url.ActionContext.ActionDescriptor.DisplayName! == page ? "active" : "";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>@ViewBag.Header - Домашняя Работа</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="shortcut icon" href="~/favicon.png" type="image/x-icon"/>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+@*хедер*@
+<header class="container-fluid">
+    <div class="top-bar row text-light align-items-center h-80-px ps-4 shadow">
+        <h1>@ViewBag.Header</h1>
+    </div>
+</header>
+
+@*навигационное меню*@
+<nav class="navbar navbar-expand-sm bg-light sticky-top ">
+    <div class="container-fluid">
+        <ul class="navbar-nav ms-3">
+            <li class="nav-item">
+                <a asp-page="/Index"
+                   class="nav-link @IsActive("/Index")"
+                   title="Перейти на страницу">
+                    Главная
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-page="/Products"
+                   class="nav-link @IsActive("/Products")"
+                   title="Перейти на страницу">
+                    Бытовая техника
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-page="/Figures"
+                   class="nav-link @IsActive("/Figures")"
+                   title="Перейти на страницу">
+                    Фигуры
+                </a>
+            </li>
+        </ul>
+       
+    </div>
+</nav>
+
+@await RenderSectionAsync("Controls", false)
+
+<div class="container-fluid" style="min-height: 80vh">
+    <main class="mt-4 mx-5"> @RenderBody()</main>
+</div>
+
+@*футер*@
+<footer class="container-fluid">
+    <div class="row align-items-center bg-light" style="height: 4rem">
+        <h6 class="text-center">&copy;2022, Масленников Виталий, г. Донецк, КА «ШАГ», ПД011.</h6>
+    </div>
+</footer>
+
+</body>
+</html>

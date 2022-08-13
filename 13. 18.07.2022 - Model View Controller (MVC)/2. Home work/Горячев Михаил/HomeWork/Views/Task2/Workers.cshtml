@@ -1,0 +1,66 @@
+﻿@using HomeWork.Models
+@model List<HomeWork.Models.Worker>
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h3>@ViewBag.Title</h3>
+
+    <hr>
+
+    @* <table class="table"> *@
+    @* *@
+    @*     <thead> *@
+    @*     <tr> *@
+    @*         <th>&#8470;</th> *@
+    @*         <th>Фото работника</th> *@
+    @*         <th>Фамилия и инициалы</th> *@
+    @*         <th>Дата поступления на работу</th> *@
+    @*         <th>Оклад (&#8381;)</th> *@
+    @*         <th>Стаж (лет)</th> *@
+    @*     </tr> *@
+    @*     </thead> *@
+    @* *@
+    @*     <tbody> *@
+    @*     @{ *@
+    @*         int i = 1; *@
+    @* *@
+    @*         foreach (var worker in Model) *@
+    @*         { *@
+    @*             <tr> *@
+    @*                 <td>@(i++)</td> *@
+    @*                 <td> *@
+    @*                     <img class="h-10rem" src="~/images/persons/@worker.ImageFile" alt="Person"> *@
+    @*                 </td> *@
+    @*                 <td>@worker.FullName</td> *@
+    @*                 <td>@($"{worker.DateOfEmployment:dd.MM.yyyy}")</td> *@
+    @*                 <td>@($"{worker.Salary:n2}")</td> *@
+    @*                 <td>@worker.GetWorkExp()</td> *@
+    @*             </tr> *@
+    @*         } *@
+    @*     } *@
+    @*     </tbody> *@
+    @* </table> *@
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var worker in Model)
+            {
+                <div class="col-sm-3 py-3">
+                    <div class="card shadow-sm p-0 h-100">
+                        <div class="card-header d-flex h-20rem">
+                            <img src="~/images/persons/@worker.ImageFile" class="my-auto mx-auto d-block mh-100 mw-100"
+                                 alt="@worker.ImageFile">
+                        </div>
+
+                        <div class="card-body p-0 m-0">
+                            <ul class="list-group-flush p-0 m-0">
+                                <li class="list-group-item">ФИО: <b>@worker.FullName</b></li>
+                                <li class="list-group-item">Принят на работу: <b>@($"{worker.DateOfEmployment:dd.MM.yyyy}")</b></li>
+                                <li class="list-group-item">Оклад: <b>@($"{worker.Salary:n2}") &#8381;</b></li>
+                                <li class="list-group-item">Стаж (лет): <b>@worker.GetWorkExp()</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

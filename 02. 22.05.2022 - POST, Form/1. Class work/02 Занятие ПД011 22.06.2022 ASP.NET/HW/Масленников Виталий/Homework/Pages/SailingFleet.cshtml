@@ -1,0 +1,56 @@
+﻿@page
+@model Homework.Pages.SailingFleetModel
+@{
+	ViewBag.Title = "Корабли - Домашняя Работа";
+	ViewBag.Header = "Корабли";
+}
+
+<link rel="stylesheet" href="css/table.css">
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary>
+		<p>
+			Имя страницы <b>SailingFleet.cshtml</b>. В ответ на GET-запрос клиента <b>/SailingFleet</b>
+			сформировать
+			представление со сведениями о трех парусных кораблях (длина в метрах, ширина в метрах, водоизмещение
+			в тоннах, название, год постройки, изображение): линейный корабль «Виктория», чайный клиппер «Катти
+			Сарк» и барк «Крузенштерн». Используйте модель, коллекцию.
+		</p>
+	</details>
+	
+	
+	<table>
+		<thead>
+		<th>№</th>
+		<th>Фото</th>
+		<th>Название</th>
+		<th>Тип</th>
+		<th>Год постройки</th>
+		<th>Длина, м</th>
+		<th>Ширина, м</th>
+		<th>Водоизмещение, т</th>
+		</thead>
+		
+		@{
+			var i = 1;
+			foreach (var fleet in Model.Fleets!)
+			{
+				<tr>
+					<td>@(i++)</td>
+					<td><img src="images/fleets/@fleet.Image" alt="Корабль"/></td>
+					<td class="align-left">@fleet.Name</td>
+					<td class="align-left">@fleet.Type</td>
+					<td>@fleet.Year</td>
+					<td>@fleet.Length</td>
+					<td>@fleet.Width</td>
+					<td>@fleet.Displacement</td>
+				</tr>
+			}
+		}
+
+	</table>
+
+</div>
+
+

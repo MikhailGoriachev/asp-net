@@ -1,0 +1,9 @@
+﻿
+/*Для всех блоков карточки*/
+.divImg {
+    text-align: center;
+}
+
+div > img{
+    width: 15rem;
+}

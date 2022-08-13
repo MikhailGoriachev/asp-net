@@ -1,0 +1,49 @@
+﻿@page "{id:int}"
+
+@model UsingFfCore.Pages.EditModel
+@{
+}
+
+<>Редактирование подиски на издание, ид: @Model.Publication.Id</>
+
+<form class="w-25" method="post">
+    <input asp-for="Publication.Id" type="hidden" value="@Model.Publication.Id" />
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="Publication.PubIndex">Индекс издания:</label>
+        <input class="form-control" asp-for="Publication.PubIndex" type="text" required="required" />
+    </div>
+    
+    <div class="form-floating mb-3">
+        <select class="form-select" asp-for="Publication.Category">
+            <option>газета</option>
+            <option>журнал</option>
+            <option>каталог</option>
+            <option>альманах</option>
+            <option>дайджест</option>
+        </select>
+        <label asp-for="Publication.Category" class="form-label">Категория издания:</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="Publication.Title">Название:</label>
+        <input class="form-control" asp-for="Publication.Title" type="text"/>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label" asp-for="Publication.Cost">Цена 1 экземпляра:</label>
+        <input class="form-control" asp-for="Publication.Cost" type="number"/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="Publication.Start">Дата начала:</label>
+        <input class="form-control" asp-for="Publication.Start" type="date"/>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label" asp-for="Publication.Duration">Длительность подписки, мес.:</label>
+        <input class="form-control" asp-for="Publication.Duration" type="number"/>
+    </div>
+
+    <input class="btn btn-success" type="submit" value="Сохранить"/>
+</form>

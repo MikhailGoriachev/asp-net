@@ -1,0 +1,29 @@
+﻿@page
+@model OneToManyEfCore.Pages.GroupingsQuery02Model
+@{
+}
+
+<h3>@Model.Task</h3>
+
+@* вывод в соответствии с запросом на выборку данных *@
+<table class="table">
+    <thead>
+    <tr>
+        <th>Категория</th>
+        <th>Минимальная цена 1 экз., руб.</th>
+        <th>Максимальная цена 1 экз., руб.</th>
+        <th>Количество в категории</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var result in Model.Results)
+    {
+        <tr>
+            <td>@result.Category</td>
+            <td>@result.MinCost</td>
+            <td>@result.MaxCost</td>
+            <td>@result.Amount</td>
+        </tr>
+    }
+    </tbody>
+</table>

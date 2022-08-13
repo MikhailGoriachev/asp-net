@@ -1,0 +1,169 @@
+﻿@page
+@model Home_Work.Pages.Appliances
+@namespace Home_Work.Models
+@using Home_Work.Utilities;
+@{
+    ViewData["title"] = "Страница 1";
+    ViewData["pageHeader"] = "СТРАНИЦА 1";
+   
+    ViewBag.PageName = "Appliances";
+}
+@functions{
+    @*public void showCollection(List<Appliance> AppCollection)
+    {
+        foreach (var appliance in AppCollection)
+            {
+                <div class="card">
+                                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                                <div><span>Наименование: @appliance.Name</span></div>
+                                <div><span>Артикул:  @appliance.Article</span></div>
+                                <div><span>Цена:  @appliance.Price</span></div>
+                                <div><span>Количество:  @appliance.Quantity</span></div>
+                </div>
+
+            }
+    }*@
+}
+
+
+<section>
+    
+@section Styles {
+    <link rel="stylesheet" href="~/styles/task1.css">
+}
+
+    <!--Задание-->
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+            <p>
+                Создайте коллекцию данных о бытовой технике на оптовом складе 
+                (наименование, тип техники, артикул, цена, количество, изображение). 
+                В коллекции должно быть не менее 12 элементов. Коллекцию инициируйте набором записей, 
+                храните коллекцию в файле формата JSON в папке App_Data проекта. 
+            </p>
+            <p>
+                Отображение данных одного элемента бытовой техники выполняйте при помощи карточки, 
+                стилизованной соответствующими классами Bootstrap.
+            </p>
+            <p>
+                По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:
+            </p>
+
+            <ul>
+                <li>вывод коллекции, упорядоченной по наименованию</li>
+                <li>вывод коллекции, упорядоченной по убыванию цены</li>
+                <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+                <li>добавление элемента в коллекцию, параметры вводить в форму, стилизованную классами Bootstrap, 
+                    сохраняйте измененную коллекцию в файле в формате JSON, 
+                    как было сказано ранее, в папке App_Data проекта 
+                </li>
+            </ul>
+        </div>
+    </details>
+
+   
+    <!--Кнопки-->
+
+
+@section NavButtons
+{
+    <a class="btn btn-outline-light mx-3 mt-3 text-black text-center text-decoration-none text-xl-center" 
+               asp-page="/Index">Главная страница</a>
+               
+     <div class="dropdown">
+         <a class="btn btn-outline-light bg-white dropdown-toggle mx-3 mt-3 text-black text-center text-decoration-none text-xl-center" 
+            data-bs-toggle="dropdown" asp-page="/Appliances">Первая страница</a>
+         <ul class="dropdown-menu border-2 border-dark mt-2 shadow-lg" >
+                 <li class="dropdown-item text-center">
+                    <a asp-page-handler="SortByName"   class="btn text-center me-2">Упорядочить по наименованию</a></li>
+                 <li class="dropdown-item text-center">
+                    <a asp-page-handler="SortByPrice"  class="btn text-center my-2 me-2">Упорядочить убыванию цены</a></li>
+                 <li class="dropdown-item text-center ps-0 pe-3">
+                    <a asp-page-handler="SortByQuantity"  class="btn text-center my-2 me-2">Упорядочить по возрастанию количества</a></li>
+                 <li class="dropdown-item add-elem-item text-center">
+                    <a data-bs-toggle="modal" data-bs-target="#applianceModalForm" class="btn btn-info text-center my-2 me-2">Добавить прибор</a></li>
+            </ul>
+     </div> 
+         
+     <a class="btn btn-outline-light mx-3 mt-3 text-black text-center text-decoration-none text-xl-center" asp-page="/Figures">Вторая страница</a>
+
+}
+
+<!--Модальное окно-->
+<div class="modal fade" id="applianceModalForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <!--Заголовок окна-->
+            <div class="modal-header">
+                <h3>Форма добавления прибора</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <!--Основной контент окна-->
+            <div class="modal-body">
+                <!--Форма-->
+                <form method="post" class="was-validated rounded-3 mt-2">
+                        <fieldset class="form-block">
+                
+                            <div class="mt-2">
+                                <label class="form-label">Выберите тип пробора</label>
+                                <select class="form-select" name="applianceType" asp-for="appliance.Name" asp-items="Model.types">
+    
+                                </select>
+                            </div>
+    
+                            <div class="mt-2">
+                                <label class="form-label">Введите артикул прибора</label>
+    
+                                <input class="form-control" asp-for="appliance.VendorCode"  required type="number" placeholder="Задайте артикул">
+                                <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                            </div>
+    
+                            <div class="mt-2">
+                                <label class="form-label">Введите цену прибора</label>
+    
+                                <input class="form-control" asp-for="appliance.Price"  required type="number" placeholder="Задайте цену">
+                                <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                            </div>
+    
+                            <div class="mt-2">
+                                <label class="form-label">Введите количество приборов</label>
+    
+                                <input class="form-control" asp-for="appliance.Quantity"  required type="number"
+                                       placeholder="Задайте количество приборов">
+                                <div class="invalid-feedback">Поле не должно быть пустым!</div>
+                            </div>
+    
+                            <!--Submit-->
+                            <div class="row">
+                                <input asp-page-handler="AddFromForm" data-bs-dismiss="modal" class="btn btn-info my-3 mt-4 mx-3 col-11" type="submit"
+                                       value="Добавить">
+                            </div>
+                        </fieldset>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+  <div class="row my-4">
+      @foreach (var appliance in @Model.appliances)
+      {
+          <div class="card col-sm-3 border-dark mx-3 mt-2 mb-2" style="position: static">
+              <div><img class="card-img-top" src="../images/appliances/@appliance.Image" alt=@appliance.Image></div>
+              
+              <ul class="list-group border-top-0 mb-3">
+                  <li class="list-group-item"><span>Наименование: @appliance.Name</span></li>
+                  <li class="list-group-item"><span>Артикул: @appliance.VendorCode</span></li>
+                  <li class="list-group-item"><span>Цена: @appliance.Price</span></li>
+                  <li class="list-group-item"><span>Количество: @appliance.Quantity</span></li>
+                </ul>
+          </div>
+      }
+  </div>
+
+</section>

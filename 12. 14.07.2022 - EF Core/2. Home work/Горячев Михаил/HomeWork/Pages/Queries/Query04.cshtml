@@ -1,0 +1,53 @@
+﻿@page "{handler?}"
+@model HomeWork.Pages.Queries.Query04
+
+@{
+    ViewBag.Title = "Запрос 4";
+    ViewBag.PageName = "/Queries";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <div class="d-lg-flex justify-content-between">
+
+        <h3 class="display-6">Запрос 4. @Model.TitleList</h3>
+
+        <form method="post" class="d-flex align-items-center">
+
+            <div class="form-floating w-10rem">
+                <select asp-items="Model.Countries" asp-for="CountryId" class="form-control"></select>
+                <label asp-for="CountryId">Страна</label>
+            </div>
+
+            <input class="btn btn-primary mx-3" type="submit" asp-page-handler="Selection" value="Выбрать">
+            <a class="btn btn-warning" asp-page="/Queries/Query04">Сбросить</a>
+        </form>
+    </div>
+
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Страна</th>
+            <th>Цель поездки</th>
+            <th>Стоимость 1 дня пребывания (&#8381;)</th>
+            <th>Транспортные услуги (&#8381;)</th>
+            <th>Оформление визы (&#8381;)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var route in Model.Routes)
+        {
+            <tr>
+                <th>@route.Id</th>
+                <td>@route.Country!.Name</td>
+                <td>@route.Objective!.Name</td>
+                <td>@($"{route.DailyCost:n2}")</td>
+                <td>@($"{route.Country.CostService:n2}")</td>
+                <td>@($"{route.Country.CostVisa:n2}")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

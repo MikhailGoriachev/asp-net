@@ -1,0 +1,92 @@
+[
+  {
+    "Id": 1,
+    "Autor": "Джон Сонмез",
+    "Title": "Путь программиста",
+    "PubYear": 2016,
+    "Quantity": 4,
+    "Price": 2050,
+    "FileName": "cover001.jpg"
+  },
+  {
+    "Id": 2,
+    "Autor": "Ямамото Цунэтомо",
+    "Title": "Путь самурая (Хагакурэ)",
+    "PubYear": 2019,
+    "Quantity": 5,
+    "Price": 800,
+    "FileName": "cover002.jpg"
+  },
+  {
+    "Id": 3,
+    "Autor": "Стив Макконнелл",
+    "Title": "Совершенный код",
+    "PubYear": 1993,
+    "Quantity": 2,
+    "Price": 4000,
+    "FileName": "cover003.jpg"
+  },
+  {
+    "Id": 4,
+    "Autor": "Эрвин Кнут",
+    "Title": "Искусство программирования",
+    "PubYear": 1968,
+    "Quantity": 3,
+    "Price": 3050,
+    "FileName": "cover004.jpg"
+  },
+  {
+    "Id": 5,
+    "Autor": "Кент Бек",
+    "Title": "Refactoring",
+    "PubYear": 1996,
+    "Quantity": 2,
+    "Price": 980,
+    "FileName": "cover006.jpg"
+  },
+  {
+    "Id": 6,
+    "Autor": "Брюс Эккель",
+    "Title": "Философия Java",
+    "PubYear": 1998,
+    "Quantity": 2,
+    "Price": 3600,
+    "FileName": "cover007.jpg"
+  },
+  {
+    "Id": 7,
+    "Autor": "Анна Фролова",
+    "Title": "Собачье счастье",
+    "PubYear": 2021,
+    "Quantity": 8,
+    "Price": 1000,
+    "FileName": "cover008.jpg"
+  },
+  {
+    "Id": 8,
+    "Autor": "Чиннатхамби Кирупа",
+    "Title": "JavaScript с нуля",
+    "PubYear": 2021,
+    "Quantity": 8,
+    "Price": 670,
+    "FileName": "cover005.jpg"
+  },
+  {
+    "Id": 9,
+    "Autor": "Эрих Гамма",
+    "Title": "Design Patterns",
+    "PubYear": 1994,
+    "Quantity": 4,
+    "Price": 2200,
+    "FileName": "cover012.jpg"
+  },
+  {
+    "Id": 10,
+    "Autor": "Эрик Фриман",
+    "Title": "Паттерны проектирования",
+    "PubYear": 2004,
+    "Quantity": 3,
+    "Price": 1800,
+    "FileName": "cover011.jpg"
+  }
+]

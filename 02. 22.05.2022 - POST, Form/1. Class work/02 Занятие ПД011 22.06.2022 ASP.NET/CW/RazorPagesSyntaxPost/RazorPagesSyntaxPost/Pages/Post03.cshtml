@@ -1,0 +1,32 @@
+﻿@page
+@model RazorPagesSyntaxPost.Pages.Post03Model
+@{
+}
+
+<h3>Введите имена сотрудников:</h3>
+<form method="post">
+    <p><input name="people" /></p>
+    <p><input name="people" /></p>
+    <p><input name="people" /></p>
+    
+@*    <p><input name="people[0]" /></p>
+    <p><input name="people[1]" /></p>
+    <p><input name="people[2]" /></p>*@
+    
+@*    <p><input name="[0]" /></p>
+    <p><input name="[1]" /></p>
+    <p><input name="[2]" /></p>*@
+    <input type="submit" value="Отправить" />
+</form>
+
+@* вывод имен сотрудников *@
+@if (Model.People.Length > 0)
+{
+    <h3>Список сотрудников</h3>
+    <ul>
+        @foreach (var person in Model.People)
+        {
+            <li>@person</li>
+        }
+    </ul>
+}

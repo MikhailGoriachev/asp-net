@@ -1,0 +1,76 @@
+﻿@page
+@using System.Runtime.CompilerServices
+@model BootstrapFileUpload.Pages.Page3Model
+@{
+    ViewBag.Title = "Страница 3";
+    ViewBag.Active = "Page3";
+    ViewBag.Header = "Фото из коллекции сведений о бытовой технике";
+
+    // для размещения флага active только на 
+    // первом элементе карусели
+    int flag = 0;
+}
+
+
+<!-- Условие задачи -->
+<a href="#task-3" class="btn btn-outline-secondary text-start" data-bs-toggle="collapse"><b>Страница 3.</b> @ViewBag.Header</a>
+<div id="task-3" class="collapse">
+    <p class="mt-3">
+        Реализуйте карусель для вывода всех фотографий бытовой техники, хранящихся в Вашем приложении 
+    </p>
+</div>
+
+<!-- Слайд-шоу, карусель -->
+<div id="goods" class="carousel mt-3" data-bs-ride="carousel">
+    <h3>Фотографии по коллекции сведений о бытовой технике</h3>
+    <div class="carousel-inner">
+        
+        @* Генерация элементов карусели для коллекции бытовой техники *@
+        @foreach (var goods in Model.DisplayGoods)
+        {
+            <div class="carousel-item @(flag++ == 0?"active":"")">
+                <img src="images/task01/@goods.Image" alt="@goods.Name" class="d-block" style="width: 60%">
+                <div class="carousel-caption">
+                    <h3 class="text-black">@goods.Name</h3>
+                    <p class="text-black">@($"цена {goods.Price} руб., {(goods.Quantity > 0?"есть":"нет")} в наличии")</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#goods" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#goods" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+
+<!-- Слайд-шоу, карусель -->
+<div id="photos" class="carousel mt-5" data-bs-ride="carousel">
+    <h3>Фотографии формата *.jpg из папки изображений бытовой техники</h3>
+    <div class="carousel-inner">
+        
+        @* Генерация элементов карусели для коллекции изображений *@
+        @(flag = 0);
+        @foreach (var photo in Model.DisplayPhotos)
+        {
+            <div class="carousel-item @(flag++ == 0?"active":"")">
+                <img src="@photo" alt="@photo" class="d-block" style="width: 60%">
+                <div class="carousel-caption">
+                    <h3 class="text-black">Имя файла: @(System.IO.Path.GetFileName(photo))</h3>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#photos" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#photos" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>

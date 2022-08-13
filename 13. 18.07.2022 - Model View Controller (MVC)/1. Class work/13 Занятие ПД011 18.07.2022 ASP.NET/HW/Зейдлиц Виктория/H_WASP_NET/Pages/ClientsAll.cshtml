@@ -1,0 +1,43 @@
+﻿@page
+@model H_WASP_NET.Pages.ClientsAllModel
+@{
+    ViewBag.Title = "Homework";
+    ViewBag.PageName = "ClientsAll";
+}
+
+<h3>Клиенты туристического агенства</h3>
+
+<a class="btn btn-outline-primary w-25" asp-page="/ClientCreate">Добавить</a>
+
+@* вывод коллекции клиентов *@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Паспортные данные</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model.Clients)
+        {
+            <tr>
+                <td>@client.Id</td>
+                <td>@client.Surname</td>
+                <td>@client.Name</td>
+                <td>@client.Patronymic</td>
+                <td>@client.Passport</td>
+
+                @* управление: переход на редактирование записи, удаление записи
+                   идентификатор записи передаем параметром маршрута
+                *@
+                <td>
+                    <a class="btn btn-sm btn-outline-success" asp-page="/ClientEdit" asp-route-id="@client.Id">Редактировать</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

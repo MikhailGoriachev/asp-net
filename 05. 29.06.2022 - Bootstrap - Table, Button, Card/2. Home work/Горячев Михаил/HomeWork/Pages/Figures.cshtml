@@ -1,0 +1,135 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.FiguresModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 2;
+
+    // название страницы
+    ViewData["Header"] = "Задача 2. Фигуры";
+}
+
+@functions {
+    // вывод фигуры
+    private void ShowFigure(IFigure figure)
+    {
+        if (figure != null)
+        {
+            <tr>
+                <td>
+                    <img src="/images/figures/@figure.Image" alt="Фигура">
+                </td>
+                <td>
+                    @figure.Name
+                </td>
+                <td>
+                    @foreach (var item in figure.ParamAndValue) {
+                        @item.Key <b>@($"{item.Value:f5}")</b><br>
+                    }
+                </td>
+                <td>
+                    @($"{figure.Perimeter:f5}")
+                </td>
+                <td>
+                    @($"{figure.Area:f5}")
+                </td>
+            </tr>
+        }
+    }
+
+    // вывод коллекции фтигур
+    private void ShowFigureList(List<IFigure> figures)
+    {
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Изображение</th>
+                    <th>Наименование</th>
+                    <th>Стороны</th>
+                    <th>Периметр</th>
+                    <th>Площадь</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    figures.ForEach(a => ShowFigure(a));
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@section Head {
+<link rel="stylesheet" href="~/styles/figures.css" />
+}
+
+@* Блок управления *@
+@section Navigate
+{
+<!-- Блок управления -->
+<div class="control-block">
+
+    <h4 class="text-center">Параметры обработки</h4>
+
+    <!-- #region Управление коллекцией -->
+
+    <p class="control-block-subheader">Управление коллекцией</p>
+
+    <!-- Добавление фигуры -->
+    <form method="post" asp-page-handler="AddRandFigure">
+        <input class="btn btn-info mt-2 mb-2" type="submit" value="Добавить фигуру" />
+    </form>
+
+    <!-- #endregion -->
+
+    <hr />
+
+    <!-- #region Сортировка фигур -->
+
+    <p class="text-center">Сортировка фигур</p>
+
+    <!-- По умоланию -->
+    <a asp-page="/Figures" class="btn btn-info mt-2 mb-2">По умоланию</a>
+
+    <!-- По убыванию площади -->
+    <a asp-page-handler="OrderByDescArea" class="btn btn-info mt-2 mb-2">По убыванию площади</a>
+
+    <!-- По типу -->
+    <a asp-page-handler="OrderByName" class="btn btn-info mt-2 mb-2">По типу</a>
+
+    <hr />
+
+    <!-- #endregion -->
+
+    <!-- #region Выборка фигур -->
+
+    <p class="text-center">Выборка фигур</p>
+
+    <!-- Только квадраты -->
+    <a asp-page-handler="SelectBySquare" class="btn btn-info mt-2 mb-2"
+        title="Вывод только квадратов, по убыванию площади">Только квадраты</a>
+
+    <!-- Только прямоугольники -->
+    <a asp-page-handler="SelectByRect" class="btn btn-info mt-2 mb-2"
+        title="Вывод только прямоугольников, по возрастанию периметра">Только прямоугольники</a>
+
+    <!-- Только треугольники -->
+    <a asp-page-handler="SelectByTriangle" class="btn btn-info mt-2 mb-2"
+        title="Вывод только треугольников, в обратном порядке по отношению к порядку в коллекции">Только
+        треугольники</a>
+</div>
+}
+
+
+<article>
+
+    <h2 class="text-align-center">@Model.NameHandler</h2>
+
+
+    <!-- Вывод бытовой техники -->
+    @{
+        ShowFigureList(Model.CurrentFigures);
+    }
+
+
+</article>

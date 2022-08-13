@@ -1,0 +1,57 @@
+﻿@page
+@model H_WASP_NET.Pages.TravelEditModel
+@{
+}
+
+<h3>Редактирование подиски на издание, ид: @Model.Travel.Id</h3>
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <form class="w-50" method="post">
+            <input asp-for="Travel.Id" type="hidden" value="@Model.Travel.Id" />
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel!.Client.Surname">Фамилия клиента:</label>
+                <input class="form-control" asp-for="Travel!.Client.Surname" type="text"/>
+            </div>
+                <div class="mb-3">
+                <label class="form-label" asp-for="Travel!.Client.Name">Имя клиента:</label>
+                <input class="form-control" asp-for="Travel!.Client.Name" type="text"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel!.Client.Patronymic">Отчество клиента:</label>
+                <input class="form-control" asp-for="Travel!.Client.Patronymic" type="text"/>
+            </div>
+    
+            <div class="form-floating mb-3">
+                <select class="form-select" asp-for="Travel.RouteId" asp-items="Model.NameCountry">
+                </select>
+                <label asp-for="Travel.RouteId" class="form-label">Страна:</label>
+            </div>
+
+                <div class="form-floating mb-3">
+                <select class="form-select" asp-for="Travel.Route.PurposeTravel" asp-items="Model.NamePurpose">
+                </select>
+                <label asp-for="Travel.Route.PurposeTravel" class="form-label">Цель поездки:</label>
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel.Route.CostDayStay">Стоимость 1 дня:</label>
+                <input class="form-control" asp-for="Travel.Route.CostDayStay" type="number"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel.StartTravel">Дата поездки:</label>
+                <input class="form-control" asp-for="Travel.StartTravel" type="date"/>
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label" asp-for="Travel.Duration">Длительность подписки, мес.:</label>
+                <input class="form-control" asp-for="Travel.Duration" type="number" min="6" value="6"/>
+            </div>
+
+            <input class="btn btn-success" type="submit" value="Сохранить"/>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+﻿@page
+@model HomeWork.Pages.ShipImages
+@{
+    ViewBag.Title = "Задание 4. Изображения кораблей";
+}
+
+@functions
+{
+    void RenderButtons()
+    {
+        if (Model.FileNameList.Count == 0)
+            return;
+
+        <button type="button" data-bs-target="#shipCarousel" data-bs-slide-to="0" class="active"></button>
+
+        for (int i = 1; i < Model.FileNameList.Count; i++) {
+            <button type="button" data-bs-target="#shipCarousel" data-bs-slide-to="@i"></button>
+        }
+    }
+
+    public void RenderImages()
+    {
+        if (Model.FileNameList.Count == 0)
+            return;
+
+        <div class="carousel-item active">
+            <img src="images/ships/@Model.FileNameList[0]" alt="@Model.FileNameList[0]" class="d-block mx-auto h-30rem">
+            <div class="carousel-caption">
+                <h3>@Model.FileNameList[0]</h3>
+            </div>
+        </div>
+
+        for (int i = 1; i < Model.FileNameList.Count; i++)
+        {
+            <div class="carousel-item">
+                <img src="images/ships/@Model.FileNameList[i]" alt="@Model.FileNameList[i]" class="d-block mx-auto h-30rem">
+                <div class="carousel-caption">
+                    <h3>@Model.FileNameList[i]</h3>
+                </div>
+            </div>
+        }
+    }
+}
+
+<!-- #region Задание 4 -->
+<div id="taskInfoModalId" class="modal fade">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Заголовок -->
+            <div class="modal-header h5">
+                Задание 4. Изображения кораблей
+            </div>
+
+            <!-- Контент -->
+            <div class="modal-body">
+                <p>
+                    <b>Страница 4</b>. Реализуйте карусель для вывода всех фотографий кораблей, хранящихся в Вашем приложении
+                </p>
+            </div>
+
+            <!-- Подвал -->
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+<div class="container-fluid px-5">
+    <div class="my-4 bg-light shadow-sm border rounded-3 py-3 px-4">
+
+        <h5 class="text-center">@ViewBag.Title</h5>
+
+        <hr/>
+
+        <!-- Условия задания -->
+        <button type="button"
+                class="col btn btn-success d-block mx-auto"
+                data-bs-toggle="modal"
+                data-bs-target="#taskInfoModalId">
+            Условия задания...
+        </button>
+
+    </div>
+</div>
+
+
+<!-- #region Общий контейнер контента -->
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 p-3">
+    <div id="shipCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+
+        <!-- Кнопки слайдов -->
+        <div class="carousel-indicators">
+            @{ RenderButtons();}
+        </div>
+
+        <!-- Изображения -->
+        <div class="carousel-inner">
+            @{ RenderImages();}
+        </div>
+
+        <!-- Кнопки переключения слайдов -->
+        <button type="button" class="carousel-control-prev" data-bs-target="#shipCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button type="button" class="carousel-control-next" data-bs-target="#shipCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+</section>

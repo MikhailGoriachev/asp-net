@@ -1,0 +1,110 @@
+﻿@page "{target?}"
+
+@model BootstrapFileUpload.Pages.Page2Model
+@{
+    ViewBag.Title = "Страница 2";
+    ViewBag.Active = "Page2";
+    ViewBag.Header = "Обработка коллекции сведений о кораблях";
+
+}
+
+
+<a class="btn btn-success w-25 me-3" data-bs-toggle="modal" data-bs-target="#addShip"
+   title="Добавление сведений о корабле в коллекцию">
+    Добавить корабль
+</a>
+
+<!-- Условие задачи -->
+<a href="#task-2" class="btn btn-outline-secondary text-start w-50" data-bs-toggle="collapse"><b>Страница 2.</b> @ViewBag.Header</a>
+<div id="task-2" class="collapse">
+    <p class="mt-3">
+        Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию сведений
+        о кораблях: тип, название, длина, ширина, водоизмещение, год постройки, фото корабля.
+        Инициализация коллекции сведений о кораблях должна проводиться при отсутствии файла
+        формируйте не менее 10 записей).
+    </p>
+    <p>
+        Функционал для разработки:
+    </p>
+    <ul>
+        <li>вывод всей коллекции в исходном порядке</li>
+        <li>вывод коллекции, упорядоченной по возрастанию года изготовления</li>
+        <li>вывод коллекции, упорядоченной по убыванию водоизмещения</li>
+        <li>вывод коллекции, упорядоченной по названиям кораблей</li>
+        <li>добавление корабля в коллекцию (естественно, с сохранением измененной коллекции в файле)</li>
+    </ul>
+</div>
+
+<h3 class="text-danger">
+    В разработке
+</h3>
+
+
+@* 
+Рендерим форму ввода параметров корабля 
+Форма модальная, т.е. ее разметка может быть размещена
+в произвольном месте, форма вызывается на клиенте, за
+счет JS-кода Bootstrap, по клику на кнопку в навигационной
+панели
+*@
+<div id="addShip" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Параметры добавляемого корабля
+                </h4>
+            </div>
+            
+            <div class="modal-body">
+                <form id="form-add-goods" method="post" enctype="multipart/form-data" asp-page="/Page1">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" asp-for="Ship.Type">
+                            <option>линейнык корабль</option>
+                            <option>чайный клиппер</option>
+                            <option>барк</option>
+                            <option>шхуна</option>
+                            <option>бригантина</option>
+                        </select>
+                        <label asp-for="Ship.Type" class="form-label">Категория товара:</label>
+                    </div>
+
+                    @* Название корабля *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="text" class="form-control" placeholder="Название" asp-for="Ship.Name" value="">
+                        <label asp-for="Ship.Name">Название корабля:</label>
+                    </div>
+
+                    @* Длина корабля *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="длина, м" asp-for="Ship.Length" value="">
+                        <label asp-for="Ship.Length">Длина корабля, м:</label>
+                    </div>
+
+                    @* Ширина корабля *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="ширина, м" asp-for="Ship.Width" value="0">
+                        <label asp-for="Ship.Width">Ширина корабля, м:</label>
+                    </div>
+                    
+                    @* Водоизмещение корабля *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="цена" asp-for="Ship.Displacement" value="0">
+                        <label asp-for="Ship.Displacement">Водоизмещение корабля,т:</label>
+                    </div>
+
+                    @* Выбор файла с фотографией корабля *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="file" class="form-control" placeholder="количество" asp-for="Ship.Image" value="0">
+                        <label asp-for="Ship.Image">Фотография корабля:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-add-goods" class="btn btn-primary">Не работает</button>                                       <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>

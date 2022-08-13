@@ -1,0 +1,47 @@
+﻿@functions
+{
+	private string IsActive(string page) => 
+		Url.ActionContext.ActionDescriptor.DisplayName! == page ? "selected" : "";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Header - Домашняя Работа</title>
+	<link rel="stylesheet" href="~/css/site.css">
+	<link rel="shortcut icon" href="~/favicon.png" type="image/x-icon"/>
+	@await RenderSectionAsync("styles", false);
+</head>
+
+<body>
+<header>
+    <h1>@ViewBag.Header</h1>
+</header>
+
+<div class="container">
+	<nav>
+		<!--навигационное меню-->
+		<ul>
+			<li class="@IsActive("/Index")"><a asp-page="/Index" title="Перейти на страницу">Главная</a></li>
+			<li class="@IsActive("/Products")"><a asp-page="/Products" title="Перейти на страницу">Бытовая техника</a></li>
+			<li class="@IsActive("/Figures")"><a asp-page="/Figures" title="Перейти на страницу">Геометрические фигуры</a></li>
+		</ul>
+	</nav>
+	
+	<main>
+		@RenderBody()
+	</main>
+
+    <aside></aside>
+    
+</div>
+
+<footer>
+    <h4>&copy;2022, Масленников Виталий, г. Донецк, КА «ШАГ», ПД011.</h4>
+</footer>
+
+</body>
+</html>

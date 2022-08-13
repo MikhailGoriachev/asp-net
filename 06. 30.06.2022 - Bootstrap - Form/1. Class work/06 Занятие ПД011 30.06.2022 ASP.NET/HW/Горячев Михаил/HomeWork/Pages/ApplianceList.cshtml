@@ -1,0 +1,116 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.ApplianceList
+@{
+    // индекс страницы
+    ViewBag.indexTab = 1;
+
+    // название страницы
+    ViewData["Header"] = "Задача 1. Список техники";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/styles/appliances.css" />
+}
+
+@functions {
+    // вывод бытовой техники
+    private void ShowAppliance(Appliance appliance)
+    {
+        if (appliance != null)
+        {
+            <div class="card col-3 m-3 ">
+                <img src="/images/appliances/@appliance.FileName" class="card-img-top" alt="Бытовая техника">
+                
+                <div class="card-header">
+                    <div>Наименование: <b>@appliance.Name</b></div>
+                </div>
+                <div class="card-body bg-light">
+                    <div>Тип техники: <b>@appliance.Type</b></div>
+                    <div>Артикул: <b>@appliance.VendorCode</b></div>
+                    <div>Цена: <b>@appliance.Price &#8381;</b></div>
+                </div>
+                <div class="card-footer">
+                    <div>Количество: <b>@appliance.Amount шт.</b></div>
+                </div>
+            </div>
+        }
+    }
+
+    // вывод коллекции бытовой техники
+    private void ShowApplianceList(List<Appliance> appliances)
+    {
+        appliances.ForEach(a => ShowAppliance(a));                    
+    }
+}
+
+
+@* Блок управления *@
+@section Navigate
+{
+<!-- Блок управления -->
+<div class="control-block">
+
+    <h4 class="text-center">Параметры обработки</h4>
+
+    <!-- #endregion -->
+
+    <hr />
+
+    <!-- #region Сортировка приборов -->
+
+    <p class="text-center">Сортировка приборов</p>
+
+    <!-- По умоланию -->
+    <a class="btn btn-info mt-2 mb-2" asp-page="/Appliancelist" class="link-button">По умоланию</a>
+
+    <!-- По наименованию -->
+    <a class="btn btn-info mt-2 mb-2" asp-page-handler="OrderByName" class="link-button">По наименованию</a>
+
+    <!-- По цене -->
+    <a class="btn btn-info mt-2 mb-2" asp-page-handler="OrderByDescPrice" class="link-button">По цене</a>
+
+    <!-- По количеству -->
+    <a class="btn btn-info mt-2 mb-2" asp-page-handler="OrderByAmount" class="link-button">По количеству</a>
+
+
+    <hr />
+
+    <!-- #endregion -->
+
+    <!-- #region Выборка приборов -->
+
+    <p class="text-center">Выборка приборов</p>
+
+    <!-- Цена -->
+    <form method="get" asp-page-handler="SelectByPriceRange">
+
+        <div class="field">
+            <label for="priceMinId" class="field-label">Выборка по диапазону цен:</label>
+
+            <input type="number" id="priceMinId" name="MinPrice" min="0" placeholder="Минимум (&#8381;)" required>
+
+            <input type="number" id="priceMaxId" name="MaxPrice" min="0" placeholder="Максимум (&#8381;)" required>
+        </div>
+
+        <!-- Кнопки управления -->
+        <div class="form-grid-controls">
+            <input class="btn mt-2 btn-info" type="submit" value="Показать" />
+        </div>
+    </form>
+</div>
+}
+
+<article>
+
+    <h2 class="text-align-center">@Model.NameHandler</h2>
+
+    <div class="container-sm mt-3">
+        <div class="row g-3">
+            <!-- Вывод бытовой техники -->
+            @{
+                ShowApplianceList(Model.CurrentAppliances);
+            }
+        </div>
+    </div>
+</article>

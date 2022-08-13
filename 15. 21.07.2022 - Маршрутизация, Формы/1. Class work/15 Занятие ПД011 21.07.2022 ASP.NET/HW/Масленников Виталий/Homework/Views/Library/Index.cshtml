@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Homework.Models.Book>
+
+@{
+    ViewBag.Header = "Книги";
+}
+
+<h3 class="color-2 mb-4">@ViewBag.Title</h3>
+
+@if(ViewContext.RouteData.Values["Action"] is "Index"){
+    <a class="btn btn-primary btn-sm" asp-controller="Library" asp-action="AddBook">Добавить</a>
+}
+
+<table class="table mt-4 text-center">
+        <thead class="border-dark">
+        <tr>
+            <th>Id</th>
+            <th>Обложка</th>
+            <th class="text-start">Название</th>
+            <th class="text-start">Автор</th>
+            <th>Год издания</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+            <th>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody class="color-2">
+        @foreach (var book in Model!)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>
+                    <img class="h-200-px" src="~/images/@book.Image" alt="@book.Image"/>
+                </td>
+                <td class="text-start">@book.Title</td>
+                <td class="text-start">@book.Author</td>
+                <td>@book.Year</td>
+                <td>@book.Amount</td>
+                <td>@book.Price</td>
+                <td>
+                    <a asp-controller="Library" asp-action="RemoveBook" asp-route-id="@book.Id"
+                       class="btn btn-sm btn-outline-danger" title="Удалить данные">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+

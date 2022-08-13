@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Example</title>
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="images/emotion_smile.png" type="image/x-icon">
+
+    <!-- подключение bootstrap через CDN: Content Delivery Network -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <script src="lib/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-3">
+    <div class="row mt-1=3">
+        <div class="col-4 m-1 p-1">
+            <h3>Tooltip Example</h3>
+
+            <p>
+                To create a tooltip, add the <code>data-bs-toggle="tooltip"</code> attribute to an element.
+            </p>    
+            
+            <p>
+                Use the <code>title</code> attribute to specify the text that should be displayed inside the tooltip:
+            </p>
+            <button type="button" class="btn btn-primary" 
+                    data-bs-toggle="tooltip" 
+                    title="Текст для отображения в подсказке!">
+                Hover over me!
+            </button>    
+            <p class="mt-3">
+                <strong>Note:</strong> Tooltips must be initialized with JavaScript to work.
+            </p>
+        </div>
+
+        <div class="col m-1 p-1">
+            <h3>Tooltip Positioning</h3>
+            <p>Use the <code>data-bs-placement</code> attribute to set the position of the tooltip on top, bottom, 
+                left or the right side of the element:.</p>
+            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Hooray!">Top</a>
+            <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hooray!">Bottom</a>
+            <a href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Hooray!">Left</a>
+            <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Hooray!">Right</a>
+        </div>
+    </div>
+    
+    <div class="row mt-3">
+        <div class="col-3 m-1 p-1">
+            <h3>Popover Example</h3>
+            <p>
+                Click to the element to show popover. To close popover click on the element again.
+            </p>
+
+            <button type="button" 
+                    class="btn btn-primary" 
+                    data-bs-toggle="popover" 
+                    title="Popover Header" 
+                    data-bs-content="Some content inside the popover">
+                Toggle popover
+            </button>
+            <p class="mt-3">
+                <strong>Note:</strong> Popovers must be initialized with JavaScript to work.
+            </p>
+        </div>
+
+        <div class="col-3 m-1 p-1">
+            <h3>Popover Positioning</h3>
+
+            <p>By default, the popover will appear on the right side of the element.</p>
+
+            <p>Use the <code>data-bs-placement</code> attribute to set the position of the popover on top, 
+                bottom, left or the right side of the element:
+            </p>
+
+            <a href="#" data-bs-toggle="popover" title="Header" data-bs-placement="top" data-bs-content="Content">Top</a>
+            <a href="#" data-bs-toggle="popover" title="Header" data-bs-placement="bottom" data-bs-content="Content">Bottom</a>
+            <a href="#" data-bs-toggle="popover" title="Header" data-bs-placement="left" data-bs-content="Content">Left</a>
+            <a href="#" 
+               data-bs-toggle="popover" 
+               data-bs-placement="right"
+               title="Popover Header"
+               data-bs-content="Some content inside the popover">
+                Right
+            </a>
+        </div>
+
+        <div class="col-4 m-1 p-1">
+            <h3>Dismissible/Closing Popover</h3>
+
+            <p>
+                By default, the popover is closed when you click on the element again. However, 
+                you can use the <code>data-bs-trigger="focus"</code> attribute which will close
+                the popover when clicking outside the element:
+            </p>
+
+            <a href="#" 
+               title="Dismissible popover" 
+               data-bs-toggle="popover" 
+               data-bs-trigger="focus" 
+               data-bs-content="Click anywhere in the document to close this popover">
+                Click me
+            </a>
+        </div>
+    </div>
+    
+    <div class="row mt-3">
+        <div class="col m-1 p-1">
+            <h3>Hoverable Popover</h3>
+            
+            <p>
+                <strong>Tip:</strong> If you want the popover to be displayed when 
+                you move the mouse pointer over the element, use the <code>data-bs-trigger</code> 
+                attribute with a value of <code>"hover"</code>:
+            </p>
+
+            <a href="#"
+               title="Header"
+               data-bs-toggle="popover"
+               data-bs-trigger="hover"
+               data-bs-content="Popover text">
+                Hover over me
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Initialize tooltips
+    // let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    // let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    //     return new bootstrap.Tooltip(tooltipTriggerEl)
+    // });
+
+    [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map((t) => new bootstrap.Tooltip(t));
+
+    // Initialize popover
+    // let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    // let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    //     return new bootstrap.Popover(popoverTriggerEl)
+    // });
+
+    [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]')).map((t) => new bootstrap.Popover(t));
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿:root {
+	--header-color: #80bdff;
+	--header-color2: #c8dffc;
+	--text-color-1: #2E74B5;
+	--text-color-2: #2471A3;
+	--text-color-3: #808B96;
+	--text-navbar: #3a5179;
+}
+
+html, body { font-size: 12pt; }
+
+.brief { font-size: 1.1rem }
+.brief h2 { color: var(--text-color-1); }
+
+.vl {
+	display: inline-block;
+	border-left: 2px solid gray; 
+	height: 40px;
+}
+
+.color-1 { color: var(--text-color-1); }
+.color-2 { color: var(--text-color-2); }
+.color-3 { color: var(--text-color-3); }
+
+.h-60-px { height: 60px }
+.h-80-px { height: 80px }
+.h-100-px { height: 100px }
+.h-180-px { height: 180px }
+.h-200-px { height: 200px }
+.h-400-px { height: 400px }
+
+.w-80-px { width: 80px;}
+.w-100-px { width: 100px;}
+.w-120-px { width: 120px;}
+.w-240-px { width: 240px;}
+
+.mh-80-vh { min-height: 80vh;}
+
+.card {
+	border: none;
+	box-shadow: 2px 4px 8px 1px rgba(0,0,0,0.1);
+}
+.card:hover {	box-shadow: 4px 16px 16px 0 rgba(0,0,0,0.2); }
+
+.top-bar {
+	height: 80px;
+	color: var(--header-color2);
+	text-shadow: 1px 1px #000000;
+	box-shadow: 0 -15px 27px -18px rgba(34, 60, 80, 0.7) inset;
+	background:   linear-gradient(to right, #373b44, #4286f4);
+}
+
+/* Кастомизация навигационной панели */
+
+.navbar {
+	font-size: 1.2rem;
+	font-family: sofia-pro, sans-serif;
+}
+
+.nav-item::after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 2px;
+	background: var(--text-navbar);
+	transition: 0.4s
+}
+
+.nav-item:hover::after {
+	width: 100%
+}
+
+.navbar-main .navbar-nav .active>.nav-link,
+.navbar-main .navbar-nav .nav-link.active,
+.navbar-main .navbar-nav .nav-link.show,
+.navbar-main .navbar-nav .show>.nav-link,
+.navbar-main .navbar-nav .nav-link:focus,
+.navbar-main .navbar-nav .nav-link:hover {
+	color: var(--text-navbar);
+}
+
+.nav-link {
+	transition: 0.2s
+}
+ 

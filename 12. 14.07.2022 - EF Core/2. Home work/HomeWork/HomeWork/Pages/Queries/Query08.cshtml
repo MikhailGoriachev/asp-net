@@ -1,0 +1,31 @@
+﻿@page
+@model HomeWork.Pages.Queries.Query08
+
+@{
+    ViewBag.Title = "Запрос 8. Страны";
+    ViewBag.PageName = "/Queries";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h3 class="display-6 text-center">Запрос 8. Страны</h3>
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Страна</th>
+            <th>Средняя стоимость транс. услуг (&#8381;)</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var result in Model.Results)
+        {
+            <tr>
+                <th>@result.CountryName</th>
+                <td>@(result.AvgDailyCost != null ? $"{result.AvgDailyCost:n2}" : "нет данных")</td>
+                <td>@(result.Count != null ? $"{result.Count}" : "нет данных")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

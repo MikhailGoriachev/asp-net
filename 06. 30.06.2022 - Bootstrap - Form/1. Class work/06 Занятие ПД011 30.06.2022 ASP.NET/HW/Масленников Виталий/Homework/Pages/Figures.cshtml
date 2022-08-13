@@ -1,0 +1,122 @@
+﻿@page "{handler?}"
+@using Homework.Models.Figures
+@using System.Globalization
+@model Homework.Pages.FiguresModel
+@{
+	ViewBag.Header = "Геометрические фигуры";
+}
+
+@section styles{
+}
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary><p>
+			Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских геометрических
+			фигур:
+			квадраты, прямоугольники, разносторонние треугольники. Инициализация коллекции должна проводиться
+			при
+			отсутствии файла (формируйте не менее 10 фигур). По кнопке-ссылке (метод GET) формируйте фигуру,
+			случайным образом выбирая ее тип и размер. Добавляйте фигуры в коллекцию, сохраняйте коллекцию.
+			Отображайте коллекцию на этой же странице в таблице, стилизованной классами Bootstrap (в ячейке
+			таблицы
+			также выводите изображение фигуры).
+		</p>
+
+		<p>По ссылкам на этой странице (кнопкам в стиле Bootstrap) вызывайте обработчики запросов GET:</p>
+
+		<ul>
+			<li>вывод всей коллекции в исходном порядке</li>
+			<li>вывод только квадратов, по убыванию площади</li>
+			<li>вывод только прямоугольников, по возрастанию периметра</li>
+			<li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+			<li>вывод всей коллекции по убыванию площади</li>
+			<li>вывод всей коллекции, упорядоченной по типу фигур</li>
+		</ul>
+	</details>
+</div>
+
+
+@section controls{
+	<div class="font-14 mt-4 ps-2" style="max-width: 250px">
+
+		<span class="lead mb-2 d-block">Вывод:</span>
+
+		<div class="list-unstyled d-grid gap-2">
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Квадрат"
+			   asp-route-sort="@nameof(IFigure.Area)"
+			   asp-route-order="Desc"
+			   class="btn btn-sm btn-outline-secondary">
+				квадраты, по убыванию площади
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Прямоугольник"
+			   asp-route-sort="@nameof(IFigure.Perimeter)"
+			   class="btn btn-sm btn-outline-secondary">
+				прямоугольники, по возрастанию периметра
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-figure="Треугольник"
+			   asp-route-order="Reverse"
+			   class="btn btn-sm btn-outline-secondary">
+				треугольники, в обратном порядке
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-sort="@nameof(IFigure.Area)"
+			   asp-route-order="Desc"
+			   class="btn btn-sm btn-outline-secondary">
+				коллекция по убыванию площади
+			</a>
+
+			<a asp-page-handler="Filter"
+			   asp-route-sort="@nameof(IFigure.Name)"
+			   asp-route-order="Desc"
+			   class="btn btn-sm btn-outline-secondary">
+				коллекция, упорядоченная по типу фигур
+			</a>
+
+			<a asp-page="Figures"
+			   class="btn btn-sm btn-outline-secondary">
+				коллекция в исходном порядке
+			</a>
+		</div>
+	</div>
+}
+
+
+<table class="table text-center">
+	<thead>
+	<th>№</th>
+	<th>Изображение</th>
+	<th>Тип</th>
+	<th>Параметры</th>
+	<th>Периметр</th>
+	<th>Площадь</th>
+	</thead>
+
+@{
+	var i = 1;
+	foreach (var item in Model.DisplayFigures!)
+	{
+		<tr>
+		<td>@(i++)</td>
+		<td><img class="img-h-100" src="@Model.ImageFolder/@item.Image" alt="Фигура"/></td>
+		<td>@item.Name</td>
+			<td>
+				<ul class="list-unstyled">
+					@foreach (var p in item.Parameters)
+					{
+						<li style="font-size: 16px">@p.Key = @($"{p.Value:.###}")</li>
+					}
+				</ul>
+			</td>
+		<td>@($"{item.Perimeter:.###}")</td>
+		<td>@($"{item.Area:.###}")</td>
+		</tr>
+	}
+}
+</table>

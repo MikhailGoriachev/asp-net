@@ -1,0 +1,35 @@
+﻿@page
+@model RazorPagesSyntaxPost.Pages.Post06Model
+@{
+}
+@* 
+    Ввод словаря, items[key] - ключ может быть как из латинских був, 
+    так и из букв локали 
+    *@
+<h2>Ввeдите столицы стран, форма получена @(Model.Header)</h2>
+<form method="post">
+    <p>
+        Германия: <input type="text" name="items[Германия]" />
+    </p>
+    <p>
+        Франция: <input type="text" name="items[Франция]" />
+    </p>
+    <p>
+        Испания: <input type="text" name="items[Испания]" />
+    </p>
+    <input type="submit" value="Отправить" />
+</form>
+
+
+
+@* Вывод словаря *@
+@if (Model.Countries.Count > 0)
+{
+    <h3>Страны и их столицы, сформировано: @(Model.Header)</h3>
+    <ul>
+        @foreach (var country in Model.Countries)
+        {
+            <li><b>@country.Key</b>: <u>@country.Value</u></li>
+        }
+    </ul>
+}

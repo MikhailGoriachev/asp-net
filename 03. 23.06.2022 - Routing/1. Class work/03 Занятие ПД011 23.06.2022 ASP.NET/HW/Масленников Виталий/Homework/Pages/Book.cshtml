@@ -1,0 +1,40 @@
+﻿@page
+@model Homework.Pages.BookModel
+@{
+	ViewBag.Header = "Книга";
+}
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary>
+		<p>
+			Имя страницы <b>Book.cshtml</b>. В ответ на GET-запрос клиента <b>/Book</b> выводите представление с 
+						формой для ввода сведений о книге (используйте модель): автор, название, год издания, цена. Метод обработки
+						формы – POST, данные книги выводите на этой же странице.
+					</p>
+	</details>
+
+</div>
+
+
+<div class="v-indent-20">
+	<form method="post">
+		<fieldset>
+			<legend>Введите данные книги:</legend>
+			<div class="field"><label class="w1">Автор: </label><input type="text" name="author" placeholder="Автор"/></div>
+			<div class="field"><label class="w1">Название:</label> <input type="text" name="title" placeholder="Название"/></div>
+			<div class="field"><label class="w1">Год издания:</label> <input class="t2-input" type="number" name="year"/></div>
+			<div class="field"><label class="w1">Цена: </label><input class="t2-input" type="number" name="price"/></div>
+
+			<div><input type="submit" value="Отправить"></div>
+		</fieldset>
+	</form>
+
+	@if(Model.Book != null)
+	{
+		<p><b>Название:</b> @Model.Book.Title</p>
+		<p><b>Автор:</b> @Model.Book.Author</p>
+		<p><b>Год издания:</b> @Model.Book.Year</p>
+		<p><b>Цена:</b> @Model.Book.Price</p>
+	}
+</div>

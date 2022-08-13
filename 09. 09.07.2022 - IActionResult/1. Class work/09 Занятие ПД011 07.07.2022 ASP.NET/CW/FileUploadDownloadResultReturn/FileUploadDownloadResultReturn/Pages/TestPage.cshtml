@@ -1,0 +1,14 @@
+﻿@page "{name}/{salary}"
+
+@model FileUploadDownloadResultReturn.Pages.TestPageModel
+@{
+    ViewBag.Title = "Прошла переадресация"; 
+}
+
+<h3>@ViewBag.Title</h3>
+
+<h4>Получены данные из параметров маршрута:</h4>
+<ul>
+    <li>Имя: @RouteData.Values["name"]</li>
+    <li>Оклад: @RouteData.Values["salary"] у.е.</li>
+</ul>

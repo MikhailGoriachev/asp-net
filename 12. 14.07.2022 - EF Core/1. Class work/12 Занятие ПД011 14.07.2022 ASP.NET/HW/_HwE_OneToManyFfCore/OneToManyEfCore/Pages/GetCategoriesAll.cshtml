@@ -1,0 +1,35 @@
+﻿@page
+@model OneToManyEfCore.Pages.GetCategoriesAllModel
+@{
+}
+
+<h3>Виды изданий на <u>@($"{DateTime.Now:dd/MM/yyyy}")</u></h3>
+
+<a class="btn btn-success w-25" asp-page="/CategoryCreate">Добавить</a>
+
+@* вывод коллекции видов изданий *@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>Название категории</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.CategoryName</td>
+
+                @* управление: переход на редактирование записи, удаление записи
+                   идентификатор записи передаем параметром маршрута
+                *@
+                <td>
+                    <a class="btn btn-sm btn-outline-warning" asp-page="/CategoryEdit" asp-route-id="@category.Id">Редактировать</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

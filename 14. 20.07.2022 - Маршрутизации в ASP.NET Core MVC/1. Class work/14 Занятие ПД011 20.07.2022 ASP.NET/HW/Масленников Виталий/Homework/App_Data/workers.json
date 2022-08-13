@@ -1,0 +1,107 @@
+[
+  {
+    "FullName": "Седов И. Т.",
+    "StartDate": "2019-03-06T00:00:00",
+    "Image": "worker1.jpg",
+    "Salary": 11500,
+    "LengthOfService": 3
+  },
+  {
+    "FullName": "Лавров Е. А.",
+    "StartDate": "2013-06-29T00:00:00",
+    "Image": "worker2.jpg",
+    "Salary": 27500,
+    "LengthOfService": 9
+  },
+  {
+    "FullName": "Белов Т. Д.",
+    "StartDate": "2014-09-04T00:00:00",
+    "Image": "worker3.jpg",
+    "Salary": 32500,
+    "LengthOfService": 7
+  },
+  {
+    "FullName": "Агеев Б. И.",
+    "StartDate": "2014-04-13T00:00:00",
+    "Image": "worker4.jpg",
+    "Salary": 31000,
+    "LengthOfService": 8
+  },
+  {
+    "FullName": "Денисов А. И.",
+    "StartDate": "2018-12-24T00:00:00",
+    "Image": "worker5.jpg",
+    "Salary": 14000,
+    "LengthOfService": 3
+  },
+  {
+    "FullName": "Шишкин В. Т.",
+    "StartDate": "2016-06-01T00:00:00",
+    "Image": "worker6.jpg",
+    "Salary": 18500,
+    "LengthOfService": 6
+  },
+  {
+    "FullName": "Матвеев А. И.",
+    "StartDate": "2016-05-13T00:00:00",
+    "Image": "worker7.jpg",
+    "Salary": 25000,
+    "LengthOfService": 6
+  },
+  {
+    "FullName": "Марков М. А.",
+    "StartDate": "2018-12-18T00:00:00",
+    "Image": "worker8.jpg",
+    "Salary": 30000,
+    "LengthOfService": 3
+  },
+  {
+    "FullName": "Кулешова Е. Е.",
+    "StartDate": "2021-07-20T00:00:00",
+    "Image": "worker9.jpg",
+    "Salary": 39000,
+    "LengthOfService": 0
+  },
+  {
+    "FullName": "Яковлева В. Б.",
+    "StartDate": "2012-04-07T00:00:00",
+    "Image": "worker10.jpg",
+    "Salary": 13500,
+    "LengthOfService": 10
+  },
+  {
+    "FullName": "Зайцева М. Д.",
+    "StartDate": "2016-01-27T00:00:00",
+    "Image": "worker11.jpg",
+    "Salary": 19500,
+    "LengthOfService": 6
+  },
+  {
+    "FullName": "Меркулова В. А.",
+    "StartDate": "2019-12-31T00:00:00",
+    "Image": "worker12.jpg",
+    "Salary": 39000,
+    "LengthOfService": 2
+  },
+  {
+    "FullName": "Корчагина В. Л.",
+    "StartDate": "2019-12-21T00:00:00",
+    "Image": "worker13.jpg",
+    "Salary": 12000,
+    "LengthOfService": 2
+  },
+  {
+    "FullName": "Успенская А. Б.",
+    "StartDate": "2019-03-13T00:00:00",
+    "Image": "worker14.jpg",
+    "Salary": 25500,
+    "LengthOfService": 3
+  },
+  {
+    "FullName": "Петрова А. А.",
+    "StartDate": "2011-03-02T00:00:00",
+    "Image": "worker15.jpg",
+    "Salary": 10000,
+    "LengthOfService": 11
+  }
+]

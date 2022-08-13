@@ -1,0 +1,29 @@
+﻿@page
+@model Homework.Pages.BookModel
+@{
+	
+	ViewBag.Title = "Книга - Домашняя Работа";
+	ViewBag.Header = "Книга";
+}
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary>
+		<p>
+			Имя страницы <b>Book.cshtml</b>. В ответ на GET-запрос клиента <b>/Book</b>
+			сформировать
+			представление со сведениями об учебнике по программированию на Python (используйте модель): автор
+			Бриггс Дж.; название «Python для детей. Самоучитель по программированию», год издания 2017. Обложка:
+		</p>
+	</details>
+
+</div>
+
+
+<div class="v-indent-20">
+	<img src="images/@Model.Book!.Image" alt="Книга"/>
+
+	<p><b>Название:</b> @Model.Book.Title</p>
+	<p><b>Автор:</b> @Model.Book.Author</p>
+	<p><b>Год издания:</b> @Model.Book.Year</p>
+</div>

@@ -1,0 +1,50 @@
+﻿@page
+@model HomeWork.Pages.SailingFleetModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 2;
+
+    // название страницы
+    ViewData["Header"] = "Задача 2. Корабли";
+}
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Задача 2. Корабли</h2>
+        </summary>
+
+        <!-- #region Задача 2 -->
+        <p>
+            <b>Задача 2.</b> Имя страницы SailingFleet.cshtml. В ответ на GET-запрос клиента
+            <b>/SailingFleet</b> сформировать представление со сведениями о трех парусных кораблях
+            (длина в метрах, ширина в метрах, водоизмещение в тоннах, название, год постройки,
+            изображение): линейный корабль «Виктория», чайный клиппер «Катти Сарк» и барк
+            «Крузенштерн». Используйте модель, коллекцию.
+        </p>
+        <!-- #endregion -->
+
+    </details>
+</article>
+
+<article>
+
+    @* Корабли *@
+    <div class="container">
+        @foreach (var item in @Model.ShipList)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="~/images/@item.FileName" alt="корабль">
+                </div>
+
+                <div>Название: <b>@item.Name</b></div>
+                <div>Длина: <b>@item.Length м</b></div>
+                <div>Ширина: <b>@item.Width м</b></div>
+                <div>Водоизмещение: <b>@item.Displacement т</b></div>
+                <div>Год постройки: <b>@item.Year</b></div>
+            </div>
+        }
+    </div>
+</article>

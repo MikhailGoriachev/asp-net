@@ -1,0 +1,153 @@
+﻿@page "{handler?}"
+@using Microsoft.Extensions.Primitives
+@model Homework.Pages.Ships
+
+@{
+    ViewBag.Header = "Корабли";
+
+    string IsActive(string actionId) =>
+        Request.Query["ActionId"] != StringValues.Empty && Request.Query["ActionId"] == actionId ? "active" : "";
+
+    var addErr = RouteData.Values["handler"] is "AddErr";
+}
+
+@* панель управления *@
+
+@section Controls{
+    <div class="navbar">
+        <div class="container-fluid justify-content-start gap-2 ">
+            <button type="button" class="btn btn-sm btn-outline-dark ms-5"
+                    data-bs-toggle="modal" data-bs-target="#modalForm">
+                Добавить корабль
+            </button>
+
+            <div class="ms-3 vl"></div>
+            <a asp-page-handler="OrderBy" asp-route-prop="Name" asp-route-ActionId="1"
+               class="btn btn-sm btn-outline-secondary ms-3 @IsActive("1")">
+                по названию
+            </a>
+
+            <a asp-page-handler="OrderBy" asp-route-prop="Year" asp-route-ActionId="2"
+               class="btn btn-sm btn-outline-secondary @IsActive("2")">
+                по году изготовления
+            </a>
+
+            <a asp-page-handler="OrderBy" asp-route-prop="Displacement" asp-route-order="Desc" asp-route-ActionId="3"
+               class="btn btn-sm btn-outline-secondary @IsActive("3")">
+                по убыванию водоизмещения
+            </a>
+            
+            <a asp-page-handler="OrderBy" asp-route-prop="Source" asp-route-ActionId="4"
+                           class="btn btn-sm btn-outline-secondary @IsActive("4")">
+                исходный порядок
+            </a>
+                        
+        </div>
+    </div>
+}
+
+@* форма ввода данных в модальном диалоге *@
+<div class="modal @(addErr ? "show d-block" : "")" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Введите данные о корабле</h5>
+                @if (addErr)
+                {
+                    <button asp-page="Ships/" form="shipForm" class="btn-close" formnovalidate></button>
+                }else
+                {
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                }
+            </div>
+
+            <div class="modal-body">
+                <form class="mb-4 p-0" method="post" enctype="multipart/form-data" id="shipForm">
+                    <div class="row">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Ship.Name" required/>
+                            <label class="form-label mx-2" asp-for="Ship.Name">Название: </label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="Ship.Type" required/>
+                            <label class="form-label mx-2" asp-for="Ship.Name">Тип: </label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Ship.Length" required/>
+                            <label class="form-label mx-2" asp-for="Ship.Length">Длина:</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Ship.Width" required/>
+                            <label class="form-label mx-2" asp-for="Ship.Width">Ширина:</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Ship.Displacement" required/>
+                            <label class="form-label mx-2" asp-for="Ship.Displacement">Водоизмещение:</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control text-end" type="number" asp-for="Ship.Year" required/>
+                            <label class="form-label mx-2" asp-for="Ship.Year">Год постройки: </label>
+                        </div>
+                        
+                        <div class="form-floating">
+                            <input class="form-control form-control-sm mt-2 ps-3" accept=".png,.jpg,.jpeg"
+                                   type="file" asp-for="Upload" required="">
+                            <label class="form-label mt-1 mx-2" asp-for="Upload">Загрузить фото (до 2Mb): </label>
+                        </div>
+                    </div>
+                </form>
+                @if (Model.ErrMsg != null)
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <button class="btn-close" data-bs-dismiss="alert"></button>
+                        <b>Ошибка!</b> @Model.ErrMsg
+                    </div>
+                }
+            </div>
+
+            <div class="modal-footer">
+                <div>
+                    <input asp-page-handler="Add" form="shipForm" class="btn btn-primary" type="submit" value="Добавить">
+                </div>
+                 @if (addErr)
+                 {
+                     <button asp-page="Ships/" form="shipForm" class="col-3 btn btn-outline-secondary ms-2" formnovalidate> Отмена </button>
+                 }else
+                 {
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                 }
+            </div>
+        </div>
+    </div>
+</div>
+
+@*вывод карточек товаров*@
+<div class="row">
+    @foreach (var item in Model.DisplayShips!)
+    {
+        <div class="col-md-auto mb-4">
+            <div class="card h-100 w-240-px">
+                <div class="card-header bg-body border-0 h-180-px p-0 text-center">
+                    <img class="card-img-top h-auto mh-100 img-fluid w-auto" src="@Model.GetImagePath(@item.Image)" 
+                    alt="Бытовая 
+                техника">
+                </div>
+                <div class="card-body pt-0 pb-2 mt-1">
+                    <h5 class="card-title color-2">@item.Name</h5>
+                    <p class="card-text color-1">@item.Type</p>
+                </div>
+                <div class="card-footer bg-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item color-1">Длина: <span class="color-3">@item.Length</span></li>
+                        <li class="list-group-item color-1">Ширина: <span class="color-3">@item.Width</span></li>
+                        <li class="list-group-item color-1">Водоизмещение: <span class="color-3">@item.Displacement</span></li>
+                        <li class="list-group-item color-1">Год постройки: <span class="color-3">@item.Year</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>

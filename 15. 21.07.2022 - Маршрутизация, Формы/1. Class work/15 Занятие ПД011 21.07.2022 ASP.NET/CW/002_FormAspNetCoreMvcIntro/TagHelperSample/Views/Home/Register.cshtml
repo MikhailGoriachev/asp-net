@@ -1,0 +1,31 @@
+﻿@model TagHelperSample.Models.RegistrationBindingModel
+
+@* в форме задаем обработчик *@
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h3 class="text-center">Пример простейшей формы</h3>
+    <form class="bg-light p-5"
+          asp-controller="home" asp-action="register" method="post">
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Login">Login:</label>
+            <input type="text" asp-for="Login" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Email">Email:</label>
+            <input type="email" asp-for="Email" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Password">Password:</label>
+            <input type="password" asp-for="Password" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PasswordConfirm" class="form-label">Password Confirm:</label>
+            <input type="password" asp-for="PasswordConfirm" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <input type="checkbox" asp-for="TermsAccepted" class="form-check-input" value="@Model.TermsAccepted"/>
+            <label class="form-check-label" asp-for="TermsAccepted">Terms Accepted</label>
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+</div>

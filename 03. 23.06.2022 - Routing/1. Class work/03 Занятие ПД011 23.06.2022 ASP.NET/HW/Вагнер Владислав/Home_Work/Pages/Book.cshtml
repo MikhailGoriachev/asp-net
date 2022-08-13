@@ -1,0 +1,56 @@
+﻿@page
+@model Home_Work.Pages.BookModel
+@{
+    ViewData["title"] = "Страница boook";
+    ViewData["pageHeader"] = "СТРАНИЦА BOOK";
+    ViewBag.IsActive = 1;
+}
+
+<section>
+
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+            Имя страницы Book.cshtml. В ответ на GET-запрос клиента /Book сформировать представление
+            со сведениями об учебнике по программированию на Python (используйте модель): автор Бриггс Дж.;
+            название «Python для детей. Самоучитель по программированию», год издания 2017.
+        </div>
+    </details>
+
+    <!--Форма изменения-->
+    <form method="post">
+        <fieldset class="form-block">
+            <div>
+                <input style="width: 15rem" required type="text" name="BookName" value="@Model.Book.BookName">
+                <label>Название книги</label>
+            </div>
+            <div>
+                <input required type="text" name="Author" value="@Model.Book.Author">
+                <label>Автор</label>
+            </div>
+            <div>
+                <input required type="number" name="PubYear" value="@Model.Book.PubYear">
+                <label>Год публикации</label>
+            </div>
+
+            <div>
+                <input type="submit" value="Изменить книгу" id="btnAdd">
+                <!--<input type="reset" value="Отмена">-->
+                <input type="reset" value="Отмена">
+            </div>
+        </fieldset>
+    </form>
+
+
+    <div class="card">
+        <div class="divImg"><img src="~/images/book_cover.jpeg" alt="Обложка" /></div>
+        <div><span>Название: @Model.Book.BookName</span></div>
+        <div><span>Автор:  @Model.Book.Author</span></div>
+        <div><span>Год издания:  @Model.Book.PubYear</span></div>
+    </div>
+
+    <p class="text-bigger">
+        @Model.Message
+    </p>
+
+</section> 

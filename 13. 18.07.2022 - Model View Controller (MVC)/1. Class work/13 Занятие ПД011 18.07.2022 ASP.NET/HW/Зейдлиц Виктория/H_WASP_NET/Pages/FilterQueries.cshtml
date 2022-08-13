@@ -1,0 +1,40 @@
+﻿@page
+@model H_WASP_NET.Pages.FilterQueriesModel
+@{
+}
+
+<h3 class="text-center">@Model.Task</h3>
+
+@* вывод коллекции данных в соответствии с запросом на выборку данных *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>ФИО</th>
+            <th>Страна</th>
+            <th>Цель поездки</th>
+            <th>Стоимость визы, руб.</th>
+            <th>Стоимость 1дн., руб.</th>
+            <th>Дата поездки</th>
+            <th>Стоимость трансп., руб.</th>
+            <th>Длительность, дн.</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var travel in Model.Travels)
+    {
+        <tr>
+            <td>@travel.Id</td>
+            <td>@travel.Client.Surname</td>
+            <td>@travel.Route.Country.NameCountry</td>
+            <td>@travel.Route.PurposeTravel.NamePurpTravel</td>
+            <td>@travel.Route.Country.CostVisa</td>
+            <td>@travel.Route.CostDayStay</td>
+            <td>@($"{travel.StartTravel:dd/MM/yyyy}")</td>
+            <td class="text-center">@travel.Route.Country.CostTransportServ</td>
+            <td class="text-center">@travel.Duration</td>
+        </tr>
+    }
+    </tbody>
+</table>
+

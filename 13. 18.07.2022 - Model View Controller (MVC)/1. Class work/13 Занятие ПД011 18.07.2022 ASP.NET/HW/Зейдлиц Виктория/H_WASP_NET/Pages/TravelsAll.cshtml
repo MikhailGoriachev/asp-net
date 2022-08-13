@@ -1,0 +1,218 @@
+﻿@page
+@model H_WASP_NET.Pages.TravelsAllModel
+@{
+    ViewBag.Title = "Homework";
+    ViewBag.PageName = "TravelsAll";
+}
+
+
+<h3>Поездки туристического агенства</h3>
+
+<div class="btn-group w-25">
+    <a class="btn btn-outline-primary me-3" asp-page="/TravelCreate">Добавить</a>
+    <div class="btn-group">
+        <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown">Выборки по заданию</button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item cursor-pointer" data-bs-toggle="modal" data-bs-target="#filterQuery01">Цель поездки</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#filterQuery02">Цель поездки и стоимость транспортных</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#filterQuery03">Длительность поездки</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#filterQuery04">Заданная страна</a></li>
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#filterQuery05">Стоимость оформления визы</a></li>
+        </ul>
+    </div>
+</div>
+
+@* вывод коллекции данных о подписных изданиях и подписках *@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>ФИО</th>
+            <th>Страна</th>
+            <th>Цель поездки</th>
+            <th>Стоимость 1дн., руб.</th>
+            <th>Дата поездки</th>
+            <th>Длительность, дн.</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var travel in Model.Travels!)
+        {
+            <tr>
+                <td>@travel.Id</td>
+                <td>@travel.Client!.Surname @travel.Client.Name[0]@(".") @travel.Client.Patronymic[0]@(".")</td>
+                <td>@travel.Route!.Country!.NameCountry</td>
+                <td>@travel.Route.PurposeTravel!.NamePurpTravel</td>
+                <td>@travel.Route.CostDayStay</td>
+                <td>@($"{travel.StartTravel:dd/MM/yyyy}")</td>
+                <td class="text-center">@travel.Duration</td>
+
+                @* управление: переход на редактирование записи, удаление записи
+                   идентификатор записи передаем параметром маршрута
+                *@
+                <td>
+                    <form class="form-check-inline" method="post" asp-page-handler="Delete" asp-route-id="@travel.Id">
+                       <a class="btn btn-sm btn-outline-success" asp-page="/TravelEdit" asp-route-id="@travel.Id">Редактировать</a>
+                        <button class="btn btn-sm btn-outline-danger" type="submit">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@*Рендерим форму ввода параметра запроса 1*@
+<div id="filterQuery01" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Выбор цели поездки для запроса 1
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-1" method="post" asp-page="/FilterQueries" asp-page-handler="Query01">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="namePurpTravel" asp-items="@Model.NamePurpose">
+                        </select>
+                        <label class="form-label">Цель поездки:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-1" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Рендерим форму ввода параметра запроса 2*@
+<div id="filterQuery02" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Выбор цели поездки и стоимости транспортных средств, для запроса 2
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-2" method="post" asp-page="/FilterQueries" asp-page-handler="Query02">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="namePurpTravel" asp-items="@Model.NamePurpose">
+                        </select>
+                        <label class="form-label">Цель поездки:</label>
+                    </div>
+
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="стоимость транспортных" name="costTransportServ" value="2000">
+                        <label>Стоимость транспортных средств, руб.:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-2" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Рендерим форму ввода параметра запроса 3*@
+<div id="filterQuery03" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Выбор длительности дней пребывания в стране, для запроса 3
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-3" method="post" asp-page="/FilterQueries" asp-page-handler="Query03">
+
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" name="duration" value="10" min="10">
+                        <label>Длительность поездки, дн.:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-3" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Рендерим форму ввода параметра запроса 4*@
+<div id="filterQuery04" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Выбор страны для запроса 4
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-4" method="post" asp-page="/FilterQueries" asp-page-handler="Query04">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="nameCountry" asp-items="@Model.NameCountry">
+                        </select>
+                        <label class="form-label">Страна назначения:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-4" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Рендерим форму ввода параметра запроса 5*@
+<div id="filterQuery05" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Выбор стоимости оформления визы для запроса 5
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="form-param-5" method="post" asp-page="/FilterQueries" asp-page-handler="Query05">
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="нижняя цена" name="CostVisaMin" value="1000">
+                        <label>Нижнее значение цены визы, руб.:</label>
+                    </div>
+
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="верхняя цена" name="CostVisaMax" value="3000">
+                        <label>Верхнее значение цены визы, руб.:</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" form="form-param-5" class="btn btn-primary">Выбрать</button>
+            </div>
+        </div>
+    </div>
+</div>

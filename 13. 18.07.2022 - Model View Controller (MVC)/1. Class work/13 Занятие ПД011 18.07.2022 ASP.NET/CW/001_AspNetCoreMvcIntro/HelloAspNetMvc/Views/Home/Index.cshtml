@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects,
+    visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Привет, мир!";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <!-- заголовок -->
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>Привет, мир ASP.NET Core MVC!</h1>
+    <h2>@ViewBag.Title</h2>
+    <h3>@($"{DateTime.Now:dd/MM/yyyy hh:mm:ss}")</h3>
+</body>
+</html>

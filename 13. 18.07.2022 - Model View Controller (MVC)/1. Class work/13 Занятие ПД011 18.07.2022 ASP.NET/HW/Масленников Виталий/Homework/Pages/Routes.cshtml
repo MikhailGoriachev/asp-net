@@ -1,0 +1,35 @@
+﻿@page
+@model Homework.Pages.Routes
+
+@{
+    ViewBag.Header = "Данные о маршрутах";
+}
+
+@* Таблица с данными *@
+<table class="table text-center">
+    <thead class="fw-bold align-top">
+    <tr class="align-top">
+        <td>Страна</td>
+        <td>Цель поездки</td>
+        <td>Стоимость визы</td>
+        <td>Стоимость транспортных<br/> услуг</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.DisplayRoutes is not null && Model.DisplayRoutes.AsEnumerable().Any()){
+        @foreach (var route in Model.DisplayRoutes){
+            <tr>
+                <td>@route.Country!.Name</td>
+                <td>@route.Purpose!.Name</td>
+                <td>@route.Country!.VisaCost</td>
+                <td>@route.Country.TransferCost</td>
+                <td>@(route.Country!.DailyCost + route.DailyCost)</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="7" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,56 @@
+Загрузка файла на сервер
+
+https://www.learnrazorpages.com/razor-pages/forms/file-upload
+
+https://docs.microsoft.com/ru-ru/aspnet/core/blazor/file-uploads?view=aspnetcore-6.0&viewFallbackFrom=aspnetcore-1.1&pivots=server
+
+
+Иногда возникает необходимость возвратить некоторый результат, например, 
+статусный код ошибки или сделать редирект. Для подобных ситуаций данные 
+методы также могут возвращать объекты IActionResult. И для этого в классе 
+PageModel определено ряд методов:
+
+Content() возвращает объект ContentResult, то есть фактически некоторое 
+          текстовое содержимое
+
+File()    возвращает с помощью различных перегруженных версий объекты 
+          FileContentResult/FileStreamResult/VirtualFileResult, то есть 
+		  отправляет клиенту файл
+
+Forbid()  возвращает статусный код 403
+
+NotFound()     возвращает статусный код 404
+
+PhysicalFile() возвращает файл по физическому пути
+
+Page()         возвращает объект PageResult или фактически текущую 
+               страницу Razor
+
+
+LocalRedirect()
+LocalRedirectPermanent() выполняет переадресацию по определенному 
+                         локальному адресу
+Redirect()
+RedirectPermanent() выполняет переадресацию по определенному адресу
+
+RedirectToAction()
+RedirectToActionPermanent() выполняет переадресацию на определенное 
+                            действие контроллера (это для MVC)
+
+RedirectToPage()
+RedirectToPagePermanent()   выполняет переадресацию на определенную 
+                            страницу Razor
+
+RedirectToRoute()
+RedirectToRoutePermanent()  выполняет переадресацию по определенному
+                            маршруту
+
+StatusCode()   возвращает объект StatusCodeResult, то есть посылает 
+               статусный код
+
+Unauthorized() возвращает объект UnauthorizedResult, то есть статусный 
+               код ошибки 401
+
+Для отправки json нет определенного метода, но определен специальный 
+тип JsonResult, в конструктор которого можно передавать отправляемый 
+код json.

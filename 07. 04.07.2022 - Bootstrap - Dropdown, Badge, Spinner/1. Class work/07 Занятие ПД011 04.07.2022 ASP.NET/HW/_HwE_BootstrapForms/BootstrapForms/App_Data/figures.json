@@ -1,0 +1,237 @@
+[
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 10.0,
+    "_b": 5.0,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 12.0,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 12.0,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 9.0,
+    "_b": 12.0,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 5.0,
+    "_b": 7.0,
+    "_c": 9.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 3.2090147282970207,
+    "_b": 1.3479745384994777,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 1.5070012065148917,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 6.859338527479832,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 4.807058921925285,
+    "_b": 9.435524871309998,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 5.310253042872182,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 3.1632837560788185,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 2.735958628699164,
+    "_b": 3.369775029537163,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 4.279942078180584,
+    "_b": 5.631494180127743,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 9.675316934788281,
+    "_b": 1.2243298702986585,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 9.264675394755171,
+    "_b": 2.460656418679588,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 7.259063862384792,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 2.629057017447919,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 2.6762754757312477,
+    "_b": 9.817383504853296,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 5.524938804341917,
+    "_b": 2.661187982960226,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Square, BootstrapForms",
+    "_a": 1.4813969188748843,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Rectangle, BootstrapForms",
+    "_a": 2.3869293156950406,
+    "_b": 2.058522355304343,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "BootstrapForms.Models.Task02.Triangle, BootstrapForms",
+    "_a": 3.0,
+    "_b": 4.0,
+    "_c": 5.0,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  }
+]

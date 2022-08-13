@@ -1,0 +1,48 @@
+﻿@page
+@model Homework.Pages.Query4
+@{
+    ViewBag.Header = "Запрос на выборку";
+}
+
+@* фильтр по цели поездки и стоимости трансп. услуг *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+        
+        <label class="form-label me-1 lead" for="selCountry">Страна: </label>
+        <select class="form-select-sm me-3 " asp-for="CountryId" asp-items="Model.CountriesList" id="selCountry"></select>
+
+        <button class="btn btn-sm btn-outline-secondary ms-1 align-baseline" type="submit">Показать</button>
+        
+    </form>
+    
+    <a class="btn btn-sm btn-outline-secondary ms-2 align-baseline" asp-page="@nameof(Query5)">Исходные данные</a>
+</div>
+
+@* Таблица с данными *@
+<table class="table text-center mt-3">
+    <thead class="fw-bold align-top">
+    <tr class="align-top">
+        <td>Страна</td>
+        <td>Цель поездки</td>
+        <td>Стоимость визы</td>
+        <td>Стоимость транспортных<br/> услуг</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.DisplayRoutes is not null && Model.DisplayRoutes.AsEnumerable().Any()){
+        @foreach (var route in Model.DisplayRoutes){
+            <tr>
+                <td>@route.Country!.Name</td>
+                <td>@route.Purpose!.Name</td>
+                <td>@route.Country!.VisaCost</td>
+                <td>@route.Country.TransferCost</td>
+                <td>@(route.Country!.DailyCost + route.Country!.DailyCost)</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="5" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

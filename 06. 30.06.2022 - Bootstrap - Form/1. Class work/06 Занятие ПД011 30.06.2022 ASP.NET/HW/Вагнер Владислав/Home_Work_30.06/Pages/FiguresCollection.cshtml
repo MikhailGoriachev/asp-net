@@ -1,0 +1,120 @@
+﻿@page
+@model Home_Work.Pages.FiguresCollectionModel
+@using Home_Work.Models.Figures
+@using Home_Work.Utilities
+@using System.Net
+@{
+    ViewData["title"] = "Страница 2";
+    ViewData["pageHeader"] = "СТРАНИЦА 2";
+   
+    ViewBag.IsActive = 2;
+}
+@functions{
+    @*public void showCollection(List<Appliance> AppCollection)
+    {
+        foreach (var appliance in AppCollection)
+            {
+                <div class="card">
+                                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                                <div><span>Наименование: @appliance.Name</span></div>
+                                <div><span>Артикул:  @appliance.Article</span></div>
+                                <div><span>Цена:  @appliance.Price</span></div>
+                                <div><span>Количество:  @appliance.Quantity</span></div>
+                </div>
+
+            }
+    }*@
+    
+
+}
+
+
+<section>
+    @section Styles{
+        <link rel="stylesheet" href="~/styles/task2.css">
+    }
+
+    <!--Задание-->
+    <details class="task-details">
+        <summary><b>Задача 2.</b></summary>
+        <div>
+            <p>
+                Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских 
+                геометрических фигур: квадраты, прямоугольники, разносторонние треугольники. 
+                Инициализация коллекции должна проводиться при отсутствии файла, формируйте не менее 10 фигур. 
+                По кнопке <b>submit</b> (метод POST) формируйте фигуру, случайным образом выбирая ее тип и размер. 
+                <i>Создайте форму для ввода параметров фигуры. Загружать изображение не требуется, 
+                формируйте его по типу фигуры. Добавляйте фигуры в коллекцию, сохраняйте коллекцию.</i> 
+                Отображайте коллекцию на этой же странице, выводите также изображение фигуры.
+            </p>
+
+            <p>
+                По ссылкам на этой странице вызывайте обработчики запросов GET:
+            </p>
+            
+            <ul>
+                <li>вывод только квадратов, по убыванию площади</li>
+                <li>вывод только прямоугольников, по возрастанию периметра</li>
+                <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+                <li>вывод всей коллекции в исходном порядке</li>
+                <li>вывод всей коллекции по убыванию площади</li>
+                <li><i>вывод всей коллекции, упорядоченной по типу фигур</i></li>
+            </ul>
+        </div>
+    </details>
+
+
+    
+    <div class="btn-group-md gap-3 bg-body border-0">
+        <a asp-page-handler="ShowDefault" class="col-lg-3 btn btn-primary me-2 my-2">Исходная коллекция</a>
+        <a asp-page-handler="SortSquaresByArea" class="col-lg-3 btn btn-primary me-2 my-2">Квадраты по убыванию площади</a>
+        <a asp-page-handler="SortRectanglesByPerimeter" class="col-lg-4 btn btn-primary me-2 my-2">Прямоугольники по возрастанию периметра</a>
+        <a asp-page-handler="ReverseTriangles" class="col-lg-4 btn btn-primary me-2 my-2">Треугольники в обратном порядке</a>
+        <a asp-page-handler="SortBySquare" class="col-lg-4 btn btn-primary me-2 my-2">Упорядочить по убыванию площади</a>
+        <a asp-page-handler="SortByType" class="col-lg-3 btn btn-primary me-2 my-2">Упорядочить по типу</a>
+        <a asp-page-handler="AddFigure" class="col-lg-2 btn btn-info me-2 my-2" >Добавить фигуру</a>
+        <a asp-page-handler="DeleteFile" class="col-lg-2 btn btn-danger me-2 my-2">Удалить файл</a>
+    </div>
+
+    <!--Вывод коллекции-->
+    <div class="container my-4">
+
+        <!--Таблица-->
+        <table class="table table-responsive-md table-bordered border-2 table-hover">
+        <thead>
+            <th>Id</th>
+            <th>Изображение</th>
+            <th>Тип</th>
+            <th>Размеры</th>
+            <th>Площадь</th>
+            <th>Периметр</th>
+        </thead>
+
+        @foreach (var figure in @Model.Figures)
+        {
+            <tr>
+                <td class="text-center align-middle">@figure.Id</td>
+                <td class="text-center align-middle w-25">
+                    <img src="../images/figures/@Utils.Icons[figure.FigureType]" alt=@figure.FigureType>
+                </td>
+                <td class="text-center align-middle">
+                    @figure.FigureType
+                </td>
+                <td class="text-center align-middle">
+                    @Html.Raw(figure.GetSize())
+                </td>
+                <td class="text-center align-middle">
+                    @figure.Area()
+                </td>
+                <td class="text-center align-middle">
+                    @figure.Perimeter()
+                </td>
+            </tr>
+        }
+    </table>
+
+    @*@showCollection(Model.Appliances)*@
+    
+    </div>
+
+</section>

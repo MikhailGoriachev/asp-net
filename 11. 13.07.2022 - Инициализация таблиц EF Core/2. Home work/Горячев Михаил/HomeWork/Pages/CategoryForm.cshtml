@@ -1,0 +1,34 @@
+@page "{handler}/{id?}"
+@model HomeWork.Pages.CategoryForm
+@{
+    ViewBag.Title = Model.IsAdd ? "Добавление категории" : "Редактирование категории";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <hr/>
+
+    <!-- #region Форма для добавления категории -->
+    <form method="post" asp-antiforgery="true" class="mx-auto w-50">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="CategoryItem!.Id">
+
+        <!-- Наименование категории (вид издания) -->
+        <div class="form-floating my-3">
+            <input type="text" asp-for="CategoryItem!.Name" placeholder="Наименование категории (вид издания)" class="form-control"
+                   required>
+            <label asp-for="CategoryItem!.Name">Наименование категории (вид издания)</label>
+        </div>
+
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               asp-page-handler="Save"
+               type="submit" value="@(Model.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger" asp-page="Categories">Выход</a>
+    </form>
+    <!-- #endregion -->
+
+</section>

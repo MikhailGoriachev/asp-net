@@ -1,0 +1,40 @@
+﻿@page
+@model HomeWork.Pages.BookModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 1;
+
+    // название страницы
+    ViewData["Header"] = "Задача 1. Книга";
+}
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Задача 1. Книга</h2>
+        </summary>
+
+        <!-- #region Задача 1-->
+        <p>
+            <b>Задача 1.</b> Имя страницы Book.cshtml. В ответ на GET-запрос клиента <b>/Book</b>
+            сформировать представление со сведениями об учебнике по программированию на Python
+            (используйте модель): автор Бриггс Дж.; название «Python для детей. Самоучитель по
+            программированию», год издания 2017. Обложка:
+        </p>
+        <!-- #endregion -->
+
+    </details>
+</article>
+
+<article>
+    <div class="tile">
+        <div class="tile-image">
+            <img src="~/images/@Model.Book.FileName" alt="Книга">
+        </div>
+
+        <div>Название: <b>@Model.Book.Title</b></div>
+        <div>Автор: <b>@Model.Book.Author</b></div>
+        <div>Год выпуска: <b>@Model.Book.Year</b></div>
+    </div>
+</article>

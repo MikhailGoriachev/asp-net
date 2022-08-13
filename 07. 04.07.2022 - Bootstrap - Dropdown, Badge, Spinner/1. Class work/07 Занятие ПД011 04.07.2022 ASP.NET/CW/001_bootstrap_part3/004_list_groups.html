@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- подключение bootstrap через CDN: Content Delivery Network -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <script src="lib/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-3">
+  <div class="row">
+	  <div class="col-3 p-1 m-1">
+		  <h3 class="mt-4">Basic List Group</h3>
+		  
+		  <ul class="list-group">
+			<li class="list-group-item">First item</li>
+			<li class="list-group-item">Second item</li>
+			<li class="list-group-item">Third item</li>
+		  </ul>
+		  
+	  </div>
+	  
+	  <div class="col-4 p-1 m-1">
+		  <h3 class="mt-3">Active Item in a List Group</h3>
+		  <ul class="list-group">
+			<li class="list-group-item active">Active item</li>
+			<li class="list-group-item">Second item</li>
+			<li class="list-group-item">Third item</li>
+		  </ul>
+	  </div>
+	  
+	  <div class="col-4 p-1 m-1">
+		  <h3>List Group With Linked Items</h3>
+		  <div class="list-group">
+			<a href="#" class="list-group-item list-group-item-action active">First item</a>
+			<a href="#" class="list-group-item list-group-item-action">Second item</a>
+			<a href="#" class="list-group-item list-group-item-action">Third item</a>
+		  </div>
+	  </div>
+  </div>
+	
+	<div class="row">
+		<div class="col-3 p-1 m-1">
+			<h3>List Group With a Disabled Item</h3>
+			<p>
+				The disabled class adds a lighter text color to the disabled
+				item. And if used on links, it will remove the default hover
+				effect.
+			</p>
+			<div class="list-group">
+				<a href="#" class="list-group-item disabled">Disabled item</a>
+				<a href="#" class="list-group-item disabled">Disabled item</a>
+				<a href="#" class="list-group-item">Third item</a>
+			</div>
+		</div>
+		
+		<div class="col-4 p-1 m-1">
+			<h2>Flush / Remove Borders</h2>
+			<p>Use the .list-group-flush class to remove some 
+				borders and rounded corners:</p>
+
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">First item</li>
+				<li class="list-group-item">Second item</li>
+				<li class="list-group-item">Third item</li>
+				<li class="list-group-item">Fourth item</li>
+			</ul>
+		</div>
+
+		<div class="col-4 m-1 p-1">
+			<h2>Numbered List Group</h2>
+			<p>Use the .list-group-numbered class to create list items with numbers in front of them:</p>
+
+			<ul class="list-group list-group-numbered mb-3">
+				<li class="list-group-item">First item</li>
+				<li class="list-group-item">Second item</li>
+				<li class="list-group-item">Third item</li>
+			</ul>
+
+			<ol class="list-group list-group-numbered">
+				<li class="list-group-item">First item</li>
+				<li class="list-group-item">Second item</li>
+				<li class="list-group-item">Third item</li>
+			</ol>
+		</div>
+	</div>
+	
+	<div class="row">
+
+		<div class="col-4 m-1 p-1">
+			<h3>List Group With Contextual Classes</h3>
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-success">Success item</li>
+				<li class="list-group-item list-group-item-secondary">Secondary item</li>
+				<li class="list-group-item list-group-item-info">Info item</li>
+				<li class="list-group-item list-group-item-warning">Warning item</li>
+				<li class="list-group-item list-group-item-danger">Danger item</li>
+				<li class="list-group-item list-group-item-primary">Primary item</li>
+				<li class="list-group-item list-group-item-dark">Dark item</li>
+				<li class="list-group-item list-group-item-light">Light item</li>
+			</ul>
+		</div>
+
+		<div class="col-3 m-1 p-1">
+			<h2>List Group With Badges</h2>
+			<p>Combine .badge classes with utility/helper classes to add badges inside the list group:</p>
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info">
+					Inbox
+					<span class="badge bg-primary rounded-pill">12</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Ads
+					<span class="badge bg-primary rounded-pill">50</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Junk
+					<span class="badge bg-primary rounded-pill">99</span>
+				</li>				
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Amount
+					<span class="badge bg-primary rounded-pill">23</span>
+				</li>
+			</ul>
+		</div>
+	</div>	
+	
+	<div class="row">
+		<div class="col-11 m-1 p-1">
+			<h3>Horizontal List Groups</h3>
+			<p>The .list-group-horizontal class displays the list items horizontally instead of vertically:</p>
+			<ul class="list-group list-group-horizontal">
+				<li class="list-group-item">First item</li>
+				<li class="list-group-item">Second item</li>
+				<li class="list-group-item">Third item</li>
+				<li class="list-group-item">Fourth item</li>
+				<li class="list-group-item list-group-item-info">Fiveth item</li>
+				<li class="list-group-item">Sixth item</li>
+				<li class="list-group-item">Seventh item</li>
+				<li class="list-group-item">Eighth item</li>
+			</ul>
+		</div>
+		
+	</div>
+	
+	<div class="row mt-3">
+		<div class="col-11 m-1 p-1">
+			<h3>Horizontal Linked List Groups</h3>
+			<div class="list-group list-group-horizontal list-group-flush">
+				<a href="#" class="list-group-item">Disabled item</a>
+				<a href="#" class="list-group-item">Disabled item</a>
+				<a href="#" class="list-group-item">Third item</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

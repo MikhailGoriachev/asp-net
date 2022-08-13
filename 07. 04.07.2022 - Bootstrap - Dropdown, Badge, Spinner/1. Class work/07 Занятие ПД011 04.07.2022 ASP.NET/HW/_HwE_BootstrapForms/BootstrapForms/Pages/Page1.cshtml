@@ -1,0 +1,154 @@
+﻿@page "{target?}"
+
+@model BootstrapForms.Pages.Page1Model
+@{
+    ViewBag.Title = "Страница 1";
+    ViewBag.Active = "Page1";
+    ViewBag.Header = "Обработка коллекции бытовой техники";
+
+    // TODO: вынести повторяющиеся функции в общий класс
+    // подсветить кнопку, в ответ на клик по которой выполняется обработка
+    string Active(string mode) => (string)ViewData["Mode"] == mode ? "" : "outline-";
+}
+
+@* 
+   Дополнительные пункты меню - обработчики для страницы, рендерим если не требуется
+   рендеринг формы ввода характеристик товара
+*@
+@section PageProcessing {
+    @if (!Model.RenderParamForm)
+    {
+        <hr/>
+
+        <!-- вертикальная группа кнопок - навигационных ссылок -->
+        <div class="btn-group-vertical gap-3">
+            <a class="btn btn-success" asp-page="/Page1" asp-page-handler="CreateGoods"
+               title="Добавление товара в коллекцию">
+                Добавить товар
+            </a>
+
+            <a class="btn btn-@Active("source")secondary" asp-page="/Page1"
+               title="Вывод всей коллекции в исходном порядке">
+                Исходный набор
+            </a>
+
+            @* режим сортировки передаем через параметр маршрута *@
+            <a class="btn btn-@Active("name")secondary" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="name"
+               title="Вывод коллекции, упорядоченной по наименованию">
+                По наименованию
+            </a>
+            <a class="btn btn-@Active("price")secondary" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="price"
+               title="Вывод коллекции, упорядоченной по убыванию цены">
+                По убыванию цены
+            </a>
+            <a class="btn btn-@Active("quantity")secondary" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="quantity"
+               title="Вывод коллекции, упорядоченной по возрастанию количества">
+                По возрастанию количества
+            </a>
+        </div>
+    }
+}
+
+<!-- Условие задачи -->
+<details>
+    <summary><b>Страница 1.</b> @ViewBag.Header</summary>
+    <p>
+        Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип техники, 
+        артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов. 
+        Коллекцию инициируйте набором записей, храните коллекцию в файле формата JSON в папке 
+        App_Data проекта.
+    </p>
+    <p>
+        Отображение данных одного элемента бытовой техники выполняйте при помощи карточки, 
+        стилизованной соответствующими классами Bootstrap.
+    </p>
+    <p>По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:</p>
+    <ul>
+        <li>вывод коллекции, упорядоченной по наименованию</li>
+        <li>вывод коллекции, упорядоченной по убыванию цены</li>
+        <li>вывод коллекции, упорядоченной по возрастанию количества</li> 
+        <li>
+            добавление элемента в коллекцию, параметры вводить в форму, 
+            стилизованную классами Bootstrap, сохраняйте измененную 
+            коллекцию в файле в формате JSON, как было сказано ранее, 
+            в папке App_Data проекта 
+        </li>
+    </ul>
+
+</details>
+
+@* Ренедринг коллекции в формате карточек *@
+@* 
+    поскольку требуется размещение в несколько рядов - рендерим карточки в "строке" системы сеток,
+    а строка должна находиться в контейнере
+*@
+<div class="container-fluid">
+    <div class="row">
+        @if (Model.RenderParamForm)
+        {
+            @* Ренедрим форму ввода характеристик товара *@
+            <div class="col-8 m-1 p-3">
+                <h3>Характеристики добавляемого товара</h3>
+                <form method="post" asp-page="/Page1"> 
+                    <div class="form-floating mb-3">
+                        <select class="form-select" asp-for="Goods.Type">
+                            <option>холодильник</option>
+                            <option>микроволновая печь</option>
+                            <option>блинница</option>
+                            <option>пылесос-робот</option>
+                            <option>стиральная машина</option>
+                        </select>
+                        <label asp-for="Goods.Type" class="form-label">Категория товара:</label>
+                    </div>
+                    
+                    @* Наименование товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="text" class="form-control" placeholder="наименование" asp-for="Goods.Name" value="">
+                        <label asp-for="Goods.Name">Наименование товара:</label>
+                    </div>
+                    
+                    @* Артикул товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="text" class="form-control" placeholder="артикул" asp-for="Goods.VendorCode" value="">
+                        <label asp-for="Goods.VendorCode">Артикул товара:</label>
+                    </div>
+                    
+                    @* Цена товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="цена" asp-for="Goods.Price" value="0">
+                        <label asp-for="Goods.Price">Цена товара:</label>
+                    </div>
+                    
+                    @* Количество товара *@
+                    <div class="form-floating mt-3 mb-3">
+                        <input type="number" class="form-control" placeholder="количество" asp-for="Goods.Quantity" value="0">
+                        <label asp-for="Goods.Quantity">Количество товара:</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            @foreach (var goods in Model.DisplayGoods)
+            {
+                <div class="card m-1 w-25">
+                    <img class="card-img-top app-img-card" src="~/images/task01/@(goods.Image)" alt="Card image">
+                    <div class="card-header">
+                        <p>@goods.Name</p>
+                    </div>
+                    <div class="card-body bg-light">
+                        <ul class="list-unstyled">
+                            <li>артикул: @goods.VendorCode</li>
+                            <li>@goods.Type</li>
+                            <li>Цена: @($"{goods.Price:n2}") руб.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <p>Количество: @goods.Quantity</p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

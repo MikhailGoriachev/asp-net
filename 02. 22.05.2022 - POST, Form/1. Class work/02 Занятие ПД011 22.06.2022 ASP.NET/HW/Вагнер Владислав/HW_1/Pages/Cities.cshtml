@@ -1,0 +1,34 @@
+﻿@page
+@model HW_1.Pages.CitiesModel
+@{
+    ViewData["title"] = "Страница Cities";
+    ViewData["pageHeader"] = "СТРАНИЦА: ГОРОДА";
+}
+
+<section>
+
+    <details class="task-details">
+        <summary><b>Задача 3.</b></summary>
+        <div>
+            Имя страницы <b>Cities.cshtml</b>. В ответ на Get-запрос клиента <b>/Cities</b> 
+            сформировать представление со сведениями о пяти городах по Вашему выбору. 
+            Используйте модель, коллекцию. По каждому городу требуется выводить: 
+            название, год основания, герб, население на текущий момент, площадь.
+        </div>
+    </details>
+
+    @*Вывод сформированной коллецкии*@
+    <div class="cards-container">
+        @foreach (var city in Model.Cities)
+        {
+            <div class="card">
+                <img src="@city.Sign" alt="Герб: @city.CityName" />
+                <div>Название города: <b>@city.CityName</b></div>
+                <div>Год основания: <b>@city.FoundYear</b></div>
+                <div>Насление: <b>@city.Population)</b></div>
+                <div>Площадь: <b>@($"{city.Square:f2}")</b> км<sup>2</sup></div>
+            </div>
+        }
+    </div>
+
+</section>

@@ -1,0 +1,112 @@
+﻿@page "{handler?}"
+@using HomeWork.Models
+@model HomeWork.Pages.FiguresModel
+@{
+    // индекс страницы
+    ViewBag.indexTab = 3;
+
+    // название страницы
+    ViewData["Header"] = "Задача 3. Фигуры";
+}
+
+@functions {
+    // вывод бытовой техники
+    private void ShowFigure(IFigure figure)
+    {
+        if (figure != null)
+        {
+            <div class="tile">
+                <div class="tile-image normal">
+                    <img src="/images/figures/@figure.Image" alt="Фигура">
+                </div>
+
+                <div>Наименование: <b>@figure.Name</b></div>
+                @foreach (var item in figure.ParamAndValue)
+                {
+                    <div>@item.Key: <b>@($"{item.Value:f5}")</b></div>
+                }
+                <div>Периметр: <b>@($"{figure.Perimeter:f5}")</b></div>
+                <div>Площадь: <b>@($"{figure.Area:f5}")</b></div>
+            </div>
+        }
+    }
+
+    // вывод коллекции бытовой техники
+    private void ShowFigureList(List<IFigure> figures)
+    {
+        <div class="container">@{
+                figures.ForEach(a => ShowFigure(a));
+            }</div>
+    }
+}
+
+<article>
+    <details>
+
+        <summary>
+            <h2>Задача 3. Фигурры</h2>
+        </summary>
+
+        <!-- #region Задача 3 -->
+        <p>
+            <b>Задача 3.</b> Требуется хранить коллекцию плоских геометрических фигур: квадраты, прямоугольники,
+            разносторонние треугольники. По кнопке <b>submit</b> (метод POST) формируйте фигуру, случайным образом
+            выбирая ее
+            тип и размер. Добавляйте эту фигуру в коллекцию. Отображайте коллекцию на этой же странице, выводите также
+            изображение фигуры.
+        </p>
+
+        <p>По ссылкам на этой странице вызывайте обработчики запросов GET:</p>
+
+        <ul>
+            <li>вывод только квадратов, по убыванию площади</li>
+            <li>вывод только прямоугольников, по возрастанию периметра</li>
+            <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>
+            <li>вывод всей коллекции в исходном порядке</li>
+            <li>вывод всей коллекции по убыванию площади</li>
+        </ul>
+        <!-- #endregion -->
+
+    </details>
+</article>
+
+<article>
+
+    <!-- Форма -->
+    <form method="post" asp-page-handler="AddFigure" class="width-normal">
+        <!-- Кнопки управления -->
+        <div class="form-grid-controls">
+            <input class="width-normal" type="submit" value="Добавить фигуру" />
+        </div>
+    </form>
+
+    <!-- Сортировки -->
+    <h3>Сортировки</h3>
+    <div>
+        <a asp-page="/Figures" class="link-button width-normal">По умоланию</a>
+        <a asp-page-handler="OrderByDescArea" class="link-button width-normal">По убыванию площади</a>
+    </div>
+
+
+    <!-- Выборки -->
+    <h3>Выборки</h3>
+    <div>
+        <a asp-page-handler="SelectBySquare" class="link-button width-normal"
+            title="Вывод только квадратов, по убыванию площади">Только квадраты</a>
+        <a asp-page-handler="SelectByRect" class="link-button width-normal"
+            title="Вывод только прямоугольников, по возрастанию периметра">Только прямоугольники</a>
+        <a asp-page-handler="SelectByTriangle" class="link-button width-normal"
+            title="Вывод только треугольников, в обратном порядке по отношению к порядку в коллекции">Только
+            треугольники</a>
+    </div>
+
+    <h2 class="text-align-center">@Model.NameHandler</h2>
+
+
+    <!-- Вывод бытовой техники -->
+    @{
+        ShowFigureList(Model.CurrentFigures);
+    }
+
+
+</article>

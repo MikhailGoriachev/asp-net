@@ -1,0 +1,59 @@
+﻿@page
+@model First
+@{
+    Layout = "_TaskLayout";
+    ViewData["Title"] = "Задача №1";
+}
+
+@section Description
+{
+    <p>
+        <b>Страница 1.</b> В форме вводите данные о бытовой технике на оптовом складе (наименование, артикул, цена, количество, изображение).
+        Используйте привязку параметров формы к свойствам модели страницы. Введенные данные отображайте на этой же странице.
+    </p>
+}
+
+<form method="POST">
+    <div class="row justify-content-center">
+        <div class="col-3 mb-3">
+            <label asp-for="Input.Name" class="form-label">Название</label>
+            <input class="form-control" asp-for="Input.Name">
+        </div>
+        <div class="col-3 mb-3">
+            <label asp-for="Input.Code" class="form-label">Артикул</label>
+            <input class="form-control" asp-for="Input.Code">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-2 mb-3">
+            <label asp-for="Input.Price" class="form-label">Цена</label>
+            <input class="form-control" asp-for="Input.Price">
+        </div>
+        <div class="col-2 mb-3">
+            <label asp-for="Input.Count" class="form-label">Количество</label>
+            <input class="form-control" asp-for="Input.Count">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <label class="text-center mb-3">Изображение</label>
+        @foreach (var file in Model.GetPossibleImageNames())
+        {
+            <div class="col-auto mb-3 form-check">
+                <input class="form-check-input" type="radio" asp-for="Input.Image" value="@file">
+                <img src="images/@file" style="height: 10vh">
+            </div>
+        }
+    </div>
+    <div class="row justify-content-center mt-3">
+        <button class="col-2 btn btn-success" type="submit">Отправить</button>
+    </div>
+</form>
+
+@if (Request.Method == "POST")
+{
+    <div class="d-flex justify-content-center mt-5 row">
+        <div class="col-4">
+            <partial name="_ProductCard" model="Model.Input"/>
+        </div>
+    </div>
+}

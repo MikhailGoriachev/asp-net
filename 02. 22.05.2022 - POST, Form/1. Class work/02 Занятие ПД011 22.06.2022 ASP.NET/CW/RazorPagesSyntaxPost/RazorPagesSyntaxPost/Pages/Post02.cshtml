@@ -1,0 +1,18 @@
+﻿@page
+@model RazorPagesSyntaxPost.Pages.Post02Model
+@{
+}
+
+<h3>@Model.Message</h3>
+
+<form method="post" >
+    <p>
+        <label>Имя:</label><br />
+        <input type="text" name="name" />
+    </p>
+    <p>
+        <label>Возраст:</label><br />
+        <input type="number" name="age" />
+    </p>
+    <input type="submit" value="Отправить" />
+</form>

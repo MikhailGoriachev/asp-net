@@ -1,0 +1,28 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model EmptyProjectRazorPages.Pages.SecondModel
+@{
+    ViewData["Title"] = "Привет, мир";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Первая страница</title>
+    <link href="~/style.css" rel="stylesheet" />
+</head>
+<body>
+<a asp-page="/Index">Первая страница</a> |
+<a asp-page="/Second">Вторая страница</a>
+<hr />
+
+<h3>Вторая страница</h3>
+
+<hr />
+<footer>
+    Донецк, 2022, ASP.NET
+</footer>
+</body>
+</html>

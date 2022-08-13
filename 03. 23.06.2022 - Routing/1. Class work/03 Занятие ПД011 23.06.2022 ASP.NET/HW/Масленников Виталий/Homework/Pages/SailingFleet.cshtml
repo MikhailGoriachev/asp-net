@@ -1,0 +1,100 @@
+﻿@page
+@model Homework.Pages.SailingFleetModel
+@{
+	ViewBag.Header = "Корабли";
+}
+
+<link rel="stylesheet" href="css/table.css">
+
+<div class="indented">
+	<details>
+		<summary>Задание</summary>
+		<p>
+			Имя страницы <b>SailingFleet.cshtml</b>. В ответ на GET-запрос клиента <b>/SailingFleet</b> сформировать
+			 представление с формой для ввода в массив сведений о трех парусных кораблях (длина в метрах, ширина в метрах, 
+			водоизмещение в тоннах, название, год постройки, изображение): линейный корабль «Виктория», чайный клиппер «Катти Сарк»
+			 и барк «Крузенштерн». Используйте модель, коллекцию. Изображение задавайте присваиванием заранее известного имени файла
+			 в соответствующее поле элемента массива (хард-код). Метод обработки формы – POST, массив выводите на этой же странице.
+					</p>
+	</details>
+
+	<div class="v-indent-20">
+		<form method="post">
+			<fieldset>
+				<legend>Характеристики кораблей:</legend>
+				<div class="h-wrap">
+					<div class="t2-form-block">
+						Линейный корабль «Виктория»:
+						<input type="hidden" name="ships[0].name" value="Виктория"/>
+						<input type="hidden" name="ships[0].type" value="линейный корабль"/>
+						<input type="hidden" name="ships[0].image" value="victory.jpg"/>
+						<div class="field"><label class="w2">Длина: </label><input class="t2-input" type="number" name="ships[0].length"  step="0.01"/></div>
+						<div class="field"><label class="w2">Ширина:</label> <input class="t2-input" type="number" name="ships[0].width"  step="0.01"/></div>
+						<div class="field"><label class="w2">Водоизмещение:</label> <input class="t2-input" type="number" name="ships[0].displacement" step="0.01"/></div>
+						<div class="field"><label class="w2">Год постройки: </label><input class="t2-input" type="number" name="ships[0].year"/></div>
+
+						<div><input type="submit" value="Отправить"></div>
+					</div>
+					<div class="t2-form-block">
+						Чайный клиппер «Катти Сарк»:
+						<input type="hidden" name="ships[1].name" value="Катти Сарк"/>
+						<input type="hidden" name="ships[1].type" value="чайный клиппер"/>
+						<input type="hidden" name="ships[1].image" value="сutty_sark.jpg"/>
+						<div class="field"><label class="w2">Длина: </label><input class="t2-input" type="number" name="ships[1].length" value="85.4" step="0.01"/></div>
+						<div class="field"><label class="w2">Ширина:</label> <input class="t2-input" type="number" name="ships[1].width" value="11" step="0.01"/></div>
+						<div class="field"><label class="w2">Водоизмещение:</label> <input class="t2-input" type="number" name="ships[1].displacement" value="2133.78" step="0.01"/></div>
+						<div class="field"><label class="w2">Год постройки: </label><input class="t2-input" type="number" name="ships[1].year" value="1869"/></div>
+
+					</div>
+					<div class="t2-form-block">
+						Барк «Крузенштерн»:
+						<input type="hidden" name="ships[2].name" value="Крузенштерн"/>
+						<input type="hidden" name="ships[2].type" value="барк"/>
+						<input type="hidden" name="ships[2].image" value="krusenstern.jpg"/>
+						<div class="field"><label class="w2">Длина: </label><input class="t2-input" type="number" name="ships[2].length" value="114.5" step="0.01"/></div>
+						<div class="field"><label class="w2">Ширина:</label> <input class="t2-input" type="number" name="ships[2].width" value="14" step="0.01"/></div>
+						<div class="field"><label class="w2">Водоизмещение:</label> <input class="t2-input" type="number" name="ships[2].displacement" value="5805" step="0.01"/></div>
+						<div class="field"><label class="w2">Год постройки: </label><input class="t2-input" type="number" name="ships[2].year" value="1926"/></div>
+
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	@if (Model.Fleet?.Count > 0)
+	{
+		<table>
+			<thead>
+			<th>№</th>
+			<th>Фото</th>
+			<th>Название</th>
+			<th>Тип</th>
+			<th>Год постройки</th>
+			<th>Длина, м</th>
+			<th>Ширина, м</th>
+			<th>Водоизмещение, т</th>
+			</thead>
+
+			@{
+				var i = 1;
+				foreach (var fleet in Model.Fleet!)
+				{
+							<tr>
+								<td>@(i++)</td>
+								<td><img src="images/fleets/@fleet.Image" alt="Корабль"/></td>
+								<td class="align-left">@fleet.Name</td>
+								<td class="align-left">@fleet.Type</td>
+								<td>@fleet.Year</td>
+								<td>@fleet.Length</td>
+								<td>@fleet.Width</td>
+								<td>@fleet.Displacement</td>
+							</tr>
+				}
+			}
+
+		</table>
+	}
+</div>
+
+

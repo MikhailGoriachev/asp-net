@@ -1,0 +1,144 @@
+﻿@functions {
+    // получить стиль
+    // string ActiveStyle(string pageName) => ViewBag.PageName == pageName ? "active" : "";
+    string ActiveStyle(string pageName) => Url.ActionContext.ActionDescriptor.DisplayName == pageName ? "active" : "";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>@ViewBag.Title</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/icon.svg">
+
+    <!-- подключение дополнительных стилей и скриптов -->
+    @RenderSection("Head", false)
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center ">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" asp-page="/Index">
+            <img class="logo" src="~/images/icon.svg" alt="logo">
+            @* HomeWork *@
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- #region Ссылки на страницы -->
+
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("/Index") mx-3" asp-page="/Index">Главная</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("/Periodicals") mx-3" asp-page="/Periodicals">Подписки</a>
+                </li>
+
+                <!-- Выборка подписок -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("/PeriodicalsSelection")" href="#"
+                       id="navbarPeriodicalsSelection" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Выборка подписок
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarPeriodicalsSelection">
+
+                        <!-- По индексу -->
+                        <li>
+                            <a class="dropdown-item"
+                               asp-page="/PeriodicalsSelection"
+                               asp-route-selectBy="ByIndex">По индексу</a>
+                        </li>
+
+                        <!-- По цене -->
+                        <li>
+                            <a class="dropdown-item"
+                               asp-page="/PeriodicalsSelection"
+                               asp-route-selectBy="ByPriceRange">По цене</a>
+                        </li>
+
+                        <!-- По длительности подписки -->
+                        <li>
+                            <a class="dropdown-item"
+                               asp-page="/PeriodicalsSelection"
+                               asp-route-selectBy="ByDurationRange">По длительности подписки</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Отчёты -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("/PeriodicalsReport")" href="#"
+                       id="navbarPeriodicalsReport" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Отчёты
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarPeriodicalsSelection">
+
+                        <!-- Запрос 3 -->
+                        <li>
+                            <a class="dropdown-item"
+                               asp-page="/PeriodicalsReport"
+                               asp-route-groupBy="Query3">Запрос 3</a>
+                        </li>
+
+                        <!-- Запрос 4 -->
+                        <li>
+                            <a class="dropdown-item"
+                               asp-page="/PeriodicalsReport"
+                               asp-route-groupBy="Query4">Запрос 4</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- #endregion -->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+    @RenderBody()
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

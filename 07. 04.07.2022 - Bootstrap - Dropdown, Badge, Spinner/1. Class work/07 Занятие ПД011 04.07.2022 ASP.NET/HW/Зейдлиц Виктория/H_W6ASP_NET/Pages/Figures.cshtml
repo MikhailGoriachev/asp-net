@@ -1,0 +1,129 @@
+﻿@page "{handler?}"
+@model H_W6ASP_NET.Pages.FiguresModel
+@{
+    ViewBag.Title = "Homework";
+    // индекс страницы
+    ViewBag.indexTab = 2;
+    ViewBag.Header = "Плоские геометрические фигуры";
+
+    // номер строки таблицы
+    int i;
+}
+
+
+<details>
+    <summary> Коллекция плоских геометрических фигур </summary>
+       <b>Страница 2.</b> Требуется хранить в файле формата JSON в папке App_Data
+        проекта коллекцию плоских геометрических фигур: квадраты, прямоугольники,
+        разносторонние треугольники. Инициализация коллекции должна проводиться
+        при отсутствии файла, формируйте не менее 10 фигур.    
+    <p>
+        В форме на странице выбирайте тип фигуры, и по кнопке «Создать» формируйте еще
+        одну форму (на этой же странице) для ввода параметров фигуры. При рендеринге
+        формы для параметров форму для выбора типа фигуры рендерить не надо. Все формы 
+        должны быть стилизованы классами Bootstsap. 
+    </p>
+    <p>
+        Отображайте коллекцию на этой же странице в таблице, стилизованной классами Bootstrap
+        (в ячейке таблицы также выводите изображение фигуры).   
+        По ссылкам на этой странице (кнопкам в стиле Bootstrap) вызывайте обработчики запросов GET:
+    </p>
+    <ul>
+        <li>вывод всей коллекции в исходном порядке</li>
+        <li>вывод только квадратов, по убыванию площади</li>
+        <li>вывод только прямоугольников, по возрастанию периметра</li>
+        <li>вывод только треугольников, в обратном порядке по отношению к порядку в коллекции</li>       
+        <li>вывод всей коллекции по убыванию площади</li>
+        <li>вывод всей коллекции, упорядоченной по типу фигур</li>
+    </ul>
+
+</details>
+
+
+<details>
+    <summary>Форма для добавления фигуры в коллекцию</summary>
+    <form method="post" class="border border-1 rounded w-75"  asp-antiforgery="true"  >
+        <div class="row">
+            <div class="col-md-4 mb-3 ms-1">
+                <label class="col-form-label" asp-for="TypesFigure" >Тип фигуры:</label>
+                <select type="text" class="form-select form-select-sm" asp-for="TypesFigure" asp-items="Model.TypesFigure"></select>
+            </div>
+                            
+            <div class="col-md-4 mb-3">
+                <label asp-for="SideA" class="col-form-label">Сторона A:</label>
+                <input type="number" asp-for="SideA" class="form-control-sm" min="0" step="any" required/>
+            </div>
+                   
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3 ms-1">
+                <label asp-for="SideB" class="col-form-label">Сторона B:</label>
+                <input type="number" asp-for="SideB" class="form-control-sm" min="0" step="any" required/>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="SideC" class="col-form-label">Сторона C:</label>
+                <input type="number" asp-for="SideC" class="form-control-sm" min="0" step="any" required/>
+            </div>
+           <button class="btn btn-primary btn-sm col-md-2 ms-3 mb-3 mt-5" type="submit" asp-page-handler="AddFigure">Создать</button>
+        </div>
+    </form>
+</details>
+
+
+@* Дополнительные пункты меню - обработчики для страницы *@
+@section Menu{
+    <div class="btn-group-vertical gap-3">
+    <label for="selectBy" class="label mt-3 h6">Вывод коллекции:</label>
+    <a class="btn btn-sm" title="Вывод всей коллекции в исходном порядке" name="selectBy">Фигуры</a>
+    <a class="btn btn-sm" asp-page-handler="SquareAreaDesc" 
+       title="Вывод квадратов, по убыванию площади" name="selectBy">Квадраты</a>
+    <a class="btn btn-sm" asp-page-handler="RectanglePerim" 
+       title="Вывод прямоугольников, по возрастанию периметров" name="selectBy">Прямоугольники</a>
+    <a class="btn btn-sm" asp-page-handler="TriangleRevers" 
+       title="Вывод треугольников, в обратном порядке, по отношению к порядку в коллекции" name="selectBy">Треугольники</a>
+
+    <label for="sort" class="label mt-3 h6">Сортировка коллекции:</label>
+    <a class="btn btn-sm" asp-page-handler="OrderByAreaDesc" 
+       title="Вывод коллекции по убыванию площади" name="sort">По площади</a>
+    <a class="btn btn-sm" asp-page-handler="OrderByType" 
+       title="Вывод коллекции по типу фигуры" name="sort">По типу фигуры</a>
+
+    <label for="add" class="label mt-3 h6">Добавление фигуры:</label>
+    <a class="btn btn-sm" asp-page-handler="AddFigureRand" 
+       title="Добавление фигуры в коллекцию:" name="add">Добавить</a>
+</div>
+}
+
+
+<div class="container mt-3">
+    <!-- Таблица с коллекцией фигур -->
+    <div class="table-responsive" >
+<table class="table table-bordered table-striped table-hover ps-0">
+    <thead>
+    <tr class="table-primary">
+        <th>№ <br />п/п</th>
+        <th>Тип фигуры</th>
+        <th>Изображение фигуры</th>
+        <th>Размеры фигуры</th>
+        <th>Периметр фигуры</th>
+        <th>Площадь фигуры</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        i = 1;
+        foreach (var figure in Model.Figures) {
+                <tr>
+                    <td>@(i++)</td>
+                    <td>@figure.Type</td>
+                    <td><img src="~/img/task2/@(figure.Image)" height="120" width="120"/></td>
+                    <td>@figure</td>
+                    <td class="text-center">@($"{figure.Perimeter():f3}")</td>
+                    <td class="text-center">@($"{figure.Area():f3}")</td>
+                </tr>
+        }
+    }
+    </tbody>
+</table>
+</div>
+</div>

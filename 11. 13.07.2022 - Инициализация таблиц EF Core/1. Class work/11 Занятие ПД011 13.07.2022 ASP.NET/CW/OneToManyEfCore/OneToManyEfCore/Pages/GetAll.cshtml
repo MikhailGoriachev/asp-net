@@ -1,0 +1,50 @@
+﻿@page "{id?}"
+
+@model OneToManyEfCore.Pages.GetAllModel
+@{
+}
+
+<h3>Подписки на <u>@($"{DateTime.Now:dd/MM/yyyy}")</u></h3>
+<div><a class="btn btn-success" asp-page="/Create">Добавить</a></div>
+
+@* вывод коллекции данных о подписных изданиях и подписках *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>Индекс</th>
+            <th>Категория</th>
+            <th>Название</th>
+            <th>Цена 1 экз., руб.</th>
+            <th>Дата начала</th>
+            <th>Длительность, мес.</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var publication in Model.Publications)
+        {
+            <tr>
+                <td>@publication.Id</td>
+                <td>@publication.PubIndex</td>
+                <td>@publication.Category.CategoryName</td>
+                <td>@publication.Title</td>
+                <td>@publication.Cost</td>
+                <td>@($"{publication.Start:dd/MM/yyyy}")</td>
+                <td>@publication.Duration</td>
+
+                @* управление: переход на редактирование записи, удаление записи
+                    идентификатор записи передаем параметром маршрута 
+                *@
+                <td>
+                    <form class="form-check-inline" method="post" asp-page-handler="Delete" asp-route-id="@publication.Id">
+                        <a class="btn btn-sm btn-outline-warning" asp-page="/Edit" asp-route-id="@publication.Id">Редактировать</a>
+                        <button class="btn btn-sm btn-outline-danger" type="submit">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

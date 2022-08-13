@@ -1,0 +1,214 @@
+/* Главный стиль страницы */
+
+/* общие стили страницы */
+html,
+body {
+    font-size: 10pt;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    color: white;
+    background: linear-gradient(#3056d3, #152455);
+}
+
+/* общие стили блоков */
+header,
+main,
+footer {
+    box-sizing: border-box;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flexbox;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+/* статья */
+article {
+    font-family: Calibri, sans-serif;
+    font-size: 1.4rem;
+}
+
+/* заголовок */
+header {
+    /* box-align: center; */
+
+    height: 4rem;
+    padding: 0;
+    padding-left: 2rem;
+}
+
+    /* ссылка в заголовке */
+    header a {
+        display: -moz-box;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flexbox;
+        -moz-box-align: center;
+        -webkit-box-align: center;
+        box-align: center;
+        text-decoration: none;
+        color: white;
+        transition: transform 0.5s 0s ease-out, filter 1s linear;
+    }
+
+        /* наведение на заголовок */
+        header a:hover {
+            transform: scale(1.1);
+            filter: hue-rotate(180deg) contrast(150%);
+        }
+
+    /* заголовок h2 */
+    header h2 {
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+    }
+
+    /* логотип заголовка */
+    header .logo {
+        height: 2.5rem;
+        margin: 0 1rem;
+        transition: all 1s 0s ease-out;
+    }
+
+/* контент */
+main {
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* панель навигации */
+nav {
+    width: 22rem;
+    /* height: auto; */
+
+    margin-right: 0.5rem;
+    padding: 1rem;
+}
+
+    /* ссылки навигации */
+    nav > a {
+        font-size: 1.1rem;
+        display: -moz-box;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flexbox;
+        padding: 1rem;
+        margin: 0.3rem;
+        border-radius: 1rem;
+        border: 2px solid transparent;
+        -moz-box-align: center;
+        -webkit-box-align: center;
+        box-align: center;
+        text-decoration: none;
+        color: white;
+        box-sizing: border-box;
+        transition: all 0.5s 0s ease-out;
+    }
+
+        /* текущая вкладка */
+        nav > a.select-tab {
+            border: 2px solid #92aaff;
+        }
+
+        /* наведение на пункт меню */
+        nav > a:hover {
+            /* background-color: #577bff; */
+
+            border: 2px solid #577bff;
+            /* border: 2px solid #98afff; */
+        }
+
+            nav > a:hover img {
+                /* background-color: #577bff; */
+
+                transform: scale(1.1);
+            }
+
+        /* изображение */
+        nav > a img {
+            display: block;
+            margin-right: 1rem;
+            transition: all 0.2s 0s ease-out;
+        }
+
+/* контент страницы */
+.content {
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border-radius: 1rem;
+    /* margin-right: 1rem; */
+
+    margin: 0 1rem 0 0.5rem;
+    padding: 3rem;
+    box-shadow: 0 0 5rem 1rem rgba(0, 0, 0, 0.281);
+}
+
+/* подвал страницы */
+footer {
+    height: 7rem;
+    /* background-color: blue; */
+
+    -moz-box-pack: justify;
+    -webkit-box-pack: justify;
+    box-pack: justify;
+    flex-wrap: wrap;
+    font-size: 1rem;
+    -moz-box-align: center;
+    -webkit-box-align: center;
+    box-align: center;
+    padding: 0 1.5rem;
+}
+
+    /* оформление элементов */
+    footer div {
+        display: block;
+        transition: all 0.1s;
+    }
+
+    /* ссылка в подвале страницы */
+    footer a {
+        text-decoration: none;
+        color: #8195da;
+        font-weight: bold;
+    }
+
+    /* наведение на элемент подвала */
+    footer div:hover {
+        color: #8195da;
+    }
+
+/* статья */
+article {
+    font-family: Calibri, sans-serif;
+    font-size: 1.4rem;
+}
+
+/* заголовки h2 */
+summary h2 {
+    display: inline;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+/* выравнивание текста по центру */
+.text-align-center {
+    text-align: center;
+}
+
+/* выравнивание текста по правой стороне */
+.text-align-right {
+    text-align: right;
+}
+
+/* выравание контента по центру */
+div.content-center {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

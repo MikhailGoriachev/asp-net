@@ -1,0 +1,122 @@
+﻿@functions {
+    string Active(string page) => ViewBag.Active == page ? "primary" : "secondary";
+}
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Задание на 11.07.2022 - @ViewBag.Title</title>
+
+    <!-- внешнее подключение стилей  -->
+    <link rel="stylesheet" href="/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- картинка для отображения в заголовке вкладки браузера -->
+    <link rel="icon" href="/images/blimp.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/blimp.png" type="image/x-icon" />
+
+    <!-- скрипты для Bootstrap -->
+    <script src="lib/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-page="/Index">ПД011</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#appNavbar-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="appNavbar-1">
+                <ul class="navbar-nav">
+                    @* Страница 1. Коллекция бытовой техники *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Бытовая техника</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page1" title="Вывод всей коллекции в исходном порядке">
+                                    Вся коллекция
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="price"
+                                   title="Вывод коллекции, упорядоченной по убыванию цены">
+                                    По убыванию цены
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="price"
+                                   title="Вывод коллекции, упорядоченной по убыванию цены">
+                                    По убыванию цены
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page1" asp-page-handler="OrderBy" asp-route-target="quantity"
+                                   title="Вывод коллекции, упорядоченной по возрастанию количества">
+                                    По возрастанию количества
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    @* Страница 2. Коллекция сведенийо кораблях *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Корабли</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page2"
+                                   title="Вывод коллекции в исходном порядке">
+                                    По умолчанию
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page2" asp-page-handler="PhysicalFile"
+                                   title="Вывод коллекции, упорядоченной по году постройки">
+                                    По году постройки
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page2" asp-page-handler="BytesArray"
+                                   title="Вывод коллекции, упорядоченной по убыванию водоизмещения">
+                                    По убыванию водоизмещения
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-page="/Page2" asp-page-handler="FileStream"
+                                   title="Вывод коллекции, упорядоченной по названию корабля">
+                                    По названию
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    @* Фотогалеря *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Фотогалерея</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-page="/Page3">Бытовая техника</a></li>
+                            <li><a class="dropdown-item" asp-page="/Page4">Корабли</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid">
+        <div class="row m-5">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="container-fluid bg-dark text-white-50 text-center">
+        <h5>Студент Программер, ПД011, Донецк, 2022</h5>
+    </footer>
+</body>
+</html>

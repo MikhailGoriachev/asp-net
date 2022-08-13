@@ -1,0 +1,33 @@
+﻿@page
+@model Homework.Pages.Query6
+@{
+    ViewBag.Header = "Запрос на выборку";
+}
+
+@* Таблица с данными *@
+<table class="table text-center">
+    <thead class="fw-bold align-top">
+    <tr>
+        <td>Страна назначения</td>
+        <td>Цель поездки</td>
+        <td>Дата начала<br/> поездки</td>
+        <td>Кол-во дней</td>
+        <td>Стоимость поездки<br/>(полная)</td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.QueryResult is not null && Model.QueryResult.Any()){
+        @foreach (var travel in Model.QueryResult){
+            <tr>
+                <td>@travel.Country</td>
+                <td>@travel.Purpose</td>
+                <td>@($"{travel.StartDate:dd.MM.yy}")</td>
+                <td>@travel.Duration</td>
+                <td>@travel.TotalCost</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="5" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

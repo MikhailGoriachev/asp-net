@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Key = 3;
+}
+<div>
+    Выбран товар: @Model
+</div>
+
+<br/>
+<hr/>
+<br/>
+
+@* после клика по этой ссылке не забыть почистить адресную строку браузера*@
+<div>
+    <a asp-controller="Products" asp-action="Details" asp-route-key="@ViewBag.Key">Обращение к товару по ключу: @ViewBag.Key</a>
+</div>

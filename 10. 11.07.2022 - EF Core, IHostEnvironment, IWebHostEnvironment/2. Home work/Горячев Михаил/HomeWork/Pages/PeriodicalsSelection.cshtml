@@ -1,0 +1,242 @@
+@page "{handler?}"
+@using HomeWork.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model HomeWork.Pages.PeriodicalsSelection
+
+@{
+    ViewBag.Title = "Выборка подписок";
+}
+
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <!-- #region Теоретическая часть -->
+    <details>
+        <summary class="h5 text-primary ">
+            Задание 1. Учет подписки на периодические печатные издания
+        </summary>
+
+        <!-- #region Задание 1 -->
+        <p>
+            Разработайте приложение ASP.NET Core, состоящее из нескольких страниц Razor Pages. Стилизацию разметки
+            выполняйте при помощи Bootstrap. Реализуйте вывод задания, вывод всех записей таблицы, создание, удаление и
+            редактирование записей таблицы. Реализуйте также выполнение запросов по заданию.
+        </p>
+
+        <!-- Таблица спецификации -->
+        <table class="table table-bordered w-50 mx-auto bg-white">
+            <tbody>
+            <tr >
+                <td class="fst-italic">
+                    Создайте базу данных «<b>Учет подписки на периодические печатные издания</b>»
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-bold fst-italic">
+                    База данных должна включать только таблицу ИЗДАНИЯ, содержащую следующую информацию:
+                </td>
+            </tr>
+            <tr>
+                <td>Индекс издания по каталогу (строка из цифр)</td>
+            </tr>
+            <tr>
+                <td>Вид издания (газета, журнал, альманах, каталог, …)</td>
+            </tr>
+            <tr>
+                <td>Наименование издания (название газеты, журнала, …)</td>
+            </tr>
+            <tr>
+                <td>Цена 1 экземпляра (в руб.)</td>
+            </tr>
+            <tr>
+                <td>Дата начала подписки</td>
+            </tr>
+            <tr>
+                <td>Длительность подписки (количество месяцев)</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <!-- Таблица запросов -->
+        <table class="table table-bordered bg-white w-50 mx-auto">
+            <!-- Заголовок таблицы -->
+            <thead>
+            <tr>
+                <th>Номер запроса</th>
+                <th>Тип запроса</th>
+                <th>Какую задачу решает запрос</th>
+            </tr>
+            </thead>
+
+            <!-- Тело таблицы -->
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Запрос на выборку</td>
+                <td>Выбирает информацию об издании с заданным <b>индексом</b>.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Запрос на выборку</td>
+                <td>
+                    Выбирает информацию обо всех изданиях, для которых <b>цена 1 экземпляра</b> есть значение из
+                    некоторого диапазона.
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Запрос на выборку</td>
+                <td>
+                    Выбирает информацию об изданиях, для которых <b>Длительность подписки</b> есть значение из
+                    некоторого диапазона.
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Итоговый запрос – агрегатные функции</td>
+                <td>
+                    Выполняет группировку по полю <b>Вид издания</b>. Для каждого вида вычисляет среднюю цену 1 экземпляра,
+                    количество изданий в группе
+                </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Итоговый запрос – агрегатные функции</td>
+                <td>Выполняет группировку по полю <b>Вид издания</b>. Для каждого вида вычисляет максимальную и минимальную цену 1 экземпляра, количество изданий в группе</td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- #endregion -->
+
+
+    </details>
+    <!-- #endregion -->
+</section>
+
+
+<!-- #region Управление коллекцией -->
+<div class="container-fluid px-5 my-4">
+    <div class="row m-0 p-0">
+        <div class="row m-0 p-0">
+
+            <!-- Выборка по индексу -->
+            <div class="col-4 ps-0 pe-3">
+
+                <div class="container mx-auto bg-light shadow-sm border rounded-3 py-3">
+                    <h5 class="text-center">Выборка по индексу</h5>
+                    <hr/>
+                    <form method="post" class="d-inline-flex justify-content-between w-100">
+
+                        <div class="form-floating w-100 me-3">
+                            <input asp-for="Index" type="text" class="form-control" placeholder="Индекс" required>
+                            <label asp-for="Index">Индекс</label>
+                        </div>
+
+                        <input asp-page="/PeriodicalsSelection" asp-page-handler="SelectionByIndex"
+                               type="submit" value="Выбрать" class="btn btn-success "/>
+
+                    </form>
+                </div>
+            </div>
+
+            <!-- Выборка по цене -->
+            <div class="col-4 ps-3 pe-0">
+                <div class="container mx-auto bg-light shadow-sm border rounded-3 py-3">
+                    <h5 class="text-center">Выборка по цене</h5>
+                    <hr/>
+                    <div class="row">
+
+                        <form method="post" class="d-inline-flex">
+
+                            <div class="form-floating me-3">
+                                <input asp-for="MinPrice" type="number" class="form-control" placeholder="Минимум (&#8381;)" min="0" required>
+                                <label asp-for="MinPrice">Минимум (&#8381;)</label>
+                            </div>
+
+                            <div class="form-floating me-3">
+                                <input asp-for="MaxPrice" type="number" class="form-control" placeholder="Максимум (&#8381;)" min="0" required>
+                                <label asp-for="MaxPrice">Максимум (&#8381;)</label>
+                            </div>
+
+                            <input asp-page="/PeriodicalsSelection" asp-page-handler="SelectionByPriceRange"
+                                   type="submit" value="Выбрать" class="btn btn-success"/>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Выборка по длительности подписки -->
+            <div class="col-4 ps-3 pe-0">
+                <div class="container mx-auto bg-light shadow-sm border rounded-3 py-3">
+                    <h5 class="text-center">Выборка по длительности подписки</h5>
+                    <hr/>
+                    <div class="row">
+
+                        <form method="post" class="d-inline-flex">
+
+                            <div class="form-floating me-3">
+                                <input asp-for="MinDuration" type="number" class="form-control" placeholder="Минимум" min="0" required>
+                                <label asp-for="MinDuration">Минимум</label>
+                            </div>
+
+                            <div class="form-floating me-3">
+                                <input asp-for="MaxDuration" type="number" class="form-control" placeholder="Максимум" min="0" required>
+                                <label asp-for="MaxDuration">Максимум</label>
+                            </div>
+
+                            <input asp-page="/PeriodicalsSelection" asp-page-handler="SelectionByDurationRange"
+                                   type="submit" value="Выбрать" class="btn btn-success"/>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #endregion -->
+
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Индекс</td>
+            <td>Наименование</td>
+            <td>Вид издания</td>
+            <td>Цена</td>
+            <td>Дата подписки</td>
+            <td>Длительность подписки</td>
+            <td>
+                <a class="btn btn-success w-100" asp-page-handler="Add" asp-page="PeriodicalForm">Добавить запись</a>
+            </td>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var periodical in Model.PeriodicalList!)
+        {
+            <tr>
+                <td>@periodical.Id</td>
+                <td>@periodical.Index</td>
+                <td>@periodical.Name</td>
+                <td>@periodical.TypeEdition</td>
+                <td>@($"{periodical.Price:d2}") &#8381;</td>
+                <td>@($"{periodical.Date:dd.MM.yyyy}")</td>
+                <td>@periodical.Duration мес.</td>
+                <td class="d-flex justify-content-around">
+                    <a class="btn btn-warning" asp-page-handler="Edit" asp-page="PeriodicalForm" asp-route-id="@periodical.Id">Редактировать</a>
+                    <a class="btn btn-danger" asp-page="Periodicals" asp-page-handler="RemoveAt" asp-route-id="@periodical.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

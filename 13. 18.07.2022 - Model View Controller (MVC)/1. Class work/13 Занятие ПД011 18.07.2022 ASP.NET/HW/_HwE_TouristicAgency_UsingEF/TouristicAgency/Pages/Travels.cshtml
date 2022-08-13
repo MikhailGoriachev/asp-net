@@ -1,0 +1,38 @@
+﻿@page
+@model TouristicAgency.Pages.TravelsModel
+@{
+    ViewBag.Title = "Поездки";
+}
+
+<h3>@ViewBag.Title клиентов туристического агенства</h3>
+
+<table class="table table-hover">
+    <theader>
+        <tr>
+            <th>Ид</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Паспорт</th>
+            <th>Страна</th>
+            <th>Цель поездки</th>
+            <th>Дата начала</th>
+            <th>Длительность, дней</th>
+        </tr>
+    </theader>
+    <tbody>
+    @foreach (var travel in Model.Travels) {
+        <tr>
+            <td>@travel.Id</td>
+            <td>@travel.Client.Surname</td>
+            <td>@travel.Client.Name</td>
+            <td>@travel.Client.Patronymic</td>
+            <td>@travel.Client.Passport</td>
+            <td>@travel.Route.Country.Name</td>
+            <td>@travel.Route.Purpose.Name</td>
+            <td>@($"{travel.Start:dd-MM-yyyy}")</td>
+            <td>@travel.Duration</td>
+        </tr>
+    }
+    </tbody>
+</table>

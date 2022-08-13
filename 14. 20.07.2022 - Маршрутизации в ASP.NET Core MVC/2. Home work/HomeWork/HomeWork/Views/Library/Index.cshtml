@@ -1,0 +1,48 @@
+﻿@model List<HomeWork.Models.Book>
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <h3>@ViewBag.Title</h3>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Обложка</th>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>Год издания</th>
+            <th>Количество (шт.)</th>
+            <th>Цена (&#8381;)</th>
+            <th>
+                <a class="btn btn-success" asp-controller="Library" asp-action="AddBook">
+                    Добавить
+                </a>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>
+                    <img class="h-10rem" src="~/images/books/@book.FileName" alt="@book.FileName"/>
+                </td>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.PubYear</td>
+                <td>@book.Count</td>
+                <td>@book.Price</td>
+                <td>
+                    <a class="btn btn-outline-danger" asp-controller="Library" asp-action="RemoveBook" asp-route-id="@book.Id">
+                        <i class="bi bi-eraser-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</section>

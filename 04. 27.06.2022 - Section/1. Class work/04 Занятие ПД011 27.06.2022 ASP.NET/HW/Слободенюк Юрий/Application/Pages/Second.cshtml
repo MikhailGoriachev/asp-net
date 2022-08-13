@@ -1,0 +1,50 @@
+﻿@page "{handler?}"
+@using Application.Common
+@using Application.Entities
+@model Application.Pages.Second
+@{
+    Layout = "_TaskLayout";
+    ViewData["Title"] = "Задача №2";
+}
+
+@section Description
+{
+    <p>
+        <b>Страница 2.</b> Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип техники, артикул, цена, количество, изображение).
+        В коллекции должно быть не менее 12 элементов. Коллекцию инициируйте набором записей, хранить коллекцию в файле не требуется.
+        По ссылкам, размещенным на странице вызывайте обработчики запросов GET:
+    </p>
+    <ul>
+        <li>вывод коллекции, упорядоченной по наименованию</li>
+        <li>вывод коллекции, упорядоченной по убыванию цены</li>
+        <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+    </ul>
+    <p>
+        В форме задайте диапазон цены, по кнопке submit выводите часть коллекции – товары с ценой, попадающей в заданный диапазон.
+    </p>
+}
+
+<div class="d-flex justify-content-center mt-3">
+    <a class="btn mx-3" asp-page-handler="">Сбросить</a>
+    <a class="btn mx-3" 
+       asp-page-handler="Order" 
+       asp-route-prop="@nameof(Product.Name)"
+       asp-route-order="@nameof(SortOrder.Ascending)">По наименованию</a>
+    <a class="btn mx-3" 
+       asp-page-handler="Order" 
+       asp-route-prop="@nameof(Product.Price)" 
+       asp-route-order="@nameof(SortOrder.Descending)">По убыванию цены</a>
+    <a class="btn mx-3" 
+       asp-page-handler="Order"
+       asp-route-prop="@nameof(Product.Count)"
+       asp-route-order="@nameof(SortOrder.Ascending)">По возрастанию количества</a>
+</div>
+
+<div class="d-flex row flex-wrap justify-content-center mt-5">
+    @foreach (var product in Model.Products)
+    {
+        <div class="col-4">
+            <partial name="_ProductCard" model="product"/>
+        </div>
+    }
+</div>

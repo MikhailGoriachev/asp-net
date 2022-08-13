@@ -1,0 +1,83 @@
+﻿@functions
+{
+    private string IsActive(string page) =>
+        Url.ActionContext.ActionDescriptor.DisplayName! == page ? "active" : "";
+}
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>@ViewBag.Header - Домашняя Работа</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="shortcut icon" href="~/favicon.png" type="image/x-icon"/>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<header class="container-fluid">
+    <div class="top-bar row align-items-center ps-4">
+        <h1>@ViewBag.Header</h1>
+    </div>
+</header>
+
+<nav class="navbar navbar-main bg-body navbar-expand-sm sticky-top shadow mb-2">
+    <div class="container-fluid">
+        <ul class="navbar-nav ms-3">
+            <li class="nav-item me-2">
+                <a asp-page="/Index"
+                   class="nav-link @IsActive("/Index")"
+                   title="Перейти на страницу">
+                    Главная
+                </a>
+            </li>
+            <li class="nav-item me-2">
+                <a asp-page="/Products"
+                   class="nav-link @IsActive("/Products")"
+                   title="Перейти на страницу">
+                    Бытовая техника
+                </a>
+            </li>
+            <li class="nav-item me-2">
+                <a asp-page="/Ships"
+                   class="nav-link @IsActive("/Ships")"
+                   title="Перейти на страницу">
+                    Корабли
+                </a>
+            </li>
+            <li class="nav-item me-2">
+                <a asp-page="@nameof(ProductsPhotos)"
+                   class="nav-link @IsActive($"/{nameof(ProductsPhotos)}")"
+                   title="Перейти на страницу">
+                    Фото бытовой техники
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-page="@nameof(ShipsPhotos)"
+                   class="nav-link @IsActive($"/{nameof(ShipsPhotos)}")"
+                   title="Перейти на страницу">
+                    Фото кораблей
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+@await RenderSectionAsync("Controls", false)
+
+<div class="container-fluid mh-100 mh-80-vh">
+    <main class="mt-4 mx-5"> @RenderBody()</main>
+</div>
+
+<footer class="container-fluid">
+    <div class="row align-items-center bg-light h-60-px">
+        <h6 class="text-center">&copy;2022, Масленников Виталий, г. Донецк, КА «ШАГ», ПД011.</h6>
+    </div>
+</footer>
+</body>
+</html>

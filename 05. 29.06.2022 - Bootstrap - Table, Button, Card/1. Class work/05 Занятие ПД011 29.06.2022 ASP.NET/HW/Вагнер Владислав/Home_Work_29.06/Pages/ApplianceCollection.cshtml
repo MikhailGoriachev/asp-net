@@ -1,0 +1,94 @@
+﻿@page
+@model Home_Work.Pages.ApplianceCollectionModel
+@namespace Home_Work.Models
+@using Home_Work.Utilities;
+@{
+    ViewData["title"] = "Страница 1";
+    ViewData["pageHeader"] = "СТРАНИЦА 1";
+   
+    ViewBag.IsActive = 1;
+}
+@functions{
+    @*public void showCollection(List<Appliance> AppCollection)
+    {
+        foreach (var appliance in AppCollection)
+            {
+                <div class="card">
+                                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                                <div><span>Наименование: @appliance.Name</span></div>
+                                <div><span>Артикул:  @appliance.Article</span></div>
+                                <div><span>Цена:  @appliance.Price</span></div>
+                                <div><span>Количество:  @appliance.Quantity</span></div>
+                </div>
+
+            }
+    }*@
+}
+
+
+<section>
+    
+@section Styles {
+    <link rel="stylesheet" href="~/styles/task2.css?v=<?= time(); ?>">
+}
+
+    <!--Задание-->
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+        <p>
+            Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, 
+            тип техники, артикул, цена, количество, изображение). В коллекции должно 
+            быть не менее 12 элементов. Коллекцию инициируйте набором записей, 
+            храните коллекцию в файле формата JSON в папке App_Data проекта. 
+            По кнопкам submit, размещенным на странице вызывайте обработчики запросов POST:
+        </p>
+
+        <ul>
+            <li>вывод коллекции, упорядоченной по наименованию</li>
+            <li>вывод коллекции, упорядоченной по убыванию цены</li>
+            <li><i>добавление новой записи о товаре, файл с изображением формируйте по типу товара, не загружайте его на сервер</i> </li>
+            <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+            <li>вывод части коллекции – товары с ценой, попадающей в заданный диапазон</li>
+        </ul>
+        </div>
+    </details>
+
+   
+    <!--Кнопки-->
+    <form method="post" class="nav-form">
+        <fieldset class="form-block">
+            <div class="contaner">
+                <input asp-page-handler="SortByName" type="submit" value="Упорядочить по именованию"/>
+                <input asp-page-handler="SortByPrice" type="submit" value="Упорядочить убыванию цены"/>
+                <input asp-page-handler="SortByQuantity" type="submit" value="Упорядочить по возрастанию количества"/>
+                <input asp-page-handler="AddAppliance" type="submit" value="Добавить прибор"/>
+            </div>
+        </fieldset>
+    </form>
+
+    <!--Форма задания диапазона-->
+    <form method="post" class="form-ranges">
+        <fieldset class="form-block">
+            <div class="contaner">
+                <input required type="number" placeholder="Введите начальную цену" name="priceLo" >
+                <input required type="number" placeholder="Введите конечную цену" name="priceHi">
+                <input asp-page-handler="SelectByPrice"  type="submit" value="Найти">
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="contaner">
+        @foreach (var appliance in @Model.appliances)
+        {
+            <div class="card">
+                <div class="divImg"><img src="~/images/appliances/@appliance.Image" alt=@appliance.Image /></div>
+                <div><span>Наименование: @appliance.Name</span></div>
+                <div><span>Артикул:  @appliance.VendorCode</span></div>
+                <div><span>Цена:  @appliance.Price</span></div>
+                <div><span>Количество:  @appliance.Quantity</span></div>
+            </div>
+        }
+    </div>
+
+</section>

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <a asp-page="/Index">Синтаксис Razor</a> |
+        <a asp-page="/Post01" title="Форма с одним полем">POST-1</a>
+        <a asp-page="/Post02" title="Форма с несколькими полями, ввод объекта">POST-2</a>
+        <a asp-page="/Post03" title="Форма для ввода массива">POST-3</a>
+        <a asp-page="/Post04" title="Форма для ввода массива объектов">POST-4</a>
+        <a asp-page="/Post05" title="Пример получения данных из контекса запроса">POST-5</a>
+        <a asp-page="/Post06" title="форма для ввода и выовда словаря">POST-6</a>
+        <hr />
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <footer>
+        <hr />
+        <p>Донецк, 2022, ASP.NET</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+﻿@page "{handler?}"
+@model Homework.Pages.AppliancesListModel
+@{
+	ViewBag.Header = "Бытовая техника";
+}
+
+@section styles{
+	@*<link rel="stylesheet" href="~/css/products.css">*@
+}
+
+
+<div class="">
+	<details>
+		<summary>Задание</summary>
+		<p>Создайте коллекцию данных о бытовой технике на оптовом складе (наименование, тип
+			техники, артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов.
+			Коллекцию инициируйте набором записей, храните коллекцию в файле формата JSON в папке App_Data
+			проекта.
+		</p>
+
+		<p>Отображение данных одного элемента бытовой техники выполняйте при помощи карточки, стилизованной
+			соответствующими классами Bootstrap.</p>
+
+		<p>По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:</p>
+
+
+		<ul>
+			<li>вывод коллекции, упорядоченной по наименованию</li>
+			<li>вывод коллекции, упорядоченной по убыванию цены</li>
+			<li>вывод коллекции, упорядоченной по возрастанию количества</li>
+		</ul>
+	</details>
+</div>
+
+
+<div class="mb-4">
+	<span class="lead">Упорядочить по:</span>
+
+<a asp-page-handler="OrderBy" asp-route-prop="Name"
+   class="btn btn-sm btn-outline-secondary">
+	наименованию
+</a> 
+
+<a asp-page-handler="OrderBy" asp-route-prop="Price"
+   class="btn btn-sm btn-outline-secondary">
+	стоимости
+</a>  
+
+<a asp-page-handler="OrderBy" asp-route-prop="Amount" asp-route-order="Desc"
+   class="btn btn-sm btn-outline-secondary">
+	убыванию количества
+</a>
+
+</div>	
+	
+
+<div class="row">
+@foreach (var item in Model.DisplayProducts!)
+{
+	<div class="col-md-auto">
+		<div class="card mb-4">
+			<img class="card-img-top  img-fluid img-h-200 m-1" src="@Model.ImageFolder/@item.Image" alt="Бытовая техника"> 
+ 			<div class="card-body">
+				<h5 class="card-title color-2">@item.Name</h5>
+				<p class="card-text color-1">@item.Type</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item color-1">Арт.: <span class="color-3">@item.VendorCode</span></li>
+				<li class="list-group-item color-1">Цена: <span class="color-3">@item.Price</span></li>
+				<li class="list-group-item color-1">Количество: <span class="color-3">@item.Amount</span></li>
+			</ul>
+		</div>
+	</div>
+}
+</div>

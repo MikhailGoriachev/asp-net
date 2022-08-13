@@ -1,0 +1,71 @@
+﻿@page
+@model Home_Work.Pages.ApplianceModel
+@{
+    ViewData["title"] = "Страница 1";
+    ViewData["pageHeader"] = "СТРАНИЦА 1";
+   
+    ViewBag.IsActive = 1;
+}
+
+<section>
+    
+    <link rel="stylesheet" href="~/styles/task1.css">
+    <details class="task-details">
+        <summary><b>Задача 1.</b></summary>
+        <div>
+            <p class="text-size-bigger">
+                В форме вводите данные о бытовой технике на оптовом складе 
+                (наименование, артикул, цена, количество, изображение). Используйте привязку 
+                параметров формы к свойствам модели страницы. 
+                Введенные данные отображайте на этой же странице.
+            </p>
+        </div>
+    </details>
+
+    <!--Форма изменения-->
+    <form method="post">
+        <fieldset class="form-block">
+            <div>
+                @*<input required type="text" name="Name" value=@Model.appliance.Name>*@
+
+                <select name="Name" >
+                    <option>Холодильник</option>
+                    <option>Стиральная машина</option>
+                    <option>Микроволновая печь</option>
+                    <option>Пылесос</option>
+                </select>
+                <label>Наименование</label>
+            </div>
+            <div>
+                <input required type="number" name="Article" value=@Model.appliance.Article>
+                <label>Артикул</label>
+            </div>
+            <div>
+                <input required type="number" name="Price" value=@Model.appliance.Price>
+                <label>Цена</label>
+            </div>
+            <div>
+                <input required type="number" name="Quantity" value=@Model.appliance.Quantity>
+                <label>Количество</label>
+            </div>
+
+            <input type="hidden" name="Image" value="">
+
+            <div>
+                <input type="submit" value="Добавить">
+            </div>
+        </fieldset>
+    </form>
+
+    @if (Request.Method.ToLower() == "post")
+    {
+        <div class="card">
+            <div class="divImg"><img src="~/images/appliances/@Model.appliance.Image" alt=@Model.appliance.Image /></div>
+            <div><span>Наименование: @Model.appliance.Name</span></div>
+            <div><span>Артикул:  @Model.appliance.Article</span></div>
+            <div><span>Цена:  @Model.appliance.Price</span></div>
+            <div><span>Количество:  @Model.appliance.Quantity</span></div>
+        </div>
+    }
+
+</section> 

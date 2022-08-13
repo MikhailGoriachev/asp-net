@@ -1,0 +1,83 @@
+/* Стилизация таблицы */
+
+/* таблица */
+.table {
+    border-spacing: 0;
+    border-radius: 1rem;
+
+    padding: 0;
+    margin: 1rem;
+
+    font-size: 1.2rem;
+}
+
+/* заголвоки */
+.table th {
+    /* background-color: #c6ff7c; */
+    background-color: #ededed;
+
+    padding: 0.8rem 1rem;
+}
+
+.table td {
+    border: 1px solid #ddd;
+}
+
+/* ячейки таблицы */
+.table tr td {
+    padding: 0.8rem 1rem;
+}
+
+/* четные строки таблицы */
+.table tr:nth-of-type(even) {
+    background-color: #f8f8f8;
+}
+
+/* наведение на строку таблицы */
+.table tr:hover {
+    background-color: #ececec;
+}
+
+/* наведение на строку таблицы */
+.table tr {
+    background-color: #ffffff;
+}
+
+/* первая строка таблицы */
+.table tr:first-child th:first-child {
+    border-left: 1px solid #ddd;
+    border-top-left-radius: 1rem;
+}
+
+.table tr:first-child th:last-child {
+    border-right: 1px solid #ddd;
+    border-top-right-radius: 1rem;
+}
+
+.table tr:first-child th {
+    border-top: 1px solid #ddd;
+}
+
+/* строка таблицы */
+.table tr td:first-child {
+    border-left: 1px solid #ddd;
+}
+
+.table tr td:last-child {
+    border-right: 1px solid #ddd;
+}
+
+/* последняя строка таблицы */
+.table tr:last-child td:first-child {
+    border-left: 1px solid #ddd;
+    border-bottom-left-radius: 1rem;
+}
+
+.table tr:last-child td:last-child {
+    border-right: 1px solid #ddd;
+    border-bottom-right-radius: 1rem;
+}
+
+.table tr:last-child td {
+    border-bottom: 1px solid #ddd;
+}

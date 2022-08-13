@@ -1,0 +1,53 @@
+﻿@page "{handler?}"
+@model HomeWork.Pages.Queries.Query05
+
+@{
+    ViewBag.Title = "Запрос 5";
+    ViewBag.PageName = "/Queries";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <h3 class="display-6">Запрос 5. @Model.TitleList</h3>
+
+    <form method="post" class="d-flex align-items-center">
+
+        <!-- Минимальная стоимость визы -->
+        <div class="form-floating w-15rem">
+            <input type="number" asp-for="Params.MinCost" class="form-control" placeholder="Мин. стоимость (&#8381;)" required>
+            <label asp-for="Params.MinCost">Мин. стоимость визы (&#8381;)</label>
+        </div>
+
+        <!-- Максимальная стоимость визы -->
+        <div class="form-floating ms-3 w-15rem">
+            <input type="number" asp-for="Params.MaxCost" class="form-control" placeholder="Мин. стоимость (&#8381;)" required>
+            <label asp-for="Params.MaxCost">Мин. стоимость визы (&#8381;)</label>
+        </div>
+
+        <input class="btn btn-primary mx-3" type="submit" asp-page-handler="Selection" value="Выбрать">
+        <a class="btn btn-warning" asp-page="/Queries/Query05">Сбросить</a>
+    </form>
+
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Транспортные услуги (&#8381;)</th>
+            <th>Оформление визы (&#8381;)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var country in Model.Countries)
+        {
+            <tr>
+                <th>@country.Id</th>
+                <td>@country.Name</td>
+                <td>@country.CostService</td>
+                <td>@country.CostVisa</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

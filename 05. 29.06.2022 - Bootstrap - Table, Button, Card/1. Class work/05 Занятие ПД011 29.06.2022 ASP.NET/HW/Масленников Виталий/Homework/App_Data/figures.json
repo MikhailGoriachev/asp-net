@@ -1,0 +1,94 @@
+[
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 1.0,
+    "_b": 1.0,
+    "_c": 1.0,
+    "Name": "Треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 3.3631893916017894,
+    "SideB": 5.545395201021445
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 5.661898700851911,
+    "_b": 7.375785410511468,
+    "_c": 5.60482365125976,
+    "Name": "Треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 8.76856572444115
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 2.0292537845711
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 9.703141374825357
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 7.475244703116926,
+    "_b": 8.054521436279938,
+    "_c": 9.995600004132008,
+    "Name": "Треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 9.633851919786688
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "SideA": 1.3011230354248537,
+    "SideB": 2.9476526013183233
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 3.026246583990445,
+    "_b": 7.287376466711729,
+    "_c": 5.243901878983372,
+    "Name": "Треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 6.34994323128689,
+    "_b": 4.4456301747755536,
+    "_c": 4.471201128850531,
+    "Name": "Треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "SideA": 8.540425418953276
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 1.101355651810671,
+    "_b": 3.2799128046819956,
+    "_c": 4.059046007445284,
+    "Name": "Треугольник",
+    "Image": "triangle.png"
+  }
+]

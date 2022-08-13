@@ -1,0 +1,29 @@
+﻿@page
+@model RazorPages_Intro.Pages.SailingFleetModel
+@{
+    ViewBag.Title = "Задача 2";
+    ViewBag.Active = "SailingFleet";
+    ViewBag.Header = "Вывод коллекции сведений о знаменитых парусных кораблях";
+}
+
+
+<h3 class="align-center">Знаменитые парусные корабли</h3>
+
+<div class="container">
+    
+    @foreach (var ship in Model.Fleet)
+    {
+        <div class="card-info">
+            <figure class="align-center">
+                <img src="@ship.Image" alt="@ship.Header - изображение" height="280"/>
+            </figure>
+            <ul>
+                <li><b>@ship.Header</b></li>
+                <li><b>Длина, м: </b>@ship.Length</li>
+                <li><b>Ширина, м: </b>@ship.Width</li>
+                <li><b>Водоизмещение, т: </b>@ship.Displacement</li>
+                <li><b>Год постройки: </b>@ship.Year</li>
+            </ul>
+        </div>
+    }
+</div>

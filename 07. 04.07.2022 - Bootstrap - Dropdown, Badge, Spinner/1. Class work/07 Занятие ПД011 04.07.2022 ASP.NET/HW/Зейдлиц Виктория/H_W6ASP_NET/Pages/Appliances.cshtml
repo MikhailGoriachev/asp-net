@@ -1,0 +1,95 @@
+﻿@page
+@model H_W6ASP_NET.Pages.AppliancesModel
+@{
+    ViewBag.Title = "Homework";
+    // индекс страницы
+    ViewBag.indexTab = 1;
+    ViewBag.Header = "Бытовая техника";
+}
+
+
+<details>
+    <summary> Коллекция данных о бытовой технике на оптовом складе </summary>
+        <b>Страница 1.</b> Создайте коллекцию данных о бытовой технике на оптовом складе (наименование,
+        тип техники, артикул, цена, количество, изображение). В коллекции должно быть не менее 12 элементов.
+        Коллекцию инициируйте набором записей, храните коллекцию в файле формата JSON в папке App_Data проекта.        
+    <p>
+        Отображение данных одного элемента бытовой техники выполняйте при помощи карточки, стилизованной соответствующими классами Bootstrap.   
+        По кнопкам-ссылкам, размещенным на странице вызывайте обработчики запросов GET:
+   </p>
+    <ul>
+        <li>вывод коллекции, упорядоченной по наименованию</li>
+        <li>вывод коллекции, упорядоченной по убыванию цены</li>
+        <li>вывод коллекции, упорядоченной по возрастанию количества</li>
+        <li>добавление элемента в коллекцию, параметры вводить в форму,
+            стилизованную классами Bootstrap, сохраняйте измененную коллекцию в
+            файле в формате JSON, как было сказано ранее, в папке App_Data проекта </li>
+    </ul>
+
+</details>
+
+<details>
+    <summary>Форма для добавления бытовой техники</summary>
+    <form method="get" class="border border-1 rounded w-75" asp-antiforgery="true"  >
+        <div class="row">
+            <div class="col-md-5 mb-3 ms-1">
+                <label for="Title" asp-for="Appliance.Title" class="col-form-label">Название</label>
+                <select type="text" class="form-control" id="Title" asp-for="Appliance.Title" asp-items="Model.NameAppliance" name="title"></select>
+            </div>
+
+            <div class="col-md-5 mb-3">
+                <label for="Type" asp-for="Appliance.Type" class="col-form-label">Тип техики</label>
+                <select class="form-select" asp-for="Appliance.Type" id="Type" name="type">
+                    <option value="Крупная быт.техника">Крупная быт.техника</option>
+                    <option value="Мелкая быт.техника">Мелкая быт.техника</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3 ms-1">
+                <label for="VendorCode" asp-for="Appliance.VendorCode" class="col-form-label">Артикул</label>
+                <input type="text" class="form-control" asp-for="Appliance.VendorCode" id="VendorCode" name="vendorCode" />
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="Price" asp-for="Appliance.Price" class="col-form-label">Цена</label>
+                <input type="number" class="form-control" asp-for="Appliance.Price" id="Price" name="price"/>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="Amount" asp-for="Appliance.Amount" class="col-form-label">Количество</label>
+                <input type="number" class="form-control" asp-for="Appliance.Amount" id="Amount" name="amount"/>
+            </div>
+            <a class="btn btn-primary btn-sm col-md-2 mt-5 mb-3 ms-2" asp-page-handler="AddAppliance" >Добавить</a>
+        </div>
+
+    </form>
+</details>
+
+@* Дополнительные пункты меню - обработчики для страницы *@
+@section Menu{
+    <div class="btn-group-vertical gap-3">
+    <label for="orderBy" class="label mt-3 h6">Сортировать по:</label>
+    <a class="btn btn-sm" asp-page-handler="OrderByTitle" name="orderBy">Наименование</a>
+    <a class="btn btn-sm" asp-page-handler="OrderByPriceDesc" name="orderBy">Цена</a>
+    <a class="btn btn-sm" asp-page-handler="OrderByAmount" name="orderBy">Количество</a>
+</div>
+}
+
+@*Карточки с коллекцией бытовой техники*@ 
+<div  class="container mt-3 row" >
+        @foreach (var data in Model.Appliances)
+    {
+        <div class="card m-1 col-3 bg-light">
+            <figure class="card-img-top">
+                <img src="~/img/task1/@(data.Image)" alt="Изображение" height="100" width="70%"/>
+            </figure>
+            <p>
+                <b>Название:</b> @data.Title<br />
+                <b>Тип:</b> @data.Type<br />
+                <b>Артикул: </b>@data.VendorCode<br />
+                <b>Цена: </b>@data.Price рубл.<br />
+                <b>Количество: </b>@data.Amount<br />
+            </p>
+        </div>
+    }
+</div>
