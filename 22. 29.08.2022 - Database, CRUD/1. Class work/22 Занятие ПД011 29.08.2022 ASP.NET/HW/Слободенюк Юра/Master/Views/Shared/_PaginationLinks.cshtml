@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using System.Web
+@using Master.TagHelpers
+@model PaginationLinksViewModel
+@{
+    string CreatePageUrlPreserveQuery(int page)
+    {
+        var uriBuilder = new UriBuilder(Context.Request.GetDisplayUrl());
+        
+        var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+        query.Set("page", page.ToString());
+
+        uriBuilder.Query = query.ToString();
+            
+        return uriBuilder.ToString();
+    }
+}
+
+
+<section class="d-flex justify-content-center gap-5 mt-4">
+    <a class="btn"
+       disabled-if="@(Model.CurrentPage == 1)"
+       href="@CreatePageUrlPreserveQuery(1)">
+        <i class="fa-solid fa-backward-fast"></i>
+    </a>
+    @{
+        var start = Math.Clamp(Model.CurrentPage - Model.LinksCount, 1, Model.PagesCount);
+        var end = Model.CurrentPage + Model.LinksCount;
+
+        for (var i = start; i <= end && i <= Model.PagesCount; i++)
+        {
+            <a class="btn" href="@CreatePageUrlPreserveQuery(i)">
+                <i class="fa-solid fa-@i @(i == Model.CurrentPage ? "text-primary" : null)"></i>
+            </a>
+        }
+    }
+    <a class="btn"
+       disabled-if="@(Model.CurrentPage == Model.PagesCount)"
+       href="@CreatePageUrlPreserveQuery(Model.PagesCount)">
+        <i class="fa-solid fa-forward-fast"></i>
+    </a>
+</section>

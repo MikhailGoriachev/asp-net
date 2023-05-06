@@ -1,0 +1,112 @@
+﻿@* Страница отображения фактов продаж *@
+@using Microsoft.AspNetCore.Html
+@using UsingTagHelpers2.Models
+@model UsingTagHelpers2.Models.ViewModels.PaginationPageViewModel<UsingTagHelpers2.Models.Sale>
+
+@{
+    ViewBag.Title = "Продажи";
+    ViewBag.MaxCountPages = 3;
+
+    // определние иконки сортировки
+    ViewBag.IdIcon = ViewBag.SaleDateIcon = ViewBag.SalePriceIcon = "";
+    switch (ViewBag.SortOrder) {
+        case SortState.IdAsc:
+            ViewBag.IdIcon = new HtmlString("<i class=\"bi bi-arrow-down-square-fill\"></i>");
+            break;
+        case SortState.IdDesc:
+            ViewBag.IdIcon = new HtmlString("<i class=\"bi bi-arrow-up-square-fill\"></i>");
+            break;       
+        case SortState.SaleDateAsc:
+            ViewBag.SaleDateIcon = new HtmlString("<i class=\"bi bi-arrow-down-square-fill\"></i>");
+            break;
+        case SortState.SaleDateDesc:
+            ViewBag.SaleDateIcon = new HtmlString("<i class=\"bi bi-arrow-up-square-fill\"></i>");
+            break;        
+        case SortState.SalePriceAsc:
+            ViewBag.SalePriceIcon = new HtmlString("<i class=\"bi bi-arrow-down-square-fill\"></i>");
+            break;
+        case SortState.SalePriceDesc:
+            ViewBag.SalePriceIcon = new HtmlString("<i class=\"bi bi-arrow-up-square-fill\"></i>");
+            break;
+    } // switch
+}
+
+<div class="row">
+    <div class="col-4">
+        <h4 class="text-center">@ViewBag.Title</h4>
+    </div>
+    <div class="col-2">
+        <a class="btn btn-success" asp-controller="WholesaleStore" asp-action="AddSeller">
+            <i class="bi bi-plus-lg"></i> Добавить
+        </a>
+    </div>
+</div>
+
+@* табличное представление товара с сортировкой по идентификатору, дате продажи, цене продажи *@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><a asp-action="Sales" asp-route-sortOrder="@ViewBag.IdSort">Ид @ViewBag.IdIcon</a></th>
+            <th>Наименование товара</th>
+            <th>Продавец ФИО</th>
+            <th><a asp-action="Sales" asp-route-sortOrder="@ViewBag.SaleDateSort">Дата продажи @ViewBag.SaleDateIcon</a></th>
+            <th><a asp-action="Sales" asp-route-sortOrder="@ViewBag.SalePriceSort">Цена продажи @ViewBag.SalePriceIcon</a></th>
+            <th>Количество</th>
+            @* столбец для элементов управления *@
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var sale in Model.Items) {
+            <sale-table-row sale="sale" editable="true" />
+        }
+    </tbody>
+</table>
+
+@* пагинации - постраничная навигация, режим сортировки берем из ViewBag, чтобы не умножать сущности *@
+<nav>
+    <ul class="pagination justify-content-center">
+
+        @* Переход на предыдущую страницу *@
+        <li class="page-item @(Model.PageViewModel.HasPrevPage ? "" : "disabled")"
+            title="Переход на предыдущую страницу">
+            <a class="page-link" asp-controller="WholesaleStore" asp-action="Sales"
+               asp-route-pageNumber="@(Model.PageViewModel.PageNumber - 1)"
+               asp-route-sortOrder="@ViewBag.SortOrder">
+                <i class="bi bi-caret-left-fill"></i>
+            </a>
+        </li>
+
+        @* Переход на страницу под номером *@
+        @{
+            int dif = Model.PageViewModel.CountPages - Model.PageViewModel.PageNumber;
+            int half = ViewBag.MaxCountPages / 2;
+            int halfDif = half - dif;
+            int i = dif > half ? Model.PageViewModel.PageNumber - half : Model.PageViewModel.PageNumber - half - halfDif;
+            for (int n = 0; n < ViewBag.MaxCountPages && i <= Model.PageViewModel.CountPages; i++) {
+                if (i > 0) {
+                    n++;
+                    <li class="page-item @(i == Model.PageViewModel.PageNumber ? "active" : "")"
+                        title="Переход на страницу @i">
+                        <a class="page-link" asp-controller="WholesaleStore" asp-action="Sales"
+                           asp-route-pageNumber="@i"
+                           asp-route-sortOrder="@ViewBag.SortOrder">
+                            @i
+                        </a>
+                    </li>
+                }
+            }
+        }
+
+        @* Переход на следующую страницу *@
+        <li class="page-item @(Model.PageViewModel.HasNextPage ? "" : "disabled")"
+            title="Переход на следующую страницу">
+            <a class="page-link" asp-controller="WholesaleStore" asp-action="Sales"
+               asp-route-pageNumber="@(Model.PageViewModel.PageNumber + 1)"
+               asp-route-sortOrder="@ViewBag.SortOrder">
+                <i class="bi bi-caret-right-fill"></i>
+            </a>
+        </li>
+    </ul>
+</nav>

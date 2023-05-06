@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="~/images/emotion_smile.png" type="image/x-icon">
+
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+<header>
+    <a asp-action="Action1" title="Медленный метод действия">Action 1</a> |
+    <a asp-action="Action2"  title="Медленное формирование представления">Action 2</a>
+</header>
+<main>
+    @* Отображение содержимого (которое не входит в секции) связанного представления *@
+    @RenderBody()
+</main>
+<footer>
+    Введение в ASP.NET Core
+</footer>
+</body>
+</html>

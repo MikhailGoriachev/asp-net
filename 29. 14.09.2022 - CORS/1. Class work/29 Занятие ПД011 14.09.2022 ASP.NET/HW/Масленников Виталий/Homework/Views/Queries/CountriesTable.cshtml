@@ -1,0 +1,28 @@
+﻿@model IQueryable<Homework.Models.Country>
+
+@* Таблица с данными *@
+<table class="table text-center mt-3">
+    <thead class="fw-bold align-top">
+    <tr class="align-top">
+        <td>Страна</td>
+        <td>Стоимость визы</td>
+        <td>Стоимость транспортных<br/> услуг</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model is not null && Model.AsEnumerable().Any()){
+        @foreach (var country in Model){
+            <tr>
+                <td>@country.Name</td>
+                <td>@country.VisaCost</td>
+                <td>@country.TransferCost</td>
+                <td>@country.DailyCost</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="4" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,69 @@
+﻿@model PlanetsIndexViewModel
+@{
+    Layout = "_TaskLayout";
+    ViewBag.Title = "Задача №2";
+}
+
+@section Description
+{
+    @await Html.PartialAsync("_PlanetsDescription")
+}
+
+
+<section class="mt-5 row gap-3">
+    <article class="col-3 card">
+        @await Html.PartialAsync("_RangeSelector", new RangeSelectorViewModel
+        {
+            Title = "Диапазон диаметра",
+            Action = "ByDiameter"
+        })
+    </article>
+    <article class="col-4 card">
+        @await Html.PartialAsync("_PlanetsTerrainSelector", Model.Planets)
+    </article>
+    <article class="col-4 ms-auto">
+        @await Html.PartialAsync("_PlanetsStats", Model.Planets)
+    </article>
+</section>
+
+
+<section class="mt-4">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Климат</th>
+            <th scope="col">Диаметр</th>
+            <th scope="col">Популяция</th>
+            <th scope="col">Поверхность</th>
+            <th scope="col">Орбитальный период</th>
+            <th scope="col">Детали</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var planet in Model.Planets)
+        {
+            <tr>
+                <td>@planet.Name</td>
+                <td>@planet.Climate</td>
+                <td>@planet.Diameter</td>
+                <td>@planet.Population</td>
+                <td>@planet.Terrain</td>
+                <td>@planet.OrbitalPeriod</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@planet.Id">
+                        <i class="fa-solid fa-info"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 3
+})

@@ -1,0 +1,110 @@
+﻿[
+  {
+    "Id": 13,
+    "StartPoint": "Широкий",
+    "MiddlePoint": "Каменная Степь",
+    "EndPoint": "Обрыв",
+    "Length": 140,
+    "Complexity": "A+",
+    "InstructorId": 3
+  },
+  {
+    "Id": 2,
+    "StartPoint": "Старобешево",
+    "MiddlePoint": "Ларино",
+    "EndPoint": "Иловайск",
+    "Length": 80,
+    "Complexity": "B+",
+    "InstructorId": 5
+  },
+  {
+    "Id": 3,
+    "StartPoint": "Моспино",
+    "MiddlePoint": "Коминтерново",
+    "EndPoint": "Обрыв",
+    "Length": 130,
+    "Complexity": "B+",
+    "InstructorId": 3
+  },
+  {
+    "Id": 4,
+    "StartPoint": "Иловайск",
+    "MiddlePoint": "Новый Свет",
+    "EndPoint": "Седово",
+    "Length": 140,
+    "Complexity": "C",
+    "InstructorId": 3
+  },
+  {
+    "Id": 5,
+    "StartPoint": "Дебальцево",
+    "MiddlePoint": "Амвросиевка",
+    "EndPoint": "Снежное",
+    "Length": 90,
+    "Complexity": "B+",
+    "InstructorId": 3
+  },
+  {
+    "Id": 6,
+    "StartPoint": "Енакиево",
+    "MiddlePoint": "Зугрэс",
+    "EndPoint": "Снежное",
+    "Length": 75,
+    "Complexity": "A+",
+    "InstructorId": 4
+  },
+  {
+    "Id": 7,
+    "StartPoint": "Харцызск",
+    "MiddlePoint": "Новый Свет",
+    "EndPoint": "Обрыв",
+    "Length": 160,
+    "Complexity": "C+",
+    "InstructorId": 4
+  },
+  {
+    "Id": 8,
+    "StartPoint": "Дебальцево",
+    "MiddlePoint": "Коминтерново",
+    "EndPoint": "Седово",
+    "Length": 140,
+    "Complexity": "C+",
+    "InstructorId": 4
+  },
+  {
+    "Id": 9,
+    "StartPoint": "Дебальцево",
+    "MiddlePoint": "Новый Свет",
+    "EndPoint": "Мангуш",
+    "Length": 180,
+    "Complexity": "C+",
+    "InstructorId": 5
+  },
+  {
+    "Id": 10,
+    "StartPoint": "Снежное",
+    "MiddlePoint": "Моспино",
+    "EndPoint": "Енакиево",
+    "Length": 80,
+    "Complexity": "B",
+    "InstructorId": 5
+  },
+  {
+    "Id": 11,
+    "StartPoint": "Седово",
+    "MiddlePoint": "Коминтерново",
+    "EndPoint": "Снежное",
+    "Length": 160,
+    "Complexity": "C-",
+    "InstructorId": 5
+  },
+  {
+    "Id": 12,
+    "StartPoint": "Иловайск",
+    "MiddlePoint": "Моспино",
+    "EndPoint": "Старобешево",
+    "Length": 80,
+    "Complexity": "B-",
+    "InstructorId": 2
+  }
+]

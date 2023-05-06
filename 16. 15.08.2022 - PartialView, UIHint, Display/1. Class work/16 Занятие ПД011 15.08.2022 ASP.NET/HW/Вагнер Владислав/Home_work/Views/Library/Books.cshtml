@@ -1,0 +1,108 @@
+﻿@* представление для вывода коллекции книг в библиотеке *@
+@model IEnumerable<Book>
+@using Home_work.Models
+@{
+    ViewBag.title = "Книжный магазин";
+    ViewBag.PageName = "Books";
+}
+
+<h4>@ViewBag.Header</h4>
+
+<!--Задание-->
+<details class="task-details">
+        <summary class="h5 text-primary">
+            Задание 1
+        </summary>
+
+        <p>
+        Сведения о книгах в библиотеке содержат: идентификатор книги, фамилию и инициалы автора, 
+        название, год издания, количество экземпляров данной книги в библиотеке, 
+        цену одного экземпляра, имя файла с изображением обложки.
+        </p>
+
+        <p>
+            Сведения о книгах хранятся в файле формата JSON в папке <b>App_Data</b> проекта. 
+            В коллекции при инициализации должно быть сведения не менее чем о <b>10 книгах</b>.
+        </p>
+        <p>
+            Тип упорядочивания и тип отбора задавайте переменной маршрута.
+        </p>
+        <p>
+            Требуется реализовать функционал:
+        </p>
+
+        <ul>
+            <li>Добавление книги в коллекцию (и в файл, данные вводить в форме)</li>
+            <li>Редактирование данных книги, сохранять изменения в файле</li>
+            <li>Удаление данных о книге из коллекции (и из файла)</li>
+            <li>Выдача сведений о всех книгах коллекции в порядке сохранения 
+                в файле данных</li>
+            <li>Выдача сведений о всех книгах, упорядоченных по фамилиям авторов</li>
+            <li>Выдача сведений о всех книгах, упорядоченных по годам издания</li>
+            <li>Выдача сведений о всех книгах, упорядоченных по убыванию цены</li>
+            <li>Выдача сведений о книгах с количеством, равным максимальному</li>
+            <li>Выдача сведений о книгах с количеством, равным минимальному</li>
+            <li>Выдача сведений о самых старых книгах</li>
+            <li>Выдача сведений о самых новых книгах</li>
+            <li>Выдача сведений о самых дорогих книгах</li>
+            <li>Выдача сведений о книгах с минимальной ценой</li>
+        </ul>
+
+    </details>
+
+@* Вывод коллекции сведений о книгах *@
+<table class="table table-hover table-bordered w-100 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th>Id</th>
+        <th>Обложка</th>
+        <th>Автор</th>
+        <th>Цена</th>
+        <th>Название</th>
+        <th>Год издания</th>
+        <th>Количество</th>
+        @if (ViewBag.ShowControls is null)
+        {
+            <th class="alignment-center">
+                <a class="btn btn-success" asp-controller="Library" asp-action="AddBook">
+                    Добавить
+                </a>
+            </th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (Book book in Model)
+    {
+        <tr class="align-middle">
+            <td class="alignment-center">@book.Id</td>
+            <td class="alignment-center"><img src="~/images/covers/@book.Image" alt="обложка книги ид: @book.Image" height="100"/></td>
+            <td>@book.Author</td>
+            <td>@book.Price</td>
+            <td>@book.Title</td>
+            <td>@book.Year</td>
+            <td>@book.Quantity</td>
+            @if (ViewBag.ShowControls is null)
+            {
+                <td>
+                    <a class="btn btn-sm btn-outline-danger d-block" asp-controller="Library" asp-action="DeleteBook" asp-route-id="@book.Id">
+                        Удалить
+                    </a>
+                    <a class="btn btn-sm btn-outline-primary mt-3 d-block" asp-controller="Library" asp-action="EditBook" asp-route-id="@book.Id">
+                        Редактировать
+                    </a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@*Если коллекция оказалась пустой*@
+@if (Model.Count() <= 0)
+{
+     <div  class="alert alert-danger" role="alert" >
+         <b>Коллекция пуста</b>, удалите JSON-файл и обновите страницу, или добавляйте книги вручную!
+     </div>
+
+}

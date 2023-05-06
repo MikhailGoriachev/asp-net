@@ -1,0 +1,33 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Homework.Models.ViewModels
+@using Homework.Models
+@model Homework.Models.ViewModels.IndexViewModel<Homework.Models.Sale>
+
+
+@{
+    ViewData["Title"] = "Продажи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Html.PartialAsync("_Filter", Model!.FilterModel)
+
+<table class="table">
+    
+    @await Html.PartialAsync("SalesTableHeader", Model)
+    
+    <tbody class="color-2">
+    @foreach (var item in Model!.Items) {
+        <sale-table-row sale="item"></sale-table-row>
+    }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 10,
+    AdditionalRouteParameters = Model.FilterModel!.GetRouteParameters
+        .Append(new RouteParameter { Key = nameof(Model.FilterModel.Sort), Value = Model.FilterModel.Sort })
+        .ToList()
+})

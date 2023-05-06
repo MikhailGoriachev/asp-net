@@ -1,0 +1,29 @@
+﻿@* 
+    частичное представление для отображения продаж
+    в страницах отчетов
+*@
+@model IEnumerable<UsingTagHelpers2.Models.Sale>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Наименование товара</th>
+        <th>Продавец ФИО</th>
+        <th>Дата продажи</th>
+        <th>Цена продажи</th>
+        <th>Количество</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var sale in Model)
+    {
+        @* 
+            тег-хелпер для вывода строки таблицы, без возможности редактирования
+            т.к. не указан атрибут тег-хелпера editable
+        *@
+        <sale-table-row sale="sale"/>
+    }
+    </tbody>
+</table>

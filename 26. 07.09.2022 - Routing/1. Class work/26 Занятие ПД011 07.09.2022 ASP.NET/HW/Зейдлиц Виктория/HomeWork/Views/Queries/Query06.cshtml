@@ -1,0 +1,44 @@
+﻿@model IQueryable<HomeWork.Models.Sale>
+
+@{
+    ViewBag.Title = $"Выбирает информацию о фактах продажи товаров для которых цена продажи от \" {ViewBag.MinPrice}р. \" до \" {ViewBag.MaxPrice}р. \"";
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+@* Вывод информации о выбранных фактах продажи *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+
+        <label class="form-label me-1" for="minPrice">Минимальная цена: </label>
+        <input class="form-select-sm me-3" id="minPrice" name="minPrice" type="number" />
+
+        <label class="form-label me-1" for="maxPrice">Максимальная цена: </label>
+        <input class="form-select-sm me-3" id="maxPrice" name="maxPrice" type="number" />
+
+        <button class="btn btn-sm btn-outline-info ms-1 align-baseline" type="submit">Выбрать</button>
+    </form>
+</div>
+
+
+@* Вывод выборки данных *@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Наименование товара</th>
+            <th>Цена закупки</th>
+            <th>Цена продажи</th>
+            <th>Дата продажи</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var sale in Model) {
+            <tr>
+                <td>@sale!.Purchase!.Good!.NameGood</td>
+                <td>@sale.Purchase.PricePurchase</td>
+                <td>@sale.PriceSale</td>
+                <td>@($"{sale.DateSale:dd/MM/yyyy}")</td>
+            </tr>
+        }
+    </tbody>
+</table>

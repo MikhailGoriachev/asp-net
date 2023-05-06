@@ -1,0 +1,35 @@
+﻿@* импорт нужен для nameof(), импорт можно перенести в _ViewImports.cshtml *@
+@using BaseViewComponent.Components
+
+@{
+    ViewBag.Title = "ViewComponent Base Class";
+}
+
+<table class="table w-50 mx-5">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    @foreach (var product in Model.Products) {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+        </tr>
+    }
+</table>
+
+<div>
+    @*
+    явное задание имени компонента - не очень хорошо,
+    например, при модификации кода, имя надо изменять вручную
+    *@
+    @await Component.InvokeAsync("ProductsSummary")
+</div>
+<hr />
+<p>
+    @* правильнее использовать nameof(имяКласса)  *@
+    @await Component.InvokeAsync(nameof(ProductsSummary))
+</p>
+

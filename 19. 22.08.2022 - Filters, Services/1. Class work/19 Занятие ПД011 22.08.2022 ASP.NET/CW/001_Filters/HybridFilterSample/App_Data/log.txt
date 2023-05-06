@@ -1,0 +1,6 @@
+﻿22/08/2022 17:27:36 - На выполнение метода HybridFilterSample.Controllers.HomeController.Index (004_HybridFilterSample) затрачено 0:00:00.0020223
+22/08/2022 17:27:37 - На формирование результата метода HybridFilterSample.Controllers.HomeController.Index (004_HybridFilterSample) затрачено 0:00:00.2738636
+22/08/2022 17:28:28 - На выполнение метода HybridFilterSample.Controllers.HomeController.Action1 (004_HybridFilterSample) затрачено 0:00:02.0151279
+22/08/2022 17:28:28 - На формирование результата метода HybridFilterSample.Controllers.HomeController.Action1 (004_HybridFilterSample) затрачено 0:00:00.013836
+22/08/2022 17:29:08 - На выполнение метода HybridFilterSample.Controllers.HomeController.Action2 (004_HybridFilterSample) затрачено 0:00:00.0000725
+22/08/2022 17:29:10 - На формирование результата метода HybridFilterSample.Controllers.HomeController.Action2 (004_HybridFilterSample) затрачено 0:00:02.0186282

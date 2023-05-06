@@ -1,0 +1,15 @@
+﻿@using Homework.Components
+@model int
+
+@{
+    ViewBag.Title = "Фотографии пользователя";
+    Layout = "_Layout";
+}
+
+<div class="container my-5">
+    <a asp-controller="Users" asp-action="Index" class="color-1" title="Назад">
+        <i class="fa-solid fa-2xl fa-arrow-left-long"></i>
+    </a>
+
+    @await Component.InvokeAsync(nameof(UserPhotos), new { Id = Model })
+</div>

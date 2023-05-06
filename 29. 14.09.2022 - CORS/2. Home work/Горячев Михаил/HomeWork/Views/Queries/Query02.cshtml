@@ -1,0 +1,29 @@
+﻿@using HomeWork.Components
+@model HomeWork.Models.BindingModels.Query02BindingModel
+
+@{
+    ViewBag.Title = $"Запрос 2. Цель поездки: \"{ViewBag.ObjectiveName}\", Макс. стоимость транс. услуг : {ViewBag.MaxPrice}";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <form method="post" id="formId" class="d-flex align-items-center">
+        <div class="form-floating w-10rem">
+            <select asp-items="ViewBag.ObjectiveList" asp-for="ObjectiveId" class="form-control" required></select>
+            <label asp-for="ObjectiveId">Цель поездки</label>
+        </div>
+
+        <div class="form-floating ms-3 w-15rem">
+            <input asp-for="MaxPrice" class="form-control" placeholder="Макс. стоимость транс. услуг"
+                   required>
+            <label asp-for="MaxPrice">Макс. стоимость транс. услуг</label>
+        </div>
+
+        <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+        <a class="btn btn-warning" id="formCancelBtn">Сбросить</a>
+    </form>
+
+
+    @await Component.InvokeAsync(typeof(Query02Component), new { Model.ObjectiveId, Model.MaxPrice })
+</section>

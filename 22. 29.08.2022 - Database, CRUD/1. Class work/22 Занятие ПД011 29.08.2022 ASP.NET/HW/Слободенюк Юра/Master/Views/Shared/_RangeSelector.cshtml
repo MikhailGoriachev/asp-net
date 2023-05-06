@@ -1,0 +1,15 @@
+﻿@model RangeSelectorViewModel
+
+
+<div class="card-body">
+    <h5 class="card-title">@Model.Title</h5>
+    <form asp-action="@Model.Action" method="get">
+        <label class="form-label" for="from">Минимум</label>
+        <input class="form-control" type="number" name="from" id="from">
+        <label class="form-label" for="to">Максимум</label>
+        <input class="form-control" type="number" name="to" id="to">
+        <div class="d-flex justify-content-end mt-4">
+            <input class="btn btn-outline-primary" type="submit" value="Применить">
+        </div>
+    </form>
+</div>

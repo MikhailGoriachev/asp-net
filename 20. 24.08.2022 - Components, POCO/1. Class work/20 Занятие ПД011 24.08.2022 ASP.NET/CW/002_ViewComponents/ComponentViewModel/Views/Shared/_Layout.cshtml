@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="~/images/blimp.png" type="image/x-icon">
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+
+    <!-- через CDN подключаем Bootstrap-иконки -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <!-- собственные стили -->
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <!-- скрипты Bootstrap -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header class="row">
+            <h5 class="mx-5">@ViewBag.Title</h5>
+        </header>
+        <main class="row">
+            @* Отображение содержимого (которое не входит в секции) связанного представления *@
+            @RenderBody()
+        </main>
+        <footer class="row">
+            <h5 class="mx-5">Введение в ASP.NET Core</h5>
+        </footer>
+    </div>
+
+</body>
+</html>

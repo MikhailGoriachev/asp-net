@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.Controllers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@functions {
+    // получить стиль
+    string ActiveStyle(string? controller = null, string? action = null)
+    {
+        if (ViewBag.PageName != null)
+            return ViewBag.PageName == controller ? "active" : "";
+
+        ControllerActionDescriptor actionDescriptor = (ControllerActionDescriptor)ViewContext.ActionDescriptor;
+
+        string curController = actionDescriptor.ControllerName;
+        string curAction = actionDescriptor.ActionName;
+
+        return curController == controller || (curController == controller && curAction == action) ? "active" : "";
+    }
+
+}
+
+<!-- Сортировка клиентов -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle @ActiveStyle("OrderClients")"
+       id="navbarOrderClients" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+        Сортировка клиентов
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarOrderInstructors">
+        <li>
+            <a class="dropdown-item" asp-controller="Clients" asp-action="OrderBy" asp-route-nameHandler="fullName">В алфавитном порядке</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Clients" asp-action="OrderBy" asp-route-nameHandler="yearsOldDesc">По убыванию возраста</a>
+        </li>
+    </ul>
+</li>
+
+<!-- Выборка клиентов -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle @ActiveStyle("SelectClients")"
+       id="navbarSelectClients" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+        Выборка клиентов
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSelectInstructors">
+        <li>
+            <a class="dropdown-item" asp-controller="Clients" asp-action="SelectByRangeYearsOld">По возрасту</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Clients" asp-action="SelectBySurname">По фамилии</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Clients" asp-action="SelectByActive">Постоянные клиенты</a>
+        </li>
+    </ul>
+</li>
+
+<!-- Исключение (Клиенты) -->
+<li class="nav-item">
+    <a class="nav-link @ActiveStyle("Home") mx-3" asp-controller="Clients" asp-action="ExceptionTest">Исключение (Клиенты)</a>
+</li>

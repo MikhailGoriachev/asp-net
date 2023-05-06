@@ -1,0 +1,20 @@
+﻿@using Master.Common
+@model IReadOnlyCollection<Master.Models.Planet>
+@{
+    var terrains = Model
+        .SelectMany(x => x.GetTerrains())
+        .Distinct()
+        .ToSelectListItems();
+}
+
+
+<div class="card-body">
+    <h5 class="card-title">Поверхность</h5>
+    <form asp-action="ByTerrain" method="get">
+        <select class="form-select" size="7" name="terrains" id="terrains" multiple
+                asp-items="@terrains"></select>
+        <div class="d-flex justify-content-end align-bottom mt-4">
+            <input class="btn btn-outline-primary" type="submit" value="Применить">
+        </div>
+    </form>
+</div>

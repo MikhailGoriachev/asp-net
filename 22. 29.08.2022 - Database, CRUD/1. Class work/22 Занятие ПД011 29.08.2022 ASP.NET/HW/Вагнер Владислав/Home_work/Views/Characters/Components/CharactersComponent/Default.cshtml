@@ -1,0 +1,111 @@
+﻿@using Home_work.ViewModels
+@using Home_work.Models.Characters
+@model CharactersViewModel
+
+
+<a class="btn btn-primary my-3" asp-controller="Characters" asp-action="SelectByWeightRange">Выборка по диапазону веса</a>
+<a class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#PlanetName">Выборка по планете</a>
+<a class="btn btn-primary my-3" asp-controller="Characters" asp-action="OrderByWeight">Сортировка по массе</a>
+
+@* Исходная коллекция персонажей*@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th class="alignment-center">Id</th>
+        <th class="alignment-center">Имя</th>
+        <th class="alignment-center">Пол</th>
+        <th class="alignment-center">Рост</th>
+        <th class="alignment-center">Вес</th>
+        <th class="alignment-center">Планета</th>
+        <th class="alignment-center">Год рождения</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (Character character in Model.Characters)
+    {
+        <tr class="align-middle" >
+            <td class="alignment-center">@character.Id</td>
+            <td class="alignment-center">@character.Name</td>
+            <td class="alignment-center">@character.Gender</td>
+            <td class="alignment-center">@character.Height</td>
+            <td class="alignment-center">@character.Mass</td>
+            <td class="alignment-center">@character.Homeworld</td>
+            <td class="alignment-center">@character.BirthYear</td>
+            <td>
+                <a class="btn btn-sm btn-outline-info d-block" asp-controller="Characters" asp-action="CharacterInfo" asp-route-value="@character.Url">
+                    Подробнее
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h3>Итоговые значения</h3>
+
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+        <tr class="align-middle">
+            <th class="alignment-center bg-dark bg-opacity-25" colspan="2">Значения</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr class="align-middle" >
+            <td>Количество персонажей</td>
+            <td class="alignment-center">@Model.Count</td>
+        </tr>
+        </tr>
+        <tr class="align-middle" >
+            <td>Среднее значение веса</td>
+            <td class="alignment-center">@($"{Model.Account.avg:f2}")</td>
+        </tr>
+        <tr class="align-middle" >
+            <td>Разница максимального и минимального веса</td>
+            <td class="alignment-center">@($"{Model.Account.delta:f2}")</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<!-- Модальное окно - выборка персонажей по планете -->
+<div class="modal fade" id="PlanetName" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Выберите родную планету персонажа</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+        <form method="post" asp-controller="Characters" 
+            asp-action="SelectByPlanet"
+
+            id="formCategory"
+            class="rounded-3 mx-auto w-100 ">
+
+            <!-- Список планет -->
+            <div class="form-floating">
+                <select class="form-control form-select" name="Planet" asp-items="@ViewBag.SelectPlanets">
+                </select>
+                <label for="category">Планеты персонажей</label>
+            </div>
+
+        </form>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="submit" form="formCategory" class="btn btn-primary px-3">Найти</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>Главная</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.svg">
+
+    <!-- скрипты -->
+    <script src="lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="js/queriesRef.js"></script>
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="index.html">
+            <img class="logo" src="images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- #region Ссылки на страницы -->
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Главная</a>
+                </li>
+
+
+                <!-- Данные -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="navbarDataId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Данные
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDataId">
+
+                        <!-- Единицы измерения -->
+                        <li>
+                            <a class="dropdown-item" href="htdocs/tables/units.html">Единицы измерения</a>
+                        </li>
+
+                        <!-- Товары -->
+                        <li>
+                            <a class="dropdown-item" href="htdocs/tables/goodsList.html">Товары</a>
+                        </li>
+
+                        <!-- Продавцы -->
+                        <li>
+                            <a class="dropdown-item" href="htdocs/tables/sellers.html">Продавцы</a>
+                        </li>
+
+                        <!-- Закупки -->
+                        <li>
+                            <a class="dropdown-item" href="htdocs/tables/purchases.html">Закупки</a>
+                        </li>
+
+                        <!-- Продажи -->
+                        <li>
+                            <a class="dropdown-item" href="htdocs/tables/sales.html">Продажи</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Запросы -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="navbarQueryId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Запросы
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarQueryId">
+
+                        <!-- Запрос 1 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query01" href="#" id="query01Id">Запрос 1</a>
+                        </li>
+
+                        <!-- Запрос 2 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query02" href="#" id="query02Id">Запрос 2</a>
+                        </li>
+
+                        <!-- Запрос 3 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query03" href="#" id="query03Id">Запрос 3</a>
+                        </li>
+
+                        <!-- Запрос 4 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query04" href="#" id="query04Id">Запрос 4</a>
+                        </li>
+
+                        <!-- Запрос 5 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query05" href="#" id="query05Id">Запрос 5</a>
+                        </li>
+
+                        <!-- Запрос 6 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query06" href="#" id="query06Id">Запрос 6</a>
+                        </li>
+
+                        <!-- Запрос 7 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query07" href="#" id="query07Id">Запрос 7</a>
+                        </li>
+
+                        <!-- Запрос 8 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query08" href="#" id="query08Id">Запрос 8</a>
+                        </li>
+
+                        <!-- Запрос 9 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query09" href="#" id="query09Id">Запрос 9</a>
+                        </li>
+
+                        <!-- Запрос 10 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query10" href="#" id="query10Id">Запрос 10</a>
+                        </li>
+
+                        <!-- Запрос 11 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query11" href="#" id="query11Id">Запрос 11</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- #endregion -->
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <!-- #region Теоретическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Теоретическая часть
+            </summary>
+
+            <ul>
+                <li>Понятие о WebAPI</li>
+                <li>Понятие о REST, RESTful API</li>
+                <li>Создание простейших ASP.NET Core WebAPI приложений</li>
+                <li>Создание ASP.NET Core WebAPI приложений c контроллерами</li>
+                <li>Добавление API-контроллеров</li>
+                <li>Реализация REST-запросов в контроллерах: GET, POST, PUT, DELETE</li>
+                <li>
+                    AJAX-реализация REST-запросов к серверу на чистом JavaScript в клиентском приложении – получение
+                    строки от сервера, получение JSON от сервера, получение разметки от сервера
+                </li>
+                <li>Отправка данных на сервер в AJAX-запросе при помощи маршрутизации</li>
+            </ul>
+
+        </details>
+        <!-- #endregion -->
+
+
+        <!-- #region Практическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Практическая часть
+            </summary>
+
+            <p>
+                Создать приложение ASP.NET Core WebAPI и набор html-страниц для решения следующих задач. Стилизацию
+                приложения выполняйте при помощи фреймворка Bootstrap.
+            </p>
+
+            <p>
+                Для работы с базой данных при помощи Entity Framework Core 6. Стилизацию разметки выполняйте при
+                помощи Bootstrap. Реализуйте вывод задания, вывод всех записей таблиц базы данных.
+            </p>
+
+            <p>Все таблицы должны быть проинициированы не менее чем 10 записями.</p>
+
+            <p>
+                Требуется также выполнение запросов по заданию, запросы отправлять на сервер операцией GET, параметры
+                вводить в формы (рекомендую формы в модальных окнах).
+            </p>
+
+            <p>
+                Методы API-контроллера для реализации запросов должны возвращать разметку, выводить результаты всех
+                запросов в одну и ту же html-страницу.
+            </p>
+
+            <table class="table table-bordered">
+                <tdody>
+                    <tr>
+                        <td>
+                            <i>База данных <b>«Оптовый магазин. Учет продаж»</b></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Описание предметной области</b>
+                            Оптовый магазин закупает товар по <b>Цене закупки единицы товара</b> и продает товар по
+                            <b>Цене продажи единицы товара</b>. Разница между ценой продажи и ценой закупки составляет
+                            прибыль магазина от реализации единицы товара.
+                            Каждый продавец получает комиссионное вознаграждение за проданный товар. Размер этого
+                            вознаграждения равен:
+                            <b>
+                                Цена продажи единицы товара * Кол-во проданных единиц товара *
+                                Процент комиссионных продавца
+                            </b>.
+                            Прибыль от продажи партии товара вычисляется как
+                            <b>
+                                (Цена продажи единицы товара - Цена закупки
+                                единицы товара) * Кол-во проданных единиц товара
+                            </b>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bolder fst-italic">
+                            База данных должна включать как минимум таблицы ТОВАРЫ, ПРОДАВЦЫ, ПРОДАЖИ, содержащие
+                            следующую
+                            информацию:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>База данных «Оптовый магазин. Учет продаж»</td>
+                    </tr>
+                    <tr>
+                        <td>Описание предметной области</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Оптовый магазин закупает товар по Цене закупки единицы товара и продает товар по Цене
+                            продажи
+                            единицы товара. Разница между ценой продажи и ценой закупки составляет прибыль магазина от
+                            реализации единицы товара.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Каждый продавец получает комиссионное вознаграждение за проданный товар. Размер этого
+                            вознаграждения равен: Цена продажи единицы товара * Кол-во проданных единиц товара * Процент
+                            комиссионных продавца.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Прибыль от продажи партии товара вычисляется как (Цена продажи единицы товара - Цена закупки
+                            единицы товара) * Кол-во проданных единиц товара.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            База данных должна включать как минимум таблицы ТОВАРЫ, ПРОДАВЦЫ, ПРОДАЖИ, содержащие
+                            следующую
+                            информацию:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Наименование товара</td>
+                    </tr>
+                    <tr>
+                        <td>Единица измерения товара</td>
+                    </tr>
+                    <tr>
+                        <td>Цена закупки единицы товара</td>
+                    </tr>
+                    <tr>
+                        <td>Дата продажи товара</td>
+                    </tr>
+                    <tr>
+                        <td>Цена продажи единицы товара</td>
+                    </tr>
+                    <tr>
+                        <td>Количество проданных единиц товара</td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия продавца, оформившего продажу</td>
+                    </tr>
+                    <tr>
+                        <td>Имя продавца, оформившего продажу</td>
+                    </tr>
+                    <tr>
+                        <td>Отчество продавца, оформившего продажу</td>
+                    </tr>
+                    <tr>
+                        <td>Процент комиссионных продавца, оформившего продажу</td>
+                    </tr>
+                </tdody>
+            </table>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Номер запроса</th>
+                    <th>Тип запроса</th>
+                    <th>Какую задачу решает запрос</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Фильтр</td>
+                    <td>
+                        Выбирает из информацию о товарах, единицей измерения которых является «шт» (штуки) и цена
+                        закупки
+                        составляет меньше 200 руб. Значения задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Фильтр</td>
+                    <td>
+                        Выбирает информацию о товарах, цена закупки которых больше 500 руб. за единицу товара. Значения
+                        задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Фильтр</td>
+                    <td>
+                        Выбирает информацию о товарах с заданным наименованием (например, «чехол защитный»), для которых
+                        цена
+                        закупки меньше 1800 руб. Значения задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Запрос с параметрами</td>
+                    <td>
+                        Выбирает информацию о продавцах с заданным значением процента комиссионных. Значения задавать
+                        параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Запрос с параметрами</td>
+                    <td>
+                        Выбирает информацию о зафиксированных фактах продажи для заданного параметром продавца
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Запрос с параметрами</td>
+                    <td>
+                        Выбирает информацию обо всех зафиксированных фактах продажи товаров (Наименование товара,
+                        Цена закупки, Цена продажи, дата продажи), для которых Цена продажи оказалась в некоторых
+                        заданных
+                        границах. Значения задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Запрос с вычисляемыми полями</td>
+                    <td>
+                        Вычисляет прибыль от продажи за каждый проданный товар. Включает поля
+                        <b>Дата продажи,Наименование товара, Цена закупки, Цена продажи, Количество проданных единиц,
+                            Прибыль</b>.
+                        Сортировка по полю <b>Наименование товара</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Итоговый запрос</td>
+                    <td>
+                        Выполняет группировку по полю <b>Наименование товара</b>. Для каждого наименования вычисляет
+                        среднюю цену закупки товара, количество закупок
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Итоговый запрос</td>
+                    <td>
+                        Выполняет группировку по полю <b>Код продавца</b> из таблицы <b>ПРОДАЖИ</b>. Для каждого
+                        продавца
+                        вычисляет среднее значение по полю <b>Цена продажи единицы товара</b>, количество продаж
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><i>Итоговый запрос</i></td>
+                    <td>
+                        Выполняет группировку по единицам измерений проданных товаров, для каждой единицы измерения
+                        вычисляет сумму продаж и суммарное количество проданного товара
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Итоговый запрос с левым соединением</td>
+                    <td>
+                        Для всех продавцов вывести сумму и количество продаж, минимальную и максимальную стоимости
+                        продаж
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Для таблицы <b>ПРОДАЖИ</b> требуется реализовать добавление (метод PUT), редактирование (метод POST) и
+                удаление записей (метод DELETE).
+            </p>
+
+        </details>
+        <!-- #endregion -->
+
+        <!-- #region Дополнительно -->
+        <details open>
+            <summary class="h5 text-primary">
+                Дополнительно
+            </summary>
+
+            <p>
+                Запись занятия можно скачать по
+                <a href="https://cloud.mail.ru/public/H78p/T8DcFAcXy" target="_blank"><b>этой ссылке</b></a>,
+                материалы занятия в этом же архиве.
+            </p>
+
+        </details>
+        <!-- #endregion -->
+    </section>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

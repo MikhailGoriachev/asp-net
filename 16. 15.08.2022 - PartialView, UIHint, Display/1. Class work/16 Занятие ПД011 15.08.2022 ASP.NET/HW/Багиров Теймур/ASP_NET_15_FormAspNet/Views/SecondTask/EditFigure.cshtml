@@ -1,0 +1,48 @@
+﻿@model  ASP_NET_15_FormAspNet.Models.Figures.FigureModel;
+
+
+@* в форме задаем обработчик *@
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    
+    
+    <h3 class="text-center">Редактирование фигуры</h3>
+    <form class="bg-light p-5" asp-controller="SecondTask" asp-action="EditFigure" method="post">
+        @switch(Model.Name){
+            case "Квадрат":
+                <div class="mt-2 mb-3">
+                    <label class="form-label" asp-for="SideA">Сторона a:</label>
+                    <input type="number" asp-for="SideA" class="form-control"/>
+                </div>
+                break;
+                
+            case "Прямоугольник":
+                <div class="mt-2 mb-3">
+                    <label class="form-label" asp-for="SideA">Сторона a:</label>
+                    <input type="number" asp-for="SideA" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SideB">Сторона b:</label>
+                    <input type="number" asp-for="SideB" class="form-control"/>
+                </div>
+                break;
+                
+                
+            case "Треугольник":
+                <div class="mt-2 mb-3">
+                    <label class="form-label" asp-for="SideA">Сторона a:</label>
+                    <input type="number" asp-for="SideA" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SideB">Сторона b:</label>
+                    <input type="number" asp-for="SideB" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SideC">Сторона c:</label>
+                    <input type="number" asp-for="SideC" class="form-control"/>
+                </div>
+                 break; 
+        }
+        <button class="btn btn-primary" type="submit">Сохранить изменения</button>
+    </form>
+
+</div>

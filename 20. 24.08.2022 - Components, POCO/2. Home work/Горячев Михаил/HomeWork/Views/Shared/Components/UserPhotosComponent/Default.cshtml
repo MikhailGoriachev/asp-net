@@ -1,0 +1,22 @@
+﻿@model HomeWork.Models.ViewModels.UserPhotosViewModel?
+
+<h5>Количество фото: @Model?.Count</h5>
+
+<div class="container-fluid">
+    <div class="row">
+        @if (Model != null)
+        {
+            foreach (var userPhoto in Model.Data)
+            {
+                <div class="col">
+                    <div class="card m-3">
+                        <div class="card-header text-center">
+                            <img src="@userPhoto.ThumbnailUrl" alt="image"/>
+                        </div>
+                        <div class="card-body">@userPhoto.Title</div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

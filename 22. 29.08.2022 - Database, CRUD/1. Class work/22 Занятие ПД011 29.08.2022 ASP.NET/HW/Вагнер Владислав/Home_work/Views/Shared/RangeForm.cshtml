@@ -1,0 +1,48 @@
+﻿@using Home_work.ViewModels
+@model RangeModel
+@{
+    ViewBag.title = $"Форма задания диапазона";
+    ViewBag.PageName = "RangeForm";
+}
+
+@section JqueryFiles{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+<section class="section-form">
+   
+    <fieldset>
+
+            <form method="post" asp-controller=@Model.Controller asp-action=@Model.Action
+            class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg">
+            
+            <input asp-for="Controller" type="hidden"/>
+            <input asp-for="Action" type="hidden"/>
+
+            <!-- Диапазон -->
+            <div class="form-floating my-3 ">
+                <input asp-for="Min" class="form-control"/>
+                <label asp-for="Min"></label>
+                
+                <span asp-validation-for="Min" class="text-danger"></span>
+            </div>
+
+            <div class="mt-4 form-floating my-3 ">
+                <input asp-for="Max" class="form-control"/>
+                <label asp-for="Max"></label>
+
+                <span asp-validation-for="Max" class="text-danger"></span>
+            </div>
+
+          <!-- Кнопки управления -->
+            <input class="btn btn-success me-2"
+                   type="submit" value="Выбрать"/>
+            <a class="btn btn-danger" asp-controller="Characters" asp-action="Default">Выход</a>
+            
+        </form>
+    </fieldset>
+
+</section>

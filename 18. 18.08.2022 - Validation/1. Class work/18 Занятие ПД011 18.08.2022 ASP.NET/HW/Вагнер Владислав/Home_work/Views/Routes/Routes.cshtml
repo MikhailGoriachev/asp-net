@@ -1,0 +1,236 @@
+﻿@* представление для вывода коллекции книг в библиотеке *@
+@model IEnumerable<Route>
+@using Home_work.Models
+@using Home_work.Infrastructure
+@{
+    ViewBag.title = "Маршруты";
+    ViewBag.PageName = "Routes";
+}
+
+
+<!--Задание-->
+<details class="task-details">
+<summary class="h5 text-primary">
+    Задание 1
+</summary>
+    <p>
+        <b>Задача 1. </b>
+        Туристическая фирма организует пешие маршруты по степным заказникам. 
+        Сведения о туристических маршрутах содержат: идентификатор маршрута, 
+        начальный пункт маршрута, обязательный промежуточный пункт маршрута, 
+        конечный пункт маршрута, протяженность маршрута в км (целое число), 
+        сложность маршрута (значение из ряда <b>А-, А, А+, В-, В, В+, С-, С, С+; А-</b> соответствует минимальной сложности,
+        <b>С+</b> соответствует максимальной сложности), фамилия и инициалы инструктора маршрута 
+        (всего на фирме работает пять инструкторов, не требуется редактировать сведения об инструкторах).
+    </p>
+
+    <p>
+        Сведения об инструкторах содержат: идентификатор инструктора, фамилия, имя, 
+        отчество, дата рождения, категория (<b>А, В, С;</b> А – низшая категория, С – высшая категория)..
+    </p>
+    <p>
+        Данные о маршрутах и инструкторах хранить в файле routes.json, instructors.json в папке App_Data. 
+        Требуется реализовать следующий функционал 
+        (критерии сортировки и выборки задавайте через переменные маршрута):
+    </p>
+
+    <ul>
+        <li>Добавление маршрута (в форме на отдельной странице)</li> 
+        <li>Редактирование сведений о маршруте (в форме на отдельной странице, это может быть та же страница, что страница добавления маршрута)
+        </li>
+        <li>Удаление сведений о маршруте</li>
+        <li>Вывод сведений о маршруте в порядке хранения в файле</li>
+        <li>Вывод сведений о маршруте по убыванию протяженности маршрута</li>
+        <li>Вывод сведений о маршруте по возрастанию протяженности маршрута</li>
+        <li>Вывод сведений о маршруте по возрастанию сложности</li>
+        <li>Вывод маршрутов с заданным начальным пунктом</li>
+        <li>Вывод маршрутов, проходящих через заданный промежуточный пункт</li>
+        <li>Вывод маршрутов с протяженностью, попадающей в заданный интервал</li>
+        <li>Вывод сведений об инструкторах в порядке хранения в файле</li>
+        <li>Вывод сведений об инструкторах в порядке убывания категорий</li>
+        <li>Вывод сведений об инструкторах в порядке убывания категорий</li>
+        <li>Вывод сведений об инструкторах в порядке убывания категорий</li>
+    </ul>
+</details>
+
+<h4>@ViewBag.Header</h4>
+@* Вывод коллекции маршрутов *@
+<table class="table table-hover table-bordered w-100 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th>Id</th>
+        <th>Начальная точка</th>
+        <th>Промежуточная точка</th>
+        <th>Конечная точка</th>
+        <th>Протяженность</th>
+        <th>Уровень сложности</th>
+        <th>Инструктор</th>
+        @if (ViewBag.ShowControls is null)
+        {
+            <th class="alignment-center">
+                <a class="btn btn-success" asp-controller="Routes" asp-action="AddRoute">
+                    Добавить
+                </a>
+            </th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (Route route in Model)
+    {
+        <tr class="align-middle">
+            <td class="alignment-center">@route.Id</td>
+            <td>@route.StartingPoint</td>
+            <td>@route.MiddlePoint</td>
+            <td>@route.EndPoint</td>
+            <td>@route.Length км</td>
+            <td class="alignment-center">@route.Complexity</td>
+            <td>@route.InstructorData.Surname.@route.InstructorData.Name[0].@route.InstructorData.Patronymic[0]</td>
+            @if (ViewBag.ShowControls is null)
+            {
+                <td>
+                    <a class="btn btn-sm btn-outline-danger d-block" asp-controller="Routes" asp-action="DeleteRoute" asp-route-id="@route.Id">
+                        Удалить
+                    </a>
+                    <a class="btn btn-sm btn-outline-primary mt-3 d-block" asp-controller="Routes" asp-action="EditRoute" asp-route-id="@route.Id">
+                        Редактировать
+                    </a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@*Если коллекция оказалась пустой*@
+@if (Model.Count() <= 0)
+{
+     <div  class="alert alert-danger" role="alert" >
+         <b>Коллекция пуста</b>, удалите JSON-файл и обновите страницу, или добавляйте книги вручную!
+     </div>
+
+}
+
+
+<!-- Модальное окно - выборка по промежуточной точке -->
+<div class="modal fade" id="inputMiddlePoint" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Введите промежуточную точку маршрута</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+        <form method="post" asp-controller="Routes" 
+            asp-action="Selection" 
+            asp-route-value="SelectByMiddlePoint" 
+
+            id="formMiddlePoint"
+            class="rounded-3 mx-auto w-100 ">
+
+            <!-- Промежуточная точка -->
+            <div class="form-floating">
+                <input name="middlePoint" class="form-control"/>
+                <label for="middlePoint">Промежуточный пункт</label>
+            </div>
+
+        </form>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="submit" form="formMiddlePoint" class="btn btn-primary px-3">Найти</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Модальное окно - выборка по стартовой точке -->
+<div class="modal fade" id="inputStartPoint" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Введите стартовую точку маршрута</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+        <form method="post" asp-controller="Routes" 
+            asp-action="Selection" 
+            asp-route-value="SelectByStartPoint" 
+            id="formStartPoint"
+            class="rounded-3 mx-auto w-100 ">
+
+            <!-- Начальная точка -->
+            <div class="form-floating">
+                <input name="startPoint" class="form-control" />
+                <label for="startPoint">Начальная точка</label>
+            </div>
+
+        </form>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="submit" form="formStartPoint" class="btn btn-primary px-3">Найти</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Модальное окно - выборка по диапазону протяженности -->
+<div class="modal fade" id="inputLengthRange" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Введите диапазон протяженности маршрута</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+        <form method="post" asp-controller="Routes" 
+            asp-action="Selection" 
+            asp-route-value="SelectByLengthRange" 
+
+            id="formLengthRange"
+            class="rounded-3 mx-auto w-100 ">
+
+            <!-- Диапазон -->
+            <div class="form-floating">
+                <input name="minLength" type="number" min="1" class="form-control"/>
+                <label>Минимальная длина</label>
+            </div>
+            <div class="mt-4 form-floating">
+                <input name="maxLength" type="number" min="1" class="form-control"/>
+                <label>Максимальная длина</label>
+            </div>
+
+        </form>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="submit" form="formLengthRange" class="btn btn-primary px-3">Найти</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,25 @@
+﻿@model HybridComponents.Model.Product
+
+
+@{
+    ViewBag.Title = "Create Product";
+}
+
+
+<form asp-action="Create" class="form">
+    <div>
+        <label>Name</label>
+        <input name="name" />
+    </div>
+
+    <div>
+        <label>Price</label>
+        <input name="price" />
+    </div>
+
+    <div>
+        <input type="submit" value="Создать" />
+    </div>
+</form>
+
+

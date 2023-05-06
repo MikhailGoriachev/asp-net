@@ -1,0 +1,33 @@
+﻿@model IQueryable<TouristicAgencyMvcCore.Models.Reports.Result01>
+@{
+    ViewBag.Title = "Отчет 1";
+}
+
+<h3>@ViewBag.Title</h3>
+<h3>@ViewBag.Task</h3>
+
+@* вывод в соответствии с запросом на выборку данных *@
+<table class="table table-hover">
+    <theader>
+        <tr>
+            <th>Цель поездки</th>
+            <th>Минимальна стоимость, руб.</th>
+            <th>Средняя стоимость, руб.</th>
+            <th>Максимальная стоимость, руб.</th>
+            <th>Количество записей</th>
+        </tr>
+    </theader>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td>@row.Purpose</td>
+                <td>@($"{row.MinCost:n2}")</td>
+                <td>@($"{row.AvgCost:n2}")</td>
+                <td>@($"{row.MaxCost:n2}")</td>
+                <td>@row.Amount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

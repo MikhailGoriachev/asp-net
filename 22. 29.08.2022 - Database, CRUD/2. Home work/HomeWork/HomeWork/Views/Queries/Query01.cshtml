@@ -1,0 +1,25 @@
+﻿@using HomeWork.Components
+@using HomeWork.Models
+@model HomeWork.Models.BindingModels.IntBindingModel
+
+@{
+    ViewBag.Title = $"Запрос 1. Цель поездки: \"{ViewBag.ObjectiveName}\"";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <div class="d-lg-flex justify-content-between">
+        <form method="post" asp-controller="Queries" asp-action="Query01" class="d-flex align-items-center">
+            <div class="form-floating w-10rem">
+                <select asp-items="ViewBag.ObjectiveList" asp-for="Value" class="form-control"></select>
+                <label asp-for="Value">Цель поездки</label>
+            </div>
+
+            <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+            <a class="btn btn-warning" asp-controller="Queries" asp-action="Query01">Сбросить</a>
+        </form>
+    </div>
+
+    @await Component.InvokeAsync(typeof(Query01Component), new { ObjectiveId = Model.Value })
+</section>

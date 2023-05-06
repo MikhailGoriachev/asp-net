@@ -1,0 +1,14 @@
+﻿@model List<ViewComponentsFirst.Model.Photo>
+
+@* т.к. вывод в row заголовок щанимает всю ширину строки, тогда фото будут выводиться ниже заголовка *@
+<h3 class="col-12 mx-auto">Фотографии пользователя с идентификатором @ViewBag.UserId, всего фотографий: @ViewBag.Count</h3>
+
+@foreach (var photo in Model) {
+    <div class="card m-1 col-3">
+        <img class="card-img-top mx-auto w-90" src="@photo.ThumbnailUrl" alt="@photo.Title">
+        <div class="card-body">
+            <h4 class="card-title">@photo.Title</h4>
+            <p class="card-text">Ид. фото: @photo.Id</p>
+        </div>
+    </div>
+}

@@ -1,0 +1,30 @@
+﻿@model Homework.Models.ViewModels.FilterViewModel
+
+@*Панель кнопок для фильтрации*@
+<div class="navbar">
+    <div class="container-fluid justify-content-start gap-2">
+        
+        <form asp-action="Index" method="get" class="d-inline-block ms-3">
+            <label asp-for="@Model!.GoodsSelected" class="form-label lead color-3" >Наименование: </label>
+            <select asp-items="Model!.GoodsList" asp-for="GoodsSelected" class="form-control-sm ms-1 color-1"></select>
+            
+            <label asp-for="PriceFrom" class="form-label lead color-3 ms-2">Цена закупки: </label>
+            <input asp-for="PriceFrom" class="form-control-sm w-80-px ms-1"/> —
+            <input asp-for="PriceTo" class="form-control-sm w-80-px"/>
+            
+            <label asp-for="UnitsSelected" class="form-label lead color-3 ms-2">Единицы: </label>
+            <select asp-items="Model.UnitsList" asp-for="UnitsSelected" class="form-control-sm ms-1 color-1"></select>
+            
+            <input class="btn btn-sm btn-outline-secondary ms-4" type="submit" value="Показать">
+        </form>
+
+        <a asp-action="Index"
+           class="btn btn-sm btn-outline-secondary align-self-start ms-2"
+           title="Сбросить фильтр">
+            Сбросить
+        </a>
+
+    </div>
+    <span asp-validation-for="PriceFrom" class="text-danger"></span>
+    <span asp-validation-for="PriceTo" class="text-danger"></span>
+</div>

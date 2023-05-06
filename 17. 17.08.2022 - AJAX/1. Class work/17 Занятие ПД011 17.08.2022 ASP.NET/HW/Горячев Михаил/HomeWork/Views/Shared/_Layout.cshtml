@@ -1,0 +1,180 @@
+﻿@using Microsoft.AspNetCore.Mvc.Controllers;
+
+@functions {
+    // получить стиль
+    string ActiveStyle(string? controller = null, string? action = null)
+    {
+        if (ViewBag.PageName != null)
+            return ViewBag.PageName == controller ? "active" : "";
+
+        ControllerActionDescriptor actionDescriptor = (ControllerActionDescriptor)ViewContext.ActionDescriptor;
+
+        string curController = actionDescriptor.ControllerName;
+        string curAction = actionDescriptor.ActionName;
+
+        return curController == controller || (curController == controller && curAction == action) ? "active" : "";
+    }
+
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>@ViewBag.Title</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/icon.svg">
+
+    <!-- подключение дополнительных стилей и скриптов -->
+    @await RenderSectionAsync("Head", false)
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" asp-controller="Home" asp-action="Index">
+            <img class="logo" src="~/images/icon.svg" alt="logo">
+            @* HomeWork *@
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- #region Ссылки на страницы -->
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("Home") mx-3" asp-controller="Home" asp-action="Index">Главная</a>
+                </li>
+
+                <!-- Маршруты -->
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("Routes") mx-3" asp-controller="Routes" asp-action="Index">Маршруты</a>
+                </li>
+
+                <!-- Сортировка маршрутов -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("OrderRoutes")"
+                       id="navbarOrderRoutes" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Сортировка маршрутов
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarOrderRoutes">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Routes" asp-action="OrderByLengthDesc">По убыванию протяженности</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Routes" asp-action="OrderByLengthAsc">По возрастанию протяженности</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Routes" asp-action="OrderByDifficultyAsc">По возрастанию сложности</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Выборка маршрутов -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("SelectRoutes")"
+                       id="navbarSelectRoutes" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Выборка маршрутов
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSelectRoutes">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Routes" asp-action="SelectByStartPoint">По начальному пункту</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Routes" asp-action="SelectByMiddlePoint">По промежуточному пункту</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Routes" asp-action="SelectByRangeLength">По диапазону протяженности</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Инструкторы -->
+                <li class="nav-item">
+                    <a class="nav-link @ActiveStyle("Instructors") mx-3" asp-controller="Instructors" asp-action="Index">Инструкторы</a>
+                </li>
+
+                <!-- Сортировка инструкторов -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("OrderInstructors")"
+                       id="navbarOrderInstructors" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Сортировка инструкторов
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarOrderInstructors">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Instructors" asp-action="OrderByFullName">В алфавитном порядке</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="Instructors" asp-action="OrderByCategoriesDesc">По убыванию категорий</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Выборка инструкторов -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @ActiveStyle("SelectInstructors")"
+                       id="navbarSelectInstructors" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Выборка инструкторов
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSelectInstructors">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Instructors" asp-action="SelectByCategory">По заданной категории</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+    @RenderBody()
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

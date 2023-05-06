@@ -1,0 +1,78 @@
+﻿@model Homework.Models.ViewModels.ClientInputForm
+
+@{
+    ViewBag.Title = "Ввод данных о клиенте";
+    Layout = "_Layout";
+}
+
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h3 class="text-center">Редактирование сведений о клиенте</h3>
+    <form class="bg-light p-5" asp-controller="Clients" asp-action="UpdateClient" enctype="multipart/form-data" method="post">
+
+        <input asp-for="@Model!.Client.Id" type="hidden" value="@Model!.Client.Id"/>
+        <input asp-for="@Model!.Photo" type="hidden" value="@Model!.Client.Photo"/>
+
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="@Model!.Client.Surname"></label>
+            <input asp-for="@Model!.Client.Surname" class="form-control"/>
+            <span asp-validation-for="@Model!.Client.Surname" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model!.Client.Name"></label>
+            <input asp-for="@Model!.Client.Name" class="form-control"/>
+            <span asp-validation-for="@Model!.Client.Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model!.Client.Patronymic"></label>
+            <input asp-for="@Model!.Client.Patronymic" class="form-control"/>
+            <span asp-validation-for="@Model!.Client.Patronymic" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model!.Client.Age"></label>
+            <input asp-for="@Model!.Client.Age" class="form-control"/>
+            <span asp-validation-for="@Model!.Client.Age" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model!.Client.Email"></label>
+            <input asp-for="@Model!.Client.Email" class="form-control"/>
+            <span asp-validation-for="@Model!.Client.Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model!.Client.PhoneNumber"></label>
+            <input asp-for="@Model!.Client.PhoneNumber" class="form-control"/>
+            <span asp-validation-for="@Model!.Client.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mb-5">
+            <input asp-for="@Model!.Client.IsRegular" class="form-check-input" value="true"/>
+            <label asp-for="@Model!.Client.IsRegular" class="form-check-label">Постоянный клиент</label>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.RawPassword"></label>
+            <input asp-for="@Model.RawPassword" class="form-control" value="@Model.RawPassword"/>
+            <span asp-validation-for="@Model.RawPassword" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.ConfirmRawPassword"></label>
+            <input asp-for="@Model.ConfirmRawPassword" class="form-control" value="@Model.ConfirmRawPassword"/>
+            <span asp-validation-for="@Model.ConfirmRawPassword" class="text-danger"></span>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label mt-1 mx-2" asp-for="@Model.File">Загрузить фото (до 2Mb): </label>
+            <input class="form-control" accept=".png,.jpg,.jpeg" type="file" asp-for="@Model.File">
+            <span asp-validation-for="@Model.File" class="text-danger"></span>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-controller="Clients" asp-action="index" type="date" class="btn btn-secondary">Отмена</a>
+    </form>
+
+</div>

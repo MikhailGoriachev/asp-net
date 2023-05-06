@@ -1,0 +1,52 @@
+﻿@model UiHintDisplayResults.Models.TouristicRoute
+@*
+    Форма редактирования сведений о туристическом маршруте
+*@
+
+
+@* в форме задаем обработчик *@
+<div class="offset-2 col-8 mt-5 p-3 border-dark">
+    <h3 class="text-center">Редактирование сведений о туристическом маршруте</h3>
+    <form class="bg-light p-5" method="post"
+          asp-controller="TouristicRoutes" asp-action="Update">
+        
+        @* идентификатор маршрута, не меняем, но используем *@
+        <input asp-for="Id" type="hidden" value="@Model.Id"/>
+        
+        @* редактируемые поля *@
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="StartPoint"></label>
+            <input type="text" asp-for="StartPoint" class="form-control"/>
+        </div>
+
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="MiddlePoint"></label>
+            <input class="form-control" asp-for="MiddlePoint" />
+        </div>
+
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="EndPoint"></label>
+            <input class="form-control" asp-for="EndPoint"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Length"></label>
+            <input class="form-control" asp-for="Length"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Complexity"></label>
+            <input acceptclass="form-control" asp-for="Complexity" />
+        </div>
+        
+        @* список инструкторов для назначения на маршрут *@
+        <div class="mb-3">
+            <label class="form-label" asp-for="InstructorId"></label>
+            <select class="form-select" asp-for="InstructorId" asp-items="@ViewBag.SelectInstructors"></select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <button class="btn btn-secondary" type="reset">Сбросить</button>
+    </form>
+
+</div>

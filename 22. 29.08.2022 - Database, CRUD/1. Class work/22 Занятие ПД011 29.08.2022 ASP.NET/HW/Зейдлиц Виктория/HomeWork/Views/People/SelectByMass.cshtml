@@ -1,0 +1,42 @@
+﻿@using HomeWork.Components
+@model HomeWork.Models.ViewModels.SelectByMass
+
+
+@section Style
+{
+    @* скрипты валидации *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <h5 class="text-center">@ViewBag.Header</h5>
+
+    <form method="post" asp-controller="People" asp-action="SelectByMass" class="container-fluid align-items-center">
+
+        <div class="row">
+            <label asp-for="MinMass" class="form-label">Диапазон веса (кг):</label>
+
+            <input asp-for="MinMass" class="form-control w-10rem mx-3">
+            <input asp-for="MaxMass" class="form-control w-10rem mx-3">
+
+            <input class="btn btn-success w-10rem" type="submit" value="Выбрать">
+        </div>
+
+
+        <div class="row">
+            <span asp-validation-for="MaxMass" class="w-100 text-danger"></span>
+            <span asp-validation-for="MinMass" class="w-100 text-danger"></span>
+        </div>
+
+    </form>
+
+
+    @* Рендер таблицы 
+    @await Html.PartialAsync("PeopleSelectMass", Model.Persons)*@
+    @await Component.InvokeAsync(nameof(PeopleSelectMass), new{from = Model, to = Model})
+
+</section>

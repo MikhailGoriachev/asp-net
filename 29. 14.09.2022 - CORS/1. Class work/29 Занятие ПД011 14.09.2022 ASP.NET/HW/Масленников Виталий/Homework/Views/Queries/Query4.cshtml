@@ -1,0 +1,5 @@
+﻿@model IQueryable<Homework.Models.Route>
+
+<h4>Информация о маршрутах в @ViewBag.Country</h4>
+
+@{ await Html.RenderPartialAsync("TravelsTable", Model); }

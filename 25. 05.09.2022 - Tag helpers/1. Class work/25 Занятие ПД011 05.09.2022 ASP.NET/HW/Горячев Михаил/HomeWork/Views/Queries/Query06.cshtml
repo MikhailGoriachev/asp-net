@@ -1,0 +1,12 @@
+﻿@model System.Collections.Generic.List<HomeWork.Models.QueryResults.Query06Result>
+
+@{
+    ViewBag.Title = "Запрос 06. Вычисление прибыли за каждый проданный товар";
+}
+
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <query06-result-table items="Model"></query06-result-table>
+</section>

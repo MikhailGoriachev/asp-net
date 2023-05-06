@@ -1,0 +1,47 @@
+﻿[
+  {
+    "Id": 1,
+    "Surname": "Панченко",
+    "Name": "Любовь",
+    "Patronymic": "Михайловна",
+    "BornDate": "1992-12-16T00:00:00",
+    "Category": "A",
+    "ShortName": "Панченко Л.П."
+  },
+  {
+    "Id": 2,
+    "Surname": "Яйло",
+    "Name": "Александр",
+    "Patronymic": "Степанович",
+    "BornDate": "1988-08-08T00:00:00",
+    "Category": "B",
+    "ShortName": "Яйло А.Я."
+  },
+  {
+    "Id": 3,
+    "Surname": "Хомченко",
+    "Name": "Алексей",
+    "Patronymic": "Кириллович",
+    "BornDate": "1995-11-10T00:00:00",
+    "Category": "A",
+    "ShortName": "Хомченко А.Х."
+  },
+  {
+    "Id": 4,
+    "Surname": "Чирик",
+    "Name": "Жанна",
+    "Patronymic": "Эсмировна",
+    "BornDate": "1990-06-01T00:00:00",
+    "Category": "C",
+    "ShortName": "Чирик Ж.Ч."
+  },
+  {
+    "Id": 5,
+    "Surname": "Ковтун",
+    "Name": "Ольга",
+    "Patronymic": "Викторовна",
+    "BornDate": "1997-03-18T00:00:00",
+    "Category": "C",
+    "ShortName": "Ковтун О.К."
+  }
+]

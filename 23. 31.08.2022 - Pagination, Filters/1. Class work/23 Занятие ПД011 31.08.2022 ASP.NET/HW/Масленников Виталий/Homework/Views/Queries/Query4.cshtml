@@ -1,0 +1,19 @@
+﻿@model IQueryable<Homework.Models.Route>
+
+@{
+    ViewBag.Header = "Запрос на выборку";
+    Layout = "_Layout";
+}
+
+@* Выбор информации о маршрутах в заданную страну *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+        
+        <label class="form-label me-1 lead" for="selCountry">Страна: </label>
+        <select class="form-select-sm me-3 " name="CountryId" asp-items="ViewBag.CountriesList" id="selCountry"></select>
+
+        <button class="btn btn-sm btn-outline-secondary ms-1 align-baseline" type="submit">Показать</button>
+    </form>
+</div>
+
+@{ await Html.RenderPartialAsync("TravelsTable", Model); }

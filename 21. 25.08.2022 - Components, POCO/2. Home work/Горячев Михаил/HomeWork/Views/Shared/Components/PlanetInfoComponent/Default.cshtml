@@ -1,0 +1,67 @@
+﻿@model HomeWork.Models.Planet
+
+<h4 class="text-center text-white">Подробная информация о планете</h4>
+
+@* Id *@
+<div class="input-group my-4">
+    <label asp-for="Id" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Id" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* название *@
+<div class="input-group my-4">
+    <label asp-for="Name" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Name" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* период вращения *@
+<div class="input-group my-4">
+    <label asp-for="RotationPeriod" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="RotationPeriod" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* орбитальный период *@
+<div class="input-group my-4">
+    <label asp-for="OrbitalPeriod" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="OrbitalPeriod" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* диаметр *@
+<div class="input-group my-4">
+    <label asp-for="Diameter" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Diameter" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* климат *@
+<div class="input-group my-4">
+    <label asp-for="Climate" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Climate" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* гравитация *@
+<div class="input-group my-4">
+    <label asp-for="Gravity" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Gravity" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* поверхность *@
+<div class="input-group my-4">
+    <label asp-for="Terrain" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Terrain" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* водная поверхность *@
+<div class="input-group my-4">
+    <label asp-for="SurfaceWater" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="SurfaceWater" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* население *@
+<div class="input-group my-4">
+    <label asp-for="Population" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Population" class="form-control text-white bg-dark" readonly>
+</div>
+
+<div class="my-4 w-100">
+    <a class="btn btn-outline-primary d-block w-18rem mx-auto" asp-controller="Planets" asp-action="Index">Вернуться к списку</a>
+</div>

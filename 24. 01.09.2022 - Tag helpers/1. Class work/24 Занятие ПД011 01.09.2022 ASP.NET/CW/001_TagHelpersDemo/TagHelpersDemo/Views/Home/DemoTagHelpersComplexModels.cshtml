@@ -1,0 +1,16 @@
+﻿@* Демонстрация моделей для тег-хелпера *@
+@using TagHelpersDemo.Models
+@model TagHelpersDemo.Models.Person
+@{
+    ViewBag.Title = "Сложные модели для тег-хелпера";
+    Person p = new Person(DateTime.Now.Millisecond, "Кузнецов Н.А.", 67);
+}
+
+<h3>@ViewBag.Title</h3>
+<h3>Пример использования сложных моделей для тег-хелперов</h3>
+
+<h4>Вывод данных сложной модели, определенных в представлении</h4>
+<person-details class="ms-5" person="p"></person-details>
+
+<h4>Вывод данных сложной модели, определенной в контроллере</h4>
+<person-details class="ms-5" person="Model"></person-details>

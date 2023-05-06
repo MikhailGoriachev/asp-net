@@ -1,0 +1,41 @@
+﻿@model Homework.Models.Planet
+
+<div class="row">
+    <div class="col-auto m-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">@Model!.Name</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="fw-bold">Климат:</span> 
+                        <span class="color-1">@Model.Climate</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Поверхность:</span>
+                        <span class="color-1">@Model.Terrain</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Население:</span>
+                        <span class="color-1">@Model.Population</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Период вращения:</span>
+                        <span class="color-1">@Model.RotationPeriod</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Период орбитального вращения:</span> 
+                        <span class="color-1">@Model.OrbitalPeriod</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Поверхностные воды:</span> 
+                        <span class="color-1">@Model.SurfaceWater</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Гравитация:</span>
+                        <span class="color-1">@Model.Gravity</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

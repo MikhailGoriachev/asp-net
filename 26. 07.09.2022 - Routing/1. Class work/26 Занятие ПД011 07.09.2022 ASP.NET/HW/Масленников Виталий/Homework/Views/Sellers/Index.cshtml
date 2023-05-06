@@ -1,0 +1,92 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Homework.Models.ViewModels
+@using Homework.Models
+@model Homework.Models.ViewModels.IndexViewModel<Homework.Models.Seller>
+
+@{
+    ViewData["Title"] = "Продавцы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Определить порядок сортировки свойства в зависимости от текущего порядка
+    string PropertyOrdering(string property)
+    {
+        var querySort = ViewContext.HttpContext.Request.Query["sort"].ToString();
+
+        var isCurrentDescend = querySort.Contains("desc");
+
+        return querySort.Contains(property) ?
+            $"{property}{(isCurrentDescend ? "" : " desc")}" :
+            $"{property}{(isCurrentDescend ? " desc" : "")}";
+    }
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Id")">
+                Id
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Surname")">
+                Фамилия
+            </a>
+
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Name")">
+                Имя
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Patronymic")">
+                Отчество
+            </a>
+
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Passport")">
+                Паспорт
+            </a>
+
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Interest")">
+                Комиссионные, %
+            </a>
+
+        </th>
+        <th>
+            <a asp-action="Create">Добавить</a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model!.Items)
+    {
+        <seller-table-row seller="item"></seller-table-row>
+    }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 5,
+    AdditionalRouteParameters = new List<RouteParameter>
+    {
+        new ()
+        {
+            Key = "sort",
+            Value = ViewContext.HttpContext.Request.Query["sort"].ToString()
+        }
+    }
+})

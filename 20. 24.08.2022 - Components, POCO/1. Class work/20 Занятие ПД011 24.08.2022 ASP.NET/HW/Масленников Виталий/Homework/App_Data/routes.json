@@ -1,0 +1,110 @@
+[
+  {
+    "Id": 1,
+    "StartPoint": "Начальный пункт 1",
+    "MiddlePoint": "Промежуточный пункт 1",
+    "FinishPoint": "Конечный пункт 1",
+    "Length": 4,
+    "Difficulty": "A-",
+    "InstructorId": 1
+  },
+  {
+    "Id": 2,
+    "StartPoint": "Начальный пункт 2",
+    "MiddlePoint": "Промежуточный пункт 2",
+    "FinishPoint": "Конечный пункт 2",
+    "Length": 16,
+    "Difficulty": "B",
+    "InstructorId": 2
+  },
+  {
+    "Id": 3,
+    "StartPoint": "Начальный пункт 3",
+    "MiddlePoint": "Промежуточный пункт 3",
+    "FinishPoint": "Конечный пункт 3",
+    "Length": 3,
+    "Difficulty": "A+",
+    "InstructorId": 1
+  },
+  {
+    "Id": 4,
+    "StartPoint": "Начальный пункт 4",
+    "MiddlePoint": "Промежуточный пункт 4",
+    "FinishPoint": "Конечный пункт 4",
+    "Length": 13,
+    "Difficulty": "C+",
+    "InstructorId": 3
+  },
+  {
+    "Id": 5,
+    "StartPoint": "Начальный пункт 5",
+    "MiddlePoint": "Промежуточный пункт 5",
+    "FinishPoint": "Конечный пункт 5",
+    "Length": 20,
+    "Difficulty": "B+",
+    "InstructorId": 2
+  },
+  {
+    "Id": 6,
+    "StartPoint": "Начальный пункт 6",
+    "MiddlePoint": "Промежуточный пункт 6",
+    "FinishPoint": "Конечный пункт 6",
+    "Length": 6,
+    "Difficulty": "A+",
+    "InstructorId": 4
+  },
+  {
+    "Id": 7,
+    "StartPoint": "Начальный пункт 7",
+    "MiddlePoint": "Промежуточный пункт 7",
+    "FinishPoint": "Конечный пункт 7",
+    "Length": 7,
+    "Difficulty": "B-",
+    "InstructorId": 5
+  },
+  {
+    "Id": 8,
+    "StartPoint": "Начальный пункт 8",
+    "MiddlePoint": "Промежуточный пункт 8",
+    "FinishPoint": "Конечный пункт 8",
+    "Length": 5,
+    "Difficulty": "C-",
+    "InstructorId": 3
+  },
+  {
+    "Id": 9,
+    "StartPoint": "Начальный пункт 9",
+    "MiddlePoint": "Промежуточный пункт 9",
+    "FinishPoint": "Конечный пункт 9",
+    "Length": 5,
+    "Difficulty": "A",
+    "InstructorId": 1
+  },
+  {
+    "Id": 10,
+    "StartPoint": "Начальный пункт 10",
+    "MiddlePoint": "Промежуточный пункт 10",
+    "FinishPoint": "Конечный пункт 10",
+    "Length": 7,
+    "Difficulty": "A-",
+    "InstructorId": 1
+  },
+  {
+    "Id": 11,
+    "StartPoint": "Начальный пункт 11",
+    "MiddlePoint": "Промежуточный пункт 11",
+    "FinishPoint": "Конечный пункт 11",
+    "Length": 5,
+    "Difficulty": "B-",
+    "InstructorId": 2
+  },
+  {
+    "Id": 12,
+    "StartPoint": "Начальный пункт 12",
+    "MiddlePoint": "Промежуточный пункт 12",
+    "FinishPoint": "Конечный пункт 12",
+    "Length": 7,
+    "Difficulty": "C",
+    "InstructorId": 3
+  }
+]

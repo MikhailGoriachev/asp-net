@@ -1,0 +1,35 @@
+﻿@* Представление для запроса 9
+   Выполняет группировку по полю Код продавца из таблицы ПРОДАЖИ.
+   Для каждого продавца вычисляет среднее значение по полю Цена
+   продажи единицы товара, количество продаж
+*@
+
+@model IQueryable<WebApiDatabase.Models.Queries.Query09Result>
+
+@{
+    ViewBag.Title = "Средняя цена и количество продаж продавцов по данным таблицы ПРОДАЖИ";
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+@* Вывод выборки данных *@
+
+<table class="table table-striped w-45 mx-auto">
+    <thead>
+        <tr>
+            <th>Фамилия И.О.</th>
+            <th>Средняя цена продаж продавца</th>
+            <th>Количество продаж продавца</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var seller in Model) {
+            <tr>
+                <td>@seller.SellerFullName</td>
+                <td>@($"{seller.AvgSellPrice:n2}")</td>
+                <td>@seller.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>

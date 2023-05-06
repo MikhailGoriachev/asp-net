@@ -1,0 +1,43 @@
+﻿@model HomeWork.Models.BindingModels.RangeBindingModel?
+
+@{
+    ViewBag.Title = $"Запрос 6. Диапазон цены продажи: {Model?.Min.ToString() ?? "————"} — {Model?.Max.ToString() ?? "————"}";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <form method="get" asp-controller="Queries" asp-action="Query06" class="d-flex align-items-center">
+
+        <!-- Минимальная стоимость визы -->
+        <div class="form-floating w-15rem">
+            <input asp-for="Min" class="form-control" placeholder="Мин. стоимость (&#8381;)" min="0">
+            <label asp-for="Min">Мин. цена продажи (&#8381;)</label>
+        </div>
+
+        <!-- Максимальная стоимость визы -->
+        <div class="form-floating ms-3 w-15rem">
+            <input asp-for="Max" class="form-control" placeholder="Макс. стоимость (&#8381;)" min="1">
+            <label asp-for="Max">Макс. цена продажи (&#8381;)</label>
+        </div>
+
+        <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+        <a class="btn btn-warning" asp-controller="Queries" asp-action="Query06">Сбросить</a>
+    </form>
+
+
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Продавец</th>
+            <th>Закупленный товар</th>
+            <th>Единица измерения</th>
+            <th>Цена единицы (&#8381;)</th>
+            <th>Количество</th>
+            <th>Дата продажи</th>
+        </tr>
+        </thead>
+        <sales-table-body items="ViewBag.Items"></sales-table-body>
+    </table>
+</section>

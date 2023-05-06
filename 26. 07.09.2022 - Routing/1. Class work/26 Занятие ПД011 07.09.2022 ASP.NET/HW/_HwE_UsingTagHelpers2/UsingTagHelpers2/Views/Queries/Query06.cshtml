@@ -1,0 +1,54 @@
+﻿@*
+    Запрос 6
+    Выбирает информацию обо всех зафиксированных фактах продажи товаров
+    (Наименование товара, Цена закупки, Цена продажи, дата продажи),
+    для которых Цена продажи оказалась в некоторых заданных границах.
+*@
+@model IQueryable<UsingTagHelpers2.Models.Sale>
+
+@{
+    ViewBag.Title = ViewBag.FromPrice == null || ViewBag.FromPrice == null
+        ? "Выбирает информацию  обо всех зафиксированных фактах продажи товаров для которых Цена продажи оказалась в некоторых заданных границах"
+        : $"Выбрана информация фактах продажи товаров для которых Цена продажи в диапазоне [{ViewBag.FromPrice}, {ViewBag.ToPrice}]";
+
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+@* Вывод информации о выбранных фактах продажи *@
+<div class="row my-4">
+    <form class="d-inline-block ms-3 me-3" method="post" asp-controller="Queries" asp-action="Query05">
+
+        <label class="form-label me-1" for="fromPrice">Нижняя цена продажи: </label>
+        <input class="form-select-sm me-3" id="fromPrice" name="fromPrice" type="number" />
+
+        <label class="form-label me-1" for="toPrice">Верхняя цена продажи: </label>
+        <input class="form-select-sm me-3" id="toPrice" name="toPrice" type="number" />
+
+        <button class="btn btn-sm btn-outline-success ms-1 align-baseline" type="submit">Выбрать</button>
+    </form>
+</div>
+
+@* Вывод выборки данных *@
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Наименование товара</th>
+            <th>Цена продажи</th>
+            <th>Цена закупки</th>
+            <th>Дата продажи</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var sale in Model) {
+            <tr>
+                <td>@sale.Purchase.Good.NameGood</td>
+                <td>@($"{sale.PriceSale:n2}")</td>
+                <td>@($"{sale.Purchase.PricePurchase:n2}")</td>
+                <td>@($"{sale.Purchase.DatePurchase:dd/MM/yyyy}")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

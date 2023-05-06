@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>AJAX в jQuery</title>
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="/images/emotion_smile.png" type="image/x-icon" />
+
+    <!-- подключение bootstrap локально, подключение собственных стилей -->
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css" />
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h4><a href="../index.html">На главную</a></h4>
+        <h4>AJAX в JavaScript</h4>
+        <h4>Синхронные запросы AJAX</h4>
+        <p>
+            Запрос в синхронном режиме блокирует исполнение остального кода JavaScritp
+            до завершения запроса
+        </p>
+        <div class="row mt-5">
+            <!-- кнопка отправки запроса на сервер -->
+            <button id="btnSync" class="w-25 btn btn-success">
+                Синхронный GET запрос
+            </button>
+        </div>
+        <!-- поле вывод результата запроса -->
+        <div id="syncResult" class="my-3">
+
+        </div>
+        <div id="syncResultCollection">
+
+        </div>
+
+        <h4>Асинхронные запросы AJAX</h4>
+        <p>
+            Работа с асинхронными запросами чуть более сложна, чем с синхронными, поскольку
+            нам надо еще обработать событие <b>readystatechange</b> объекта <b>XMLHttpRequest.</b>
+        </p>
+
+        <p>
+            При асинхронном запросе объект <b>XMLHttpRequest</b> использует свойство <b>readyState</b>
+            для хранения состояния запроса. Состояние запроса представляет собой число:
+        </p>
+        <ul>
+            <li>
+                0: объект <b>XMLHttpRequest</b> создан, но метод open() еще не был вызван
+                для инициализации объекта
+            </li>
+            <li>
+                1: метод open() был вызван, но запрос еще не был отправлен методом send()
+            </li>
+            <li>
+                2: запрос был отправлен, заголовки и статус ответа получены и готовы к использованию
+            </li>
+            <li>
+                3: ответ получен от сервера
+            </li>
+            <li>
+                4: выполнение запроса полностью завершено (даже если получен код ошибки, например, 404)
+            </li>
+        </ul>
+        <p>
+            Событие <b>readystatechange</b> возникает каждый раз, когда изменяется значение
+            свойства <b>readyState</b>.
+        </p>
+
+        <div class="row mt-3">
+            <!-- кнопка отправки запроса на сервер -->
+            <button id="btnAsync" class="w-25 btn btn-success">
+                Асинхронный запрос
+            </button>
+        </div>
+        <!-- поле вывод результата запроса -->
+        <div id="asyncResult" class="my-3">
+
+        </div>
+        <div id="asyncResultCollection">
+
+        </div>
+
+        <div class="row mt-3">
+            <!-- кнопка отправки запроса на сервер -->
+            <button id="btnAsyncLoad" class="w-25 btn btn-success">
+                Асинхронный запрос - событие Load
+            </button>
+        </div>
+        <!-- поле вывода результата запроса -->
+        <div id="asyncLoadResult" class="my-3">
+
+        </div>
+        <div id="asyncLoadResultCollection">
+
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            // поиск элемента по id
+            var $ = id => document.getElementById(id);
+
+            // обработчики кликов по кнопкам
+            $("btnSync").onclick = syncGetRequest;
+            $("btnAsync").onclick = asyncGetRequest;
+            $("btnAsyncLoad").onclick = asyncGetRequestLoad;
+
+            // выполнение синхронного GET-запроса к серверу
+            function syncGetRequest() {
+                // XMLHttpRequest - основной объект
+                var request = new XMLHttpRequest();
+
+                //           тип    куда                                асинхронно: true - по умолчанию
+                //                                                      синхронно : false
+                request.open("GET", "http://localhost:4242/api/people/get", false);
+
+                // !! т.к. синхронный запрос - блокирующий вызов!!!
+                request.send();
+
+                // получить статус-код запроса, код завершения
+                let status = request.status;
+                let result = $("syncResult");
+
+                // коллекция данных, полученная от сервера
+                let people;
+
+                if (status === 200) {
+                    let responseText = request.responseText;   // текст ответа
+                    result.innerText = responseText;           // вывод ответа как текста
+                    people = JSON.parse(responseText);         // парсинг в коллекцию объектов
+                    show(people, "syncResultCollection");      // вывод коллекции
+                } else if (status === 404)
+                    result.innerHTML = "<h5>Ресурс не найден</h5>";
+                else
+                    result.innerHTML = `<h5>${request.statusText}</h5>`;
+            } // syncGetRequest
+
+            // запуск асинхронного запроса по клику на кнопку
+            function asyncGetRequest() {
+                // создание объекта запроса для
+                let request = new XMLHttpRequest();
+
+                // алгоритм отправки запроса, для понимания callback определен отдельно
+                request.open("GET", "http://localhost:4242/api/people/get");
+                request.onreadystatechange = reqReadyStateChange;
+                request.send();
+
+                // функция обратного вызова - асинхронность запроса
+                function reqReadyStateChange() {
+                    if (request.readyState === 3) {
+                        console.log("Запрос отправлен, заголовки получены");
+                        return;
+                    } // if
+
+                    // запрос обработан
+                    if (request.readyState === 4) {
+                        console.log("Запрос готов, можно обрабатывать");
+
+                        // коллекция данных, полученная от сервера
+                        let people;
+
+                        // получить статус код запроса
+                        let status = request.status;
+                        let result = $("asyncResult");
+
+                        if (status === 200) {
+                            let responseText = request.responseText;  // текст ответа
+                            result.innerText = responseText;          // вывод ответа как текста
+                            people = JSON.parse(responseText);        // парсинг в коллекцию объектов
+                            show(people, "asyncResultCollection");    // вывод коллекции
+                        } else if (status === 404)
+                            result.innerHTML = "<h5>Ресурс не найден</h5>";
+                        else
+                            result.innerHTML = `<h5>${request.statusText}</h5>`;
+                    } // if
+                } // reqReadyStateChange
+            } // asyncGetRequest
+
+            // использование события "load" - возникает событие по выполнении запроса
+            function asyncGetRequestLoad() {
+                let request = new XMLHttpRequest();
+                request.open("GET", "http://localhost:4242/api/people/get");
+
+                // назаначение обработчика события load - возникает событие по выполнении запроса
+                request.onload = responseLoad;
+
+                request.send();
+                console.log('Запрос отправлен');
+
+                // обработчик события load
+                function responseLoad() {
+                    console.log('load: Данные загружены');
+
+                    // коллекция данных, полученная от сервера
+                    let people;
+
+                    // получить статус код запроса
+                    let status = request.status;
+                    let result = $("asyncLoadResult");
+
+                    if (status === 200) {
+                        let responseText = request.responseText;
+                        result.innerText = responseText;
+                        people = JSON.parse(responseText);
+                        show(people, "asyncLoadResultCollection");
+                    } else if (status === 404)
+                        result.innerHTML = "<h5>Ресурс не найден</h5>";
+                    else
+                        result.innerHTML = `<h5>${request.statusText}</h5>`;
+                } // responseLoad
+            } // asyncGetRequestLoad
+
+            // вывод коллекции
+            function show(collection, id) {
+                $(id).innerHTML = collection
+                    .reduce((acc, item) => acc + `<tr><td>${item.id}</td><td>${item.name}</td><td>${item.age}</td></tr>`,
+                        "<table class='table table-bordered w-50 mx-auto'>") +
+                    "</table>";
+            } // show
+        } // onload
+
+    </script>
+</body>
+</html>

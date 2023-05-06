@@ -1,0 +1,35 @@
+﻿@model SelectList 
+
+@*Панель кнопок для фильтрации/выборки*@
+<div class="navbar">
+    <div class="container-fluid justify-content-start gap-2">
+        
+        <a asp-controller="Characters" asp-action="Index"
+           class="btn btn-sm btn-outline-secondary align-self-start"
+           title="вывод коллекции в исходном порядке">
+            исходные данные
+        </a>
+        
+        <a asp-controller="Characters" asp-action="OrderByMass"
+           class="btn btn-sm btn-outline-secondary align-self-start"
+           title="вывод данных, упорядоченных по возрастанию массы">
+            возрастание массы
+        </a>
+        
+
+        @* фильтр по весу *@
+        <form class="d-inline-block ms-3" asp-controller="Characters" asp-action="ByMass">
+            <label class="form-label lead color-3" for="inpMass">Вес: </label>
+            <input class="form-control-sm w-80-px ms-1" type="number" name="from" id="inpMass"/> —
+            <input class="form-control-sm w-80-px" type="number" name="to"/>
+            <input class="btn btn-sm btn-outline-secondary ms-2" type="submit" value="Показать">
+        </form>
+
+        @* фильтр по планете *@
+        <form asp-controller="Characters" asp-action="ByHomeworld" class="d-inline-block ms-3">
+            <label class="form-label lead color-3" for="selHomeworld">Мир: </label>
+            <select class="form-control-sm ms-1 color-1" asp-items="Model" name="homeworld" id="selHomeworld"></select>
+            <input class="btn btn-sm btn-outline-secondary ms-2" type="submit" value="Показать"/>
+        </form>
+    </div>
+</div>

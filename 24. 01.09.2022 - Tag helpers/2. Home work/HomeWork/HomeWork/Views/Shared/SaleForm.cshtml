@@ -1,0 +1,77 @@
+﻿@model HomeWork.Models.Sale
+
+@section Head
+{
+    @* скрипты валидации *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{
+    ViewBag.Title = ViewBag.IsAdd ? "Добавление продажи" : "Редактирование продажи";
+}
+
+<section class="mx-auto my-4 bg-light shadow-sm border rounded-3 w-50 h-75 p-3">
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <hr/>
+
+    <!-- #region Форма для записи -->
+    <form method="post" asp-controller="Sales" asp-action="@(ViewBag.IsAdd ? "AddSale" : "EditSale")"
+          asp-antiforgery="true" class="mx-auto">
+
+        <!-- Id -->
+        <input asp-for="Id">
+
+        <!-- Закупленный товар -->
+        <div class="form-floating my-3">
+            <select asp-for="PurchaseId" asp-items="ViewBag.PurchaseList" class="form-select"></select>
+            <label asp-for="PurchaseId"></label>
+            <span asp-validation-for="PurchaseId" class="text-danger"></span>
+        </div>
+
+        <!-- Единица измерения -->
+        <div class="form-floating my-3">
+            <select asp-for="UnitId" asp-items="ViewBag.UnitList" class="form-select"></select>
+            <label asp-for="UnitId"></label>
+            <span asp-validation-for="UnitId" class="text-danger"></span>
+        </div>
+
+        <!-- Продавец -->
+        <div class="form-floating my-3">
+            <select asp-for="SellerId" asp-items="ViewBag.SellerList" class="form-select"></select>
+            <label asp-for="SellerId"></label>
+            <span asp-validation-for="SellerId" class="text-danger"></span>
+        </div>
+
+        <!-- Цена закупки -->
+        <div class="form-floating my-3">
+            <input asp-for="Price" placeholder="Цена закупки" class="form-control">
+            <label asp-for="Price"></label>
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <!-- Количество -->
+        <div class="form-floating my-3">
+            <input asp-for="Amount" placeholder="Количество" class="form-control">
+            <label asp-for="Amount"></label>
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+
+        <!-- Дата продажи -->
+        <div class="form-floating my-3">
+            <input type="date" asp-for="DateSell" placeholder="Дата продажи" class="form-control">
+            <label asp-for="DateSell"></label>
+            <span asp-validation-for="DateSell" class="text-danger"></span>
+        </div>
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="SalesAccounting" asp-action="Sales">Выход</a>
+
+    </form>
+    <!-- #endregion -->
+
+</section>

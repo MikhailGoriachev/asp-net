@@ -1,0 +1,29 @@
+﻿@model IQueryable<HomeWork.Models.Queries.Query10Result>
+
+@{
+    ViewBag.Title = "Для каждой единицы измерения вычисляет сумму продаж и количество проданного товара.";
+
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+@* Вывод выборки данных *@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ед.изм. товара</th>
+        <th>Сумма продаж</th>
+        <th>Количество проданного товара</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>@item.Units</td>
+                <td>@item.SumSale</td>
+                <td>@item.AmountSale</td>               
+            </tr>
+        }
+    </tbody>
+</table>

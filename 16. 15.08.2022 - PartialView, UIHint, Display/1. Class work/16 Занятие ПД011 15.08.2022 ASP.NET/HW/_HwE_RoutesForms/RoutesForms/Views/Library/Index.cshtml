@@ -1,0 +1,60 @@
+﻿@* представление для вывода коллекции книг в библиотеке *@
+@model IEnumerable<Book>
+@{
+    ViewBag.Title = "Книги библиотеки";
+}
+
+<h4 class="text-center">@ViewBag.Header</h4>
+
+@* Вывод коллекции сведений о книгах *@
+<table class="table table-bordered table-hover w-100 mx-auto">
+    <thead>
+    @*a align-middle выравнивание строки по центру, по вертикали *@
+    @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+    <tr class="bg-light text-black align-middle">
+        <th class="text-end">Ид</th>
+        <th class="text-center">Обложка</th>
+        <th>Автор</th>
+        <th>Название</th>
+        <th class="text-center">Год издания</th>
+        <th class="text-center">Цена 1 экз., руб.</th>
+        <th class="text-center">Количество</th>
+        <th class="text-center">
+            <a class="btn btn-success" asp-controller="Library" asp-action="AddBook">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var book in Model) {
+        @* align-middle выравнивание строки по центру, по вертикали *@
+        @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+        <tr class="align-middle">
+            <td class="text-end">@book.Id</td>
+            <td class="text-center"><img src="~/images/task01/@book.Cover" 
+                alt="обложка книги ид: @book.Id" 
+                height="80"/></td>
+            <td>@book.Author</td>
+            <td>@book.Title</td>
+            <td class="text-end">@book.PubYear</td>
+            <td class="text-end">@($"{@book.Cost:n2}")</td>
+            <td class="text-end">@book.Quantity</td>
+            <td class="text-center">
+                <a class="btn btn-outline-danger" 
+                   asp-controller="Library" 
+                   asp-action="DeleteById" 
+                   asp-route-id="@book.Id" title="Удалить">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
+                <a class="btn btn-outline-warning ms-2"
+                   asp-controller="Library"
+                   asp-action="UpdateById"
+                   asp-route-id="@book.Id" title="Изменить...">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

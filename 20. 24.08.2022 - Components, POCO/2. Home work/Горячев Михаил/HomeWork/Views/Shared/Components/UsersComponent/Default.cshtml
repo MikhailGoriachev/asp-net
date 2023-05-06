@@ -1,0 +1,49 @@
+﻿@model HomeWork.Models.ViewModels.UsersViewModel?
+
+<table class="table align-middle" id="clientsTableId">
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Ник</th>
+        <th>Email</th>
+        <th>Номер телефона</th>
+        <th>Веб-сайт</th>
+        <th>Количество: @Model?.Count</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var user in Model.Data)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>@user.Phone</td>
+                <td>@user.Website</td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-controller="Users" asp-action="UserPosts"
+                       asp-route-id="@user.Id" title="Посты пользователя...">
+                        <i class="bi bi-file-post-fill"></i>
+                    </a>
+
+                    <a class="btn btn-outline-primary" asp-controller="Users" asp-action="UserPhotos"
+                       asp-route-id="@user.Id" title="Фото пользователя...">
+                        <i class="bi bi-images"></i>
+                    </a>
+
+                    <a class="btn btn-outline-primary" asp-controller="Users" asp-action="UserTodos"
+                       asp-route-id="@user.Id" title="Список дел пользователя...">
+                        <i class="bi bi-check2-circle"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

@@ -1,0 +1,8 @@
+﻿@using AsyncComponents.Components;
+@{
+    ViewBag.Title = "Async Componetns";
+}
+
+<p>
+    @await Component.InvokeAsync(nameof(RegistredUsers))
+</p>

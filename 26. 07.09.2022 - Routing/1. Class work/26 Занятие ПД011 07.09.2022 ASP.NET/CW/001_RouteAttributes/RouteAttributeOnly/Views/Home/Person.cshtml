@@ -1,0 +1,11 @@
+﻿@model (string name, int age)
+@{
+    ViewBag.Title = "Person";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<ul>
+    <li>имя: <strong>@Model.name</strong></li>
+    <li>возраст: <strong>@Model.age</strong></li>
+</ul>

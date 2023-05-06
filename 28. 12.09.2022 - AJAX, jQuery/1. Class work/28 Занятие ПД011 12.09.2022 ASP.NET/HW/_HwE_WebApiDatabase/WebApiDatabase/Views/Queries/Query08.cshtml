@@ -1,0 +1,35 @@
+﻿@* Представление для запроса 8 
+   Выполняет группировку по полю Наименование товара. Для каждого
+   наименования вычисляет среднюю цену закупки товара, количество
+   закупок
+*@
+
+@model IQueryable<WebApiDatabase.Models.Queries.Query08Result>
+
+@{
+    ViewBag.Title = "Средняя цена и количество закупок по наименованию товара";
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+@* Вывод выборки данных *@
+
+<table class="table table-striped w-45 mx-auto">
+    <thead>
+    <tr>
+        <th>Наименование товара</th>
+        <th>Средняя цена закупки</th>
+        <th>Количество закупок</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var good in Model) {
+        <tr>
+            <td>@good.ProductName</td>
+            <td>@($"{good.AvgPurhaseprice:n2}")</td>
+            <td>@good.Count</td>
+        </tr>
+    }
+    </tbody>
+</table>

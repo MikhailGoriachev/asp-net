@@ -1,0 +1,57 @@
+﻿@model RegistrationBindingModel
+
+<form asp-controller="home" asp-action="register" method="post"
+      class="w-50 mx-auto my-5">
+    <div class="mb-3">
+        @*
+        У элемента label задаем тег-хэлпер asp-for, тогда надпись
+        будет задаваться атрибутом [Display(Name="Текст для label")]
+        в классе модели
+        У элемента input не указываем тип, т.к. тип для string задается
+        по  умолчанию
+        *@
+        <label asp-for="Login"></label>
+        <input asp-for="Login" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PasswordConfirm" class="form-label"></label>
+        <input asp-for="PasswordConfirm" class="form-control" />
+    </div>
+    <div class="form-check mb-5">
+        <input asp-for="TermsAccepted" class="form-check-input" value="true" />
+        <label asp-for="TermsAccepted" class="form-check-label"></label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+</form>
+<hr/>
+
+@* Устаревший вариант построения формы - для быстрого прототипирования *@
+@* при помощи Html.EditorFor() *@
+
+@* Не очень удобный вариант построения формы *@
+@{ Html.BeginForm("Register", "Home"); }
+
+@Html.EditorFor(m => Model)
+<button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+
+@{ Html.EndForm(); }
+<hr/>
+
+@* Более удобный вариант построения формы (хотя тоже устаревший ) *@
+@using (Html.BeginForm("Register", "Home")) {
+    @Html.EditorFor(m => Model)
+    <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+}
+<hr/>
+
+@* Устаревший вариант построения просмотрщика - для быстрого прототипирования *@
+@Html.DisplayFor(m => Model)

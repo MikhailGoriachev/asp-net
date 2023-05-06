@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<div class="row">
+
+    <div class="col-5">
+        <h3>@ViewBag.Title</h3>
+    </div>
+
+    <div class="col-2">
+        <a asp-controller="Users" asp-action="Create">Добавить пользователя</a>
+    </div>     
+
+    <div class="col-1">
+        <a asp-controller="Users" asp-action="OrderBy"title="Демонстраия сортировки">Сортировка</a>
+    </div>
+    
+    @* Вывод сведений о пользователях с возможностью фильтрации *@
+    <div class="col-1">
+        <a asp-controller="Users" asp-action="FilterBy"title="Демонстрация фильтрации">Фильтрация</a>
+    </div>
+    
+    @* Постраничный вывод сведений о пользователях - пагинация *@
+    <div class="col-1">
+        <a asp-controller="Users" asp-action="PageBy"title="Демонстрация постраничного вывода">Пагинация</a>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Возраст</th>
+        @*<th>Комания</th>*@
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Age</td>
+            @*<td>@item.Company.Name</td>*@
+            <td>
+                <a asp-controller="users" asp-action="edit" asp-route-id="@item.Id">Изменить</a>
+            </td>
+            <td>
+                <form asp-controller="users" asp-action="delete" method="post" asp-route-id="@item.Id">
+                    <input type="submit" value="Удалить" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>

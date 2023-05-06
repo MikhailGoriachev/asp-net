@@ -1,0 +1,86 @@
+﻿@removeTagHelper Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Homework.Models.ViewModels.IndexViewModel<Homework.Models.Sale>
+
+@{
+	// Определить порядок сортировки свойства в зависимости от текущего порядка
+    string PropertyOrdering(string property)
+    {
+        var querySort = ViewContext.HttpContext.Request.Query["sort"].ToString();
+        
+        var isCurrentDescend = querySort.Contains("desc");
+
+	    return querySort.Contains(property) ?
+            $"{property}{(isCurrentDescend ? "" : " desc")}" :
+            $"{property}{(isCurrentDescend ? " desc" : "")}";
+    }
+}
+
+<thead class="border-dark">
+    <tr>
+        <th>
+            <a asp-action="Index" 
+               asp-route-sort="@PropertyOrdering("Id")"
+               asp-route-page="@Model!.CurrentPage"
+               add-routes="@(Model!.FilterModel?.GetRouteParameters)">
+                Id
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("SaleDate")"
+               asp-route-page="@Model.CurrentPage"
+               add-routes="@(Model.FilterModel?.GetRouteParameters)">
+                Дата продажи
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Purchase.Goods.Name")"
+               asp-route-page="@Model.CurrentPage"
+               add-routes="@(Model.FilterModel?.GetRouteParameters)">
+                Наименование
+            </a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Seller.Surname")"
+               asp-route-page="@Model.CurrentPage"
+               add-routes="@(Model.FilterModel?.GetRouteParameters)">
+            Продавец</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Amount")"
+               asp-route-page="@Model.CurrentPage"
+               add-routes="@(Model.FilterModel?.GetRouteParameters)">
+            Количество</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Purchase.Price")"
+               asp-route-page="@Model.CurrentPage"
+               add-routes="@(Model.FilterModel?.GetRouteParameters)">
+            Цена закупки </a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Price")"
+               asp-route-page="@Model.CurrentPage"
+               add-routes="@(Model.FilterModel?.GetRouteParameters)">
+            Цена продажи</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sort="@PropertyOrdering("Unit.Short")"
+               asp-route-page="@Model.CurrentPage"
+               add-routes="@(Model.FilterModel?.GetRouteParameters)">
+            Единицы</a>
+        </th>
+        <th>
+            <a class="btn btn-primary btn-sm" href="Sales/Create">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+

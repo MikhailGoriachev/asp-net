@@ -1,0 +1,68 @@
+﻿@model HomeWork.Controllers.FigureBindingForm
+
+<section class="mx-auto my-4 bg-light shadow-sm border rounded-3 h-75 p-3 w-75">
+
+    <form method="post" class="mx-4" asp-controller="Figures"
+          asp-action="@(ViewBag.IsAdd ? "AddFigure" : "EditFigure")" enctype="multipart/form-data">
+
+        <h4 class="text-center">@(ViewBag.IsAdd ? "Добавление фигуры" : "Редактирование фигуры")</h4>
+
+        <hr>
+
+        @* сообщение об ошибке *@
+        @if (Model.ErrorMessage != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Ошибка!</strong> @Model.ErrorMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @* id *@
+        <input asp-for="Id" type="hidden" value="@Model.Id">
+
+        @* название *@
+        <div class="input-group my-3">
+            <label asp-for="Name" class="input-group-text w-8rem">Название</label>
+            <input asp-for="Name" type="text" class="form-control" readonly required>
+        </div>
+
+        @* цена *@
+        <div class="input-group my-3">
+
+            @* сторона A *@
+            @if (Model.A != null)
+            {
+                <label asp-for="A" class="input-group-text w-8rem">Сторона A</label>
+                <input type="number" asp-for="A" min="0" step="any" class="form-control"
+                       placeholder="Сторона A" required>
+            }
+
+            @* сторона B *@
+            @if (Model.B != null)
+            {
+                <label asp-for="B" class="input-group-text w-8rem">Сторона B</label>
+                <input type="number" asp-for="B" min="0" step="any" class="form-control"
+                       placeholder="Сторона B" required>
+            }
+
+            @* сторона C *@
+            @if (Model.C != null)
+            {
+                <label asp-for="C" class="input-group-text w-8rem">Сторона C</label>
+                <input type="number" asp-for="C" min="0" step="any" class="form-control"
+                       placeholder="Сторона C" required>
+            }
+
+        </div>
+
+        <hr>
+
+        @* управление *@
+        <div class="d-flex justify-content-end">
+            <input class="btn btn-success w-10rem me-3" type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")">
+            <a class="btn btn-danger w-10rem" asp-controller="Figures" asp-action="Index">Выйти</a>
+        </div>
+    </form>
+
+</section>

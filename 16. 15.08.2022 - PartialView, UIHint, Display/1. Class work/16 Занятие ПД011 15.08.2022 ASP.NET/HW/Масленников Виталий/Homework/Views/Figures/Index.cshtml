@@ -1,0 +1,111 @@
+﻿@using Homework.Models.Figures
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Homework.Models.ViewModels.FiguresIndexViewModel
+
+@{
+    ViewBag.Header = "Фигуры";
+}
+
+ <div class="navbar">
+        <div class="container-fluid justify-content-start gap-2">
+
+            <a asp-controller="Figures"
+               asp-action="Index"
+               class="btn btn-sm btn-outline-secondary ms-3"
+               title="вывод коллекции в исходном порядке">
+                в исходном порядке
+            </a>
+
+            <a asp-controller="Figures" 
+               asp-action="Filter"
+               asp-route-figure="All"
+               asp-route-property="@nameof(IFigure.Area)"
+               asp-route-sort="Desc"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод коллекции по убыванию площади">
+                по убыванию площади
+            </a>
+
+            <a asp-controller="Figures" 
+               asp-action="Filter"
+               asp-route-figure="All"
+               asp-route-property="@nameof(IFigure.Name)"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод коллекции упорядоченной по типу фигур">
+                по типу фигур
+            </a>
+
+            <a asp-controller="Figures" 
+               asp-action="Filter"
+               asp-route-figure="Квадрат"
+               asp-route-property="@nameof(IFigure.Area)"
+               asp-route-sort="Desc"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод квадратов, по убыванию площади">
+                <span class="ms-auto">квадраты</span>
+                <span class="badge bg-primary rounded-pill">@Model!.FiguresCounts["Квадрат"]</span>
+            </a>
+
+            <a asp-controller="Figures"
+               asp-action="Filter"
+               asp-route-figure="Прямоугольник"
+               asp-route-property="@nameof(IFigure.Perimeter)"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод прямоугольников, по возрастанию периметра">
+                <span class="ms-auto">прямоугольники</span>
+                <span class="badge bg-primary rounded-pill">@Model!.FiguresCounts["Прямоугольник"]</span>
+            </a>
+
+            <a asp-controller="Figures"
+               asp-action="Filter"
+               asp-route-figure="Треугольник"
+               asp-route-property="Reverse"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод треугольников, в обратном порядке">
+                <span class="ms-auto">треугольники</span>
+                <span class="badge bg-primary rounded-pill">@Model!.FiguresCounts["Треугольник"]</span>
+            </a>
+        </div>
+    </div>
+
+<table class="table mt-4 text-center">
+    <thead class="border-dark">
+    <tr>
+        <th>Изображение</th>
+        <th class="text-start">Тип</th>
+        <th>Параметры сторон:</th>
+        <th>Периметр</th>
+        <th>Площадь</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var figure in Model!.Figures){
+        <tr>
+            <td>
+                <img src="~/images/figures/@figure.Image" alt="Фигура"/>
+            </td>
+            <td class="text-start">@figure.Name</td>
+            <td>
+                @foreach (var p in figure.Parameters) {
+                    <div class="color-1">
+                        @p.Key = <span class="color-3"> @($"{p.Value:.###}")</span>
+                    </div>
+                }
+            </td>
+            <td>@($"{figure.Perimeter:.###}")</td>
+            <td>@($"{figure.Area:.###}")</td>
+            <td>
+                <a asp-controller="Figures" asp-action="EditFigure"
+                   class="btn btn-sm btn-outline-primary ms-2"
+                   asp-route-id="@figure.Id" title="Редактировать данные">
+                    <i class="fa-solid fa-pen-to-square"></i></a>
+                <a asp-controller="Figures" asp-action="RemoveFigure" asp-route-id="@figure.Id"
+                   class="btn btn-sm btn-outline-danger ms-2" title="Удалить данные">
+                    <i class="fa-solid fa-trash-can"></i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

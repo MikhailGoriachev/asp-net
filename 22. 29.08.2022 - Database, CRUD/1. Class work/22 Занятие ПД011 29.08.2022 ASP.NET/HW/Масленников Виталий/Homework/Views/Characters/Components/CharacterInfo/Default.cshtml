@@ -1,0 +1,45 @@
+﻿@model Homework.Models.Character
+
+<div class="row">
+    <div class="col-auto m-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">@Model!.Name</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="fw-bold">Родной мир:</span> 
+                        <span class="color-1">@Model.Homeworld</span>
+                   </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Пол:</span>
+                        <span class="color-1">@Model.Gender</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Год рождения:</span>
+                        <span class="color-1">@Model.BirthYear</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Рост:</span>
+                        <span class="color-1">@Model.Height</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Вес:</span> 
+                        <span class="color-1">@Model.Mass</span>
+                   </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Цвет кожи:</span> 
+                        <span class="color-1">@Model.SkinColor</span>
+                   </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Цвет волос:</span>
+                        <span class="color-1">@Model.HairColor</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Цвет глаз:</span>
+                        <span class="color-1">@Model.EyeColor</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

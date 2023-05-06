@@ -1,0 +1,156 @@
+﻿@using Microsoft.AspNetCore.Mvc.Controllers;
+
+@functions {
+
+    string IsActive(string page) => ViewBag.PageName.ToLower() == page.ToLower() ? "active":"";
+    
+    bool IsCurrPage(string page)
+        =>ViewBag.PageName.ToLower() == page.ToLower() ;
+
+    string IsDefault()
+    {
+        return ViewBag.IsDefault ?? false ? "active" : "";
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.title</title>
+
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/styles/styles.css">
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Head",false)
+
+    <!--Подключение удалённого шрифта через репозиторий Google Fonts-->
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap'>
+
+</head>
+<body>
+
+    @*Navbar*@
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home work</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link ms-3 @IsActive("Index")" asp-controller="Home" asp-action="Index">Главная</a>
+                </li>
+                <!-- Маршруты -->
+                
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link mx-3 dropdown-toggle @IsActive("Routes")" 
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="False">
+                        Маршруты
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarTask1Id">
+                        <li><a class="dropdown-item" asp-controller="Routes" asp-action="Routes">Исходная коллекция</a></li> 
+                        <li><a class="dropdown-item" asp-controller="Routes" asp-action="OrderBy" asp-route-value="OrderByLengthDesc">Маршруты по убыванию протяженности </a></li>
+                        <li><a class="dropdown-item" asp-controller="Routes" asp-action="OrderBy" asp-route-value="OrderByLengthAsc">Маршруты по возрастанию протяженности </a></li>
+                        <li><a class="dropdown-item" asp-controller="Routes" asp-action="OrderBy" asp-route-value="OrderByComplexity">Маршруты по возрастанию сложности </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        @if (IsCurrPage("Routes"))
+                        {
+                            <li><a class="dropdown-item" type="button"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#inputStartPoint"> Маршруты с заданным начальным пунктом</a>
+                            </li>
+                            <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#inputMiddlePoint" > Маршруты заданным промежуточным пунктом</a></li>
+                        }
+                        <li><a class="dropdown-item" asp-controller="Routes" asp-action="SelectByRange"> Маршруты определённой длины </a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item btn-danger" asp-controller="Routes" asp-action="DeleteFile">Удалить JSON-файл</a></li>
+                    </ul>
+                </li>
+                       
+                <!-- Инструктора -->
+                
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle @IsActive("Instructors")" 
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="False">
+                        Инструкторы
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarTask1Id">
+                        <li><a class="dropdown-item" asp-controller="Instructors" asp-action="Default">Исходная коллекция</a></li>
+                        <li><a class="dropdown-item" asp-controller="Instructors" asp-action="OrderBy" asp-route-value="OrderByCategory">Инструктора по убыванию категорий</a></li>
+                        <li><a class="dropdown-item" asp-controller="Instructors" asp-action="OrderBy" asp-route-value="OrderBySurnames">Инструктора в алфавитном порядке</a></li>
+
+                        @if (IsCurrPage("Instructors"))
+                        {
+                            <li><hr class="dropdown-divider"></li>
+
+                            <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#inputCategory" >Инструктора с заданной категорией</a></li>
+                        }
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item btn-danger" asp-controller="Instructors" asp-action="DeleteFile">Удалить JSON-файл</a></li>
+                    </ul>
+                </li>
+                       
+                <!-- Клиенты -->
+                
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link mx-3 dropdown-toggle @IsActive("Clients")" 
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="False">
+                        Клиенты
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarTask1Id">
+                        
+                        <li><a class="dropdown-item" asp-controller="Clients" asp-action="Default">Исходная коллекция</a></li>
+                        <li><a class="dropdown-item" asp-controller="Clients" asp-action="OrderBy" asp-route-value="OrderBySnp">Cортировка клиентов в алфавитно порядке</a></li>
+                        <li><a class="dropdown-item" asp-controller="Clients" asp-action="OrderBy" asp-route-value="OrderByAgeDesc">Сортировка клиентов по убыванию возраста</a></li>
+                        
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" asp-controller="Clients" asp-action="SelectByAgeRange">Выбрать по возрастному диапазону</a></li>
+                        <li><a class="dropdown-item" asp-controller="Clients" asp-action="Selection" asp-route-value="SelectConstant">Выбрать постоянных клиентов</a></li>
+
+                        @if (IsCurrPage("Clients"))
+                        {
+                            <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#modalFormSurname" >Клиенты с заданной фамилией</a></li>
+                        }
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item btn-danger" asp-controller="Clients" asp-action="DeleteFile">Удалить JSON-файл</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    </nav>
+    <main class="container mt-5">
+            @RenderBody()
+    </main>
+
+    <footer class="bg-dark">
+        <b>Разработчик:</b> Вагнер Владислав
+        <b><br>Группа:</b> ПД011
+        <b><br>Город:</b> Донецкая область,Макеевка.
+        <b><br>Год разработки:</b> 2022
+    </footer>
+    @RenderSection("JqueryFiles",false)
+</body>
+</html>

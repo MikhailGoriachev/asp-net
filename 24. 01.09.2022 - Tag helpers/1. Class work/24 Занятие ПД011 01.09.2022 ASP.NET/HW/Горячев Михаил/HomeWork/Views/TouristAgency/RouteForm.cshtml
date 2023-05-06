@@ -1,0 +1,47 @@
+﻿@model HomeWork.Models.Route
+
+@{
+    ViewBag.Title = ViewBag.IsAdd ? "Добавление маршрута" : "Редактирование маршрута";
+}
+
+<section class="mx-auto my-4 bg-light shadow-sm border rounded-3 h-75 w-50 p-3">
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <hr/>
+
+    <!-- #region Форма для записи -->
+    <form method="post" asp-controller="TouristAgency" asp-action="@(ViewBag.IsAdd ? "AddRoute" : "EditRoute")"
+          asp-antiforgery="true" class="mx-auto">
+
+        <!-- Id -->
+        <input asp-for="Id">
+
+        <!-- Страна -->
+        <div class="form-floating my-3">
+            <select asp-for="CountryId" asp-items="ViewBag.CountryList" class="form-select" required></select>
+            <label asp-for="CountryId"></label>
+        </div>
+
+        <!-- Цель поездки -->
+        <div class="form-floating my-3">
+            <select asp-for="ObjectiveId" asp-items="ViewBag.ObjectiveList" class="form-select" required></select>
+            <label asp-for="ObjectiveId"></label>
+        </div>
+
+        <!-- Стоимость 1 дня пребывания -->
+        <div class="form-floating my-3">
+            <input asp-for="DailyCost" placeholder="Стоимость 1 дня пребывания" class="form-control">
+            <label asp-for="DailyCost"></label>
+            <span asp-validation-for="DailyCost" class="text-danger"></span>
+        </div>
+
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="TouristAgency" asp-action="Routes">Выход</a>
+
+    </form>
+    <!-- #endregion -->
+
+</section>

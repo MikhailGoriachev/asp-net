@@ -1,0 +1,54 @@
+﻿@using Home_work.ViewModels
+@model TodoViewModel
+
+@* Вывод коллекции сведений об задачах пользователя *@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th class="alignment-center">Id задачи</th>
+        <th class="alignment-center">Id пользователя</th>
+        <th class="alignment-center">Заголовок</th>
+        <th class="alignment-center">Признак завершенности</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (Todo todo in Model.Tasks)
+    {
+        <tr class="align-middle" >
+            <td class="alignment-center">@todo.UserId</td>
+            <td class="alignment-center">@todo.Id</td>
+            <td class="alignment-center">@todo.Title</td>
+            <td class="alignment-center">
+                <input class="form-check-input alignment-center align-middle my-auto" type="checkbox" readonly @(todo.Completed?"checked":"") disabled>
+            </td>
+            @*<td class="alignment-center">@todo.Completed</td>*@
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h3>Итоговые значения</h3>
+
+<table class="table table-hover table-bordered w-80 mx-auto mb-5" id="ClientsTable">
+    <thead>
+        <tr class="align-middle">
+            <th class="alignment-center bg-dark bg-opacity-25" colspan="2">Значения</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr class="align-middle" >
+            <td>Количество задач</td>
+            <td class="alignment-center">@Model.TaksQuantity</td>
+        </tr>
+        <tr class="align-middle" >
+            <td>Количество завершенных задач</td>
+            <td class="alignment-center">@Model.Completed</td>
+        </tr>
+        <tr class="align-middle" >
+            <td>Количество незавершенных задач</td>
+            <td class="alignment-center">@Model.Uncompleted</td>
+        </tr>
+    </tbody>
+</table>

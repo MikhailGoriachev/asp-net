@@ -1,0 +1,20 @@
+﻿@using Master.Common
+@model IReadOnlyCollection<Master.Models.Character>
+@{
+    var planets = Model
+        .Select(x => x.Homeworld!)
+        .Distinct()
+        .ToSelectListItems();
+}
+
+
+<div class="card-body">
+    <h5 class="card-title">Планета</h5>
+    <form asp-action="ByHomeworld" method="get">
+        <select class="form-select" size="7" name="homeworld" id="homeworld"
+                asp-items="@planets"></select>
+        <div class="d-flex justify-content-end align-bottom mt-4">
+            <input class="btn btn-outline-primary" type="submit" value="Применить">
+        </div>
+    </form>
+</div>

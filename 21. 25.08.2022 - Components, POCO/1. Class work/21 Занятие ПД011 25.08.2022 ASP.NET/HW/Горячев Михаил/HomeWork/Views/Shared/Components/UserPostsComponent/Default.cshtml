@@ -1,0 +1,25 @@
+﻿@model System.Collections.Generic.IEnumerable<HomeWork.Models.UserPost>?
+
+<table class="table align-middle" id="clientsTableId">
+    <h5>Количество постов: @ViewBag.Count; Мин. длина: @ViewBag.MinSize; Сред. длина: @ViewBag.AvgSize; Макс. длина: @ViewBag.MaxSize; </h5>
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Текст поста</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var post in Model)
+        {
+            <tr>
+                <td>@post.Id</td>
+                <td>@post.Body</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

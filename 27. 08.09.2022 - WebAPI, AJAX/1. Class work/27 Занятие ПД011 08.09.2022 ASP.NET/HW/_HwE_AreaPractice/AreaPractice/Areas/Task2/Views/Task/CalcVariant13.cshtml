@@ -1,0 +1,79 @@
+﻿@* строго типизированное представление *@
+@model (double Z1, double Z2)
+
+@{
+    ViewBag.Title = "Задача 2";
+    ViewBag.Header = "Вычисление выражения по варианту 13";
+}
+
+<div class="mt-5 w-50 mx-auto">
+    <a href="#task1" class="btn btn-info" data-bs-toggle="collapse">
+        <strong>Задача 2.</strong> Задание на разработку
+    </a>
+    <div id="task1" class="collapse">
+        <p class="mt-3">
+            Реализуйте вычисления, приведенные на рисунке 3, исходные данные вводите в форму.
+        </p>
+
+        <figure class="mt-3 align-middle">
+            <img src="~/images/tasks/pic03.png" alt="Вариант для кодирования" />
+            <figcaption>Рисунок 3</figcaption>
+        </figure>
+    </div>
+
+
+    @* форма ввода данных по заданию *@
+    <form class="mt-3 p-3 w-100" method="post" asp-area="Task2" asp-controller="Task" asp-action="CalcVariant13">
+        <div class="row">
+            @* ввод alpha *@
+            <div class="my-3 col-5">
+                <label class="form-label" for="a">Параметр <strong>&alpha;</strong>:</label>
+                <input class="form-control" id="a" name="a" value="" type="number" />
+            </div>
+
+            @* ввод beta *@
+            <div class="ms-5 my-3 col-5">
+                <label class="form-label" for="b">Параметр <strong>&beta;</strong>:</label>
+                <input class="form-control" id="b" name="b" type="number" />
+            </div>
+            
+            @* отправка данных на сервер *@
+            <div class="my-3 col-1">
+                <label class="form-label"> </label>
+                <button class="btn btn-success" type="submit">Вычислить</button>
+            </div>
+        </div>
+    </form>
+
+    @* вывод результатов  *@
+    @if (!double.IsNaN(Model.Z1) && !double.IsNaN(Model.Z2)) {
+        <h5 class="w-100">
+            Параметры для вычислений:
+            <strong>&alpha;</strong> = @($"{ViewBag.Data.Item1:f5}") и
+            <strong>&beta;</strong> = @($"{ViewBag.Data.Item2:f5}")
+        </h5>
+        <table class="table table-bordered w-100">
+            <thead>
+                <tr>
+                    <th>Вариант</th>
+                    <th>Z<sub>1</sub></th>
+                    <th>Z<sub>2</sub></th>
+                    <th>Правильность</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    // определение корректности вычислений
+                    bool result = Math.Abs(Model.Z1 - Model.Z2) <= 1e-6;
+                }
+                <tr>
+                    <td>13</td>
+                    <td>@Model.Z1</td>
+                    <td>@Model.Z2</td>
+                    @* визуализация корректности/некорректности вычислений *@
+                    <td class="@(result ? "bg-info" : "bg-error") text-white text-center">@(result ? "Успех" : "Неудача")</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>

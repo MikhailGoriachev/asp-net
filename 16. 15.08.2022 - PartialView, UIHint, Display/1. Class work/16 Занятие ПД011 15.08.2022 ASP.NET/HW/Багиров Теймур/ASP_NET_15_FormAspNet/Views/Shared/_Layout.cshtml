@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width" /> 
+    <!-- Подключение к CSS файлам -->
+    <link  rel="stylesheet" href="~/css/styles.css"/>
+    <link  rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/> 
+    @RenderSection("Icons",false)
+    
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+ 
+    <!--#region панель навигации -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-2" asp-controller="Home" asp-action="Index">
+                <img class="img-brand" src="~/imgs/brand.png" alt="brand">
+            </a>
+            
+            <div class="collapse navbar-collapse " id="navbar-1">
+                <ul class="navbar-nav">
+                    <li class="nav-item"> 
+                        <a class="nav-link" asp-controller="Task" asp-action="Index">Задача 1</a>  
+                    </li> 
+                    <li class="nav-item">  
+                        <a class="nav-link" asp-controller="SecondTask" asp-action="Index">Задача 2</a>
+                    </li>   
+                    <li class="nav-item">
+                        @RenderSection("NavBarCommand", false)  
+                    </li>  
+                </ul> 
+            </div> 
+        </div> 
+    </nav>
+    <!--#endregion -->
+
+    <!--#region контент страницы --> 
+    <main class="container-fluid mt-4">
+        @RenderBody()
+    </main>  
+    <!--#endregion -->
+      
+    <!--#region подвал страницы -->
+    <footer class="container-fluid bg-black text-light text-center">
+        <p class="p-1">Багиров Теймур ПД011, г. Донецк 2022г; адрес разработчика: <a href="mailto:t.bagirov2000@gmail.com" target="_blank">t.bagirov2000@gmail.com</a></p>
+    </footer>
+    <!--#endregion-->
+
+</body>
+</html>

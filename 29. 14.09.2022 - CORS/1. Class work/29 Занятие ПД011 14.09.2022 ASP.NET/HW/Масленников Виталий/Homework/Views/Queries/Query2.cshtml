@@ -1,0 +1,5 @@
+﻿@model IQueryable<Homework.Models.Route>
+
+<h4>Маршруты с целью поездки @ViewBag.Purpose и стоимостью транспортных услуг до @ViewBag.TransferCost</h4>
+
+@{ await Html.RenderPartialAsync("TravelsTable", Model); }

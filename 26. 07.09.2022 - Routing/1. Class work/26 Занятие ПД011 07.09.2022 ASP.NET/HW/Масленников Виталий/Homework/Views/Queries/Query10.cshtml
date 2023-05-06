@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Homework.TagHelpers
+@model IQueryable<Homework.Models.Queries.Query10Result>
+
+@{
+    ViewBag.Title = "Итоговый запрос ";
+    Layout = "_Layout";
+}
+
+<h4 class="text-center color-1">Группировка по единицам измерений проданных товаров</h4>
+
+
+<table class="table table-striped">
+    <thead class="border-dark">
+    <tr>
+        <th>Единица измерения</th>
+        <th>Количество продаж</th>
+        <th>Количество товара продано</th>
+        <th>Продано на сумму</th>
+    </tr>
+    </thead>
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td>@item.Unit.Long</td>
+            <td>@(item.SalesAmount != null ? item.SalesAmount : "нет данных")</td>
+            <td>@(item.SoldAmount != null ? item.SoldAmount : "нет данных")</td>
+            <td>@(item.SoldSum != null ? item.SoldSum : "нет данных")</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>

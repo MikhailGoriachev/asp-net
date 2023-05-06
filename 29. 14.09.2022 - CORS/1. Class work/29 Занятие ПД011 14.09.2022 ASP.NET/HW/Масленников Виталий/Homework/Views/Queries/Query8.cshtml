@@ -1,0 +1,25 @@
+﻿@model IQueryable<Homework.Models.ResultQuery8>
+
+<h4>Среднее значение по полю Стоимость транспортных услуг для каждой страны</h4>
+
+@* Таблица с данными *@
+<table class="table text-center">
+    <thead class="fw-bold align-top">
+    <tr>
+        <td>Страна</td>
+        <td>Стоимость транспортных услуг</td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model is not null && Model.Any()){
+        @foreach (var result in Model){
+            <tr>
+                <td>@result.Country</td>
+                <td>@($"{result.TransferAvg:.#}")</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="5" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

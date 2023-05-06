@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TouristicAgencyMvcCore.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Добавить</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patronymic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passport)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var client in Model) {
+        <tr>
+            <td>
+                @client.Surname
+            </td>
+            <td>
+                @client.Name
+            </td>
+            <td>
+                @client.Patronymic
+            </td>
+            <td>
+                @client.Passport
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@client.Id">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

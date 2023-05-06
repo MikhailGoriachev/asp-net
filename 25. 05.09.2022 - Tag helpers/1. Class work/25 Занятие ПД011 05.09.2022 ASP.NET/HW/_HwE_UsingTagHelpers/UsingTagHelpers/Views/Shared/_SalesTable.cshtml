@@ -1,0 +1,23 @@
+﻿@model IEnumerable<UsingTagHelpers.Models.Sale>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Наименование товара</th>
+        <th>Продавец ФИО</th>
+        <th>Дата продажи</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        @* столбец для элементов управления *@
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var sale in Model)
+    {
+        <sale-table-row sale="sale"/>
+    }
+    </tbody>
+</table>

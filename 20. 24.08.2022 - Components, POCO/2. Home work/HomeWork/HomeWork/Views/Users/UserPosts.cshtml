@@ -1,0 +1,7 @@
+﻿@using HomeWork.Components
+@model int
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h5 class="text-center">Посты пользователя: Id - @Model</h5>
+    @await Component.InvokeAsync(nameof(UserPostsComponent), new { Id = Model })
+</section>

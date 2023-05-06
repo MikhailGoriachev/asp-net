@@ -1,0 +1,55 @@
+﻿@model UsingTagHelpers2.Models.ViewModels.FilterByPurchaseViewModel
+
+@{
+    ViewBag.Title = $"Фильтр. Единица изм.товара: \"{ViewBag.UnitName}\", Наименование: \"{ViewBag.GoodName}\", Цена товара: {ViewBag.Price}";
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+<div class="mx-5 my-4 bg-light h-50 p-2">
+    <form method="get" asp-controller="Queries" asp-action="Filter" class="d-flex align-items-center">
+        <div class="form-floating w-25">
+            <select asp-items="ViewBag.UnitsList" asp-for="UnitId" class="form-control" required></select>
+            <label asp-for="UnitId"></label>
+        </div>
+
+        <div class="form-floating mx-3 w-50">
+            <select asp-items="ViewBag.GoodsList" asp-for="GoodId" class="form-control" required></select>
+            <label asp-for="GoodId"></label>
+        </div>
+
+        <div class="form-floating mx-3 w-15rem">
+            <input asp-for="Price" class="form-control" min="0">
+            <label asp-for="Price"></label>
+        </div>
+
+        <input class="btn btn-outline-info mx-3" type="submit" value="Выбрать">
+        <a class="btn btn-outline-danger" asp-controller="Queries" asp-action="Filter">Сбросить</a>
+    </form>
+</div>
+
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>Наименование товара</th>
+            <th>Ед.измерения</th>
+            <th>Дата закупки</th>
+            <th>Цена закупки</th>
+            <th>Количество</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Purchases) {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Good!.NameGood</td>
+                <td title="@item.Unit!.Long">@item.Unit!.Short</td>
+                <td>@($"{item.DatePurchase:dd.MM.yyyy}")</td>
+                <td>@item.PricePurchase</td>
+                <td>@item.Amount</td>
+            </tr>
+        }
+    </tbody>
+</table>

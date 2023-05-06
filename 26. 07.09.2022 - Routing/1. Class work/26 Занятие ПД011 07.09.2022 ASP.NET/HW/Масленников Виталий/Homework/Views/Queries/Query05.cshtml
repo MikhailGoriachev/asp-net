@@ -1,0 +1,39 @@
+﻿@model IQueryable<Homework.Models.Sale>
+
+@{
+    ViewBag.Title = "Запрос с параметрами";
+    Layout = "_Layout";
+}
+
+
+<form class="d-inline-block ms-3" asp-action="Query05">
+    <label class="form-label me-1" for="seller">Продавец: </label>
+    <select class="form-select-sm me-3" id="seller" asp-items="ViewBag.Sellers" name="sellerId"></select>
+    <button class="btn btn-sm btn-outline-success ms-1 align-baseline" type="submit">Выбрать</button>
+</form>
+
+
+<table class="table table-striped">
+    <thead class="border-dark">
+    <tr>
+        <th>Продавец</th>
+        <th>Наименование товара</th>
+        <th>Цена продажи</th>
+        <th>Цена закупки</th>
+        <th>Дата продажи</th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var sale in Model!)
+    {
+        <tr>
+            <td>@sale.Seller!.ShortName</td>
+            <td>@sale.Purchase!.Goods!.Name</td>
+            <td>@($"{sale.Price:n2}")</td>
+            <td>@($"{sale.Purchase.Price:n2}")</td>
+            <td>@($"{sale.Purchase.PurchaseDate:dd/MM/yyyy}")</td>
+        </tr>
+    }
+    </tbody>
+</table>

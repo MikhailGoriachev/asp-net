@@ -1,0 +1,9 @@
+﻿@using HomeWork.Components
+
+@{
+    ViewBag.Title = "Персонажи";
+}
+
+<section class="mx-5 my-4 shadow-sm bg-dark rounded-3 h-75 p-3">
+    @await Component.InvokeAsync(typeof(PeopleListComponent))
+</section>

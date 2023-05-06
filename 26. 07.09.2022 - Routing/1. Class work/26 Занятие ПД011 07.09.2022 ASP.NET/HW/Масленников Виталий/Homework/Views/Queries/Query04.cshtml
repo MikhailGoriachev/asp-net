@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Homework.TagHelpers
+@model IEnumerable<Homework.Models.Seller>
+
+@{
+    ViewBag.Title = "Запрос с параметрами";
+    Layout = "_Layout";
+}
+
+
+<form class="d-inline-block ms-3" asp-action="Query04">
+    <label class="form-label me-1 lead"> Комиссионные: </label>
+    <input class="form-control-sm w-80-px" type="number" name="Interest"/>
+    <button class="btn btn-sm btn-outline-secondary ms-2" type="submit">Показать</button>
+</form>
+
+<sellers-table items="@Model!.ToList()"></sellers-table>

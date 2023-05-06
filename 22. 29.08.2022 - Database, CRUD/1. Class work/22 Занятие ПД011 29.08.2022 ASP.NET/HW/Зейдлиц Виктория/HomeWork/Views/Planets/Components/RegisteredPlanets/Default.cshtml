@@ -1,0 +1,60 @@
+﻿@model List<HomeWork.Models.Task2.Planet>
+
+@{
+    int id = 1;
+}
+
+
+@* вывод данных *@
+<table table class="table table-bordered table-striped table-hover ps-0">
+<thead>
+    <tr>
+        <th class="text-end">Ид</th>
+        <th>Название</th>
+        <th>Вращение</th>
+        <th>Диаметр</th>
+        <th>Климат</th>
+        <th>Сила<br /> тяжести</th>
+        <th>Местность</th>
+        <th>Население</th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+@foreach(var item in Model)
+{
+    <tr>
+        <td class="text-end">@(item.Id == 0 ? id++:"")</td>
+        <td>@item.Name</td>
+        <td>@item.Rotation_Period</td>
+        <td>@item.Diameter</td>
+        <td>@item.Climate</td>
+        <td>@item.Gravity</td>
+        <td>@item.Terrain</td>
+        <td>@item.Population</td>
+        <td>
+            <a class="btn btn-outline-success" data-id ="@item.Id" title="Подробная информация..."
+                   asp-controller="Planets"
+                       asp-action="PlanetInfoAll"
+                       asp-route-id="@item.Id">
+                    <i data-id="@item.Id"
+                       class="bi bi-info-circle">
+                    </i>
+            </a>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+
+
+<h5 class="text-center">Обработка по заданию</h5>
+
+<ul class="list-group w-45 mx-auto">
+    <li class="list-group-item d-flex justify-content-between">Минимальный диаметр планет: <span>@ViewBag.Tasks.Item1</span></li>
+    <li class="list-group-item d-flex justify-content-between">Средний диаметр планет: <span>@ViewBag.Tasks.Item2</span></li>
+    <li class="list-group-item d-flex justify-content-between">Максимальный диаметр планет: <span>@ViewBag.Tasks.Item3</span></li>
+    <li class="list-group-item d-flex justify-content-between">Минимальный орбитальный период планет: <span>@ViewBag.Tasks.Item4</span></li>
+    <li class="list-group-item d-flex justify-content-between">Средний орбитальный период планет: <span>@ViewBag.Tasks.Item5</span></li>
+    <li class="list-group-item d-flex justify-content-between">Максимальный орбитальный период планет: <span>@ViewBag.Tasks.Item6</span></li>
+</ul>

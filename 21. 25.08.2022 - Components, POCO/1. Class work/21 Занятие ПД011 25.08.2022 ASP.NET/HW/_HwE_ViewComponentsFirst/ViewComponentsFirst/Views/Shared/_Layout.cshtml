@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="~/images/blimp.png" type="image/x-icon">
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+
+    <!-- подключаем Bootstrap-иконки -->
+    <link rel="stylesheet" href="~/lib/bootstrap-icons-1.9.1/bootstrap-icons.css">
+
+    <!-- собственные стили -->
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    <!-- скрипты Bootstrap -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <i class="bi bi-house"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#appNavbar-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="appNavbar-1">
+                <ul class="navbar-nav">
+                    @* Вывод зарегистрированных пользователей *@
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Users" asp-action="Index"
+                           title="Вывод зарегистрированных пользователй">Пользователи</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="mt-5 p-1 bg-dark text-white text-center">
+        <h5>КА Шаг, ПД011, Донецк, 2022</h5>
+    </footer>
+
+</body>
+</html>

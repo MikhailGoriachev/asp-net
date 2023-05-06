@@ -1,0 +1,24 @@
+﻿@model List<Homework.Models.Post>
+<div class="row">
+    <div class="col-8">
+        @foreach (var item in Model!)
+            {
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4> @item.Title </h4>
+                    </div>
+                    <div class="card-body">
+                        @item.Body
+                    </div>
+                </div>
+            }
+    </div>
+        <div class="col-auto">
+        <ul>
+            <li>Постов: @ViewBag.PostsCount</li>
+            <li>Макс. длина: @ViewBag.MaxLength</li>
+            <li>Мин. длина: @ViewBag.MinLength</li>
+            <li>Ср. длина: @ViewBag.AvgLength</li>
+        </ul>
+    </div>
+</div>

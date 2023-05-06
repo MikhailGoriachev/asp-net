@@ -1,0 +1,9 @@
+﻿@using HomeWork.Components; 
+@model string
+
+
+<h4>@ViewBag.Header</h4>
+
+
+@await Component.InvokeAsync(nameof(PeopleSelectMass), new{from = Model, to = Model})
+

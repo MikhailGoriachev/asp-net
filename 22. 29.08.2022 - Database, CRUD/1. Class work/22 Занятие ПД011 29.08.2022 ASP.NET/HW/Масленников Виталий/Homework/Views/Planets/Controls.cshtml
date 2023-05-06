@@ -1,0 +1,36 @@
+﻿@model SelectList 
+
+@*Панель кнопок для фильтрации/выборки*@
+<div class="navbar">
+    <div class="container-fluid justify-content-start gap-2">
+        
+        <a asp-controller="Planets" asp-action="Index"
+           class="btn btn-sm btn-outline-secondary align-self-start"
+           title="вывод коллекции в исходном порядке">
+            исходные данные
+        </a>
+        
+        <a asp-controller="Planets" asp-action="OrderByDiameterDesc"
+           class="btn btn-sm btn-outline-secondary align-self-start ms-2"
+           title="вывод данных, упорядоченных по убыванию диаметра">
+            убывание диаметра
+        </a>
+        
+        @* фильтр по типу поверхности *@
+        <form asp-controller="Planets" asp-action="ByTerrain" class="d-inline-block ms-3">
+            <label class="form-label lead color-3" for="selTerrain">Поверхность: </label>
+            <select class="form-control-sm ms-1 color-1" asp-items="Model" name="terrain" id="selTerrain"></select>
+            <input class="btn btn-sm btn-outline-secondary ms-2" type="submit" value="Показать"/>
+        </form>
+        
+        
+        @* фильтр по диаметру *@
+        <form class="d-inline-block ms-3" asp-controller="Planets" asp-action="ByDiameter">
+            <label class="form-label lead color-3" for="inpDiameter">Диаметр: </label>
+            <input class="form-control-sm w-80-px ms-1" type="number" name="from" id="inpDiameter"/> —
+            <input class="form-control-sm w-80-px" type="number" name="to"/>
+            <input class="btn btn-sm btn-outline-secondary ms-2" type="submit" value="Показать">
+        </form>
+
+    </div>
+</div>

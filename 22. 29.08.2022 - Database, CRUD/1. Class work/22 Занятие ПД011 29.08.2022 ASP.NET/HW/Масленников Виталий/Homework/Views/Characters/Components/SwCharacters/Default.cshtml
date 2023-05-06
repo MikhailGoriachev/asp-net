@@ -1,0 +1,43 @@
+﻿@model List<Homework.Models.Character>
+
+<div class="mt-2 fs-5 color-3">
+    <span>Средний вес: 
+        <span class="color-1">@($"{(double)ViewBag.AvgMass:F2}")</span></span>
+    <span class="ms-2">Разница между минимальным и максимальным весом: 
+        <span class="color-1">@ViewBag.MinMaxMassDiff</span></span>
+</div>
+
+<table class="table mt-4 text-start" id="clientsTable">
+    <thead class="border-dark">
+    <tr>
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Родной Мир</th>
+        <th>Год Рождения</th>
+        <th>Пол</th>
+        <th>Вес</th>
+        <th>Рост</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Homeworld</td>
+            <td>@item.BirthYear</td>
+            <td>@item.Gender</td>
+            <td>@item.Mass</td>
+            <td>@item.Height</td>
+            <td> <a asp-controller="Characters" asp-action="CharacterInfo" asp-route-id="@item.Id"
+                    class="btn btn-sm btn-outline-primary ms-2" title="Информация о персонаже">
+                    <i class="fa fa-info-circle"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

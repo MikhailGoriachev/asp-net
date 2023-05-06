@@ -1,0 +1,10 @@
+﻿@using HomeWork.Components
+@model string
+
+@{
+    ViewBag.Title = "Подробная информация о планете";
+}
+
+<section class="mx-auto my-4 shadow-sm bg-dark rounded-3 h-75 w-50 p-3">
+    @await Component.InvokeAsync(typeof(PlanetInfoComponent), Model)
+</section>

@@ -1,0 +1,35 @@
+﻿@model AreaPractice.Models.Result
+
+@{
+    ViewBag.Title = "Задача 1";
+}
+
+@* вывод в карточку *@
+<div class="card bg-success text-white m-1 col-4 mx-auto p-5">
+    <div class="card-header">@ViewBag.Header</div>
+    @* исходные данные*@
+    <div class="card-body">
+        <ul class="list-group bg-info">
+            <li class="list-group-item">
+                X: @($"{ViewBag.Data.Item1:n2}")
+            </li>            
+            <li class="list-group-item">
+                Y: @($"{ViewBag.Data.Item2:n2}")
+            </li>           
+            <li class="list-group-item">
+                Z: @($"{ViewBag.Data.Item3:n2}")
+            </li>
+        </ul>
+    </div>
+    @* результаты с контрольными данными *@
+    <div class="card-footer">
+        <ul class="list-group bg-info">
+            <li class="list-group-item">
+                A: @($"{Model.A:n6}"), контроль: @($"{ViewBag.Check.A:n6}") 
+            </li>            
+            <li class="list-group-item">
+                B: @($"{Model.B:n7}"), контроль: @($"{ViewBag.Check.B:n7}") 
+            </li>           
+        </ul>
+    </div>
+</div>

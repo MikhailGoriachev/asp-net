@@ -1,0 +1,44 @@
+﻿@model HomeWork.Models.ViewModels.UserTodosViewModel?
+
+<table class="table table-bordered w-50">
+    <thead>
+    <tr>
+        <th>Всего дел</th>
+        <th>Завершено</th>
+        <th>В процессе</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>@Model?.Count</td>
+        <td>@Model?.CountCompleted</td>
+        <td>@Model?.CountUnfinished</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<table class="table align-middle" id="clientsTableId">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Выполнено</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var todo in Model.Data)
+        {
+            <tr>
+                <td>@todo.Id</td>
+                <td>@todo.Title</td>
+                <td>@(todo.Completed ? "Да" : "Нет")</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

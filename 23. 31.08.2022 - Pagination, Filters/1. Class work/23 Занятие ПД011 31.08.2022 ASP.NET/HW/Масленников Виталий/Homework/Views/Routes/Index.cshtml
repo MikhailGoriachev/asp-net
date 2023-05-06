@@ -1,0 +1,61 @@
+@using Homework.Models
+@model IEnumerable<Homework.Models.Route>
+
+@{
+    ViewData["Header"] = "Маршруты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead class="border-dark align-top">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Purpose)
+            </th>
+            <th>
+               @Html.DisplayNameFor(model => model.Country!.VisaCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country!.TransferCost)
+            </th>
+            <th>
+                Стоимость 1 дня<br/> пребывания
+            </th>
+            <th>
+                <a asp-action="Create">Добавить</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="color-2">
+@foreach (var item in Model!) {
+        <tr>
+            <td>
+                @item.Country!.Name
+            </td>
+            <td>
+                @item.Purpose!.Name
+            </td>
+            <td>
+                @item.Country!.VisaCost
+            </td>
+            <td>
+                @item.Country!.TransferCost
+            </td>
+            <td>
+                @(item.DailyCost + item.DailyCost)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

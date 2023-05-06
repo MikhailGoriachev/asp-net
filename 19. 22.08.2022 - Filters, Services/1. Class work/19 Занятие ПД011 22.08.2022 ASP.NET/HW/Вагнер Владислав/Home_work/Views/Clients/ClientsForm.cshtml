@@ -1,0 +1,145 @@
+﻿@namespace Home_work
+@model Models.Client
+@{
+    ViewBag.title = $"Форма {(@ViewBag.AddingFormMode?"добавления":"редактирования")} клиента";
+    ViewBag.PageName = "ClientsForm";
+}
+
+@section JqueryFiles{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/scripts/ClientForm.js"></script>
+}
+
+@section Head{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+}
+
+<section class="section-form">
+    <fieldset>
+        <!-- #region Форма для записи -->
+        <form method="post" asp-controller="Clients" 
+        asp-action="FormSubmit" 
+        asp-route-addingmode="@ViewBag.AddingFormMode" 
+        class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg" enctype="multipart/form-data">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="Id">
+
+        @*Если режим редактирования, то сохраняем имя файла и пароль*@
+        @if (!ViewBag.AddingFormMode)
+        {
+            <input type="hidden" asp-for="PhotoFile">
+            <input type="hidden" asp-for="Password">
+        }
+
+
+        <h4>@ViewBag.Title</h4>                        
+        <hr class="dropdown-divider">
+
+        <!-- Фото клиента -->
+        <div class="form-group my-3">
+            
+            <label class="d-block mb-3" for="photoFile">Выберите фото @(ViewBag.AddingFormMode ? "" : "(необязательно)")</label>
+
+            @*В зависимоти от режима формы меняем атриубты поля для задания файла*@
+            @if (ViewBag.AddingFormMode){
+                
+                <input type="file" class="form-control d-block"
+                data-val="true" 
+                data-val-required="Поле обязатено к заполнению!" 
+                required name="photoFile"/>
+
+                <span class="text-danger field-validation-valid d-block mt-2 mb-1" data-valmsg-for="photoFile" data-valmsg-replace="true"></span>
+            }
+            else {
+
+                <input type="file" class="form-control" name="photoFile"/>
+            }
+
+        </div>
+
+         <!-- Фамилия -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Surname"/>
+
+            <label asp-for="Surname"></label>
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+
+        <!-- Имя -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Name"/>
+
+            <label asp-for="Name"></label>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Отчество -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Patronymic"/>
+
+            <label asp-for="Patronymic"></label>
+            <span asp-validation-for="Patronymic" class="text-danger"></span>
+        </div>
+
+        <!-- Возраст -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Age"/>
+
+            <label asp-for="Age"></label>
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <!-- Номер телефона -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="PhoneNumber"/>
+
+            <label asp-for="PhoneNumber"></label>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <!-- Электронная почта -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Email"/>
+
+            <label asp-for="Email"></label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        @if (ViewBag.AddingFormMode)
+        {
+            <!-- Пароль -->
+            <div class="form-floating my-3 ">
+                <div id="showPassword" class="btn py-0 my-3 show-password-eye"><i class="bi bi-eye"></i></div>
+                <input class="form-control" asp-for="Password"/>
+                <label asp-for="Password"></label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        }
+
+        <!-- Признак постоянного клиента -->
+        <div class="form-check my-3 ">
+            <input class="form-check-input" asp-for="IsConstant"/>
+            <label class="form-check-label" asp-for="IsConstant" for="IsConstant"></label>
+
+        </div>
+
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="@(ViewBag.AddingFormMode?"Добавить":"Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="Clients" asp-action="Default">Выход</a>
+
+    </form>
+        <!-- #endregion -->
+    </fieldset>
+
+</section>

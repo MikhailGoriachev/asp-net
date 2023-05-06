@@ -1,0 +1,12 @@
+﻿@model (string name, int age, string phone)
+@{
+    ViewBag.Title = "Default Values";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<ul>
+    <li>имя: <strong>@Model.name</strong></li>
+    <li>возраст: <strong>@Model.age</strong></li>
+    <li>телефон: <strong>@Model.phone</strong></li>
+</ul>

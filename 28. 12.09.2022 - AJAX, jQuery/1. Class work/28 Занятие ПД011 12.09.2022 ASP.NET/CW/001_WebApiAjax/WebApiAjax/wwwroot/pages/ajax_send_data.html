@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>AJAX send data</title>
+    <!-- иконка -->
+    <link rel="shorcut icon" href="/images/emotion_smile.png" type="image/x-icon" />
+
+    <!-- подключение bootstrap локально, подключение собственных стилей -->
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css" />
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <main class="container">
+        <h5 class="m-2"><a href="/index.html">На главную</a></h5>
+
+        <h4 class="mt-2">Передача данных</h4>
+
+        <form id="formId" class="w-25 mt-2">
+            <div class="my-3">
+                <!-- Имена элементов формы должны совпадать с именами свойств/полей объекта -->
+                <input name="id" type="hidden" value="105" />
+                <label class="form-label">Фамилия И.О.:</label>
+                <input class="form-control" id="strSurnameNp" name="name" type="text" placeholder="Фамилия И.О." />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Возраст:</label>
+                <input class="form-control" id="numAge" name="age" type="number" placeholder="Возраст в годах" />
+            </div>
+            <button id="btnForm" type="submit" class="btn btn-success">Отправка формы</button>
+        </form>
+
+        <div class="mt-5">
+            <button id="btnGetData" class="btn btn-info">
+                Отправка данных в GET-запросе
+            </button>
+
+            <button id="btnPutData" class="ms-2 btn btn-info">
+                Отправка данных в PUT-запросе
+            </button>
+        </div>
+
+        <div class="mt-5">
+            <button id="btnPutDataForm" class="btn btn-info">
+                Отправка данных виртуальной формы в PUT-запросе
+            </button>
+
+            <!-- Метод модет быть PUT, POST, ... -->
+            <button id="btnPostJson" class="ms-2 btn btn-info">
+                Отправка данных формата JSON в POST-запросе
+            </button>
+        </div>
+        
+        <!-- поле вывода результатов AJAX-запросов -->
+        <div id="result" class="m-5">
+
+        </div>
+    </main>
+
+    <script>
+        window.onload = function () {
+            // поиск элемента по id
+            var $ = id => document.getElementById(id);
+
+            $("btnGetData").onclick = sendDataInGet;
+            $("btnPutData").onclick = sendDataInPut;
+            $("btnPutDataForm").onclick = sendDataVirtFormInPut;
+            $("btnForm").onclick = sendDataFormInPut;
+            $("btnPostJson").onclick = sendDataJsonInPost;
+            let id = 1;
+
+            // GET-запрос с параметрами...
+            function sendDataInGet(e) {
+                let request = new XMLHttpRequest();
+
+                // строка с параметрами для отправки
+                let body = `id=${id}`;  // замыкание id !!!
+                request.open("GET", `http://localhost:4242/api/people/GetId?${body}`);
+                request.onreadystatechange = reqReadyStateChange;
+                request.send();
+
+                // обработка ответа сервера
+                function reqReadyStateChange() {
+                    if (request.readyState === 4) {
+                        var status = request.status;
+                        if (status === 200) {
+                            $("result").innerHTML = `<b>${request.responseText}</b>`;
+                        } // if
+                    } // if
+                }
+            } // sendDataInGet
+
+            // PUT-запрос
+            function sendDataInPut(e) {
+                let person = {
+                    id: 101,
+                    name: "Васин А.Е.",
+                    age: 23
+                };
+
+                let request = new XMLHttpRequest();
+
+                // !!! передача id - только для примера !!!
+                let body = `name=${person.name}&age=${person.age}`;
+                request.open("PUT", `http://localhost:4242/api/people/Put/${person.id}`);
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                request.onreadystatechange = reqReadyStateChange;
+                request.send(body);
+                // request.send("");
+
+                function reqReadyStateChange() {
+                    if (request.readyState === 4 && request.status === 200)
+                        $("result").innerHTML = `<b>${request.responseText}</b>`;
+                }
+
+            } // sendDataInPut
+
+            // PUT-запрос, сериализация данных формы - реальной или виртуальной, не важно
+            function sendDataVirtFormInPut(e) {
+                let person = {
+                    id: 102,
+                    name: "Форма В.Н.",
+                    age: 32
+                };
+
+                // создание виртуальной формы - не указываем объект-форму при вызове FormData
+                // FormData - стандартный объект
+                let formData = new FormData();
+                formData.append("name", person.name);
+                formData.append("age", person.age);
+
+                let request = new XMLHttpRequest();
+
+                request.open("PUT", "http://localhost:4242/api/people/Put/" + person.id);
+                request.onreadystatechange = reqReadyStateChange;
+
+                // отправка данных формы
+                request.send(formData);
+
+                function reqReadyStateChange() {
+                    if (request.readyState === 4 && request.status === 200)
+                        $("result").innerHTML = `<b>${request.responseText}</b>`;
+                }
+
+            } // sendDataFormInPut
+
+            // PUT-запрос, сериализация данных формы - реальной
+            function sendDataFormInPut(e) {
+                // в форме button - типа submit, необходимо перехватить отправку на сервер
+                e.preventDefault();
+
+                // создание формы - указываем объект-форму при вызове FormData
+                // FormData - стандартный объект
+                let form = $("formId");
+                let formData = new FormData(form);
+
+                let request = new XMLHttpRequest();
+
+                // передача ид в маршрцуте - просто  демонстрация возможностей,
+                // информация передается в форме - переменная formData
+                request.open("PUT", `http://localhost:4242/api/people/Put/${form.id.value}`);
+                request.onreadystatechange = reqReadyStateChange;
+
+                // отправка данных формы
+                request.send(formData);
+
+                function reqReadyStateChange() {
+                    if (request.readyState === 4 && request.status === 200)
+                        $("result").innerHTML = `<b>${request.responseText}</b>`;
+                }
+
+            } // sendDataFormInPut
+
+            // POST-запрос - формат JSON
+            function sendDataJsonInPost(e) {
+                let person = {
+                    id: 109,
+                    name: "Жуков В.Е.",
+                    age: 55
+                };
+
+                let request = new XMLHttpRequest();
+
+                // сериализация в JSON
+                let json = JSON.stringify(person);
+
+                // !!! передача id - только для примера !!!
+                request.open("POST", "http://localhost:4242/api/people/post");
+                request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+                request.onreadystatechange = reqReadyStateChange;
+                request.send(json);
+
+                function reqReadyStateChange() {
+                    if (request.readyState === 4 && request.status === 200)
+                        $("result").innerHTML = `<b>${request.responseText}</b>`;
+                }
+
+            } // sendDataInPut
+        }
+    </script>
+</body>
+</html>
+        

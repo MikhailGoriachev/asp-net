@@ -1,0 +1,5 @@
+﻿@model IQueryable<Homework.Models.Client>
+
+<h4>Информация о клиентах с поездками в @ViewBag.Country на @ViewBag.Days дней</h4>
+
+@{ await Html.RenderPartialAsync("ClientsTable", Model); }

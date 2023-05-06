@@ -1,0 +1,80 @@
+﻿@using Home_work.ViewModels
+@using Home_work.Models.Characters
+@model Character
+
+
+
+<table class="table table-hover table-bordered w-75 mx-auto my-4">
+    <thead>
+        <tr class="align-middle">
+            <th class="alignment-center bg-dark bg-opacity-25" colspan="2">Информация о персонаже</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr class="align-middle" >
+            <td class="w-50 alignment-center">Имя персонажа</td>
+            <td class="alignment-center">@Model.Name</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Рост персонажа</td>
+            <td class="alignment-center">@Model.Height</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Вес персонажа</td>
+            <td class="alignment-center">@(Model.Mass is null ? "Нет данных" : Model.Mass)</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Цвет волос</td>
+            <td class="alignment-center">@(string.IsNullOrWhiteSpace(Model.HairColor) ? "Нет данных" : Model.HairColor)</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Цвет кожи</td>
+            <td class="alignment-center">@(string.IsNullOrWhiteSpace(Model.SkinColor) ? "Нет данных" : Model.SkinColor)</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Цвет глаз</td>
+            <td class="alignment-center">@(string.IsNullOrWhiteSpace(Model.EyeColor) ? "Нет данных" : Model.EyeColor)</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Год рождения</td>
+            <td class="alignment-center">@Model.BirthYear</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Пол персонажа</td>
+            <td class="alignment-center">@Model.Gender</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Происхождение персонажа</td>
+            <td class="alignment-center">@Model.Homeworld </td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Фильмы персонажа</td>
+            <td class="alignment-center">
+
+                <button class="btn btn-primary my-3" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#filmsList" aria-expanded="false" 
+                aria-controls="filmsList">Показать список
+                <span class="badge bg-warning text-dark">@Model.Films.Count</span>
+                </button>
+
+                <div class="collapse multi-collapse" id="filmsList">
+                    @foreach(string film in Model.Films){
+                        <p>@film</p>
+                    }
+                </div>
+
+            </td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Дата создания персонажа</td>
+            <td class="alignment-center">@($"{Model.Created:dd.MM.yyyy}")</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Дата Последнего редактирования</td>
+            <td class="alignment-center">@($"{Model.Edited:dd.MM.yyyy}")</td>
+        </tr>
+    </tbody>
+</table>

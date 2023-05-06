@@ -1,0 +1,72 @@
+﻿@functions {
+    // получить стиль
+    string ActivePage(string page) => ViewBag.PageName == page ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="ru">
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/style/index.css" rel="stylesheet" />
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="~/img/program-64.png" type="image/x-icon" />
+
+   <!-- подключение bootstrap локально -->
+   <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.css">
+
+   <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("style", false)
+</head>
+<body class="body">
+<nav class="navbar navbar-expand-sm bg-primary navbar-light">
+  <div class="container-fluid">
+     <!-- ссылки на страницы -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active @ActivePage("Index")"  asp-controller="Home" asp-action="Index">Главная</a>
+      </li>
+      <li class="nav-item me-2">
+        <a class="nav-link @ActivePage("Goods")"  asp-controller="WholesaleStore" asp-action="Goods">Товары</a>
+      </li>
+      <li class="nav-item me-2">
+        <a class="nav-link @ActivePage("Sellers")"  asp-controller="WholesaleStore" asp-action="Sellers">Продавцы</a>
+      </li>
+      <li class="nav-item me-2">
+        <a class="nav-link @ActivePage("Purchases")"  asp-controller="WholesaleStore" asp-action="Purchases">Закупки</a>
+      </li>
+      <li class="nav-item me-2">
+        <a class="nav-link @ActivePage("Sales")"  asp-controller="WholesaleStore" asp-action="Sales">Продажи</a>
+      </li>
+      <li class="nav-item dropdown me-2">
+      <a class="nav-link dropdown-toggle @ActivePage("Queries")" href="#" role="button" data-bs-toggle="dropdown">Отчёты</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-controller="Queries" asp-action="Filter">Фильтр</a></li>
+            <li><a class="dropdown-item" asp-controller="Queries" asp-action="Query04">Запрос 4</a></li>
+        </ul>
+      </li>
+  </div>
+</nav>
+
+<main class="mx-5 ps-3">
+       <section class="col-12 col-md-12 mt-3">
+            @RenderBody()
+       </section>
+ </main>
+
+        <!-- подвал страницы-->
+    <footer class="container-fluid ">
+        <div id="footer" class="row col-12">
+                <h3>Данные о разработчике:</h3>               
+                <p>
+                     группа:<b> ПД011 г.Донецк 2022г.</b><br>студент: <b>Зейдлиц Виктория</b>
+                </p>
+        </div>
+    </footer>
+</body>
+</html>

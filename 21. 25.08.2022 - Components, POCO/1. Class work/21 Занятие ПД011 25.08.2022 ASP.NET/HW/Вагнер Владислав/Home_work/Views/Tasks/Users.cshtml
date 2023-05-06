@@ -1,0 +1,26 @@
+﻿@using Home_work.Components
+@{
+    ViewBag.title = "Пользователи";
+    ViewBag.PageName = "Users";
+}
+
+
+<!--Задание-->
+<details class="task-details">
+    <summary class="h5 text-primary">
+        Задание 2
+    </summary>
+    По кнопке на отдельной странице вывести все посты пользователя 
+    (запрос вида <a class="link-to-record" target="_blank" 
+    href="https://jsonplaceholder.typicode.com/users/2/posts">
+    https://jsonplaceholder.typicode.com/users/2/posts</a> где 2 - идентификатор пользователя), 
+    при помощи компонента представления, в этом же компоненте выводить количество постов, минимальную, 
+    среднюю и максимальную длина текста (поле body) в символах
+</details>
+
+<h4 class="mt-3">@ViewBag.title</h4>
+
+<div>
+    @await Component.InvokeAsync(nameof(UsersComponent));
+</div>
+

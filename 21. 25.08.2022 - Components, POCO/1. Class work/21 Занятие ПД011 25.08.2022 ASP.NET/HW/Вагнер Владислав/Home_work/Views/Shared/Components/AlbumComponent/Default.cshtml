@@ -1,0 +1,35 @@
+﻿@using Home_work.ViewModels
+@model AlbumViewModel
+
+
+ <div  class="alert alert-info mt-2" role="alert" >
+     <b>Количество фотографий</b>: @Model.AlbumSize
+ </div>
+
+@* Вывод коллекции сведений об фотографиях пользователей *@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th class="alignment-center">Фото</th>
+        <th class="alignment-center">Ссылка на фото</th>
+        <th class="alignment-center">Id альбома</th>
+        <th class="alignment-center">Id пользователя</th>
+        <th class="alignment-center">Заговок фотографии</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (Photo photo in Model.Album)
+    {
+        <tr class="align-middle" >
+            <td class="alignment-center">
+                    <img src="@photo.ThumbnailUrl" alt="@photo.ThumbnailUrl" height="100"/>
+                    </td>
+            <td class="alignment-center">@photo.ThumbnailUrl</td>
+            <td class="alignment-center">@photo.AlbumId</td>
+            <td class="alignment-center">@photo.Id</td>
+            <td class="alignment-center">@photo.Title</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+﻿@model HomeWork.Models.ViewModels.UserPostsViewModel?
+
+<table class="table table-bordered w-50">
+    <thead>
+    <tr>
+        <th>Количество постов</th>
+        <th>Минимальная длина</th>
+        <th>Средняя длина</th>
+        <th>Максимальная длина</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>@Model?.Count</td>
+        <td>@Model?.MinLength</td>
+        <td>@Model?.AvgLength</td>
+        <td>@Model?.MaxLength</td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table align-middle" id="clientsTableId">
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Текст поста</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var post in Model.Data)
+        {
+            <tr>
+                <td>@post.Id</td>
+                <td>@post.Body</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

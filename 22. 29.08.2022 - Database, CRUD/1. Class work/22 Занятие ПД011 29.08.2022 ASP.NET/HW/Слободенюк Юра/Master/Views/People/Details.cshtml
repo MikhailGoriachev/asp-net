@@ -1,0 +1,27 @@
+﻿@model PeopleDetailsViewModel
+@{
+    Layout = "_Layout";
+}
+
+<section class="mt-5 row justify-content-center">
+    <div class="col-auto  align-middle card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@Model.Homeworld, @Model.BirthYear</h6>
+            <dl class="card-text">
+                <dt>Рост</dt>
+                <dd>@Model.Height</dd>
+                <dt>Вес</dt>
+                <dd>@Model.Mass</dd>
+                <dt>Пол</dt>
+                <dd>@Model.Gender</dd>
+                <dt>Цвет глаз</dt>
+                <dd>@Model.EyeColor</dd>
+                <dt>Цвет волос</dt>
+                <dd>@Model.HairColor</dd>
+                <dt>Цвет кожи</dt>
+                <dd>@Model.SkinColor</dd>
+            </dl>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,67 @@
+﻿@model HomeWork.Models.Instructor
+
+@section Head
+{
+    @* скрипты валидации *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{ ViewBag.Title = ViewBag.IsAdd ? "Добавление тинструктора" : "Редактирование инструктора"; }
+
+<section class="mx-auto my-4 bg-light shadow-sm border rounded-3 h-75 p-3 w-50">
+
+    <form method="post" class="mx-4" asp-controller="Instructors"
+          asp-action="@(ViewBag.IsAdd ? "AddInstructor" : "EditInstructor")">
+
+        <h4 class="text-center">@ViewBag.Title</h4>
+
+        <hr>
+
+        @* id *@
+        <input asp-for="Id">
+
+        @* фамилия *@
+        <div class="input-group my-3">
+            <label asp-for="Surname" class="input-group-text w-16rem"></label>
+            <input asp-for="Surname" class="form-control">
+            <span asp-validation-for="Surname" class="text-danger w-100"></span>
+        </div>
+
+        @* имя *@
+        <div class="input-group my-3">
+            <label asp-for="Name" class="input-group-text w-16rem"></label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" class="text-danger w-100"></span>
+        </div>
+
+        @* отчество *@
+        <div class="input-group my-3">
+            <label asp-for="Patronymic" class="input-group-text w-16rem"></label>
+            <input asp-for="Patronymic" class="form-control">
+            <span asp-validation-for="Patronymic" class="text-danger w-100"></span>
+        </div>
+
+        @* дата рождения *@
+        <div class="input-group my-3">
+            <label asp-for="DateOfBirth" class="input-group-text w-16rem"></label>
+            <input asp-for="DateOfBirth" class="form-control">
+            <span asp-validation-for="DateOfBirth" class="text-danger w-100"></span>
+        </div>
+
+        @* категория *@
+        <div class="input-group my-3">
+            <label asp-for="Category" class="input-group-text w-16rem"></label>
+            <select asp-for="Category" asp-items="@ViewBag.Categories" class="form-select"></select>
+            <span asp-validation-for="Category" class="text-danger w-100"></span>
+        </div>
+
+        @* управление *@
+        <div class="d-flex justify-content-end">
+            <input class="btn btn-success w-10rem me-3" type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")">
+            <a class="btn btn-danger w-10rem" asp-controller="Instructors" asp-action="Index">Выйти</a>
+        </div>
+    </form>
+
+</section>

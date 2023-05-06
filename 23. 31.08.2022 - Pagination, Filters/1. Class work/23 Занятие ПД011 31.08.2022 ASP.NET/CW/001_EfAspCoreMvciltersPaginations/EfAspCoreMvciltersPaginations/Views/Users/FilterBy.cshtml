@@ -1,0 +1,36 @@
+﻿@model EfAspCoreMvciltersPaginations.Models.ViewModels.UserListViewModel
+
+@* Вывод са=писка пользователей с возмодностью фильтрации *@
+<h3>Пользователи нашего сервиса (с фильтрацией)</h3>
+
+@* Яорма ввода параметров фильтрации *@
+<form method="get">
+    <div>
+        <label>Имя: </label>
+        <input asp-for="Name" />
+
+        <label>Компания: </label>
+        <select name="companyId" asp-items="Model.Companies"></select>
+
+        <input type="submit" value="Фильтр" />
+    </div>
+</form>
+
+<table>
+    <tr>
+        <th>Ид</th>
+        <th>Имя</th>
+        <th>Возраст</th>
+        <th>Компания</th>
+    </tr>
+
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Age</td>
+            <td>@item.Company?.Name</td>
+        </tr>
+    }
+</table>

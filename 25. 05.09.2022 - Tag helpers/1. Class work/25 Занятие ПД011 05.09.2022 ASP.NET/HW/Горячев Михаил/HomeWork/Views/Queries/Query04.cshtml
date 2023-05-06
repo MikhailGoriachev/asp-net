@@ -1,0 +1,26 @@
+﻿@model HomeWork.Models.BindingModels.IntBindingModel?
+
+@{
+    ViewBag.Title = $"Запрос 4. Процент комиссионных: {Model?.Value.ToString() ?? "————"}";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <div class="d-lg-flex justify-content-between">
+
+        <form method="get" asp-controller="Queries" asp-action="Query04" class="d-flex align-items-center">
+
+            <div class="form-floating w-18rem">
+                <input asp-for="Value" class="form-control" min="0" placeholder="Процент комиссонных">
+                <label asp-for="Value">Процент комиссионных</label>
+            </div>
+
+            <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+            <a class="btn btn-warning" asp-controller="Queries" asp-action="Query04">Сбросить</a>
+        </form>
+    </div>
+
+
+    <sellers-table items="@ViewBag.Items"></sellers-table>
+</section>

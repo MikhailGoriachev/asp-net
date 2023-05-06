@@ -1,0 +1,26 @@
+﻿@* Демонстрация атрибутов тег-хелпера *@
+@{
+    ViewBag.Ttile = "Атрибуты тег-хелпера";
+}
+
+<h3>@ViewBag.Title</h3>
+<h3>Пример использования атрибутов тег-хелперов</h3>
+
+<ul>
+    <li>
+        все атрибуты явно заданы, <strong>не</strong> показывать секунды:
+        <current-time Color="lightseagreen" seconds-included="false"/>
+    </li>
+    <li>
+        все атрибуты явно заданы, показывать секунды:
+        <current-time color="#0984e3" seconds-included="true"/>
+    </li>
+    <li>
+        только атрибут цвета: 
+        <current-time Color="#ff7675"/>
+    </li>
+    <li>
+        атрибуты по умолчанию: 
+        <current-time/>
+    </li>
+</ul>

@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="/../../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/../../css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="/../../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>Таблицы</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="/images/icon.svg">
+
+    <!-- скрипты -->
+    <script src="/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/js/data.js"></script>
+    <script src="/js/queriesRef.js"></script>
+    <script src="/js/tables.js"></script>
+
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="/../../index.html">
+            <img class="logo" src="/images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- #region Ссылки на страницы -->
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3" href="/index.html">Главная</a>
+                </li>
+
+                <!-- Данные -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#"
+                       id="navbarDataId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Данные
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDataId">
+
+                        <!-- Клиенты -->
+                        <li>
+                            <a class="dropdown-item" id="clientsId" data-table-info="clients" href="#">Клиенты</a>
+                        </li>
+
+                        <!-- Страны -->
+                        <li>
+                            <a class="dropdown-item" id="countriesId" data-table-info="countries" href="#">Страны</a>
+                        </li>
+
+                        <!-- Цели поездки -->
+                        <li>
+                            <a class="dropdown-item" id="objectivesId" data-table-info="objectives" href="#">Цели поездки</a>
+                        </li>
+
+                        <!-- Маршруты -->
+                        <li>
+                            <a class="dropdown-item" id="routesId" data-table-info="routs" href="#">Маршруты</a>
+                        </li>
+
+                        <!-- Поездки -->
+                        <li>
+                            <a class="dropdown-item" id="visitsId" data-table-info="visits" href="#">Поездки</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Запросы -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="navbarQueryId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Запросы
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarQueryId">
+
+                        <!-- Запрос 1 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query01" id="query01Id" href="#">Запрос 1</a>
+                        </li>
+
+                        <!-- Запрос 2 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query02" id="query02Id" href="#">Запрос 2</a>
+                        </li>
+
+                        <!-- Запрос 3 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query03" id="query03Id" href="#">Запрос 3</a>
+                        </li>
+
+                        <!-- Запрос 4 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query04" id="query04Id" href="#">Запрос 4</a>
+                        </li>
+
+                        <!-- Запрос 5 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query05" id="query05Id" href="#">Запрос 5</a>
+                        </li>
+
+                        <!-- Запрос 6 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query06" id="query06Id" href="#">Запрос 6</a>
+                        </li>
+
+                        <!-- Запрос 7 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query07" id="query07Id" href="#">Запрос 7</a>
+                        </li>
+
+                        <!-- Запрос 8 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query08" id="query08Id" href="#">Запрос 8</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+        <h4 class="text-center" id="tableLabelId"></h4>
+
+        <table class="table table-hover align-middle" id="tableId">
+            <thead id="theadId">
+
+            </thead>
+            <tbody id="tbodyId">
+
+            </tbody>
+
+        </table>
+    </section>
+
+
+    <!-- Модальное окно с формой для добавления/редактирования поездки -->
+    <div class="modal fade" id="visitFormModalId" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Заголовок модального окна -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="visitFormLabelId"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+
+                <!-- Форма -->
+                <div class="modal-body">
+                    <form id="formVisitId" class="mx-auto">
+
+                        <!-- Id -->
+                        <input type="hidden" id="idVisit" name="id">
+
+                        <!-- Клиент -->
+                        <div class="form-floating my-3">
+                            <select id="clientIdSelectId" name="clientId" class="form-select"></select>
+                            <label for="clientIdSelectId">Клиент</label>
+                        </div>
+
+                        <!-- Маршрут -->
+                        <div class="form-floating my-3">
+                            <select id="routeIdSelectId" name="routeId" class="form-select"></select>
+                            <label for="routeIdSelectId">Маршрут</label>
+                        </div>
+
+                        <!-- Длительность -->
+                        <div class="form-floating my-3">
+                            <input id="durationId" name="duration" placeholder="Длительность (день)" class="form-control">
+                            <label for="durationId">Длительность (день)</label>
+                        </div>
+
+                        <!-- Дата начала поездки -->
+                        <div class="form-floating my-3">
+                            <input type="date" id="dateStartId" name="dateStart"  placeholder="Дата начала поездки" class="form-control">
+                            <label for="dateStartId">Дата начала поездки</label>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Кнопки управления -->
+                <div class="modal-footer">
+                    <button type="reset" form="formVisitId" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary" id="visitFormModalBtnOk" data-bs-dismiss="modal"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

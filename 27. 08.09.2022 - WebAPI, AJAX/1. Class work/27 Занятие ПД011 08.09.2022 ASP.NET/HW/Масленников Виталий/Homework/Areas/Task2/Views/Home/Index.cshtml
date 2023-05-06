@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Задача 2";
+}
+
+<h4> Задача 2 </h4>
+
+<form asp-area="Task2" asp-action="calc">
+    <label for="z1">z1 = </label>
+    <input type="number" name="z1" id="z1">
+    
+    <label for="z2">z1 = </label>
+    <input type="number" name="z2" id="z2">
+    <div class="card-footer">
+        <input type="submit" class="btn btn-secondary mt-3" value="Расчитать"/>
+        </div>
+</form>
+
+<div class="card mt-4" style="width: 18rem;">
+    <div class="card-header">
+        Расчитано:
+    </div>
+    <p><i>*Расчеты в разработке, выводятся введенные в форму значения*</i></p>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            z1 = @ViewBag.z1
+        </li>
+        <li class="list-group-item">
+            z2 = @ViewBag.z2
+        </li>
+    </ul>
+</div>

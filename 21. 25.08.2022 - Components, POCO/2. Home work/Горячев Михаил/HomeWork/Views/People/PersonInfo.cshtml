@@ -1,0 +1,11 @@
+﻿@using HomeWork.Components
+@model string
+
+@{
+    ViewBag.Title = "Упорядочивание по убыванию диаметра";
+    ViewBag.PageName = "OrderPeople";
+}
+
+<section class="mx-auto my-4 shadow-sm bg-dark rounded-3 h-75 w-50 p-3">
+    @await Component.InvokeAsync(typeof(PersonInfoComponent), Model)
+</section>

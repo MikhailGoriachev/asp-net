@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>Запросы - Домашняя Работа</title>
+
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"/>
+
+    <script src="lib/jquery/jquery-3.6.1.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/queries.js"></script>
+
+    <script src="https://kit.fontawesome.com/6bbf14962c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+<header class="container-fluid">
+    <div class="top-bar row align-items-center ps-4">
+        <h1>Запросы</h1>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand-sm navbar-main bg-body sticky-top shadow mb-2">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#appNavbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="appNavbarMain">
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item me-2">
+                    <a href="index.html" class="nav-link" title="Перейти на страницу">
+                        Главная </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="purchases.html" class="nav-link" title="Перейти на страницу">
+                        Закупки </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="sales.html" class="nav-link" title="Перейти на страницу">
+                        Продажи </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="references.html" class="nav-link" title="Перейти на страницу">
+                        Справочники </a>
+                </li>
+                <li>
+                    <a class="nav-link active" title="Перейти на страницу" href="queries.html">
+                        Запросы
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid mh-100 mh-80-vh">
+    <main class="mt-4 mx-5">
+        <div class="dropdown mb-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Выберите запрос
+            </button>
+            <ul class="dropdown-menu">
+                <li><button id="btnQuery1" class="dropdown-item">Запрос 1</button></li>
+                <li><button id="btnQuery2" class="dropdown-item">Запрос 2</button></li>
+                <li><button id="btnQuery3" class="dropdown-item">Запрос 3</button></li>
+                <li><button id="btnQuery4" class="dropdown-item">Запрос 4</button></li>
+                <li><button id="btnQuery5" class="dropdown-item">Запрос 5</button></li>
+                <li><button id="btnQuery6" class="dropdown-item">Запрос 6</button></li>
+                <li><button id="btnQuery7" class="dropdown-item">Запрос 7</button></li>
+                <li><button id="btnQuery8" class="dropdown-item">Запрос 8</button></li>
+                <li><button id="btnQuery9" class="dropdown-item">Запрос 9</button></li>
+                <li><button id="btnQuery10" class="dropdown-item">Запрос 10</button></li>
+                <li><button id="btnQuery11" class="dropdown-item">Запрос 11</button></li>
+            </ul>
+        </div>
+        
+        <div id="output">            
+        </div>
+        
+    </main>
+</div>
+
+
+<!--Модальная форма для 6 запроса-->
+<div class="modal fade" id="modalQuery6" tabindex="-1" aria-labelledby="query6ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="query6ModalLabel">Запрос 6</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="query6Form">
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="fromPrice" name="fromPrice" min="0" required/>
+                        <label for="fromPrice">Нижняя цена продажи: </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="toPrice" name="toPrice" type="number" min="0" required/>
+                        <label for="toPrice">Верхняя цена продажи: </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input form="query6Form" type="submit" id="btnSubmitQuery6" value="Выбрать" class="btn btn-primary"/>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальная форма для 5 запроса-->
+<div class="modal fade" id="modalQuery5" tabindex="-1" aria-labelledby="query5ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="query5ModalLabel">Запрос 5</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="query5Form">
+                    <div class="form-floating mb-3">
+                        <select class="form-control" id="selSellerQ5" name="sellerId"></select>
+                        <label for="selSellerQ5">Продавец: </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input form="query5Form" type="submit" id="btnSubmitQuery5" value="Выбрать" class="btn btn-primary"/>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальная форма для 4 запроса-->
+<div class="modal fade" id="modalQuery4" tabindex="-1" aria-labelledby="query4ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="query4ModalLabel">Запрос 4</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="query4Form">
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="inpInterestQ4" name="interest" min="0" required>
+                        <label for="inpInterestQ4">Комиссионные (%): </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input form="query4Form" type="submit" id="btnSubmitQuery4" value="Выбрать" class="btn btn-primary"/>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальная форма для 3 запроса-->
+<div class="modal fade" id="modalQuery3" tabindex="-1" aria-labelledby="query3ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="query3ModalLabel">Запрос 3</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="query3Form">
+                    <div class="form-floating mb-3">
+                        <select class="form-control" id="selGoodsQ3" name="name"></select>
+                        <label for="selGoodsQ3">Наименование: </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="inpMaxPriceQ3" name="maxPriceExcl" min="0" required>
+                        <label for="inpMaxPriceQ3">Цена закупки до: </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input form="query3Form" type="submit" id="btnSubmitQuery3" value="Выбрать" class="btn btn-primary"/>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальная форма для 2 запроса-->
+<div class="modal fade" id="modalQuery2" tabindex="-1" aria-labelledby="query2ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="query2ModalLabel">Запрос 2</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="query2Form">
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="inpMaxPriceQ2" name="maxPriceExcl" min="0" required>
+                        <label for="inpMaxPriceQ2">Цена закупки до: </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input form="query2Form" type="submit" id="btnSubmitQuery2" value="Выбрать" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Модальная форма для 1 запроса-->
+<div class="modal fade" id="modalQuery1" tabindex="-1" aria-labelledby="query1ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="query1ModalLabel">Запрос 1</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="query1Form">
+                    <div class="form-floating mb-3">
+                        <select class="form-control" id="selUnitsQ1" name="name"></select>
+                        <label for="selUnitsQ1">Единицы измерения: </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="inpMaxPriceQ1" name="maxPriceExcl" min="0" required>
+                        <label for="inpMaxPriceQ1">Цена закупки до: </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input form="query1Form" type="submit" id="btnSubmitQuery1" value="Выбрать" class="btn btn-primary" />
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="container-fluid">
+    <div class="row align-items-center bg-light h-60-px">
+        <h6 class="text-center">&copy;2022, Масленников Виталий, г. Донецк, КА «ШАГ», ПД011.</h6>
+    </div>
+</footer>
+</body>
+</html>

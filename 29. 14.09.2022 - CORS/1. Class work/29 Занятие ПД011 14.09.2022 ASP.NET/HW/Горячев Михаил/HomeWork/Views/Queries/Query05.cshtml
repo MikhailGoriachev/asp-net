@@ -1,0 +1,30 @@
+﻿@using HomeWork.Components
+@model HomeWork.Models.BindingModels.RangeBindingModel
+
+@{
+    ViewBag.Title = $"Запрос 5. Диапазон стоимости визы: {ViewBag.MinCost} — {ViewBag.MaxCost}";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <form method="post" id="formId" class="d-flex align-items-center">
+
+        <!-- Минимальная стоимость визы -->
+        <div class="form-floating w-15rem">
+            <input asp-for="Min" class="form-control" placeholder="Мин. стоимость (&#8381;)" min="0" required>
+            <label asp-for="Min">Мин. стоимость визы (&#8381;)</label>
+        </div>
+
+        <!-- Максимальная стоимость визы -->
+        <div class="form-floating ms-3 w-15rem">
+            <input asp-for="Max" class="form-control" placeholder="Макс. стоимость (&#8381;)" min="1" required>
+            <label asp-for="Max">Макс. стоимость визы (&#8381;)</label>
+        </div>
+
+        <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+        <a class="btn btn-warning" id="formCancelBtn">Сбросить</a>
+    </form>
+
+    @await Component.InvokeAsync(typeof(Query05Component), new { MinCost = Model.Min, MaxCost = Model.Max })
+</section>

@@ -1,0 +1,23 @@
+﻿@* Демонстрация простейшкго тег-хелпера *@
+@{
+    ViewBag.Ttile = "Главная";
+}
+
+<h3>@ViewBag.Title</h3>
+<h4>Пример использования трех тег-хелперов &lt;first&gt;</h4>
+
+@* 
+    fisrt - тег-хелпер, класс FirstTagHelper 
+    для класса ClientsEntityTagHelper имя тег-хелпера будет: 
+    clients-entity (в кебаб-стиле, без суффикса)
+*@
+<first></first>
+<first></first>
+<first></first>
+<hr/>
+
+<h4>Пример использования трех тег-хелперов &lt;second&gt;</h4>
+<second></second>
+<second></second>
+<second></second>
+<hr />

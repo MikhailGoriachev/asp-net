@@ -1,0 +1,104 @@
+[
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 6.0,
+    "_b": 8.0,
+    "_c": 3.0,
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "Id": 0
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Id": 1,
+    "SideA": 9.651
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Id": 2,
+    "SideA": 7.497
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "Id": 3,
+    "SideA": 4.033,
+    "SideB": 5.845
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "Id": 4,
+    "SideA": 3.896,
+    "SideB": 4.292
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "Id": 5,
+    "SideA": 2.425,
+    "SideB": 8.464
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "Id": 6,
+    "SideA": 5.58,
+    "SideB": 7.083
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Id": 7,
+    "SideA": 7.89
+  },
+  {
+    "$type": "Homework.Models.Figures.Rectangle, Homework",
+    "Name": "Прямоугольник",
+    "Image": "rectangle.png",
+    "Id": 8,
+    "SideA": 1.085,
+    "SideB": 5.97
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 5.585,
+    "_b": 6.947,
+    "_c": 2.531,
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "Id": 0
+  },
+  {
+    "$type": "Homework.Models.Figures.Triangle, Homework",
+    "_a": 5.666,
+    "_b": 5.824,
+    "_c": 9.501,
+    "Name": "Треугольник",
+    "Image": "triangle.png",
+    "Id": 0
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Id": 11,
+    "SideA": 9.565
+  },
+  {
+    "$type": "Homework.Models.Figures.Square, Homework",
+    "Name": "Квадрат",
+    "Image": "square.png",
+    "Id": 12,
+    "SideA": 9.872
+  }
+]

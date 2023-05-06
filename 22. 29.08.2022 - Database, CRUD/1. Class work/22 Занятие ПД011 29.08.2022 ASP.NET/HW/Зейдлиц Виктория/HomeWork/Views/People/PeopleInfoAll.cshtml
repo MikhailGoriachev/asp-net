@@ -1,0 +1,6 @@
+﻿@using HomeWork.Components
+@model int
+
+<h4>@ViewBag.Header</h4>
+
+@await Component.InvokeAsync(nameof(PeopleInfoAll), new {id = Model})

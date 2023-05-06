@@ -1,0 +1,9 @@
+﻿@using Homework.Components
+
+@{
+    ViewBag.Title = "Пользователи";
+    Layout = "_Layout";
+}
+
+@await Component.InvokeAsync(nameof(RegisteredUsers))
+

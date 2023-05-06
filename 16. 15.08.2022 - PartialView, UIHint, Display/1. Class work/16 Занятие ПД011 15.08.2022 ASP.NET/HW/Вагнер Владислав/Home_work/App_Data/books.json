@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 1,
+    "Image": "Cover_01.jpg",
+    "Author": "Адитья Бхаргава",
+    "Title": "Грокаем алгоритмы",
+    "Year": 2010,
+    "Quantity": 2,
+    "Price": 1200
+  },
+  {
+    "Id": 4,
+    "Image": "Cover_04.jpg",
+    "Author": "Джон Сонмез",
+    "Title": "Путь программиста",
+    "Year": 2010,
+    "Quantity": 4,
+    "Price": 1599
+  },
+  {
+    "Id": 5,
+    "Image": "Cover_05.jpg",
+    "Author": "Майкл Физерс",
+    "Title": "Эффективная работа с унаследованным кодом",
+    "Year": 2012,
+    "Quantity": 3,
+    "Price": 2967
+  },
+  {
+    "Id": 6,
+    "Image": "Cover_06.jpg",
+    "Author": "Эрик Фримен",
+    "Title": "Head First. Паттерны проектирования",
+    "Year": 2012,
+    "Quantity": 5,
+    "Price": 2528
+  },
+  {
+    "Id": 7,
+    "Image": "Cover_07.jpg",
+    "Author": "Мартин Фаулер",
+    "Title": "Рефакторинг",
+    "Year": 2010,
+    "Quantity": 4,
+    "Price": 2697
+  },
+  {
+    "Id": 8,
+    "Image": "Cover_08.jpg",
+    "Author": "Стив Макконнелл",
+    "Title": "Совершенный код",
+    "Year": 2009,
+    "Quantity": 2,
+    "Price": 2450
+  },
+  {
+    "Id": 9,
+    "Image": "Cover_09.jpg",
+    "Author": "Роберт Мартин",
+    "Title": "Чистый код",
+    "Year": 2011,
+    "Quantity": 4,
+    "Price": 2061
+  },
+  {
+    "Id": 10,
+    "Image": "Cover_10.jpg",
+    "Author": "Эрих Гамма",
+    "Title": "Паттерны объектно-ориентированного проектирования",
+    "Year": 2010,
+    "Quantity": 2,
+    "Price": 2742
+  }
+]

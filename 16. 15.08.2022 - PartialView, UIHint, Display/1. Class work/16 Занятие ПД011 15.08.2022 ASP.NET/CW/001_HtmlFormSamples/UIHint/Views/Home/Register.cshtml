@@ -1,0 +1,47 @@
+﻿@* строго типизированное представление - упрощает создание форм *@
+@model UIHint.Models.RegistrationBindingModel
+
+@* правильное построение формы - использование тэг-хелперов *@
+<form asp-controller="home" asp-action="register" method="post"
+      class="w-50 mx-auto my-5">
+    <div class="mb-3">
+        @*
+        У элемента input не указываем тип - по умолчанию это будет "text"
+        В элементе label задаем for, надпсиь формируется в элементе label
+        *@
+        <label for="Login" class="form-label">Login:</label>
+        <input asp-for="Login" class="form-control" />
+    </div>
+    <div class="mb-3">
+        @*
+        У элемента input не указываем тип, т.к. тип задается атрибутом UIHint
+        в классе модели - [UIHint("EmailAddress")]
+        *@
+        <label for="Email" class="form-label">Email:</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        @*
+        У элемента input не указываем тип, т.к. тип задается атрибутом UIHint
+        в классе модели - [UIHint("Password")]
+        *@
+        <label for="Password" class="form-label">Password:</label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="PasswordConfirm" class="form-label">Password Confirm:</label>
+        <input asp-for="PasswordConfirm" class="form-control" />
+    </div>    
+    
+    <div class="mb-3">
+        <label for="Age" class="form-label">Age:</label>
+        <input asp-for="Age" class="form-control" />
+    </div>
+    <div class="form-check mb-5">
+        <input asp-for="TermsAccepted" class="form-check-input" value="true" />
+        <label for="TermsAccepted" class="form-check-label">Terms Accepted</label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+

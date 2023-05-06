@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Hybrid Component";
+}
+
+<a asp-action="create" asp-controller="product">Create Product</a>
+<br/>
+@model IEnumerable<HybridComponents.Model.Product>
+
+@* вывод таблицы без компонентов *@
+<table class="table w-50 mx-5">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    @foreach (var product in Model) {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+        </tr>
+    }
+</table>
+<hr class="my-5" />
+
+@* обращение к компоненту *@
+<p>
+    @await Component.InvokeAsync("ProductCount")
+</p>
+

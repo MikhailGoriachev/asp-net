@@ -1,0 +1,55 @@
+﻿@model HomeWork.Models.Sale
+
+
+@{
+    ViewBag.Title = ViewBag.IsAdd ? "Добавление продажи" : "Редактирование продажи";
+}
+
+    
+@*Форма для записи*@
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h4 class="text-center">@ViewBag.Title</h4>
+    <form method="post" asp-controller="WholesaleStore" asp-action="@(ViewBag.IsAdd ? "AddSale" : "EditSale")"
+         class="bg-light p-2">
+
+        <input type="hidden" asp-for="Id">
+
+        <div class="mt-2 mb-3">
+            <label asp-for="PurchaseId">Наименование товара</label>
+            <select asp-for="PurchaseId" asp-items="ViewBag.GoodsList" class="form-select" required></select>            
+        </div>
+
+        <div class="mt-2 mb-3">
+            <label asp-for="Seller!.Surname">Фамилия</label>
+            <input type="text" asp-for="Seller!.Surname" asp-page-handler="ViewBag.SellerList" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Seller!.NameSeller">Имя</label>
+            <input type="text" asp-for="Seller!.NameSeller" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Seller!.Patronymic">Отчество</label>
+            <input type="text" asp-for="Seller!.Patronymic" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DateSale">Дата продажи</label>
+            <input type="date" asp-for="DateSale" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PriceSale">Цена продажи товара</label>
+            <input type="number" asp-for="PriceSale" class="form-control" min="0">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AmountSale">Количество</label>
+            <input type="number" asp-for="AmountSale" class="form-control" min="0">            
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="WholesaleStore" asp-action="Sales">Отмена</a>
+    </form>
+</div>

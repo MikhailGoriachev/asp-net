@@ -1,0 +1,39 @@
+﻿@model RoutesForms.Models.Task02.FigureDataModel
+@*
+    Форма редактирования сведений о фигуре
+*@
+@{
+}
+
+@* в форме задаем обработчик *@
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h3 class="text-center">@(Model.Type.Substring(0, 1).ToUpper() + Model.Type.Substring(1)). 
+        @($"Ид. {Model.Id}"). Редактирование сведений</h3>
+    <form class="bg-light p-5"
+          asp-controller="Figures" asp-action="Update" method="post">
+        
+        @* идентификатор фигуры, не меняем, но используем *@
+        <input type="hidden" asp-for="Id" value="@Model.Id"/>       
+        
+        @* тип фигуры, не меняем, но используем *@
+        <input type="hidden" asp-for="Type" value="@Model.Type"/>
+        
+        @* редактируемые поля *@
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="A">Сторона A:</label>
+            <input type="number" asp-for="A" min="0" step="any" class="form-control" required="required"/>
+        </div>
+        <div class="mt-2 mb-3 @(Model.Type == "квадрат"?"d-none":"")">
+            <label class="form-label" asp-for="B">Сторона B:</label>
+            <input type="number" asp-for="B" min="0" step="any" class="form-control" required="required"/>
+        </div>
+        <div class="mt-2 mb-3 @(Model.Type == "треугольник"?"":"d-none")">
+            <label class="form-label" asp-for="C">Сторона C:</label>
+            <input type="number" asp-for="C" min="0" step="any" class="form-control" required="required"/>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <button class="btn btn-secondary" type="reset">Сбросить</button>
+    </form>
+
+</div>

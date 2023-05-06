@@ -1,0 +1,9 @@
+﻿@using ViewComponentsFirst.Components
+@model int
+
+@{
+    ViewBag.Title = "Фотографии пользователя";
+}
+
+@* метод Invoke/InvokeAsync ожидае  параметра с именем, указанным в объекте *@
+@await Component.InvokeAsync(nameof(UserPhotos), new {id = Model})

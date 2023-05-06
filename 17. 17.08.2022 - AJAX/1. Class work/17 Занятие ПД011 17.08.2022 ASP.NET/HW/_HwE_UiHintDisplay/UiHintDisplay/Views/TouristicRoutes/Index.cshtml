@@ -1,0 +1,68 @@
+﻿@model IEnumerable<UiHintDisplay.Models.TouristicRoute>  
+@{
+    ViewBag.Header = "Маршруты";
+
+    // возвращает фамилию и инициалы инструктора
+    string GetInstructor(TouristicRoute touristicRoute) {
+
+        // получить ссылку на сведения об инструкторе по его идентификатору
+        var instructor = (ViewBag.Instructors as List<Instructor>)
+            .Find(i => i.Id == touristicRoute.InstructorId);
+
+        // вернуть фамилию и инициалы инструктора
+        return instructor.ShortName;
+    } // GetInstructor
+}
+
+<h4 class="text-center">@ViewBag.Header</h4>
+
+@* Вывод коллекции сведений о маршрутах *@
+<table class="table table-bordered table-hover w-100 mx-auto">
+    <thead>
+    @*a align-middle выравнивание строки по центру, по вертикали *@
+    @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+    <tr class="bg-light text-black align-middle">
+        <th class="text-end">Ид</th>
+        <th>Начальная точка</th>
+        <th>Промежуточная точка</th>
+        <th>Конечная точка</th>
+        <th>Протяженность, км</th>
+        <th>Сложность</th>
+        <th>Инструктор</th>
+        <th class="text-center">
+            <a class="btn btn-success" asp-controller="TouristicRoutes" asp-action="AddRoute">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var touristicRoute in Model) {
+        @* align-middle выравнивание строки по центру, по вертикали *@
+        @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+        <tr class="align-middle">
+            <td class="text-end">@touristicRoute.Id</td>
+            <td>@touristicRoute.StartPoint</td>
+            <td>@touristicRoute.MiddlePoint</td>
+            <td>@touristicRoute.EndPoint</td>
+            <td class="text-end">@($"{@touristicRoute.Length:n0}")</td>
+            <td class="text-end">@touristicRoute.Complexity</td>
+            <td class="text-end">@GetInstructor(touristicRoute)</td>
+            <td class="text-center">
+                <a class="btn btn-outline-danger" 
+                   asp-controller="TouristicRoutes" 
+                   asp-action="DeleteById" 
+                   asp-route-id="@touristicRoute.Id" title="Удалить">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
+                <a class="btn btn-outline-warning ms-2"
+                   asp-controller="TouristicRoutes"
+                   asp-action="UpdateById"
+                   asp-route-id="@touristicRoute.Id" title="Изменить...">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

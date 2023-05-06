@@ -1,0 +1,10 @@
+﻿@model PartialViews02.Model.ContactsViewModel
+
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<h1>Контакты</h1>
+
+@* Рендеринг частичного представления с передачей данных *@
+@await Html.PartialAsync("_ContactsPartial", Model)

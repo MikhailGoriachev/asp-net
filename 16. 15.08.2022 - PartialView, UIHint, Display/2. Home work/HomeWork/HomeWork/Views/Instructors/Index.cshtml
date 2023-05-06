@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HomeWork.Models.Instructor>
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <table class="table align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+            <th>Категория</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var instructor in Model)
+        {
+            <tr>
+                <td>@instructor.Id</td>
+                <td>@instructor.Surname</td>
+                <td>@instructor.Name</td>
+                <td>@instructor.Patronymic</td>
+                <td>@($"{instructor.DateOfBirth:dd.MM.yyyy}")</td>
+                <td>@instructor.Category</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>

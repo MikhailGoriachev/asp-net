@@ -1,0 +1,30 @@
+﻿@using Home_work.ViewModels
+@model UsersViewModel
+
+@* Вывод коллекции сведений о пользователях *@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Имя пользователя</th>
+        <th>Email</th>
+        <th>Номер телефона</th>
+        <th>Сайт</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (User user in Model.Users)
+    {
+        <tr class="align-middle" >
+            <td class="alignment-center">@user.Id</td>
+            <td class="alignment-center">@user.Name</td>
+            <td class="alignment-center">@user.UserName</td>
+            <td class="alignment-center">@user.Email</td>
+            <td class="alignment-center">@user.Phone</td>
+            <td class="alignment-center">@user.Website</td>
+        </tr>
+    }
+    </tbody>
+</table>

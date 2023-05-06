@@ -1,0 +1,64 @@
+﻿
+@using Home_work.Models.Figures
+@{
+    ViewBag.title = $"Форма редактирования фигуры";
+    ViewBag.PageName = "FigureForm";
+}
+
+
+<section class="section-form">
+
+    <fieldset>
+        <!-- #region Форма для записи -->
+        <form method="post" asp-controller="Figures" asp-action="FormSubmit" class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg">
+
+        <!-- Вывод сообщения об ошибке -->
+        @*@if (@Model.ErrorMessage != null)
+        {
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div>@Model.ErrorMessage</div>
+            </div>
+        }*@
+
+        <!-- Id -->
+        <input type="hidden" name="id" value="@Model.Id">
+
+        <!--Type -->
+        <input type="hidden" name="type" value="@Model.FigureType">
+
+        <label><h4 class="align-middle">@Model.FigureType</h4></label>
+        <!-- Сторона А -->
+        <div class="form-floating my-3 ">
+            <input class="form-control" name="side_a" type="text" value="@Math.Round(Model.A,3)"/>
+            <label>Сторона А</label>
+        </div>
+
+        @if (!Model.FigureType.ToLower().Contains("квадрат"))
+        {
+            <!-- Сторона B -->
+            <div class="form-floating my-3">
+                <input class="form-control" name="side_b" type="text" value="@Math.Round(Model.B,3)"/>
+                <label>Сторона B</label>
+            </div>
+        }
+
+
+        @if (!Model.FigureType.ToLower().Contains("прям") && !Model.FigureType.ToLower().Contains("квад"))
+        {
+            <!-- Сторона C -->
+            <div class="form-floating my-3">
+                <input class="form-control" name="side_c" type="text" value="@Math.Round(Model.C,3)"/>
+                <label>Сторона C</label>
+            </div>
+        }
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="Сохранить"/>
+        <a class="btn btn-danger" asp-controller="Figures" asp-action="Figures">Выход</a>
+
+    </form>
+        <!-- #endregion -->
+    </fieldset>
+
+</section>

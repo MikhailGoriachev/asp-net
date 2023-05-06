@@ -1,0 +1,9 @@
+﻿@using ViewComponentsFirst.Components
+@model int
+
+@{
+    ViewBag.Title = "Список заплпнированных дел пользователя";
+}
+
+
+@await Component.InvokeAsync(nameof(UserToDos), new {id = Model})

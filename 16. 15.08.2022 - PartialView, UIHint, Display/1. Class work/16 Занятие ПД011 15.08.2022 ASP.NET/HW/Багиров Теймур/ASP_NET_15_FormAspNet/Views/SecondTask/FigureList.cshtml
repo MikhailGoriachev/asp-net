@@ -1,0 +1,101 @@
+﻿@using ASP_NET_15_FormAspNet.Models.Figures
+@model dynamic
+
+@section Icons{ 
+   <link rel="shortcut icon" href="/imgs/koi-fish.png" type="image/x-icon" /> 
+} 
+
+@{
+    string Active(string mode) => (string)ViewData["Mode"] == mode ? "" : "outline-";
+    string ActiveNavBar(string mode) => (string)ViewData["Mode"] == mode ? "outline-" : "";
+}
+
+@{ 
+    
+    // вывод фигуры
+    async Task ShowFigure(IFigure figure)
+    {
+        <div class="card col-sm-3 me-3 mb-5 shadow-sm p-0" style="width: 18rem;">
+            <div class="card-header d-flex" style="height: 150px;">
+                <img src="/imgs/figures/@figure.Image" class="my-auto mx-auto d-block mh-100 mw-100"
+                     alt="плоская геометрическая фигура">
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    
+                    @* свойство класса необходимое для реализации методов над коллекцией фигур *@
+                    @* <li class="list-group-item">Ид: <b>@(figure.Id + 1)</b></li> *@
+                    <li class="list-group-item bg-dark bg-opacity-50">Тип фигуры: <b>@figure.Name</b></li>
+                    @foreach (var item in figure.ParamAndValue)
+                    {
+                        <li class="list-group-item">Сторона <span class="text-uppercase">@item.Key</span>: <b>@($"{item.Value:f5}")</b></li>
+                    }
+                    
+                    <li class="list-group-item bg-dark bg-opacity-25">Периметр: <b>@($"{figure.Perimeter:f5}")</b></li>
+                    <li class="list-group-item bg-dark bg-opacity-25">Площадь: <b>@($"{figure.Area:f5}")</b></li>
+                </ul>
+
+            </div>
+            <div class="card-footer">
+                <ul class="list-group">
+                    <a class="btn w-75 m-auto mt-1 mb-1 btn-@Active("Edit")primary"  asp-controller="SecondTask" asp-action="EditFigure" asp-route-id="@figure.Id">Редактировать</a>
+                    <a class="btn w-75 m-auto mt-1 mb-1 btn-@Active("Remove")danger"  asp-controller="SecondTask" asp-action="RemoveFigure" asp-route-id="@figure.Id">Удалить</a>
+                </ul>
+            </div>
+        </div>
+    }
+
+    // вывод коллекции фтигур
+    void ShowFigureList(List<IFigure> figures)  {
+        figures.ForEach(f => ShowFigure(f));
+    }
+ 
+}
+
+
+@* Секция для команд в навигационном меню *@
+@section NavBarCommand{    
+    <li class="nav-item border border-end-0 border-2 rounded-start border-primary border-opacity-75">
+        <a class="nav-link dropdown-toggle" href="#" role="button" 
+           data-bs-toggle="dropdown">Сортировки</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-controller="SecondTask" asp-action="Index">Вывод исходной коллекции</a></li>        
+            <li><a class="dropdown-item" asp-controller="SecondTask" asp-action="OrderByName">Вывод всей коллекции, упорядоченной по типу фигур</a></li>
+            <li><a class="dropdown-item" asp-controller="SecondTask" asp-action="OrderByDescArea">Вывод всей коллекции, упорядоченной по убыванию площади</a></li>
+        </ul>
+    </li>
+
+    <li class="nav-item border border-start-0 border-2 rounded-end border-primary border-opacity-75">
+        <a class="nav-link dropdown-toggle" href="#" role="button"  
+           data-bs-toggle="dropdown">Выборки</a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" asp-controller="SecondTask" asp-action="SelectByTriangle">Выборка треугольников, в обратном порядке по отношению к порядку в коллекции</a></li>
+            <li><a class="dropdown-item" asp-controller="SecondTask" asp-action="SelectBySquare">Выборка квадратов, упорядочивая их по возрастанию периметра</a></li>
+            <li><a class="dropdown-item" asp-controller="SecondTask" asp-action="SelectByRect">Выборка прямоугольников, упорядочивая их по убыванию периметра</a></li>
+        </ul>
+    </li>
+    
+    <a class="btn btn-@ActiveNavBar("Add")success ms-2 ps-5 pe-5 text-white" asp-controller="SecondTask" asp-action="AddFigure">Добавить фигуру</a> 
+
+}
+
+
+<div class="container col-9">
+    
+    <h4>@ViewBag.Title</h4> 
+    
+    <section class="col bg-light shadow-sm border rounded-3 p-5">
+        <h5 class="text-center">@ViewBag.Title</h5>
+        
+        <hr>
+        
+        <div class="container-sm mt-3">
+            <div class="row m-2">
+                <!-- Вывод фигур -->
+                @{
+                    ShowFigureList(Model.Figures);
+                }
+            </div>
+        </div>
+    </section>
+</div>

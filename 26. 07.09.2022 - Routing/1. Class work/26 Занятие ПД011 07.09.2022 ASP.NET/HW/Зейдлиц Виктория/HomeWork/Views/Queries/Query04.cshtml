@@ -1,0 +1,42 @@
+﻿@model IQueryable<HomeWork.Models.Seller>
+
+@{
+    ViewBag.Title = $"Выбирает информацию о продавцах с заданным значением процента комиссионных {ViewBag.Interest}%";
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+@* Выбор информацию о продавцах с заданным значением процента комиссионных *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+        
+        <label class="form-label me-1 lead" for="Interest">Процент: </label>
+        <input type="number" class="form-select-sm me-3 " name="Interest" asp-items="ViewBag.Interest" id="Interest">
+
+        <button class="btn btn-sm btn-outline-info ms-1 align-baseline" type="submit">Выбрать</button>
+    </form>
+</div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Комиссионные,(%)</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var seller in Model)
+    {
+        <tr>            
+            <td>@seller.Id</td>
+            <td>@seller.Surname</td>
+            <td>@seller.NameSeller</td>
+            <td>@seller.Patronymic</td>
+            <td>@seller.Interest</td>
+        </tr>
+    }
+    </tbody>
+</table>

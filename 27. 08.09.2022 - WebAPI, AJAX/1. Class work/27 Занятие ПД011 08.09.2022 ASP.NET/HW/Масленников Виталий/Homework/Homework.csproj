@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="App_Data" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\20220813135024942.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover10.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover11.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover12.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover13.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover14.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover2.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover3.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover4.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover5.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover6.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover7.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover8.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\books\cover9.jpg" />
+    <_ContentIncludedByDefault Remove="Views\Figures\EditFigure.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Figures\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Library\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Task2\Views\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Task1\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Areas\Task2\Views\Home\Index.cshtml" />
+  </ItemGroup>
+
+</Project>

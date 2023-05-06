@@ -1,0 +1,38 @@
+﻿@model IEnumerable<HomeWork.Models.Route>
+
+<table class="table table-hover align-middle">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Страна</th>
+        <th>Цель поездки</th>
+        <th>Стоимость 1 дня пребывания (&#8381;)</th>
+        <th>Транспортные услуги (&#8381;)</th>
+        <th>Оформление визы (&#8381;)</th>
+        <th>
+            <a class="btn btn-success" asp-controller="TouristAgency" asp-action="AddRoute">
+                <i class="bi bi-plus-lg"></i> Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var route in Model)
+    {
+        <tr>
+            <th>@route.Id</th>
+            <td>@route.Country!.Name</td>
+            <td>@route.Objective!.Name</td>
+            <td>@($"{route.DailyCost:n2}")</td>
+            <td>@($"{route.Country.CostService:n2}")</td>
+            <td>@($"{route.Country.CostVisa:n2}")</td>
+            <td>
+                <a class="btn btn-outline-primary" asp-controller="TouristAgency" asp-action="EditRoute" asp-route-id="@route.Id">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

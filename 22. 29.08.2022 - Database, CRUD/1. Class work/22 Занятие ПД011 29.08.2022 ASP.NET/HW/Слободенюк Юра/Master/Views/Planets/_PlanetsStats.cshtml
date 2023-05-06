@@ -1,0 +1,44 @@
+﻿@model IReadOnlyCollection<Master.Models.Planet>
+@{
+    var diameters = @Model
+        .Select(x => int.TryParse(x.Diameter, out var mass) ? mass : (int?)null)
+        .ToArray();
+    var periods = @Model
+        .Select(x => int.TryParse(x.OrbitalPeriod, out var mass) ? mass : (int?)null)
+        .ToArray();
+
+    var minDiameter = diameters.Min();
+    var averageDiameter = diameters.Average();
+    var maxDiameter = diameters.Max();
+    
+    var minPeriod = diameters.Min();
+    var averagePeriod = diameters.Average();
+    var maxPeriod = diameters.Max();
+}
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Минимальный диаметр
+        <span class="badge bg-primary rounded-pill">@minDiameter</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Средний диаметр
+        <span class="badge bg-primary rounded-pill">@averageDiameter</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Максимальный диаметр
+        <span class="badge bg-primary rounded-pill">@maxDiameter</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Минимальный орбитальный период
+        <span class="badge bg-primary rounded-pill">@minPeriod</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Средний орбитальный период
+        <span class="badge bg-primary rounded-pill">@averagePeriod</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Максимальный орбитальный период
+        <span class="badge bg-primary rounded-pill">@maxPeriod</span>
+    </li>
+</ul>

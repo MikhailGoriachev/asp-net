@@ -1,0 +1,60 @@
+﻿@* @model HomeWork.Models.Visit *@
+@* *@
+@* @section Head *@
+@* { *@
+@*     $1$ скрипты валидации #1# *@
+@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> *@
+@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script> *@
+@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script> *@
+@* } *@
+@* *@
+@* @{ *@
+@*     ViewBag.Title = ViewBag.IsAdd ? "Добавление поездки" : "Редактирование поездки"; *@
+@* } *@
+@* *@
+@* *@
+@* <section class="mx-auto my-4 bg-light shadow-sm border rounded-3 h-75 w-50 p-3"> *@
+@*     <h5 class="text-center">@ViewBag.Title</h5> *@
+@* *@
+@*     <hr/> *@
+@*     <!-- #region Форма для записи --> *@
+@*     <form method="post" asp-controller="TouristAgency" asp-action="@(ViewBag.IsAdd ? "AddVisit" : "EditVisit")" *@
+@*           asp-antiforgery="true" class="mx-auto"> *@
+@* *@
+@*         <!-- Id --> *@
+@*         <input asp-for="Id"> *@
+@* *@
+@*         <!-- Клиент --> *@
+@*         <div class="form-floating my-3"> *@
+@*             <select asp-for="ClientId" asp-items="ViewBag.ClientList" class="form-control" placeholder="Клиент"></select> *@
+@*             <label asp-for="ClientId"></label> *@
+@*         </div> *@
+@* *@
+@*         <!-- Маршрут --> *@
+@*         <div class="form-floating my-3"> *@
+@*             <select asp-for="RouteId" asp-items="ViewBag.RouteList" class="form-control" placeholder="Маршрут"></select> *@
+@*             <label asp-for="RouteId">Маршрут</label> *@
+@*         </div> *@
+@* *@
+@*         <!-- Дата начала поездки --> *@
+@*         <div class="form-floating my-3"> *@
+@*             <input asp-for="DateStart" placeholder="Дата поездки" *@
+@*                    value="@($"{DateTime.Now:yyyy-MM-dd}")" class="form-control"> *@
+@*             <label asp-for="DateStart">Дата поездки</label> *@
+@*         </div> *@
+@* *@
+@*         <!-- Длительность поездки --> *@
+@*         <div class="form-floating my-3"> *@
+@*             <input asp-for="Duration" placeholder="Длительность поездки" class="form-control"> *@
+@*             <label asp-for="Duration">Длительность поездки</label> *@
+@*             <span asp-validation-for="Duration" class="text-danger"></span> *@
+@*         </div> *@
+@* *@
+@*         <!-- Кнопки управления --> *@
+@*         <input class="btn btn-success me-2" *@
+@*                type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")"/> *@
+@*         <a class="btn btn-danger" asp-controller="TouristAgency" asp-action="Visits">Выход</a> *@
+@* *@
+@*     </form> *@
+@*     <!-- #endregion --> *@
+@* </section> *@

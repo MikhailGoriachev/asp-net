@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>Справочники - Домашняя Работа</title>
+    
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"/>
+
+    
+    <script src="lib/jquery/jquery-3.6.1.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/references.js"></script>
+
+    <script src="https://kit.fontawesome.com/6bbf14962c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+<header class="container-fluid">
+    <div class="top-bar row align-items-center ps-4">
+        <h1>Справочники</h1>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand-sm navbar-main bg-body sticky-top shadow mb-2">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#appNavbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="appNavbarMain">
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item me-2">
+                    <a href="index.html" class="nav-link" title="Перейти на страницу">
+                        Главная </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="purchases.html" class="nav-link" title="Перейти на страницу">
+                        Закупки </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="sales.html" class="nav-link" title="Перейти на страницу">
+                        Продажи </a>
+                </li>
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link dropdown-toggle active"
+                    data-bs-toggle="dropdown" role="button">
+                    Справочники
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <button class="dropdown-item" id="btnGoods">
+                                Номенклатуры товаров
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item" id="btnUnits">
+                                Единицы измерения</button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item" id="btnSellers">
+                                Продавцы
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="nav-link" title="Перейти на страницу" href="queries.html">
+                        Запросы
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid mh-100 mh-80-vh">
+    <main class="mt-4 mx-5">
+        <div id="output"></div>
+    </main>
+</div>
+
+<footer class="container-fluid">
+    <div class="row align-items-center bg-light h-60-px">
+        <h6 class="text-center">&copy;2022, Масленников Виталий, г. Донецк, КА «ШАГ», ПД011.</h6>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- подключение файла-иконки -->
+    <link rel="shortcut icon" href="~/images/blimp.png" type="image/x-icon">
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    
+    <!-- через CDN подключаем Bootstrap-иконки -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    <!-- собственные стили -->
+    <link rel="stylesheet" href="~/css/style.css" />
+    
+    <!-- скрипты Bootstrap -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">ПД011</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#appNavbar-1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="appNavbar-1">
+                <ul class="navbar-nav">
+                    @* Вывод всех книг *@
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Library" asp-action="Index"
+                           title="Вывод книг библиотеки в исходном порядке">Книги</a>
+                    </li>
+
+                    @* Упорядочивание книг *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Сортировки книг</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Library" asp-action="OrderBy"
+                                   asp-route-key="author">
+                                    Книги по автору
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    asp-controller="Library" asp-action="OrderBy"
+                                    asp-route-key="pub-year">
+                                    Книги по году издания
+                                </a>
+                            </li>                          
+                            <li>
+                                <a class="dropdown-item"
+                                    asp-controller="Library" asp-action="OrderBy"
+                                    asp-route-key="cost-descend">
+                                    Книги по убыванию цены
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    @* Выборка книг *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Выборки книг</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Library" asp-action="Where"
+                                   asp-route-key="max-quantity">
+                                    Максимальное количество
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Library" asp-action="Where"
+                                   asp-route-key="oldest">
+                                    Самые старые
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Library" asp-action="Where"
+                                   asp-route-key="newest">
+                                    Самые новые
+                                </a>
+                            </li>                          
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Library" asp-action="Where"
+                                   asp-route-key="most-expensive">
+                                    Самые дорогие
+                                </a>
+                            </li>                          
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Library" asp-action="Where"
+                                   asp-route-key="most-unexpensive">
+                                    С минимальной ценой
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    @* ----------------------------------------------------------------- *@
+
+                    @* Вывод всех фигур из коллекции *@
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Figures" asp-action="Index"
+                           title="Вывод фигур из коллекции в порядке хранения в файле">
+                            Фигуры
+                        </a>
+                    </li>
+
+                    @* Упорядочивание фмгур по заданию *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Сортировки фигур</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Figures" asp-action="OrderBy" asp-route-key="area-desc">
+                                    Фигуры по убыванию площади
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Figures" asp-action="OrderBy" asp-route-key="type">
+                                    Фигуры по типу
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    @* Выборка фигур *@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown">Выборки фигур</a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Figures" asp-action="Where"
+                                   asp-route-key="squares-perims-ascend">
+                                    Квадраты по возрастанию периметра
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Figures" asp-action="Where"
+                                   asp-route-key="rectangles-perim-descend">
+                                    Прямоугольники по убыванию периметра
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                   asp-controller="Figures" asp-action="Where"
+                                   asp-route-key="triangles-reverse">
+                                    Треугольники в реверсном порядке хранения
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="mt-5 p-1 bg-dark text-white text-center">
+        <h5>КА Шаг, ПД011, Донецк, 2022</h5>
+    </footer>
+</body>
+</html>

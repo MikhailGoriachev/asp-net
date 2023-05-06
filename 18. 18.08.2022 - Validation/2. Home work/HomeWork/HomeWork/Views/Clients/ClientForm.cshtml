@@ -1,0 +1,91 @@
+﻿@model HomeWork.Models.ClientBindingModel
+
+@section Head
+{
+    @* скрипты валидации *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{ ViewBag.Title = ViewBag.IsAdd ? "Добавление клиента" : "Редактирование клиента"; }
+
+<section class="mx-auto my-4 bg-light shadow-sm border rounded-3 h-75 p-3 w-50">
+
+    <form method="post" class="mx-4" asp-controller="Clients"
+          asp-action="@(ViewBag.IsAdd ? "AddClient" : "EditClient")" enctype="multipart/form-data">
+
+        <h4 class="text-center">@ViewBag.Title</h4>
+
+        <hr>
+
+        @* id *@
+        <input asp-for="Id" value="@Model.Id">
+
+        @* фамилия *@
+        <div class="input-group my-3">
+            <label asp-for="Surname" class="input-group-text w-16rem"></label>
+            <input asp-for="Surname" class="form-control">
+            <span asp-validation-for="Surname" class="text-danger w-100"></span>
+        </div>
+
+        @* имя *@
+        <div class="input-group my-3">
+            <label asp-for="Name" class="input-group-text w-16rem"></label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" class="text-danger w-100"></span>
+        </div>
+
+        @* отчество *@
+        <div class="input-group my-3">
+            <label asp-for="Patronymic" class="input-group-text w-16rem"></label>
+            <input asp-for="Patronymic" class="form-control">
+            <span asp-validation-for="Patronymic" class="text-danger w-100"></span>
+        </div>
+
+        @* возраст *@
+        <div class="input-group my-3">
+            <label asp-for="YearsOld" class="input-group-text w-16rem"></label>
+            <input asp-for="YearsOld" class="form-control">
+            <span asp-validation-for="YearsOld" class="text-danger w-100"></span>
+        </div>
+
+        @* номер телефона *@
+        <div class="input-group my-3">
+            <label asp-for="TelNumber" class="input-group-text w-16rem"></label>
+            <input asp-for="TelNumber" class="form-control">
+            <span asp-validation-for="TelNumber" class="text-danger w-100"></span>
+        </div>
+
+        @* адрес электронной посты *@
+        <div class="input-group my-3">
+            <label asp-for="Mail" class="input-group-text w-16rem"></label>
+            <input asp-for="Mail" class="form-control">
+            <span asp-validation-for="Mail" class="text-danger w-100"></span>
+        </div>
+
+        @* название файла *@
+        <input asp-for="ImageFile">
+
+        @* файл с обложной *@
+        <div class="input-group my-3">
+            <label asp-for="FormFile" class="input-group-text w-16rem"></label>
+            <input asp-for="FormFile" type="file" class="form-control px-4 py-3">
+        </div>
+
+        @* постоянный клиент (да/нет) *@
+        <div class="form-check-inline my-3">
+            <label asp-for="IsActive" class="form-check-label"></label>
+            <input asp-for="IsActive" class="form-check-input">
+        </div>
+
+        <hr>
+
+        @* управление *@
+        <div class="d-flex justify-content-end">
+            <input class="btn btn-success w-10rem me-3" type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")">
+            <a class="btn btn-danger w-10rem" asp-controller="Clients" asp-action="Index">Выйти</a>
+        </div>
+    </form>
+
+</section>

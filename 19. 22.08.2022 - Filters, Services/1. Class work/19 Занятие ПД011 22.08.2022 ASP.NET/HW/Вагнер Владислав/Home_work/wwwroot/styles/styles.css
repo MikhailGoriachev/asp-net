@@ -1,0 +1,127 @@
+﻿
+
+.text-Big {
+    font-size: 1.2rem;
+}
+
+/*Главный блок*/
+main {
+    min-height: 90vh;
+}
+
+/*Подвал*/
+footer {
+    z-index: 3;
+    padding: 1.2%;
+    padding-right: 0;
+    color: rgb(149, 151, 152);
+}
+
+/*region Стили для кнопки "вверх"*/
+.up-link {
+    position: fixed;
+    right: 3rem;
+    bottom: 0;
+    z-index: 5;
+    text-decoration: none;
+    display: block;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-style: normal;
+    border-radius: 13px;
+    background: rgba(140, 154, 255,0.42);
+    backdrop-filter: blur(10px);
+    /*box-shadow: 0px 0px 10px 0px #0d0c0c;*/
+    margin-bottom: 1rem;
+}
+
+.up-link:hover {
+        background: royalblue;
+        color: white;
+    }
+
+.up-link img {
+        width: 1.5rem;
+    }
+
+
+/*Общая настройка для абзацев*/
+p.paragraph-settings {
+    margin-left: 5%;
+    font-size: 1.04rem;
+}
+
+/*Вывод задания*/
+details > summary {
+    font-size: 1.1rem;
+    background: rgba(240,240,240,1);
+    border-radius: 18px;
+    padding-top: 1rem;
+    padding-bottom: 0.2rem;
+}
+
+summary::marker {
+    color: rgb(113, 119, 152);
+}
+
+summary {
+    cursor: pointer;
+}
+
+details.task-details {
+    margin-bottom: 0.5rem;
+    background: rgba(240,240,240,1);
+    border-radius: 18px;
+    padding-left: 0.8rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.task-details div {
+    padding: 1rem;
+    padding-top: 0.8rem;
+}
+/*endregion*/
+
+.form-window-body {
+    background: rgb(245 245 245);
+}
+
+/*Секция с формой добавления или редактирования*/
+.section-form{
+    padding-bottom:4%;
+}
+
+.w-10{
+    width: 10%;
+}
+.w-15{
+    width: 15%;
+}
+
+
+.h-8-rem{
+    height: 8rem;
+}
+.h-5-rem{
+    height: 5rem;
+}
+
+.list-group img {
+    width: 10rem;
+}
+
+.alignment-center {
+    text-align: center
+}
+
+
+.input-validation-error {
+    border-color: rgb(250, 12, 12);
+}
+
+.show-password-eye {
+    position: absolute;
+    right: 1%;
+    margin-top: 2%;
+}

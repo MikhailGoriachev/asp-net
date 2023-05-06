@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Mvc.Controllers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@functions {
+    // получить стиль
+    string ActiveStyle(string? controller = null, string? action = null)
+    {
+        if (ViewBag.PageName != null)
+            return ViewBag.PageName == controller ? "active" : "";
+
+        ControllerActionDescriptor actionDescriptor = (ControllerActionDescriptor)ViewContext.ActionDescriptor;
+
+        string curController = actionDescriptor.ControllerName;
+        string curAction = actionDescriptor.ActionName;
+
+        return curController == controller || (curController == controller && curAction == action) ? "active" : "";
+    }
+
+}
+
+<!-- Сортировка маршрутов -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle @ActiveStyle("OrderRoutes")"
+       id="navbarOrderRoutes" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+        Сортировка маршрутов
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarOrderRoutes">
+        <li>
+            <a class="dropdown-item" asp-controller="Routes" asp-action="OrderBy" asp-route-nameHandler="lengthDesc">По убыванию протяженности</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Routes" asp-action="OrderBy" asp-route-nameHandler="lengthAsc">По возрастанию протяженности</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Routes" asp-action="OrderBy" asp-route-nameHandler="difficultyAsc">По возрастанию сложности</a>
+        </li>
+    </ul>
+</li>
+
+<!-- Выборка маршрутов -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle @ActiveStyle("SelectRoutes")"
+       id="navbarSelectRoutes" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+        Выборка маршрутов
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSelectRoutes">
+        <li>
+            <a class="dropdown-item" asp-controller="Routes" asp-action="SelectByStartPoint">По начальному пункту</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Routes" asp-action="SelectByMiddlePoint">По промежуточному пункту</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Routes" asp-action="SelectByRangeLength">По диапазону протяженности</a>
+        </li>
+    </ul>
+</li>

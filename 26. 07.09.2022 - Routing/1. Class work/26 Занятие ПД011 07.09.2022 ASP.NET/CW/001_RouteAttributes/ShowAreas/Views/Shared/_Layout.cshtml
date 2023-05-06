@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="~/images/emotion_smile.png" type="image/x-icon" />
+
+</head>
+<body>
+    <nav>
+        @* тег-хелпера используются для построения маршрутов *@
+        <a asp-area=""  asp-controller="Home" asp-action="Index">Главная</a> |
+        <a asp-area="First" asp-controller="Home" asp-action="Index">Область First</a>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

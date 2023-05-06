@@ -1,0 +1,5 @@
+﻿@model IQueryable<Homework.Models.Country>
+
+<h4>Страны с ценой визы в диапазоне от @ViewBag.MinPrice до @ViewBag.MaxPrice</h4>
+
+@{ await Html.RenderPartialAsync("CountriesTable", Model); }

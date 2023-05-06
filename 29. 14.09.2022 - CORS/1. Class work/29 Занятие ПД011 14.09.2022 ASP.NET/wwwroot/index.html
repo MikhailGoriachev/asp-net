@@ -1,0 +1,293 @@
+﻿<!--
+Для запуска страницы index.html в конфигурационном файле Properties/launchSettings.json
+в секциях "profiles" и "IIS Express" установить параметр launchUrl в "index.html"
+
+"launchUrl": "index.html",
+
+для старта браузера в этих же секциях установить:
+    "launchBrowser": true,
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Клиент WebAPI</title>
+
+    <!-- пример подлючения стиля -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="images/emotion_smile.png" type="image/x-icon" />
+</head>
+<body>
+    <h3>Главная страница - пример использования RESTful API</h3>
+    <ul>
+        <!-- порт зафиксирован в конфигурацонном файле Properties/launchSettings.json -->
+        <li><a href="http://localhost:4242/weatherforecast/get">На метод Get контроллера WeatherForecast</a></li>
+        <li><a href="#" onclick="ajaxGet()">На метод Get контроллера People</a></li>
+        <li><a href="#" onclick="ajaxPost()">Пример метода POST из REST</a></li>
+        <li><a href="#" onclick="ajaxPut()">Пример метода PUT из REST</a></li>
+        <li><a href="#" onclick="ajaxDelete()">Пример метода DELETE из REST</a></li>
+        <li><a href="#" onclick="ajaxGetJson()">Пример метода GET из REST, получение JSON</a></li>
+        <li><a href="#" onclick="ajaxGetWeatherForecastJson()">Получение коллекции JSON из контроллера WeatherForecast</a></li>
+        <li><a href="#" onclick="ajaxGetHtml()">Получение разметки HTML</a></li>
+    </ul>
+    
+<!-- 
+    контейнер для данных и разметки со мтороны сервера
+    эьл и есть SPA (Single Page Applicationw)
+-->
+<h3>Полученные данные:</h3>
+    <div id="output">
+
+    </div>
+
+
+    <script>
+        // все функции однотипные, как упростить код - подумайте :)
+        // данные для отправки на сервер
+        let id = 1000;
+        let fullName = "Шавыркина Б.П.";
+        let age = 29;
+
+        // вызов сервера с методом GET
+        function ajaxGet() {
+            // XNLHttpRequest это и есть реализация AJAX в JavaScript
+            let request = new XMLHttpRequest();
+
+            // формально требуется тело запроса, т.к. перелдача через параметры, тело пустое
+            let body = "";
+
+            // настройка и отправка AJAX-запроса на сервер
+            request.open("GET", "http://localhost:4242/people/get");
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // callBack, работающий по окончании запроса
+            request.onreadystatechange = function () {
+                // если запрос завершен и завершен корректно вывести полученные от сервера данные
+                if (request.readyState === 4 && request.status === 200) {
+                    document.getElementById("output").innerHTML = request.responseText;
+                } // if
+            } // callBack
+
+            // собственно отправка запроса
+            request.send(body);
+
+            document.getElementById("output").innerHTML = "<h4>GET-запрос отправлен</h4>"
+            console.log("GET-запрос отправлен");
+        } // ajaxGet
+
+
+        // вызов сервера с методом POST
+        function ajaxPost() {
+            // XNLHttpRequest это и есть реализация AJAX в JavaScript
+            let request = new XMLHttpRequest();
+
+            id += 100;
+            age += 10;
+
+            // формально требуется тело запроса, т.к. перелдача через параметры, тело пустое
+            let body = "";
+
+            // настройка и отправка AJAX-запроса на сервер
+            request.open("POST", `http://localhost:4242/people/post/${id}/${fullName}/${age}`);
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // callBack, работающий по окончании запроса
+            request.onreadystatechange = function () {
+                // если запрос завершен и завершен корректно вывести полученные от сервера данные
+                if (request.readyState === 4 && request.status === 200) {
+                    document.getElementById("output").innerHTML = request.responseText;
+                } // if
+            } // callBack
+
+            // собственно отправка запроса
+            request.send(body);
+
+            document.getElementById("output").innerHTML = "<h4>POST-запрос отправлен</h4>"
+            console.log("POST-запрос отправлен");
+        } // ajaxPost
+
+
+        // вызов сервера с методом PUT
+        function ajaxPut() {
+            // XNLHttpRequest это и есть реализация AJAX в JavaScript
+            let request = new XMLHttpRequest();
+
+            // имитация создвания нового объекта Person
+            id = 1010;
+            fullName = "Уотни Марк";
+            age = 42;
+
+            // формально требуется тело запроса, т.к. перелдача через параметры, тело пустое
+            let body = "";
+
+            // настройка и отправка AJAX-запроса на сервер
+            request.open("PUT", `http://localhost:4242/people/put/${id}/${fullName}/${age}`);
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // callBack, работающий по окончании запроса
+            request.onreadystatechange = function () {
+                // если запрос завершен и завершен корректно вывести полученные от сервера данные
+                if (request.readyState === 4 && request.status === 200) {
+                    document.getElementById("output").innerHTML = request.responseText;
+                } // if
+            } // callBack
+
+            // собственно отправка запроса
+            request.send(body);
+
+            document.getElementById("output").innerHTML = "<h4>PUT-запрос отправлен</h4>"
+            console.log("PUT-запрос отправлен");
+        } // ajaxPut
+
+
+        // вызов сервера с методом DELETE
+        function ajaxDelete() {
+            // XNLHttpRequest это и есть реализация AJAX в JavaScript
+            let request = new XMLHttpRequest();
+
+            // имитация выбора объекта для удаления на стороне сервера
+            id = 1022;
+
+            // формально требуется тело запроса, т.к. перелдача через параметры, тело пустое
+            let body = "";
+
+            // настройка и отправка AJAX-запроса на сервер
+            request.open("DELETE", `http://localhost:4242/people/delete/${id}`);
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // callBack, работающий по окончании запроса
+            request.onreadystatechange = function () {
+                // если запрос завершен и завершен корректно вывести полученные от сервера данные
+                if (request.readyState === 4 && request.status === 200) {
+                    document.getElementById("output").innerHTML = request.responseText;
+                } // if
+            } // callBack
+
+            // собственно отправка запроса
+            request.send(body);
+
+            document.getElementById("output").innerHTML = "<h4>DELETE-запрос отправлен</h4>"
+            console.log("DELETE-запрос отправлен");
+        } // ajaxDelete
+
+
+        // -------------------------------------------------------------------------------------
+        // добавлено после занятия, по мотивам предыдущих занятий
+        // вызов сервера с методом GET, получение JSON
+        function ajaxGetJson() {
+            // XNLHttpRequest это и есть реализация AJAX в JavaScript
+            let request = new XMLHttpRequest();
+
+            // формально требуется тело запроса, т.к. перелдача через параметры, тело пустое
+            let body = "";
+
+            // настройка и отправка AJAX-запроса на сервер
+            request.open("GET", "http://localhost:4242/people/getPerson");
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // callBack, работающий по окончании запроса
+            request.onreadystatechange = function () {
+                // если запрос завершен и завершен корректно вывести полученные от сервера данные
+                if (request.readyState == 4 && request.status == 200) {
+                    // распарсим JSON в объект и выведем его в output
+                    let person = JSON.parse(request.response);
+                    console.log(person);
+                    document.getElementById("output").innerHTML = `
+                        <ul>
+                            <li>Ид: ${person.id}</li>
+                            <li>Полное имя: ${person.fullname}</li>
+                            <li>Возраст: ${person.age}</li>
+                        </ul>
+                    `;
+                } // if
+            } // callBack
+
+            // собственно отправка запроса
+            request.send(body);
+
+            document.getElementById("output").innerHTML = "<h4>GET-запрос отправлен</h4>"
+            console.log("GET-запрос отправлен");
+        } // ajaxGetJson
+
+
+        // -------------------------------------------------------------------------------------
+        // добавлено после занятия, по материалу предыдущих занятий
+        // вызов сервера с методом GET, получение JSON-коллекции
+        function ajaxGetWeatherForecastJson() {
+            // XNLHttpRequest это и есть реализация AJAX в JavaScript
+            let request = new XMLHttpRequest();
+
+            // формально требуется тело запроса, т.к. перелдача через параметры, тело пустое
+            let body = "";
+
+            // настройка и отправка AJAX-запроса на сервер
+            request.open("GET", "http://localhost:4242/weatherforecast/get");
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // callBack, работающий по окончании запроса
+            request.onreadystatechange = function () {
+                // если запрос завершен и завершен корректно вывести полученные от сервера данные
+                if (request.readyState === 4 && request.status === 200) {
+                    // распарсим JSON в объект и выведем его в output
+                    let weatherForecast = JSON.parse(request.response);
+                    console.log(weatherForecast);
+
+                    let tableResult = '<table><tr><th>date</th><th>temperatureC</th><th>temperatureF</th><th>summary</th></tr>'
+                    weatherForecast.forEach(w => tableResult += `
+                            <tr>
+                                <td>${w.date}</td>
+                                <td>${w.temperatureC}</td>
+                                <td>${w.temperatureF}</td>
+                                <td>${w.summary}</td>
+                            </tr>`);
+                    tableResult += '</table>';
+
+                    document.getElementById("output").innerHTML = tableResult;
+                } // if
+            } // callBack
+
+            // собственно отправка запроса
+            request.send(body);
+
+            document.getElementById("output").innerHTML = "<h4>GET-запрос отправлен</h4>"
+            console.log("GET-запрос отправлен");
+        } // ajaxGetWeatherForecastJson
+
+
+        // -------------------------------------------------------------------------------------
+        // добавлено после занятия, по материалу предыдущих занятий
+        // вызов сервера с методом GET, получение HTML-разметки, ничем не отличается
+        // от получения строки, поскольку разметка строкой и является
+        function ajaxGetHtml() {
+            // XNLHttpRequest это и есть реализация AJAX в JavaScript
+            let request = new XMLHttpRequest();
+
+            // формально требуется тело запроса, т.к. перелдача через параметры, тело пустое
+            let body = "";
+
+            // настройка и отправка AJAX-запроса на сервер
+            request.open("GET", "http://localhost:4242/people/getPersonHtml");
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            // callBack, работающий по окончании запроса
+            request.onreadystatechange = function () {
+                // если запрос завершен и завершен корректно вывести полученные от сервера данные
+                if (request.readyState === 4 && request.status === 200) {
+                    document.getElementById("output").innerHTML = request.responseText;
+                } // if
+            } // callBack
+
+            // собственно отправка запроса
+            request.send(body);
+
+            document.getElementById("output").innerHTML = "<h4>GET-запрос отправлен</h4>"
+            console.log("GET-запрос отправлен");
+        } // ajaxGetHtml
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<HomeWork.Models.Instructor>
+
+@section Head
+{
+    <script src="~/js/instructorInfo.js"></script>
+}
+
+@section NavBar
+{
+    @await Html.PartialAsync("_InstructorsNavBarView")
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    @* Рендер таблицы *@
+    @await Html.PartialAsync("_IntructorsTableView", Model)
+
+</section>

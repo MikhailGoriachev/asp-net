@@ -1,0 +1,67 @@
+﻿@model HomeWork.Models.Person
+
+<h4 class="text-center text-white">Подробная информация о персонаже</h4>
+
+@* ID *@
+<div class="input-group my-4">
+    <label asp-for="Id" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Id" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* имя *@
+<div class="input-group my-4">
+    <label asp-for="Name" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Name" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* рост *@
+<div class="input-group my-4">
+    <label asp-for="Height" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Height" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* масса *@
+<div class="input-group my-4">
+    <label asp-for="Mass" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Mass" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* цвет волос *@
+<div class="input-group my-4">
+    <label asp-for="HairColor" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="HairColor" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* цвет кожи *@
+<div class="input-group my-4">
+    <label asp-for="SkinColor" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="SkinColor" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* цвет глаз *@
+<div class="input-group my-4">
+    <label asp-for="EyeColor" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="EyeColor" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* год рождения *@
+<div class="input-group my-4">
+    <label asp-for="BirthYear" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="BirthYear" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* пол *@
+<div class="input-group my-4">
+    <label asp-for="Gender" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="Gender" class="form-control text-white bg-dark" readonly>
+</div>
+
+@* родной мир *@
+<div class="input-group my-4">
+    <label asp-for="HomeWorld" class="w-10rem form-control text-white bg-secondary"></label>
+    <input asp-for="HomeWorld" class="form-control text-white bg-dark" readonly>
+</div>
+
+<div class="my-4 w-100">
+    <a class="btn btn-outline-primary d-block w-18rem mx-auto" asp-controller="People" asp-action="Index">Вернуться к списку</a>
+</div>

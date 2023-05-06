@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HomeWork.Models.Seller>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Комиссионные,(%)</th>
+        <th>
+           <a class="btn btn-success" asp-controller="WholesaleStore" asp-action="AddSeller">
+                <i class="bi bi-plus-lg"></i> Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var seller in Model)
+    {
+        <tr>            
+            <td>@seller.Id</td>
+            <td>@seller.Surname</td>
+            <td>@seller.NameSeller</td>
+            <td>@seller.Patronymic</td>
+            <td>@seller.Interest</td>
+            <td>
+                <a class="btn btn-outline-primary" asp-controller="WholesaleStore" asp-action="EditSeller" asp-route-id="@seller.Id">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

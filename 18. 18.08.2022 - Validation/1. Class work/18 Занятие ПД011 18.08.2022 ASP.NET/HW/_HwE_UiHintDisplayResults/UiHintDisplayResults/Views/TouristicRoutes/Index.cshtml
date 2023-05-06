@@ -1,0 +1,175 @@
+﻿@model IEnumerable<UiHintDisplayResults.Models.TouristicRoute>  
+@{
+    ViewBag.Title = "Маршруты";
+
+    // возвращает фамилию и инициалы инструктора
+    string GetInstructor(TouristicRoute touristicRoute) {
+
+        // получить ссылку на сведения об инструкторе по его идентификатору
+        var instructor = (ViewBag.Instructors as List<Instructor>)
+            .Find(i => i.Id == touristicRoute.InstructorId);
+
+        // вернуть фамилию и инициалы инструктора
+        return instructor.ShortName;
+    } // GetInstructor
+}
+
+<h4 class="text-center">@ViewBag.Header</h4>
+
+@* Вывод коллекции сведений о маршрутах *@
+<table class="table table-bordered table-hover w-100 mx-auto">
+    <thead>
+    @*a align-middle выравнивание строки по центру, по вертикали *@
+    @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+    <tr class="bg-light text-black align-middle">
+        <th class="text-end">Ид</th>
+        <th>Начальная точка</th>
+        <th>Промежуточная точка</th>
+        <th>Конечная точка</th>
+        <th>Протяженность, км</th>
+        <th>Сложность</th>
+        <th>Инструктор</th>
+        <th class="text-center">
+            <a class="btn btn-success" asp-controller="TouristicRoutes" asp-action="AddRoute">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var touristicRoute in Model) {
+        @* align-middle выравнивание строки по центру, по вертикали *@
+        @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+        <tr class="align-middle">
+            <td class="text-end">@touristicRoute.Id</td>
+            <td>@touristicRoute.StartPoint</td>
+            <td>@touristicRoute.MiddlePoint</td>
+            <td>@touristicRoute.EndPoint</td>
+            <td class="text-end px-5">@($"{@touristicRoute.Length:n0}")</td>
+            <td class="px-5">@touristicRoute.Complexity</td>
+            <td>@GetInstructor(touristicRoute)</td>
+            <td class="text-center">
+                <a class="btn btn-outline-primary ms-2"
+                   asp-controller="TouristicRoutes"
+                   asp-action="UpdateById"
+                   asp-route-id="@touristicRoute.Id" title="Изменить...">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-outline-danger"
+                   asp-controller="TouristicRoutes"
+                   asp-action="DeleteById"
+                   asp-route-id="@touristicRoute.Id" title="Удалить">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@* 
+Рендерим форму ввода параметра выборки маршрутов - начальный пункт маршрута
+Форма модальная, т.е. ее разметка может быть размещена в произвольном месте, 
+форма вызывается на клиенте, за счет JS-кода Bootstrap, по клику на пункт меню
+в навигационной панели
+панели
+*@
+<div id="get-start-point" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Параметр выборки</h4>
+            </div>
+            
+            <div class="modal-body">
+                <form id="form-start-point" class="p-3"
+                      asp-controller="TouristicRoutes" asp-action="Where" asp-route-key="start-point">
+                    @* список городов - пунктов маршрута *@
+                    <div class="mb-3">
+                        <label class="form-label" for="start-point">Начальный пункт маршрута:</label> 
+                        <select class="form-select" id="start-point" name="startPoint"
+                                asp-items="@ViewBag.SelectStartPoints">
+                        </select>
+                    </div>
+                </form>  
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="form-start-point">Выбрать</button>                                       <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 
+Рендерим форму ввода параметра выборки маршрутов - промежуточный пункт маршрута
+Форма модальная, т.е. ее разметка может быть размещена в произвольном месте, 
+форма вызывается на клиенте, за счет JS-кода Bootstrap, по клику на пункт меню
+в навигационной панели
+*@
+<div id="get-middle-point" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Параметр выборки</h4>
+            </div>
+            
+            <div class="modal-body">
+                <form id="form-middle-point" class="p-3"
+                      asp-controller="TouristicRoutes" asp-action="Where" asp-route-key="middle-point">
+                    @* список городов - пунктов маршрута *@
+                    <div class="mb-3">
+                        <label class="form-label" for="middle-point">Промежуточный пункт маршрута:</label> 
+                        <select class="form-select" id="middle-point" name="middlePoint"
+                                asp-items="@ViewBag.SelectMiddlePoints">
+                        </select>
+                    </div>
+                </form>  
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="form-middle-point">Выбрать</button>                                       <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* 
+Рендерим форму ввода параметра выборки маршрутов - промежуточный пункт маршрута
+Форма модальная, т.е. ее разметка может быть размещена в произвольном месте, 
+форма вызывается на клиенте, за счет JS-кода Bootstrap, по клику на пункт меню
+в навигационной панели
+*@
+<div id="get-range" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Параметры выборки</h4>
+            </div>
+            
+            <div class="modal-body">
+                <form id="form-length-range" class="p-3"
+                      asp-controller="TouristicRoutes" asp-action="Where" asp-route-key="length-in-range">
+                    @* начальное значение интервала *@
+                    <div class="my-3">
+                        <label class="form-label" for="from-length">Нижнее значение протяженности, км:</label> 
+                        <input id="from-length" name="fromLength" class="form-control" type="number" value="0" step="1" min="0" />
+                    </div>      
+                    @* начальное значение интервала *@
+                    <div class="mb-3">
+                        <label class="form-label" for="to-length">Верхнее значение протяженности, км:</label> 
+                        <input id="to-length" name="toLength" class="form-control" type="number" value="0" step="1" min="0" />
+                    </div>
+                </form>  
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="form-length-range">Выбрать</button>                                       <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>

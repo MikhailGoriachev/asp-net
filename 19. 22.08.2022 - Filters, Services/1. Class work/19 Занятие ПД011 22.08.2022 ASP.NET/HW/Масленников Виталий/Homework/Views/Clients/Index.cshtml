@@ -1,0 +1,192 @@
+﻿@using Homework.Models.TravelCompany
+@model Homework.Models.ViewModels.ClientsIndexViewModel
+
+@{
+    ViewBag.Title = "Клиенты";
+    Layout = "_Layout";
+}
+
+
+@*Панель кнопок для фильтрации/выборки*@
+<div class="navbar">
+    <div class="container-fluid justify-content-start gap-2">
+        <div class="d-flex gap-2">
+            <a asp-controller="Clients"
+               asp-action="Index"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод коллекции в исходном порядке">
+                исходные данные
+            </a>
+            <a asp-controller="Clients"
+               asp-action="OrderBy"
+               asp-route-property="@nameof(Client.ShortName)"
+               asp-route-sort="Asc"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод коллекции упорядоченной в алфавитном порядке">
+                в алфавитном порядке <i class="fa-solid fa-sort-up align-bottom"></i>
+            </a>
+            <a asp-controller="Clients"
+               asp-action="OrderBy"
+               asp-route-property="@nameof(Client.Age)"
+               asp-route-sort="Desc"
+               class="btn btn-sm btn-outline-secondary"
+               title="вывод коллекции в порядке убывания возраста">
+                возраст <i class="fa-solid fa-sort-down align-top"></i>
+            </a>
+        </div>
+        <div class="vl ms-3"></div>
+        <button type="button" class="btn btn-sm btn-secondary ms-3" data-bs-toggle="modal" data-bs-target="#modalFilter">
+            Фильтр
+        </button>
+
+    </div>
+</div>
+
+
+@*Модальное окно выбора фильтра*@
+<div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Выбор фильтрации</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid ">
+                    <form asp-action="WhereRegular" class="row align-items-baseline">
+                        <div class="col d-flex justify-content-start align-items-center">
+                            <label asp-for="RegularityOptions" class="fs-form-title"></label>
+                            <select name="regularity" asp-items="Model!.RegularityOptions"
+                                    class="form-control-sm ms-2 w-200-px">
+                            </select>
+                            <button class="btn btn-sm btn-primary ms-auto" type="submit"> Показать</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="container-fluid justify-content-start gap-2 mt-3">
+                    <form asp-action="WhereSurname" class="row align-items-center ">
+                        <div class="col d-flex align-items-center">
+                            <label asp-for="@Model!.Surname" class="fs-form-title"></label>
+                            <input asp-for="@Model!.Surname"  class="form-control-sm ms-3 w-200-px">
+                            <button class="btn btn-sm btn-primary ms-auto" type="submit"> Показать</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container-fluid justify-content-start gap-2 mt-3">
+                    <form asp-action="WhereAge" class="row align-items-center g-3">
+                        <div class="col d-flex justify-content-start align-items-center">
+                            <span class="fs-form-title">Возраст:</span>
+                            <div class="col-2 ms-4">
+                                <label asp-for="@Model!.AgeMin" class="fs-form-title w-40-px"></label>
+                                <input asp-for="@Model!.AgeMin" name="from" class="form-control"/>
+                            </div>
+                            <div class="col-2 ms-2">
+                                <label asp-for="@Model!.AgeMax" class="fs-form-title"></label>
+                                <input asp-for="@Model!.AgeMax" name="to" class="form-control"/>
+                            </div>
+                            <button class="btn btn-sm btn-primary ms-auto" type="submit"> Показать</button>
+                        </div>
+                        <span asp-validation-for="@Model!.Surname" class="text-danger"></span>
+                        <span asp-validation-for="@Model!.AgeMin" class="text-danger"></span>
+                        <span asp-validation-for="@Model!.AgeMax" class="text-danger"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table mt-4 text-center" id="clientsTable">
+    <thead class="border-dark">
+    <tr>
+        <th>Id</th>
+        <th>Фото</th>
+        <th>Фамилия И.О.</th>
+        <th>Возраст</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Постоянный</th>
+        <th>
+            <a class="btn btn-primary btn-sm" asp-controller="Clients" asp-action="AddClient">
+                Добавить
+            </a>
+        </th>
+
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var client in Model!.Clients!)
+    {
+        <tr>
+            <td>@client.Id</td>
+            <td>
+                <img src="~/images/clients/@client.Photo" alt="@client.ShortName">
+            </td>
+            <td>@client.ShortName</td>
+            <td>@client.Age</td>
+            <td>@client.Email</td>
+            <td>@client.PhoneNumber</td>
+            <td>@(client.IsRegular ? "Да" : "Нет")</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary ms-2"
+                        data-id="@client.Id" title="Информация о клиенте"
+                        data-bs-toggle="modal" data-bs-target="#clientInfoModal">
+                    <i class="fa fa-info-circle" data-id="@client.Id" aria-hidden="true"></i>
+                </button>
+                <a asp-controller="Clients" asp-action="EditClient"
+                   class="btn btn-sm btn-outline-primary ms-2"
+                   asp-route-id="@client.Id" title="Редактировать данные">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+
+                <a asp-controller="Clients" asp-action="RemoveClient" asp-route-id="@client.Id"
+                   class="btn btn-sm btn-outline-danger ms-2" title="Удалить данные">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@*Модальное окно с информацией о клиенте*@
+<div class="modal fade" id="clientInfoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Информация о клиенте</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card m-1 p-1">
+                    <div class="card-header">
+                        <p class="d-flex justify-content-between">Клиент: <strong id="shortName"></strong></p>
+                    </div>
+                    <div class="card-body bg-light">
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between">Id: <strong id="id"></strong></li>
+                            <li class="d-flex justify-content-between">Фамилия: <strong id="surname"></strong></li>
+                            <li class="d-flex justify-content-between">Имя: <strong id="name"></strong></li>
+                            <li class="d-flex justify-content-between">Отчество: <strong id="patronymic"></strong></li>
+                            <li class="d-flex justify-content-between">Возраст: <strong id="age"></strong></li>
+                            <li class="d-flex justify-content-between">Телефон: <strong id="phone"></strong></li>
+                            <li class="d-flex justify-content-between">Электронная почта: <strong id="email"></strong></li>
+                            <li class="d-flex justify-content-between">Постоянный клиент: <strong id="regular"></strong></li>
+                            <li class="d-flex justify-content-between">Пароль: <strong id="password"></strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/clientInfo.js"></script>

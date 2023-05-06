@@ -1,0 +1,106 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="App_Data" />
+      <Folder Include="Models\" />
+      <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.8" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Task1\Expression1.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Task1\Expression2.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Task2\Workers.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Library\BookForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Library\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Figures\FigureForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Figures\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-1.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-2.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-3.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-4.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-5.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-6.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-7.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-8.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-path-programmer.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\book-samurai.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\books\default-book.jpg" />
+      <_ContentIncludedByDefault Remove="Views\Clients\ClientForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Clients\ClientPasswordForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Clients\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Clients\OrderBy.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Clients\SelectByActive.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Clients\SelectByRangeYearsOld.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Clients\SelectBySurname.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Instructors\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Instructors\InstructorForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Instructors\SelectByCategory.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Routes\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Routes\RouteForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Routes\SelectByMiddlePoint.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Routes\SelectByRangeLength.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Routes\SelectByStartPoint.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\default-client.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_001.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_002.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_003.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_004.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_005.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_006.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_007.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_008.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_009.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\female_010.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_001.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_002.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_003.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_004.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_005.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_006.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_007.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_008.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_009.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\persons\male_010.jpg" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\UserPhotosComponent\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\UserPostsComponent\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\UsersComponent\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\UserTodosComponent\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Components\Query06Component\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Components\Query07Component\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Components\Query08Component\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Queries\Filter.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Queries\Query04.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Queries\Query05.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Queries\Query06.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Queries\Query07.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Queries\Query08.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\Query06Component\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\Query07Component\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\Query08Component\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\ClientForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\Clients.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\Countries.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\Objectives.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\RouteForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\Routes.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\VisitForm.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TouristAgency\Visits.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Forms\GoodsForm.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Purchases\FilterBy.cshtml" />
+    </ItemGroup>
+
+</Project>

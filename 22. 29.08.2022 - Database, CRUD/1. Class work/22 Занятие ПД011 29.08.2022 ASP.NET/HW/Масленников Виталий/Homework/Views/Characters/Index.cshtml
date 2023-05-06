@@ -1,0 +1,13 @@
+﻿@model SelectList
+
+@{
+    ViewBag.Title = "Персонажи";
+    Layout = "_Layout";
+}
+
+@{ await Html.RenderPartialAsync("Controls", Model); }
+
+@*<vc:sw-characters amount="@ViewBag.CharactersToShow"/>*@
+
+@await Component.InvokeAsync(ViewBag.Component, ViewBag.ComponentParameters)
+

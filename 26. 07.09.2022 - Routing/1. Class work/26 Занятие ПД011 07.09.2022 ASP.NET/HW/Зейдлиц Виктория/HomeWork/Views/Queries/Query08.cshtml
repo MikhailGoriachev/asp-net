@@ -1,0 +1,29 @@
+﻿@model IQueryable<HomeWork.Models.Queries.Query08Result>
+
+@{
+    ViewBag.Title = "Для каждого наименования товара вычисляет среднюю цену закупки товара, количество закупок";
+
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+@* Вывод выборки данных *@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Наименование товара</th>
+        <th>Количество закупки</th>
+        <th>Средняя цена закупки</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>@item.GoodsName</td>
+                <td>@item.AmoutPurchase</td>
+                <td>@($"{item.AvgPurchase:n2}") &#8381</td>               
+            </tr>
+        }
+    </tbody>
+</table>

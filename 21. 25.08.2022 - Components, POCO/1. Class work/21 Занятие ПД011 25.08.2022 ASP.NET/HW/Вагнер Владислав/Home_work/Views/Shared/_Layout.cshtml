@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Mvc.Controllers;
+
+@functions {
+
+    string IsActive(string page) => ViewBag.PageName.ToLower() == page.ToLower() ? "active":"";
+    
+    bool IsCurrPage(string page)
+        =>ViewBag.PageName.ToLower() == page.ToLower() ;
+
+    string IsDefault()
+    {
+        return ViewBag.IsDefault ?? false ? "active" : "";
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.title</title>
+
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/styles/styles.css">
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Head",false)
+
+    <!--Подключение удалённого шрифта через репозиторий Google Fonts-->
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap'>
+
+</head>
+<body>
+
+    @*Navbar*@
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home work</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link ms-3 @IsActive("Index")" asp-controller="Home" asp-action="Index">Главная</a>
+                </li>
+
+                <!-- Пользователи -->
+                <li class="nav-item">
+                    <a class="nav-link ms-3 @IsActive("Users")" asp-controller="Tasks" asp-action="Users">Пользователи</a>
+                </li>
+
+                <!-- Посты пользоватаелей -->
+                <li class="nav-item">
+                    <a class="nav-link ms-3 @IsActive("UserPosts")" asp-controller="Tasks" asp-action="UsersPosts">Посты</a>
+                </li>
+
+                <!-- Альбом пользователя -->
+                <li class="nav-item">
+                    <a class="nav-link ms-3 @IsActive("UserAlbum")" asp-controller="Tasks" asp-action="UsersAlbum">Альбом</a>
+                </li>
+                <!-- Список дел пользователя -->
+                <li class="nav-item">
+                    <a class="nav-link ms-3 @IsActive("UsersTodo")" title="Список задачь пользователя" asp-controller="Tasks" asp-action="UsersTodo">Список задач</a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+    </nav>
+    <main class="container mt-5">
+            @RenderBody()
+    </main>
+
+    <footer class="bg-dark">
+        <b>Разработчик:</b> Вагнер Владислав
+        <b><br>Группа:</b> ПД011
+        <b><br>Город:</b> Донецкая область,Макеевка.
+        <b><br>Год разработки:</b> 2022
+    </footer>
+    @RenderSection("JqueryFiles",false)
+</body>
+</html>

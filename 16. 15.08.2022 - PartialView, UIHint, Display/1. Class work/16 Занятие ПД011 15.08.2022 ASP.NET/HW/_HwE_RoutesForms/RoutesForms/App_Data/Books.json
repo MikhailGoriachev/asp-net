@@ -1,0 +1,65 @@
+﻿[
+  {
+    "Id": 1,
+    "Author": "Бейтс К.",
+    "Title": "Как программировать на Java",
+    "PubYear": 2012,
+    "Quantity": 5,
+    "Cost": 880,
+    "Cover": "cover001.jpg"
+  },
+  {
+    "Id": 2,
+    "Author": "Васильев А.Н.",
+    "Title": "Как программировать на JavaScript",
+    "PubYear": 2019,
+    "Quantity": 2,
+    "Cost": 780,
+    "Cover": "cover002.jpg"
+  },
+  {
+    "Id": 3,
+    "Author": "Радченко М.С.",
+    "Title": "1С:Предприятие 8.3. Разработка приложений",
+    "PubYear": 2013,
+    "Quantity": 5,
+    "Cost": 450,
+    "Cover": "cover003.jpg"
+  },
+  {
+    "Id": 4,
+    "Author": "Гальярди В.",
+    "Title": "Раздельный Django",
+    "PubYear": 2022,
+    "Quantity": 6,
+    "Cost": 630,
+    "Cover": "cover004.jpg"
+  },
+  {
+    "Id": 5,
+    "Author": "Троелсен Э.",
+    "Title": "Язык C# 9. Платформа .NET 5",
+    "PubYear": 2021,
+    "Quantity": 8,
+    "Cost": 1200,
+    "Cover": "cover005.jpg"
+  },
+  {
+    "Id": 8,
+    "Author": "Кузнецов В.М.",
+    "Title": "PHP 7. Самоучитель",
+    "PubYear": 2019,
+    "Quantity": 1,
+    "Cost": 900,
+    "Cover": "cover008.jpg"
+  },
+  {
+    "Id": 10,
+    "Author": "МакФарланд Д.",
+    "Title": "JavaScript и jQuery",
+    "PubYear": 2022,
+    "Quantity": 9,
+    "Cost": 980,
+    "Cover": "cover010.jpg"
+  }
+]

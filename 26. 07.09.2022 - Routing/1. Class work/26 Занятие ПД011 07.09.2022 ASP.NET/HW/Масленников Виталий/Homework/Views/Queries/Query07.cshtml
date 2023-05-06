@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Homework.TagHelpers
+@model IOrderedEnumerable<Homework.Models.Queries.Query07Result>
+
+@{
+    ViewBag.Title = "Запрос с вычисляемыми полями";
+    Layout = "_Layout";
+}
+
+<h4 class="text-center color-1">Прибыль от продажи за каждый проданный товар</h4>
+
+@* Вывод выборки данных *@
+
+<table class="table table-striped">
+    <thead class="border-dark">
+    <tr>
+        <th>Дата продажи</th>
+        <th>Наименование товара</th>
+        <th>Цена закупки</th>
+        <th>Цена продажи</th>
+        <th>Количество</th>
+        <th>Прибыль</th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+        @foreach (var sale in Model) {
+            <tr>
+                <td>@($"{sale.SellDate:dd/MM/yyyy}")</td>
+                <td>@sale.ProductName</td>
+                <td>@sale.PurchasePrice</td>
+                <td>@sale.SellPrice</td>
+                <td>@sale.Amount</td>
+                <td>@sale.Profit</td>
+            </tr>
+        }
+    </tbody>
+</table>

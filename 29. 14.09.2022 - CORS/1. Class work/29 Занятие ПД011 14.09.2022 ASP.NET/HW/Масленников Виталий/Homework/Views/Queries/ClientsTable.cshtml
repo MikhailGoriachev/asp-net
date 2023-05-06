@@ -1,0 +1,28 @@
+﻿@model IQueryable<Homework.Models.Client>
+
+
+@* Таблица с данными *@
+<table class="table text-start">
+    <thead class="fw-bold align-top">
+    <tr>
+        <td>Фамилия</td>
+        <td>Имя</td>
+        <td>Отчество</td>
+        <td>Паспорт</td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model is not null && Model.AsEnumerable().Any()){
+        @foreach (var client in Model){
+            <tr>
+                <td>@client.Surname</td>
+                <td>@client.Name</td>
+                <td>@client.Patronymic</td>
+                <td>@client.Passport</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="4" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

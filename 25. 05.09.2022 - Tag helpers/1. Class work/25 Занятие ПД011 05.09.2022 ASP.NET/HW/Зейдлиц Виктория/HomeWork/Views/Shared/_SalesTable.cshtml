@@ -1,0 +1,44 @@
+﻿@model IEnumerable<HomeWork.Models.Sale>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Наименование товара</th>
+        <th>Продавец ФИО</th>
+        <th>Дата продажи</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>
+@*           <a class="btn btn-success" asp-controller="WholesaleStore" asp-action="AddSales">
+                <i class="bi bi-plus-lg"></i> Добавить
+            </a>
+
+            *@
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var seller in Model)
+    {
+        <tr>            
+            <td>@seller.Id</td>
+            <td>@seller!.Purchase!.Good!.NameGood</td>
+            <td>@($"{seller!.Seller!.Surname} {seller!.Seller!.NameSeller[0]}.{seller!.Seller!.Patronymic[0]}. ")</td>
+            <td>@($"{seller.DateSale:dd.MM.yyyy}")</td>
+            <td>@seller.PriceSale</td>
+            <td>@seller.AmountSale</td>
+            <td>
+@*                <a class="btn btn-outline-primary" asp-controller="WholesaleStore" asp-action="EditSales" asp-route-id="@seller.Id">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+               <a class="btn btn-outline-danger" asp-controller="WholesaleStore" asp-action="RemoveSale" asp-route-id="@visit.Id">
+                 <i class="bi bi-trash3"></i>
+               </a>
+                *@
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

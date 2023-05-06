@@ -1,0 +1,62 @@
+﻿@model HomeWork.Models.ViewModels.PlanetsViewModel
+
+<table class="table table-dark align-middle">
+    <thead>
+    <tr>
+        <th>Мин. диаметр</th>
+        <th>Сред. диаметр</th>
+        <th>Макс. диаметр</th>
+        <th>Мин. орбитальный период</th>
+        <th>Сред. орбитальный период</th>
+        <th>Макс. орбитальный период</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>@($"{Model.DiameterStat.min:n1}")</td>
+        <td>@($"{Model.DiameterStat.avg:n1}")</td>
+        <td>@($"{Model.DiameterStat.max:n1}")</td>
+        <td>@($"{Model.OrbitalPeriodStat.min:n1}")</td>
+        <td>@($"{Model.OrbitalPeriodStat.avg:n1}")</td>
+        <td>@($"{Model.OrbitalPeriodStat.max:n1}")</td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table table-dark align-middle">
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Орбитальный период</th>
+        <th>Диаметр</th>
+        <th>Поверхность</th>
+        <th>Количество: @Model.Data?.Count</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    @if (Model.Data != null)
+    {
+        foreach (var planet in Model.Data)
+        {
+            <tr>
+                <td>@planet.Id</td>
+                <td>@planet.Name</td>
+                <td>@planet.OrbitalPeriod</td>
+                <td>@planet.Diameter</td>
+                <td>@planet.Terrain</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-primary" asp-controller="Planets" asp-action="PlanetInfo"
+                       asp-route-url="@planet.UrlInfo" title="Подробная информация...">
+                        <i class="bi bi-file-post-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

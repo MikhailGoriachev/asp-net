@@ -1,0 +1,28 @@
+﻿@model ComponentContext.Model.ProductTableViewModel
+
+<table class="table table-bordered w-25">
+    <tr>
+        @if (Model.ShowId)
+        {
+            <th>Id</th>
+        }
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+
+    @foreach (var item in Model.Products) {
+        <tr>
+            @if (Model.ShowId) {
+                <td>@item.Id</td>
+            }
+            
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+        </tr>
+    }
+</table>
+@if (Model.ShowTotal) {
+    <div>
+        Total: @Model.Total
+    </div>
+}

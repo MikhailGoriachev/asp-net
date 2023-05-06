@@ -1,0 +1,76 @@
+﻿@model HomeWork.Models.Route
+
+@section Head
+{
+    @* скрипты валидации *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{ ViewBag.Title = ViewBag.IsAdd ? "Добавление маршрута" : "Редактирование маршрута"; }
+
+<section class="mx-auto my-4 bg-light shadow-sm border rounded-3 h-75 p-3 w-50">
+
+    <form method="post" class="mx-4" asp-controller="Routes"
+          asp-action="@(ViewBag.IsAdd ? "AddRoute" : "EditRoute")" enctype="multipart/form-data">
+
+        <h4 class="text-center">@ViewBag.Title</h4>
+
+        <hr>
+
+        @* id *@
+        <input asp-for="Id" value="@Model.Id">
+
+        @* начальный пункт *@
+        <div class="input-group my-3">
+            <label asp-for="StartPoint" class="input-group-text w-16rem"></label>
+            <select asp-for="StartPoint" asp-items="@ViewBag.Points" class="form-select"></select>
+            <span asp-validation-for="StartPoint" class="text-danger w-100"></span>
+        </div>
+
+        @* промежуточный пункт *@
+        <div class="input-group my-3">
+            <label asp-for="MiddlePoint" class="input-group-text w-16rem"></label>
+            <select asp-for="MiddlePoint" asp-items="@ViewBag.Points" class="form-select"></select>
+            <span asp-validation-for="MiddlePoint" class="text-danger w-100"></span>
+        </div>
+
+        @* конечный пункт *@
+        <div class="input-group my-3">
+            <label asp-for="EndPoint" class="input-group-text w-16rem"></label>
+            <select asp-for="EndPoint" asp-items="@ViewBag.Points" class="form-select"></select>
+            <span asp-validation-for="EndPoint" class="text-danger w-100"></span>
+        </div>
+
+        @* протяженность *@
+        <div class="input-group my-3">
+            <label asp-for="Length" class="input-group-text w-16rem"></label>
+            <input asp-for="Length" class="form-control">
+            <span asp-validation-for="Length" class="text-danger w-100"></span>
+        </div>
+
+        @* сложность маршрута *@
+        <div class="input-group my-3">
+            <label asp-for="Difficulty" class="input-group-text w-16rem"></label>
+            <select asp-for="Difficulty" asp-items="@ViewBag.DifficultyList" class="form-select"></select>
+            <span asp-validation-for="Difficulty" class="text-danger w-100"></span>
+        </div>
+
+        @* инструктор *@
+        <div class="input-group my-3">
+            <label asp-for="InstructorId" class="input-group-text w-16rem"></label>
+            <select asp-for="InstructorId" asp-items="@ViewBag.Instructors" class="form-select"></select>
+            <span asp-validation-for="InstructorId" class="text-danger w-100"></span>
+        </div>
+
+        <hr>
+
+        @* управление *@
+        <div class="d-flex justify-content-end">
+            <input class="btn btn-success w-10rem me-3" type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")">
+            <a class="btn btn-danger w-10rem" asp-controller="Routes" asp-action="Index">Выйти</a>
+        </div>
+    </form>
+
+</section>

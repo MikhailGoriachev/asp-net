@@ -1,0 +1,24 @@
+﻿@model IEnumerable<HomeWork.Models.Country>
+
+<table class="table table-hover align-middle">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Транспортные услуги (&#8381;)</th>
+        <th>Оформление визы (&#8381;)</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var country in Model)
+    {
+        <tr>
+            <th>@country.Id</th>
+            <td>@country.Name</td>
+            <td>@($"{country.CostService:n2}")</td>
+            <td>@($"{country.CostVisa:n2}")</td>
+        </tr>
+    }
+    </tbody>
+</table>

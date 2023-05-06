@@ -1,0 +1,46 @@
+﻿@model HomeWork.Models.BindingModels.IntBindingModel?
+
+@{
+    ViewBag.Title = $"Запрос 5. Продавец: {ViewBag.Seller}";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <div class="d-lg-flex justify-content-between">
+
+        <form method="get" asp-controller="Queries" asp-action="Query05" class="d-flex align-items-center">
+
+            <div class="form-floating w-18rem">
+                <select asp-for="Value" asp-items="ViewBag.SellerList" class="form-select"></select>
+                <label asp-for="Value">Продавец</label>
+            </div>
+
+            <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+            <a class="btn btn-warning" asp-controller="Queries" asp-action="Query05">Сбросить</a>
+        </form>
+    </div>
+
+
+    <table class="table table-hover align-middle">
+
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Продавец</th>
+            <th>Закупленный товар</th>
+            <th>Единица измерения</th>
+            <th>Цена единицы (&#8381;)</th>
+            <th>Количество</th>
+            <th>Дата продажи</th>
+            <th>
+                <a class="btn btn-success" asp-controller="Sales" asp-action="AddSale">
+                    <i class="bi bi-plus-lg"></i> Добавить
+                </a>
+            </th>
+        </tr>
+        </thead>
+
+        <sales-table-body items="@ViewBag.Items"></sales-table-body>
+    </table>
+</section>

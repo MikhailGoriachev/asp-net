@@ -1,0 +1,23 @@
+body {
+    font-family: Tahoma, Verdana, sans-serif;
+    font-size: 12pt;
+    margin: 10px;
+    padding: 10px;
+}
+
+table {
+    empty-cells: show;
+    border-collapse: collapse;
+}
+
+table, td {
+    border-bottom: solid 1px darkblue;
+}
+
+th {
+    border-bottom: solid 3px darkblue;
+}
+
+td, th {
+    padding: 6px;
+}

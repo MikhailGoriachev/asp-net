@@ -1,0 +1,57 @@
+﻿@model RoutesForms.Models.Task01.Book
+@*
+    Форма редактирования сведений о книге
+*@
+@{
+}
+
+@* в форме задаем обработчик *@
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h3 class="text-center">Редактирование сведений о книге</h3>
+    <form class="bg-light p-5" enctype="multipart/form-data"
+          asp-controller="library" asp-action="Update" method="post">
+        
+        @* идентификатор книги, не меняем, но используем *@
+        <input asp-for="Id" type="hidden" value="@Model.Id"/>
+        
+        @* редактируемые поля *@
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Author">Автор:</label>
+            <input type="text" asp-for="Author" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Title">Название:</label>
+            <input type="text" asp-for="Title" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="PubYear">Год издания:</label>
+            <input type="number" asp-for="PubYear" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Cost">Цена 1 экземпляра:</label>
+            <input type="number" asp-for="Cost" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Quantity">Количество экземпляров:</label>
+            <input type="number" asp-for="Quantity" class="form-control"/>
+        </div>
+        
+        @* имя файла с обложной *@
+        @* временное решение *@
+        <input type="hidden" asp-for="Cover" value="@Model.Cover"/>
+        @*        
+        <div class="mb-3">
+            <label asp-for="FormFile" class="form-label">Выберите изображение обложки:</label>
+            <input asp-for="FormFile" type="file" class="form-control">
+        </div>
+        *@
+
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <button class="btn btn-secondary" type="reset">Сбросить</button>
+    </form>
+
+</div>

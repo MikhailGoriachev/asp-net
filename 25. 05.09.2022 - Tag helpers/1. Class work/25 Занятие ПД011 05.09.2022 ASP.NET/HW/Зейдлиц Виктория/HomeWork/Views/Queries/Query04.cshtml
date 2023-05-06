@@ -1,0 +1,19 @@
+﻿@model IQueryable<HomeWork.Models.Seller>
+
+@{
+    ViewBag.Title = "Выбирает информацию о продавцах с заданным значением процента комиссионных";
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+@* Выбор информацию о продавцах с заданным значением процента комиссионных *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+        
+        <label class="form-label me-1 lead" for="selInterest">Процент: </label>
+        <select class="form-select-sm me-3 " name="Interest" asp-items="ViewBag.InterestList" id="selInterest"></select>
+
+        <button class="btn btn-sm btn-outline-info ms-1 align-baseline" type="submit">Выбрать</button>
+    </form>
+</div>
+
+@await Html.PartialAsync("_SellersTable", Model)

@@ -1,0 +1,83 @@
+﻿@model List<HomeWork.Models.Task1.Person>
+
+@{
+    int id = 1;
+}
+
+
+@* вывод данных *@
+<table table class="table table-bordered table-striped table-hover ps-0">
+<thead>
+    <tr>
+        <th class="text-end">Ид</th>
+        <th>Имя</th>
+        <th>Рост</th>
+        <th>Вес</th>
+        <th>Цвет волос</th>
+        <th>Цвет глаз</th>
+        <th>Дата рождения</th>
+        <th>Пол</th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+@foreach(var item in Model)
+{
+    <tr>
+        <td class="text-end">@(item.Id == 0 ? id++:"")</td>
+        <td>@item.Name</td>
+        <td>@item.Height</td>
+        <td>@item.Mass</td>
+        <td>@item.Hair_Color</td>
+        <td>@item.Eye_Color</td>
+        <td>@item.Birth_Year</td>
+        <td>@item.Gender</td>
+        <td>
+            <a class="btn btn-outline-success" data-id ="@item.Id" title="Подробная информация..."
+                   asp-controller="People"
+                       asp-action="PeopleInfoAll"
+                       asp-route-id="@item.Id">
+                    <i data-id="@item.Id"
+                       class="bi bi-info-circle">
+                    </i>
+            </a>
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+
+
+@*Модальное окно выбора фильтра
+<div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Выбор фильтрации</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+                <div class="container-fluid justify-content-start gap-2 mt-3">
+                    <form asp-action="WhereAge" class="row align-items-center g-3">
+                        <div class="col d-flex justify-content-start align-items-center">
+                            <span class="fs-form-title">Возраст:</span>
+                            <div class="col-2 ms-4">
+                                <label asp-for="@Model!.AgeMin" class="fs-form-title w-40-px"></label>
+                                <input asp-for="@Model!.AgeMin" name="from" class="form-control"/>
+                            </div>
+                            <div class="col-2 ms-2">
+                                <label asp-for="@Model!.AgeMax" class="fs-form-title"></label>
+                                <input asp-for="@Model!.AgeMax" name="to" class="form-control"/>
+                            </div>
+                            <button class="btn btn-sm btn-primary ms-auto" type="submit"> Показать</button>
+                        </div>
+                        <span asp-validation-for="@Model!.Surname" class="text-danger"></span>
+                        <span asp-validation-for="@Model!.AgeMin" class="text-danger"></span>
+                        <span asp-validation-for="@Model!.AgeMax" class="text-danger"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@

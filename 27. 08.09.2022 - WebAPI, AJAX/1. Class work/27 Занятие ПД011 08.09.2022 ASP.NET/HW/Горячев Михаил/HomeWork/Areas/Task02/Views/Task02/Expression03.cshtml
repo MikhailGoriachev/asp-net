@@ -1,0 +1,59 @@
+﻿@model HomeWork.Models.Expression03
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h3>Выражение 3</h3>
+
+    <hr>
+
+    @* условия задания *@
+    <img src="~/images/image3.png" alt="image2">
+
+    <hr>
+
+    @* исходные данные *@
+    <h5>Дано:</h5>
+    <ul>
+        <li>
+            <p>&alpha;: <b>@(Model.A != null ? $"{Model.A:f5}" : "———")</b></p>
+        </li>
+        <li>
+            <p>&beta;: <b>@(Model.B != null ? $"{Model.B:f5}" : "———")</b></p>
+        </li>
+    </ul>
+
+    <hr>
+
+    @* вычисление результата *@
+    <h5>Ответ:</h5>
+    <ul>
+        <li>
+            <p>z<sub>1</sub>: <b>@(Model.Z1 != null ? $"{Model.Z1:f5}" : "———")</b></p>
+        </li>
+        <li>
+            <p>z<sub>2</sub>: <b>@(Model.Z2 != null ? $"{Model.Z2:f5}" : "———")</b></p>
+        </li>
+    </ul>
+
+    @* ввод данных *@
+    <h5>Ввод данных:</h5>
+    <form method="post" asp-area="Task02" asp-controller="Task02" asp-action="Expression03" class="w-10rem mx-3">
+
+        <!-- Альфа -->
+        <div>
+            <label asp-for="A" class="form-label">Альфа (&alpha;):</label>
+            <input asp-for="A" class="form-control" placeholder="&alpha;" type="number" required>
+        </div>
+
+        <!-- Бета -->
+        <div class="field">
+            <label asp-for="B" class="form-label">Бета (&beta;):</label>
+            <input asp-for="B" class="form-control" placeholder="&beta;" type="number" required>
+        </div>
+
+        <!-- Кнопки управления -->
+        <div class="my-3">
+            <input class="btn btn-success" type="submit" value="Вычислить"/>
+        </div>
+
+    </form>
+</section>

@@ -1,0 +1,203 @@
+﻿@using Homework.Models.TravelCompany
+@model Homework.Models.ViewModels.RoutesIndexViewModel
+
+@{
+    ViewBag.Title = "Туристические маршруты";
+    Layout = "_Layout";
+}
+
+@*Панель кнопок управления*@
+<div class="navbar">
+    <div class="container-fluid justify-content-start gap-2">
+
+        <a asp-controller="Routes"
+           asp-action="Index"
+           class="btn btn-sm btn-outline-secondary"
+           title="вывод коллекции в исходном порядке">
+            исходные данные
+        </a>
+
+        <a asp-controller="Routes"
+           asp-action="OrderBy"
+           asp-route-property="@nameof(Route.Length)"
+           asp-route-sort="Desc"
+           class="btn btn-sm btn-outline-secondary"
+           title="вывод коллекции по убыванию протяженности маршрута">
+            протяженность <i class="fa-solid fa-sort-down align-top"></i>
+        </a>
+
+        <a asp-controller="Routes"
+           asp-action="OrderBy"
+           asp-route-property="@nameof(Route.Length)"
+           asp-route-sort="Asc"
+           class="btn btn-sm btn-outline-secondary"
+           title="вывод коллекции упорядоченной по возрастанию протяженности">
+            протяженность <i class="fa-solid fa-sort-up align-bottom"></i>
+        </a>
+
+        <a asp-controller="Routes"
+           asp-action="OrderBy"
+           asp-route-property="@nameof(Route.Difficulty)"
+           asp-route-sort="Asc"
+           class="btn btn-sm btn-outline-secondary"
+           title="вывод коллекции упорядоченной по возрастанию сложности">
+            сложность <i class="fa-solid fa-sort-up align-bottom"></i>
+        </a>
+        <span class="vl ms-3"></span>
+
+        <button type="button" class="btn btn-sm btn-secondary ms-3" data-bs-toggle="modal" data-bs-target="#modalFilter">
+            Фильтр
+        </button>
+        
+        <a asp-action="ExceptionTest"
+           class="btn btn-sm btn-outline-danger ms-3"
+           title="тест исключения">
+            тест исключения
+        </a>
+    </div>
+</div>
+
+@*Вывод таблицы с данными*@
+<table id="routesTable" class="table mt-4 text-center">
+    <thead class="border-dark">
+    <tr>
+        <th>Id</th>
+        <th>Начальный пункт</th>
+        <th>Промежуточный пункт</th>
+        <th>Конечный пункт</th>
+        <th>Протяженность, км</th>
+        <th>Сложность</th>
+        <th>Инструктор</th>
+        <th>
+            <a class="btn btn-primary btn-sm" asp-controller="Routes" asp-action="AddRoute">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var route in Model!.Routes)
+    {
+        <tr>
+            <td>@route.Id</td>
+            <td>@route.StartPoint</td>
+            <td>@route.MiddlePoint</td>
+            <td>@route.FinishPoint</td>
+            <td>@route.Length</td>
+            <td>@route.Difficulty</td>
+            <td>@Model.GetInstructorName(route.InstructorId)</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary ms-2"
+                        data-id="@route.Id" title="Информация о маршруте"
+                        data-bs-toggle="modal" data-bs-target="#routeInfoModal">
+                    <i class="fa fa-info-circle" data-id="@route.Id" aria-hidden="true"></i>
+                </button>
+
+                <a asp-controller="Routes" asp-action="EditRoute"
+                   class="btn btn-sm btn-outline-primary ms-2"
+                   asp-route-id="@route.Id" title="Редактировать данные">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a asp-controller="Routes" asp-action="RemoveRoute" asp-route-id="@route.Id"
+                   class="btn btn-sm btn-outline-danger ms-2" title="Удалить данные">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@*Модальное окно выбора фильтра*@
+<div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Выбор фильтрации</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid ">
+                    <form asp-action="WherePoint" class="row align-items-baseline">
+                        <div class="col d-flex justify-content-start align-items-center">
+                            <input type="hidden" name="point" value="Start"/>
+                            <label asp-for="PointsSelectLists.StartPoints" class="fs-form-title">Начальная точка:</label>
+                            <select name="value" asp-items="Model!.PointsSelectLists.StartPoints"
+                                    class="form-control-sm ms-auto w-200-px">
+                            </select>
+                            <button class="btn btn-sm btn-primary ms-auto" type="submit"> Показать</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container-fluid justify-content-start gap-2 mt-3">
+                    <form asp-action="WherePoint" class="row align-items-baseline ">
+                        <div class="col d-flex align-items-center">
+                            <input type="hidden" name="point" value="Middle"/>
+                            <label asp-for="PointsSelectLists.StartPoints" class="fs-form-title me-2">Средняя точка:</label>
+                            <select name="value" asp-items="Model!.PointsSelectLists.MiddlePoints"
+                                    class="form-control-sm ms-auto w-200-px">
+                            </select>
+                            <button class="btn btn-sm btn-primary ms-auto" type="submit"> Показать</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container-fluid justify-content-start gap-2 mt-3">
+                    <form asp-action="WhereLength" class="row align-items-center g-3">
+                        <div class="col d-flex justify-content-start align-items-center">
+                            <span class="fs-form-title">Протяженность, км:</span>
+                            <div class="col-2 ms-4">
+                                <label asp-for="@Model.RouteMinLength" class="fs-form-title w-40-px"></label>
+                                <input asp-for="@Model.RouteMinLength" class="form-control"/>
+                            </div>
+                            <div class="col-2 ms-2">
+                                <label asp-for="@Model.RouteMaxLength" class="fs-form-title"></label>
+                                <input asp-for="@Model.RouteMaxLength" class="form-control"/>
+                            </div>
+                            <button class="btn btn-sm btn-primary ms-auto" type="submit"> Показать</button>
+                        </div>
+                        <span asp-validation-for="@Model.RouteMinLength" class="text-danger"></span>
+                        <span asp-validation-for="@Model.RouteMaxLength" class="text-danger"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Модальное окно с информацией о маршруте*@
+<div class="modal fade" id="routeInfoModal" tabindex="-1" aria-labelledby="routeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="routeModalLabel">Информация о маршруте</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card m-1 p-1">
+                    <div class="card-body bg-light">
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between">Id: <strong id="infoId"></strong></li>
+                            <li class="d-flex justify-content-between">Начальный пункт: <strong id="infoStartPoint"></strong></li>
+                            <li class="d-flex justify-content-between">Промежуточный пункт: <strong id="infoMiddlePoint"></strong></li>
+                            <li class="d-flex justify-content-between">Конечный пункт: <strong id="infoFinishPoint"></strong></li>
+                            <li class="d-flex justify-content-between">Протяженность, км: <strong id="infoLength"></strong></li>
+                            <li class="d-flex justify-content-between">Сложность: <strong id="infoDifficulty"></strong></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <li class="d-flex justify-content-between">Инструктор: <strong id="infoInstructor"></strong></li>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/routeInfo.js"></script>

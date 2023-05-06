@@ -1,0 +1,34 @@
+﻿@model System.Collections.Generic.List<HomeWork.Models.Queries.Query11Result>
+
+@{
+    ViewBag.Title = "Для всех продавцов вывести сумму и количество продаж, минимальную и максимальную стоимости продаж";
+    Layout = "_Layout";
+}
+
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+@* Вывод выборки данных *@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ФИО продавца</th>
+        <th>Сумма продаж</th>
+        <th>Количество продаж</th>
+        <th>Мин.стоимость продаж</th>
+        <th>Макc. стоимость продаж</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>@($"{item.Seller.Surname} {item!.Seller!.NameSeller![0]}.{item!.Seller!.Patronymic![0]}.")</td>
+                <td>@($"{(item.SumSales != null ? $"{item.SumSales}" : "нет данных")}")</td>
+                <td>@($"{(item.AmountSales != null ? $"{item.AmountSales}" : "нет данных")}")</td>
+                <td>@($"{(item.MinPrice != null ? $"{item.MinPrice}" : "нет данных")}")</td>               
+                <td>@($"{(item.MaxPrice != null ? $"{item.MaxPrice}" : "нет данных")}")</td>                              
+            </tr>
+        }
+    </tbody>
+</table>

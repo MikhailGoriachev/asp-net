@@ -1,0 +1,46 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Homework.Models.ViewModels
+@using Homework.Models
+@model Homework.Models.ViewModels.IndexViewModel<Homework.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Закупки";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Html.PartialAsync("_Filter", Model!.FilterModel)
+
+<table class="table">
+    
+    @await Html.PartialAsync("PurchasesTableHeader", Model)
+    
+    <tbody class="color-2">
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Goods!.Name</td>
+            <td>@($"{item.PurchaseDate:dd.MM.yy}")</td>
+            <td>@item.Amount</td>
+            <td>@item.Unit!.Short</td>
+            <td>@item.Price</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"class="btn btn-sm btn-outline-primary ms-2"
+                   title="Редактировать данные">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 10,
+    AdditionalRouteParameters = Model.FilterModel!.GetRouteParameters
+        .Append(new RouteParameter { Key = nameof(Model.FilterModel.Sort), Value = Model.FilterModel.Sort })
+        .ToList()
+})

@@ -1,0 +1,83 @@
+﻿@model Home_work.Models.Route
+@using Home_work.Models
+@{
+    ViewBag.title = $"Форма {(@ViewBag.AddingFormMode?"добавления":"редактирования")} маршрута";
+    ViewBag.PageName = "Form";
+}
+
+
+<section class="section-form">
+    <fieldset>
+        <!-- #region Форма для записи -->
+        <form method="post" asp-controller="Routes" 
+        asp-action="FormSubmit" 
+        asp-route-addingmode="@ViewBag.AddingFormMode" 
+        class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="Id">
+
+
+        <h4></h4>
+
+        <!-- Начальная точка -->
+        <div class="form-floating my-3 ">
+            <select class="form-control form-select" 
+            asp-for="StartingPoint" 
+            asp-items="@(ViewBag.AddingFormMode ? ViewBag.Points : ViewBag.StartingPoint)"></select>
+
+            <label>Начальный пункт</label>
+        </div>
+        
+        <!-- Промежуточная точка -->
+        <div class="form-floating my-3 ">
+            <select class="form-control form-select" 
+            asp-for="MiddlePoint" 
+            asp-items="@(ViewBag.AddingFormMode ? ViewBag.Points : ViewBag.MiddlePoint)"></select>
+
+            <label>Промежуточный пункт</label>
+        </div>
+        
+        <!-- Конечная точка -->
+        <div class="form-floating my-3 ">
+            <select class="form-control form-select" 
+            asp-for="EndPoint" 
+            asp-items="@(ViewBag.AddingFormMode ? ViewBag.Points : ViewBag.EndPoint)"></select>
+
+            <label>Конечный пункт</label>
+        </div>
+
+
+        <!-- Протяженность -->
+        <div class="form-floating my-3">
+            <input class="form-control" asp-for="Length"/>
+            <label asp-for="Length">Протяженность</label>
+        </div>
+        
+        <!-- Уровни сложности -->
+        <div class="form-floating my-3">
+            <select asp-for="Complexity" asp-items="@ViewBag.Complexity" 
+            class="form-control form-select" 
+            required></select>
+            <label asp-for="Complexity">Уровни сложности</label>
+        </div>
+        
+        <!-- Инструкторы -->
+        <div class="form-floating my-3">
+            <select name="instructorSelect" asp-items="@ViewBag.Instructors" 
+            class="form-control form-select" 
+            required></select>
+            <label>Инструкторы</label>
+        </div>
+
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="@(ViewBag.AddingFormMode?"Добавить":"Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="Routes" asp-action="Routes">Выход</a>
+
+    </form>
+        <!-- #endregion -->
+    </fieldset>
+
+</section>

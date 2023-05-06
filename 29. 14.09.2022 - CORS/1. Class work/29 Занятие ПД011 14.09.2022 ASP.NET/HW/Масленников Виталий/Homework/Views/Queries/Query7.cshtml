@@ -1,0 +1,29 @@
+﻿@model IQueryable<Homework.Models.ResultQuery7>
+
+<h4>Минимальная, средняя и максимальная стоимость 1 дня пребывания</h4>
+
+@* Таблица с данными *@
+<table class="table text-center">
+    <thead class="fw-bold align-top">
+    <tr>
+        <td>Причина поездки</td>
+        <td>Минимальная стоимость 1<br/> дня пребывания</td>
+        <td>Средняя стоимость 1<br/> дня пребывания</td>
+        <td>Максимальная стоимость 1<br/> дня пребывания</td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model is not null && Model.Any()){
+        @foreach (var result in Model){
+            <tr>
+                <td>@result.Purpose</td>
+                <td>@result.MinPrice</td>
+                <td>@($"{result.AvgPrice:.#}")</td>
+                <td>@result.MaxPrice</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="5" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

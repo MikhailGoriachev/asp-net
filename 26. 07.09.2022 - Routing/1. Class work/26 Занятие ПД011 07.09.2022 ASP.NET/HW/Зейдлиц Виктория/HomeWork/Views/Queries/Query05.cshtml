@@ -1,0 +1,45 @@
+﻿@model IQueryable<HomeWork.Models.Sale>
+
+@{
+    ViewBag.Title = $"Выбирает информацию о зафиксированных фактах продажи для заданного продавца.";
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+@* Выбор информацию о зафиксированных фактах продажи для заданного продавца *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+        
+        <label class="form-label me-1 lead" for="selSeller">Фамилия продавца: </label>
+        <select class="form-select-sm me-3 " name="SellerId" asp-items="ViewBag.SellersList" id="selSeller"></select>
+
+        <button class="btn btn-sm btn-outline-info ms-1 align-baseline" type="submit">Выбрать</button>
+    </form>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Ид</th>
+        <th>Наименование товара</th>
+        <th>Продавец ФИО</th>
+        <th>Дата продажи</th>
+        <th>Цена</th>
+        <th>Количество</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var sale in Model)
+    {
+        <tr>            
+            <td>@sale.Id</td>
+            <td>@sale!.Purchase!.Good!.NameGood</td>
+            <td>@($"{sale!.Seller!.Surname} {sale!.Seller!.NameSeller![0]}.{sale!.Seller!.Patronymic![0]}. ")</td>
+            <td>@($"{sale.DateSale:dd.MM.yyyy}")</td>
+            <td>@sale.PriceSale</td>
+            <td>@sale.AmountSale</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+﻿@model HomeWork.Models.ViewModels.PeopleListViewModel
+
+<table class="table table-dark align-middle">
+    <thead>
+    <tr>
+        <th>Мин. масса</th>
+        <th>Сред. масса</th>
+        <th>Макс. масса</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>@($"{Model.WeightStat.min:n1}")</td>
+        <td>@($"{Model.WeightStat.avg:n1}")</td>
+        <td>@($"{Model.WeightStat.max:n1}")</td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table table-dark align-middle">
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Имя</th>
+        <th>Масса</th>
+        <th>Цвет волос</th>
+        <th>Цвет кожи</th>
+        <th>Год рождения</th>
+        <th>Родной мир</th>
+        <th>Количество: @Model.Data?.Count</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    @if (Model.Data != null)
+    {
+        foreach (var person in Model.Data)
+        {
+            <tr>
+                <td>@person.Id</td>
+                <td>@person.Name</td>
+                <td>@(person.Mass != null ? $"{person.Mass:n1}" : "unknown")</td>
+                <td>@person.HairColor</td>
+                <td>@person.SkinColor</td>
+                <td>@person.BirthYear</td>
+                <td>@person.HomeWorld</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-primary" asp-controller="People" asp-action="PersonInfo"
+                       asp-route-url="@person.UrlInfo" title="Подробная информация...">
+                        <i class="bi bi-file-post-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

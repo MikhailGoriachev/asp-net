@@ -1,0 +1,137 @@
+﻿@model Homework.Models.ViewModels.LibraryIndexViewModel
+@{
+    ViewBag.Header = "Книги";
+}
+
+<h3 class="color-2 mb-4">@ViewBag.Title</h3>
+
+<table class="table mt-4 text-center">
+        <thead class="border-dark">
+        <tr>
+            <th>Id</th>
+            <th>Обложка</th>
+            <th class="text-start">Название</th>
+            <th class="text-start">Автор</th>
+            <th>Год издания</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+            <th>
+                <button type="button" class="btn btn-primary btn-sm"
+                        data-bs-toggle="modal" data-bs-target="#modalForm">Добавить</button>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody class="color-2">
+        @foreach (var book in Model!.Books){
+            <tr>
+                <td>@book.Id</td>
+                <td>
+                    <img class="h-200-px" src="~/images/books/@book.Image" alt="@book.Image"/>
+                </td>
+                <td class="text-start">@book.Title</td>
+                <td class="text-start">@book.Author</td>
+                <td>@book.Year</td>
+                <td>@book.Amount</td>
+                <td>@book.Price</td>
+                <td>
+                    <a asp-controller="Library" asp-action="EditBook"
+                       class="btn btn-sm btn-outline-primary ms-2"
+                       asp-route-id="@book.Id" title="Редактировать данные">
+                        <i class="fa-solid fa-pen-to-square"></i></a>
+                    <a asp-controller="Library" asp-action="RemoveBook" asp-route-id="@book.Id"
+                       class="btn btn-sm btn-outline-danger ms-2" title="Удалить данные">
+                        <i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+        }
+        </tbody>
+ </table>
+
+@* Форма ввода данных в модальном диалоге *@
+<div class="modal @(Model.InvokeForm ? "show d-block" : "")" id="modalForm" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                @if (Model.IsEdit!){
+                    <h5 class="modal-title">Изменить данные книги</h5>
+                    <button asp-controller="Library" asp-action="Index" 
+                            form="bookForm" class="btn-close" formnovalidate></button>
+                }else{
+                    <h5 class="modal-title">Добавить данные о книге</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                }
+            </div>
+
+            <div class="modal-body">
+                <form class="mb-4 p-0" method="post" enctype="multipart/form-data" id="bookForm">
+                    <div class="row">
+
+                        <input asp-for="@Model.Book!.Id" type="hidden"/>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="@Model.Book!.Title" required/>
+                            <label class="form-label mx-2" asp-for="@Model.Book!.Title">Название книги: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" asp-for="@Model.Book!.Author" required/>
+                            <label class="form-label mx-2" asp-for="@Model.Book!.Author">Автор: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="number" asp-for="@Model.Book!.Year" required/>
+                            <label class="form-label mx-2" asp-for="@Model.Book!.Year">Год издания: </label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="number" asp-for="@Model.Book!.Price" required/>
+                            <label class="form-label mx-2" asp-for="@Model.Book!.Price">Цена: </label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="number" asp-for="@Model.Book!.Amount" required/>
+                            <label class="form-label mx-2" asp-for="@Model.Book!.Amount">Количество: </label>
+                        </div>
+                        
+                         @if (Model.IsEdit!){
+                             <input asp-for="@Model.Book!.Image" type="hidden"/>
+                         }
+                         else{
+                             <div class="form-floating">
+                                 <input class="form-control form-control-sm mt-2 ps-3" accept=".png,.jpg,.jpeg"
+                                        type="file" asp-for="@Model.File">
+                                 <label class="form-label mt-1 mx-2" asp-for="@Model.File">Загрузить обложку (до 2Mb): </label>
+                             </div>
+                         }
+                        
+                        @if (Model.ErrMsg != null){
+                            <div class="alert alert-danger alert-dismissible ms-2 mt-3 w-auto">
+                                <button class="btn-close" data-bs-dismiss="alert"></button>
+                                <b>Ошибка!</b> @Model.ErrMsg
+                            </div>
+                        }
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                @if (Model.IsEdit){
+                    <button asp-controller="Library" asp-action="EditBook" form="bookForm" class="btn btn-primary" type="submit">
+                        Изменить</button>
+                }else{
+                    <button asp-controller="Library" asp-action="AddBook" form="bookForm" class="btn btn-primary" type="submit">
+                        Добавить</button>
+                }
+                @if (Model.InvokeForm){
+                    <button asp-controller="Library" asp-action="Index" form="bookForm" class="btn btn-danger"
+                            formnovalidate>Отмена</button>
+                }
+                else{
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отмена</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

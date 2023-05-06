@@ -1,0 +1,3 @@
+﻿22/08/2022 17:11:57 - На выполнение метода ActionAsyncFilterSample.Controllers.HomeController.Index (002_ActionAsyncFilterSample) затрачено 0:00:00.0000286
+22/08/2022 17:16:44 - На выполнение метода ActionAsyncFilterSample.Controllers.HomeController.Action1 (002_ActionAsyncFilterSample) затрачено 0:00:02.0103997
+22/08/2022 17:17:21 - На выполнение метода ActionAsyncFilterSample.Controllers.HomeController.Action2 (002_ActionAsyncFilterSample) затрачено 0:00:00.0001208

@@ -1,0 +1,27 @@
+﻿@model System.Collections.Generic.IEnumerable<HomeWork.Models.UserTodo>?
+
+<table class="table align-middle" id="clientsTableId">
+    <h5>Количество дел: @ViewBag.Count; Завершено: @ViewBag.CompletedCount</h5>
+
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Выполнено</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var todo in Model)
+        {
+            <tr>
+                <td>@todo.Id</td>
+                <td>@todo.Title</td>
+                <td>@(todo.Completed ? "Да" : "Нет")</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

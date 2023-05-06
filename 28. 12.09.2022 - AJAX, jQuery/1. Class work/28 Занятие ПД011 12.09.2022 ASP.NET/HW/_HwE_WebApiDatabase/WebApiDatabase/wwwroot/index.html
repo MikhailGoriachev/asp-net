@@ -1,0 +1,86 @@
+﻿<!--
+Для запуска страницы index.html в конфигурационном файле Properties/launchSettings.json
+в секциях "profiles" и "IIS Express" установить параметр launchUrl в "index.html"
+
+"launchUrl": "index.html",
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>AJAX-запросы к базе данных</title>
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="images/blimp.png" type="image/x-icon" />
+
+    <!-- подключение bootstrap локально, подключение собственных стилей -->
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/style.css" />
+
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/queries.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" >Главная</a>
+                </li>
+                <li class="nav-item dropdown me-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Отчёты</a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#"
+                               onclick="ajaxGetHtml('http://localhost:4242/api/Queries/Query01/шт/200')">
+                            Запрос с параметром 1 (Запрос 1)
+                        </a></li>
+                        <li><a class="dropdown-item" href="#"
+                               onclick="ajaxGetHtml('http://localhost:4242/api/Queries/Query02/250')">
+                            Запрос с параметром 2 (Запрос 2)
+                        </a></li>
+                        <li><a class="dropdown-item" href="#"
+                               onclick="ajaxGetHtml('http://localhost:4242/api/Queries/Query03/Кофе NESCAFE Классик растворимый/550')">
+                            Запрос с параметром 3 (Запрос 3)
+                        </a></li>
+                        <li><a class="dropdown-item" href= "#">Запрос с параметром 4 (Запрос 4)</a></li>
+                        <li><a class="dropdown-item" href= "#">Запрос с параметром 5 (Запрос 5)</a></li>
+                        <li><a class="dropdown-item" href= "#">Запрос с параметром 6 (Запрос 6)</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"
+                               onclick="ajaxGetHtml('http://localhost:4242/api/Queries/Query07')">
+                            Запрос с вычисляемым полем (Запрос 7)
+                        </a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"
+                               onclick="ajaxGetHtml('http://localhost:4242/api/Queries/Query08')">
+                            Итоговый запрос 1 (Запрос 8)
+                        </a></li>
+                        <li><a class="dropdown-item" href="#"
+                               onclick="ajaxGetHtml('http://localhost:4242/api/Queries/Query09')">
+                            Итоговый запрос 2 (Запрос 9)
+                        </a></li>
+                        <li><a class="dropdown-item" href= "#">Итоговый запрос 3 (Запрос 10)</a></li>
+                        <li><a class="dropdown-item" href= "#">Итоговый запрос 4 (Запрос 11)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Место вывода разметки из запросов -->
+    <main id="outputMarkup" class="container m-5 p-3">
+        
+    </main>
+
+    @* подвал страницы *@
+    <footer class="container-fluid bg-dark text-white-50">
+        <div id="footer" class="row">
+            <h5 class="text-center">
+                КА Шаг, группа ПД011 Донецк 2022, Студент Программер
+            </h5>
+        </div>
+    </footer>
+</body>
+</html>

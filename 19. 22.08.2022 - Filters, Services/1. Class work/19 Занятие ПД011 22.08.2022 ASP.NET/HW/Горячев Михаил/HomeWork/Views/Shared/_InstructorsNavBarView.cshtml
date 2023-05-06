@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Mvc.Controllers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@functions {
+    // получить стиль
+    string ActiveStyle(string? controller = null, string? action = null)
+    {
+        if (ViewBag.PageName != null)
+            return ViewBag.PageName == controller ? "active" : "";
+
+        ControllerActionDescriptor actionDescriptor = (ControllerActionDescriptor)ViewContext.ActionDescriptor;
+
+        string curController = actionDescriptor.ControllerName;
+        string curAction = actionDescriptor.ActionName;
+
+        return curController == controller || (curController == controller && curAction == action) ? "active" : "";
+    }
+
+}
+
+<!-- Сортировка инструкторов -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle @ActiveStyle("OrderInstructors")"
+       id="navbarOrderInstructors" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+        Сортировка инструкторов
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarOrderInstructors">
+        <li>
+            <a class="dropdown-item" asp-controller="Instructors" asp-action="OrderBy" asp-route-nameHandler="fullName">В алфавитном порядке</a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Instructors" asp-action="OrderBy" asp-route-nameHandler="categoriesDesc">По убыванию категорий</a>
+        </li>
+    </ul>
+</li>
+
+<!-- Выборка инструкторов -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle @ActiveStyle("SelectInstructors")"
+       id="navbarSelectInstructors" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+        Выборка инструкторов
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSelectInstructors">
+        <li>
+            <a class="dropdown-item" asp-controller="Instructors" asp-action="SelectByCategory">По заданной категории</a>
+        </li>
+    </ul>
+</li>

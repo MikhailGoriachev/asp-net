@@ -1,0 +1,28 @@
+﻿@model PocoComponentSample.Model.ProductRepository
+@{
+    ViewBag.Title = "Poco Component";
+}
+
+<table class="table w-50 mx-5">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    @foreach (var product in Model.Products) {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+        </tr>
+    }
+</table>
+<p>
+    <!-- отображение компонента представления -->
+    @await Component.InvokeAsync("ProductsSummary")
+</p>
+
+<h3 class="mt-5">Итоги</h3>
+<p>
+    @await Component.InvokeAsync("ProductsSummary")
+</p>

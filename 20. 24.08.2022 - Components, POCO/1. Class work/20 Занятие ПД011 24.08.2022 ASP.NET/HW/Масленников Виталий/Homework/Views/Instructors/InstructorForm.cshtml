@@ -1,0 +1,49 @@
+﻿@model Homework.Models.TravelCompany.Instructor
+
+@{
+    ViewBag.Title = "Ввод данных об инструкторе";
+    Layout = "_Layout";
+}
+
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h3 class="text-center">Редактирование сведений об инструкторе</h3>
+    <form class="bg-light p-5" asp-controller="Instructors" asp-action="UpdateInstructor" method="post">
+
+        <input asp-for="Id" type="hidden" value="@Model!.Id"/>
+
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Surname"></label>
+            <input asp-for="Surname" class="form-control"/>
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Name"></label>
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Patronymic"></label>
+            <input asp-for="Patronymic" class="form-control"/>
+            <span asp-validation-for="Patronymic" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="DoB"></label>
+            <input asp-for="DoB" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Category"></label>
+            <select class="form-select" asp-for="Category" asp-items="ViewBag.Categories"></select>
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-controller="Routes" asp-action="index" type="date" class="btn btn-secondary">Отмена</a>
+    </form>
+
+</div>
+
+

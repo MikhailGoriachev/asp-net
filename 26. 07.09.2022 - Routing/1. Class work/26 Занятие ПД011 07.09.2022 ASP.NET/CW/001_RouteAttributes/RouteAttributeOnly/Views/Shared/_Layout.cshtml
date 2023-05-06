@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <!-- иконка -->
+    <link rel="shorcut icon" href="~/images/emotion_smile.png" type="image/x-icon" />
+
+</head>
+<body>
+    <nav>
+        <a href="/">Пустой путь</a> 
+        @* href - зло :( смена схемы маршрутизации требуется коррекции всех href *@
+        <a href="/Home/Index">href Home/Index</a> |
+        
+        @* тег-хелпера используются для построения маршрутов *@
+        <a asp-controller="Home" asp-action="Index">ASP-хелпер Home/Index</a> |
+        <a asp-controller="Home" asp-action="Add" asp-route-a="3" asp-route-b="4">Add/3/4</a> |
+        
+        @* сгенерируется ссылка /Василий/34 *@
+        <a asp-controller="Home" asp-action="Person" asp-route-name="Василий" asp-route-age="34">Person:правильно</a> |
+        
+        @* ссылка не сгенерируется *@
+        <a asp-controller="Home" asp-action="Person" asp-route-name="Ю" asp-route-age="молодой">Person:неправильно</a> 
+        <br/>
+        <a asp-controller="Home" asp-action="DefaultValues">Значения по умолчанию</a> |
+        <a asp-controller="Home" asp-action="DefaultValues" asp-route-name="Евгений" asp-route-age="22" asp-route-phone="222-333-333-222">
+            Явно заданные значения
+        </a>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

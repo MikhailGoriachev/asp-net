@@ -1,0 +1,163 @@
+﻿@model IEnumerable<UiHintDisplayResults.Models.Instructor>  
+@{
+    ViewBag.Title = "Инструкторы";
+}
+
+<h4 class="text-center">@ViewBag.Header</h4>
+
+@* Вывод коллекции сведений об инструкторах *@
+<table id="table" class="table table-bordered table-hover w-75 mx-auto">
+    <thead>
+    @*a align-middle выравнивание строки по центру, по вертикали *@
+    @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+    <tr class="bg-light text-black align-middle">
+        <th class="text-end">Ид</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Дата рождения</th>
+        <th>Категория</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var instructor in Model) {
+        @* align-middle выравнивание строки по центру, по вертикали *@
+        @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+        <tr class="align-middle">
+            <td class="text-end">@instructor.Id</td>
+            <td>@instructor.Surname</td>
+            <td>@instructor.Name</td>
+            <td>@instructor.Patronymic</td>
+            <td class="px-5">@($"{instructor.BornDate:dd/MM/yyyy}")</td>
+            <td class="px-5">@instructor.Category</td>
+            <td class="text-center">
+                <a class="btn btn-outline-primary ms-2"
+                   asp-controller="Instructors"
+                   asp-action="UpdateById"
+                   asp-route-id="@instructor.Id" title="Изменить...">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-outline-success"
+                   data-bs-toggle="modal"
+                   data-id="@instructor.Id"
+                   data-bs-target="#instructor-card"
+                   title="Карточка...">
+                        <i class="bi bi-card-heading" data-id="@instructor.Id"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+        
+@* 
+Рендерим форму ввода параметра выборки инструкторов 
+Форма модальная, т.е. ее разметка может быть размещена
+в произвольном месте, форма вызывается на клиенте, за
+счет JS-кода Bootstrap, по клику на кнопку в навигационной
+панели
+*@
+<div id="get-category" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Параметр выборки</h4>
+            </div>
+            
+            <div class="modal-body">
+                <form id="form-category" asp-controller="Instructors" asp-action="Where" class="p-3">
+                    @* список категорий *@
+                    <div class="mb-3">
+                        <label class="form-label" for="category">Категория:</label> 
+                        <select class="form-select" id="category" name="category"
+                                asp-items="@ViewBag.SelectCategories">
+                        </select>
+                    </div>
+                </form>  
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="form-category">Выбрать</button>                                       <h3></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        
+@* 
+Рендерим в модальном окне карточку с данными инструктора 
+Окно модальное, т.е. ее разметка может быть размещена
+в произвольном месте, окно вызывается на клиенте, за
+счет JS-кода Bootstrap, по клику на кнопку в таблице
+*@
+<div id="instructor-card" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Сведения об инструкторе</h4>
+            </div>
+            
+            <div class="modal-body">
+                <div class="card m-1 p-1">
+                    <div class="card-header">
+                        <p class="d-flex justify-content-between">Инструктор: <strong id="shortName"></strong></p>
+                    </div>
+                    <div class="card-body bg-light">
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between">Фамилия: <strong id="surname"></strong></li>
+                            <li class="d-flex justify-content-between">Имя:      <strong id="name"></strong></li>
+                            <li class="d-flex justify-content-between">Отчество: <strong id="patronymic"></strong></li>
+                            <li class="d-flex justify-content-between">Дата рождения: <strong id="dob"></strong></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <p class="d-flex justify-content-between">Категория: <strong id="category"></strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                Запрос выполнен @($"{DateTime.Now:dd-MM-yyy в HH:mm:ss}")<h3></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // вспомогательная функция для доступа к элементам DOM
+    $ = id => document.getElementById(id);
+
+    // объект для AJAX-запроса - чистый JavaScript
+    // AJAX - Asynchronous Javascript And XML 
+    let xhr = new XMLHttpRequest();
+
+    let btn = $("table");
+    btn.addEventListener("click", 
+        (e) => {
+            console.log(e);
+            console.log(e.target.dataset.id);
+
+            // открыть AJAX-запрос
+            xhr.open("GET", `/instructors/details/${e.target.dataset.id}`);
+
+            // отправить запрос
+            xhr.send();
+
+            // настроить callback-функцию - сработает по приему данных
+            xhr.onload = () => {
+                let instructor = JSON.parse(xhr.response);
+                console.log(instructor);
+
+                $("shortName").innerHTML  = `${instructor.id}. ${instructor.shortName}`;
+                $("surname").innerHTML    = instructor.surname;
+                $("name").innerHTML       = instructor.name;
+                $("patronymic").innerHTML = instructor.patronymic;
+                $("dob").innerHTML        = instructor.bornDate;
+                $("category").innerHTML   = instructor.category;
+            };
+        });
+</script>
+

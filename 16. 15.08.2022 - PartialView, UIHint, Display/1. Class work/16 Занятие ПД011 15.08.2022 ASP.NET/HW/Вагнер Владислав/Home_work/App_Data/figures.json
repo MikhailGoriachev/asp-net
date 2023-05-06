@@ -1,0 +1,77 @@
+[
+  {
+    "$type": "Home_work.Models.Figures.Triangle, Home_work",
+    "FigureType": "Треугольник",
+    "A": 6.2776616511527035,
+    "B": 9.45286695455103,
+    "C": 6.7082906694365825,
+    "Id": 1
+  },
+  {
+    "$type": "Home_work.Models.Figures.Triangle, Home_work",
+    "FigureType": "Треугольник",
+    "A": 8.53053146920231,
+    "B": 9.941993521405132,
+    "C": 7.287761862017758,
+    "Id": 2
+  },
+  {
+    "$type": "Home_work.Models.Figures.Rectangle, Home_work",
+    "FigureType": "Прямоугольник",
+    "A": 10.647744929358744,
+    "B": 9.581258075001642,
+    "Id": 3
+  },
+  {
+    "$type": "Home_work.Models.Figures.Rectangle, Home_work",
+    "FigureType": "Прямоугольник",
+    "A": 5.089175001109835,
+    "B": 8.477723700606456,
+    "Id": 4
+  },
+  {
+    "$type": "Home_work.Models.Figures.Triangle, Home_work",
+    "FigureType": "Треугольник",
+    "A": 8.753889604086805,
+    "B": 7.763700498529291,
+    "C": 7.941967070738551,
+    "Id": 5
+  },
+  {
+    "$type": "Home_work.Models.Figures.Rectangle, Home_work",
+    "FigureType": "Прямоугольник",
+    "A": 6.693271576039949,
+    "B": 8.36923507984735,
+    "Id": 6
+  },
+  {
+    "$type": "Home_work.Models.Figures.Triangle, Home_work",
+    "FigureType": "Треугольник",
+    "A": 8.285261329334919,
+    "B": 9.576831861685537,
+    "C": 10.684803869586528,
+    "Id": 7
+  },
+  {
+    "$type": "Home_work.Models.Figures.Rectangle, Home_work",
+    "FigureType": "Прямоугольник",
+    "A": 9.764938111822833,
+    "B": 9.19032874638052,
+    "Id": 8
+  },
+  {
+    "$type": "Home_work.Models.Figures.Rectangle, Home_work",
+    "FigureType": "Прямоугольник",
+    "A": 9.39477358006278,
+    "B": 6.57644802020653,
+    "Id": 9
+  },
+  {
+    "$type": "Home_work.Models.Figures.Triangle, Home_work",
+    "FigureType": "Треугольник",
+    "A": 10.912962954214013,
+    "B": 6.956370516350807,
+    "C": 9.400137576444566,
+    "Id": 10
+  }
+]

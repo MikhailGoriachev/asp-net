@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+
+    <title>Главная - Домашняя Работа</title>
+    
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"/>
+    
+    <script src="lib/jquery/jquery-3.6.1.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/6bbf14962c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+<header class="container-fluid">
+    <div class="top-bar row align-items-center ps-4">
+        <h1>Главная</h1>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand-sm navbar-main bg-body sticky-top shadow mb-2">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#appNavbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="appNavbarMain">
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item me-2">
+                    <a href="index.html" class="nav-link active" title="Перейти на страницу">
+                        Главная </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="purchases.html" class="nav-link" title="Перейти на страницу">
+                        Закупки </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="sales.html" class="nav-link" title="Перейти на страницу">
+                        Продажи </a>
+                </li>
+                <li class="nav-item me-2">
+                    <a href="references.html" class="nav-link" title="Перейти на страницу">
+                        Справочники </a>
+                </li>
+                <li>
+                    <a class="nav-link" title="Перейти на страницу" href="queries.html">
+                        Запросы
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid mh-100 mh-80-vh">
+    <main class="mt-4 mx-5">
+        <h2>Теоретическая часть</h2>
+        <ul>
+            <li>Понятие о WebAPI</li>
+            <li>Понятие о REST, RESTful API</li>
+            <li>Создание простейших ASP.NET Core WebAPI приложений</li>
+            <li>Создание ASP.NET Core WebAPI приложений c контроллерами</li>
+            <li>Добавление API-контроллеров</li>
+            <li>Реализация REST-запросов в контроллерах: GET, POST, PUT, DELETE</li>
+            <li>AJAX-реализация REST-запросов к серверу на чистом JavaScript в клиентском приложении –
+                получение строки от сервера, получение JSON от сервера, получение разметки от сервера</li>
+            <li>Отправка данных на сервер в AJAX-запросе при помощи маршрутизации</li>
+        </ul>
+
+        <h2>Практическая часть</h2>
+        
+        <p>Создать приложение ASP.NET Core WebAPI и набор html-страниц для решения следующих задач. 
+            Стилизацию приложения выполняйте при помощи фреймворка Bootstrap.</p>
+
+        <p>Для работы с базой данных при помощи Entity Framework Core 6. Стилизацию разметки выполняйте 
+            при помощи Bootstrap. Реализуйте вывод задания, вывод всех записей таблиц базы данных.</p>
+        
+        <p>Все таблицы должны быть проинициированы не менее чем 10 записями. </p>
+        
+        <p>Требуется также выполнение запросов по заданию, запросы отправлять на сервер операцией <b>GET</b>,
+            параметры вводить в формы (рекомендую формы в модальных окнах).</p>
+        
+        <p>Методы <b>API</b>-контроллера для реализации запросов должны возвращать разметку,
+            выводить результаты всех запросов в одну и ту же html-страницу.</p>
+
+        <div class="col-8">
+            <table class="table-bordered ps-2 pe-2 w-100">
+                <tbody>
+                <tr>
+                    <td class="ps-1 pe-2">
+                        <i>База данных <b>«Оптовый магазин. Учет продаж»</b></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">
+                        <div class="fw-bold">Описание предметной области</div>
+                        <div>
+                            Оптовый магазин закупает товар по Цене закупки единицы товара и продает товар по Цене продажи единицы товара. Разница между ценой продажи и ценой закупки составляет прибыль магазина от реализации единицы товара.
+                        </div>
+                        <div>
+                            Каждый продавец получает комиссионное вознаграждение за проданный товар. Размер этого вознаграждения равен: Цена продажи единицы товара * Кол-во проданных единиц товара * Процент комиссионных продавца.
+                        </div>
+                        <div>Прибыль от продажи партии товара вычисляется как (Цена продажи единицы товара - Цена закупки единицы товара) * Кол-во проданных единиц товара.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2 fw-bold fst-italic">
+                        База данных должна включать как минимум таблицы ТОВАРЫ, ПРОДАВЦЫ, ПРОДАЖИ, содержащие следующую информацию:
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Наименование товара</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Единица измерения товара</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Цена закупки единицы товара</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Дата продажи товара</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Цена продажи единицы товара</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Количество проданных единиц товара</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Фамилия продавца, оформившего продажу</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Имя продавца, оформившего продажу</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Отчество продавца, оформившего продажу</td>
+                </tr>
+                <tr>
+                    <td class="ps-1 pe-2">Процент комиссионных продавца, оформившего продажу</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table-bordered mt-4 w-100">
+                <thead class="fw-bold text-center">
+                <tr>
+                    <td>Номер запроса</td>
+                    <td>Тип запроса</td>
+                    <td>Какую задачу решает запрос</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">1</td>
+                    <td class="ps-2 pe-2">Фильтр</td>
+                    <td class="ps-2 pe-2">Выбирает из информацию о товарах, единицей измерения которых является «шт» (штуки) и цена закупки составляет меньше 200 руб. Значения задавать параметрами </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">2</td>
+                    <td class="ps-2 pe-2">Фильтр</td>
+                    <td class="ps-2 pe-2">
+                        ВВыбирает информацию о товарах, цена закупки которых больше 500 руб. за единицу товара. Значения задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">3</td>
+                    <td class="ps-2 pe-2">Фильтр</td>
+                    <td class="ps-2 pe-2">
+                        Выбирает информацию о товарах с заданным наименованием (например, «чехол защитный»), для которых цена закупки меньше 1800 руб. Значения задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">4</td>
+                    <td class="ps-2 pe-2">Запрос с параметрами</td>
+                    <td class="ps-2 pe-2">
+                        Выбирает информацию о продавцах с заданным значением процента комиссионных. Значения задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">5</td>
+                    <td class="ps-2 pe-2">Запрос с параметрами</td>
+                    <td class="ps-2 pe-2">
+                        Выбирает информацию о зафиксированных фактах продажи для заданного параметром продавца</td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">6</td>
+                    <td class="ps-2 pe-2">Запрос с параметрами</td>
+                    <td class="ps-2 pe-2">
+                        Выбирает информацию обо всех зафиксированных фактах продажи товаров (Наименование товара, Цена закупки, Цена продажи, дата продажи), для которых Цена продажи оказалась в некоторых заданных границах. Значения задавать параметрами
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">7</td>
+                    <td class="ps-2 pe-2">Запрос с вычисляемыми полями</td>
+                    <td class="ps-2 pe-2">
+                        Вычисляет прибыль от продажи за каждый проданный товар. Включает поля Дата продажи, Наименование товара, Цена закупки, Цена продажи, Количество проданных единиц, Прибыль. Сортировка по полю Наименование товара
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">8</td>
+                    <td class="ps-2 pe-2">Итоговый запрос</td>
+                    <td class="ps-2 pe-2">
+                        Выполняет группировку по полю Наименование товара. Для каждого наименования вычисляет среднюю цену закупки товара, количество закупок
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">9</td>
+                    <td class="ps-2 pe-2">Итоговый запрос (нет левого соединения)</td>
+                    <td class="ps-2 pe-2">
+                        Выполняет группировку по полю Код продавца из таблицы ПРОДАЖИ. Для каждого продавца вычисляет среднее значение по полю Цена продажи единицы товара, количество продаж
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">10</td>
+                    <td class="ps-2 pe-2">Итоговый запрос</td>
+                    <td class="ps-2 pe-2">
+                        Выполняет группировку по единицам измерений проданных товаров, для каждой единицы измерения вычисляет сумму продаж и суммарное количество проданного товара
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ps-2 pe-2 text-center">11</td>
+                    <td class="ps-2 pe-2">Итоговый запрос</td>
+                    <td class="ps-2 pe-2">
+                        Для всех продавцов вывести сумму и количество продаж, минимальную и максимальную стоимости продаж
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        
+        <p>Для таблицы ПРОДАЖИ требуется реализовать добавление (метод PUT), редактирование (метод POST)
+            и удаление записей (метод DELETE). </p>
+
+        <h2>Дополнительно</h2>
+        <p>
+            Запись занятия можно скачать по
+            <a href="https://cloud.mail.ru/public/H78p/T8DcFAcXy"> <b>этой ссылке</b> </a>.
+            Материалы занятия – в этом же архиве.
+        </p>        
+    </main>
+</div>
+
+<footer class="container-fluid">
+    <div class="row align-items-center bg-light h-60-px">
+        <h6 class="text-center">&copy;2022, Масленников Виталий, г. Донецк, КА «ШАГ», ПД011.</h6>
+    </div>
+</footer>
+</body>
+</html>

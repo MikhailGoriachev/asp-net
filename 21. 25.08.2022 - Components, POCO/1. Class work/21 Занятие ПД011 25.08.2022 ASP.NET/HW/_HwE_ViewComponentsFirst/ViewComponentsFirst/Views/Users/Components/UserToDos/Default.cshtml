@@ -1,0 +1,28 @@
+﻿@model List<ViewComponentsFirst.Model.Todo>
+
+<table class="table table-striped table-hover w-50 mx-auto">
+    <thead>
+    <tr>
+        <th>Ид.</th>
+        <th>Название дела</th>
+        <th>Признак завершения</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var todo in Model) {
+        <tr>
+            <td>@todo.Id</td>
+            <td>@todo.Title</td>
+            <td>@(todo.Completed?"завершено":"")</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h5 class="text-center">Обработка по заданию</h5>
+
+<ul class="list-group w-45 mx-auto">
+    <li class="list-group-item d-flex justify-content-between">Количество запланированных дел: <span>@ViewBag.Statistics.Item1</span></li>
+    <li class="list-group-item d-flex justify-content-between">Количество завершенных дел: <span>@ViewBag.Statistics.Item2</span></li>
+    <li class="list-group-item d-flex justify-content-between">Количество незавершенных дел: <span>@ViewBag.Statistics.Item3</span></li>
+</ul>

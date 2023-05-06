@@ -1,0 +1,46 @@
+﻿@model UsingTagHelpers2.Models.Purchase
+
+
+@{
+    ViewBag.Title = ViewBag.IsAdd ? "Добавление закупки" : "Редактирование закупки";
+}
+
+    
+@*Форма для записи*@
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h4 class="text-center">@ViewBag.Title</h4>
+    <form method="post" asp-controller="WholesaleStore" asp-action="@(ViewBag.IsAdd ? "AddPurchase" : "EditPurchase")"
+         class="bg-light p-2">
+
+        <input type="hidden" asp-for="Id">
+
+        <div class="mt-2 mb-3">
+            <label asp-for="GoodId">Наименование товара</label>
+            <select asp-for="GoodId" asp-items="ViewBag.GoodList" class="form-select" required></select>            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UnitId">Ед.измерения</label>
+            <select asp-for="UnitId" asp-items="ViewBag.UnitList" class="form-select" required></select>
+            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DatePurchase">Дата закупки</label>
+            <input type="date" asp-for="DatePurchase" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PricePurchase">Цена закупки товара</label>
+            <input type="number" asp-for="PricePurchase" class="form-control" min="0">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Amount">Количество</label>
+            <input type="number" asp-for="Amount" class="form-control" min="0">            
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger w-10rem" asp-controller="WholesaleStore" asp-action="Purchases">Отмена</a>
+    </form>
+</div>

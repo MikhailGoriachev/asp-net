@@ -1,0 +1,55 @@
+@model IEnumerable<Homework.Models.Country>
+
+@{
+    ViewData["Header"] = "Страны";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead class="border-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DailyCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransferCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisaCost)
+            </th>
+            <th><a asp-action="Create">Добавить</a></th>
+        </tr>
+    </thead>
+        <tbody class="color-2">
+@foreach (var item in Model!) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransferCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisaCost)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary ms-2">
+                     <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary ms-2">
+                     <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-sm btn-outline-primary ms-2">
+                     <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

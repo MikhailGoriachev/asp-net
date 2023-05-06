@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Redirects Controller Index";
+}
+
+
+<ul>
+    <li>
+        <a asp-action="sample1">
+            Sample 1. Перенаправление с помощью кода 302. Временное перенаправление. Внешний.
+        </a>
+    </li>
+    <li>
+        <a asp-action="sample2">
+            Sample 2. перенаправление с помощью кода 302. Временное перенаправление. Внутренний
+        </a>
+    </li>
+    <li>
+        <a asp-action="sample3">
+            Sample 3. перенаправление с помощью кода 301. Постоянное перенаправление.
+        </a>
+    </li>
+    <li>
+        <a asp-action="sample4">
+            Sample 4. Перенаправление на метод Index текущего контроллера
+        </a>
+    </li>
+    <li>
+        <a asp-action="sample5">
+            Sample 5. Перенаправление на метод Index контроллера Home
+        </a>
+    </li>
+    <li>
+        <a asp-action="sample6">
+            Sample 6. Перенаправление с использованием значений для переменных сегментов
+        </a>
+    </li>
+</ul>
+

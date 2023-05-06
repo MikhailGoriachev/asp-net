@@ -1,0 +1,104 @@
+﻿@model Home_work.Models.Book
+@using Home_work.Models
+@{
+    ViewBag.title = $"Форма {(@ViewBag.AddingFormMode?"добавления":"редактирования")} книги";
+    ViewBag.PageName = "Forms";
+}
+
+
+<section class="section-form">
+    
+    @*Скрипт для изменения картинки*@
+    <script>
+            //Функция с самовызовом
+            (function (){
+
+                function $(id) {
+                    return document.getElementById(id);
+                }
+
+                let loadHandler = function () {
+
+                    $("fileSelect").addEventListener("change",(e) => {
+                        let fileName = e.target.value;
+
+                        $("bookCoverImage").innerHTML = `<img src="/images/covers/${fileName}" alt="обложка книги ид: ${fileName}" class="book-form-image"/>`
+                    },false);
+
+                }//loadHandler
+
+                window.addEventListener('load',loadHandler,false)
+            })();
+        </script>
+
+    <fieldset>
+        <!-- #region Форма для записи -->
+        <form method="post" asp-controller="Library" asp-action="FormSubmit" asp-route-addingmode="@ViewBag.AddingFormMode" class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="Id">
+        
+        @*Если файла из свойтсва Image нет в папке, то добавится последний существующий файл*@
+        <div id="bookCoverImage" class="alignment-center">
+            @if (File.Exists($"{Environment.CurrentDirectory}\\wwwroot\\images\\covers\\{Model.Image}")){
+                <img src="~/images/covers/@Model.Image" alt="обложка книги с id: @Model.Id" class="book-form-image" />
+            }
+            else
+            {
+                string fileName = Directory.GetFiles($"{Environment.CurrentDirectory}\\wwwroot\\images\\covers").Last();
+
+                <img src="~/images/covers/@fileName.Substring(fileName.LastIndexOf('\\')+1)" alt="обложка книги с id: @Model.Id" class="book-form-image" />
+            }
+        </div>
+
+
+        <h4></h4>
+
+        <!-- Оболожка -->
+        <div class="form-floating my-3">
+            <select asp-for="Image" asp-items="@ViewBag.ImagesNames" id="fileSelect" class="form-control form-select" 
+            placeholder="Название обложки" required></select>
+            <label asp-for="Image">Обложка</label>
+        </div>
+
+        <!-- Название книги -->
+        <div class="form-floating my-3">
+            <input class="form-control" type="text" asp-for="Title"/>
+            <label asp-for="Title">Название книги</label>
+        </div>
+
+        <!-- Автор -->
+        <div class="form-floating my-3">
+            <input class="form-control" type="text" asp-for="Author"/>
+            <label asp-for="Title">Автор</label>
+        </div>
+
+        <!-- Год издания -->
+        <div class="form-floating my-3">
+            <input class="form-control" type="number" max="2022" asp-for="Year"/>
+            <label asp-for="Year">Год издания</label>
+        </div>
+
+        <!-- Количество -->
+        <div class="form-floating my-3">
+            <input class="form-control" type="number" max="1000" asp-for="Quantity"/>
+            <label asp-for="Quantity">Количество</label>
+        </div>
+
+        <!-- Стоимость -->
+        <div class="form-floating my-3">
+            <input class="form-control" type="number" asp-for="Price"/>
+            <label>Стоимость</label>
+        </div>
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="@(ViewBag.AddingFormMode?"Добавить":"Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="Library" asp-action="Books">Выход</a>
+
+    </form>
+        <!-- #endregion -->
+    </fieldset>
+
+</section>
+

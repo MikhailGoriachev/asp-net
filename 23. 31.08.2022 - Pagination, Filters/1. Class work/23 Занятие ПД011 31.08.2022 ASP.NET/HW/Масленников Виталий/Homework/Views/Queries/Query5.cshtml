@@ -1,0 +1,22 @@
+﻿@model IQueryable<Homework.Models.Country>
+
+@{
+    ViewBag.Header = "Запрос на выборку";
+    Layout = "_Layout";
+}
+
+@* фильтр по стране с ценой визы в указанном диапазоне *@
+<div class="list-group-horizontal my-4">
+    <form class="d-inline-block ms-3 me-3" method="post">
+        
+        <label class="form-label me-1 lead" for="inpMinPrice"> Стоимость визы от: </label>
+        <input class="form-control-sm w-80-px" type="text" name="MinPrice" id=inpMinPrice/>
+      
+        <label class="form-label me-1 lead" for="inpMaxPrice"> до: </label>
+        <input class="form-control-sm w-80-px" type="text" name="MaxPrice" id=inpMaxPrice/>
+        
+        <button class="btn btn-sm btn-outline-secondary ms-1 align-baseline" type="submit">Показать</button>
+    </form>
+</div>
+
+@{ await Html.RenderPartialAsync("CountriesTable", Model); }

@@ -1,0 +1,126 @@
+﻿@using Home_work.ViewModels
+@using Home_work.Models.Planets
+@model PlanetsViewModel
+
+<a class="btn btn-secondary my-3" asp-controller="Planets" asp-action="Default">Исходная коллекция</a>
+<a class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#SurfaceType">Выборка по типу поверхности</a>
+<a class="btn btn-primary my-3" asp-controller="Planets" asp-action="SelectByDiameterRange">Выборка по диапазону диаметра</a>
+<a class="btn btn-primary my-3" asp-controller="Planets" asp-action="OrderByMass">Сортировка планет по массе</a>
+
+@* Выборка планет по типу поверхности*@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th class="alignment-center">Id</th>
+        <th class="alignment-center">Название</th>
+        <th class="alignment-center">Диаметр</th>
+        <th class="alignment-center">Орбитальный период</th>
+        <th class="alignment-center">Тип поверхности</th>
+        <th class="alignment-center">Гравитация</th>
+        <th class="alignment-center">Население</th>
+        <th class="alignment-center">Климат</th>
+        <th class="alignment-center">Дейтсвия</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (Planet planet in Model.Planets)
+    {
+        <tr class="align-middle" >
+            <td class="alignment-center">@planet.Id</td>
+            <td class="alignment-center">@planet.Name</td>
+            <td class="alignment-center">@planet.Diameter</td>
+            <td class="alignment-center">@planet.OrbitalPeriod</td>
+            <td class="alignment-center">@planet.Terrain</td>
+            <td class="alignment-center">@planet.Gravity</td>
+            <td class="alignment-center">@planet.Population</td>
+            <td class="alignment-center">@planet.Climate</td>
+            <td>
+                <a class="btn btn-sm btn-outline-info d-block" asp-controller="Planets" asp-action="PlanetInfo" asp-route-value="@planet.Url">
+                    Подробнее
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h3>Итоговые значения</h3>
+
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+        <tr class="align-middle">
+            <th class="alignment-center bg-dark bg-opacity-25" colspan="2">Значения</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr class="align-middle" >
+            <td>Максимальное значение диаметра</td>
+            <td class="alignment-center">@($"{Model.Diameter.max:f2}")</td>
+        </tr>
+        <tr class="align-middle" >
+            <td>Среднее значение диаметра</td>
+            <td class="alignment-center">@($"{Model.Diameter.avg:f2}")</td>
+        </tr>
+        <tr class="align-middle" >
+            <td>Минимальное значение диаметра</td>
+            <td class="alignment-center">@($"{Model.Diameter.min:f2}")</td>
+        </tr>
+
+        <tr class="align-middle br-top-w-015-rem" >
+            <td>Максимальное значение орбитального периода</td>
+            <td class="alignment-center">@($"{Model.OrbitalPeriod.max:f2}")</td>
+        </tr>
+        <tr class="align-middle" >
+            <td>Среднее значение орбитального периода</td>
+            <td class="alignment-center">@($"{Model.OrbitalPeriod.avg:f2}")</td>
+        </tr>
+        <tr class="align-middle" >
+            <td>Минимальное значение орбитального периода</td>
+            <td class="alignment-center">@($"{Model.OrbitalPeriod.min:f2}")</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<!-- Модальное окно - выборка планет по типу поверхности -->
+<div class="modal fade" id="SurfaceType" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Выберите тип поверхности планеты</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+        <form method="post" asp-controller="Planets" 
+            asp-action="SelectBySurface"
+
+            id="formCategory"
+            class="rounded-3 mx-auto w-100 ">
+
+            <!-- Список типов поверхностей -->
+            <div class="form-floating">
+                <select class="form-control form-select" name="Surface" asp-items="@ViewBag.SelectPlanets">
+                </select>
+                <label for="Surface">Типы поверхностей</label>
+            </div>
+
+        </form>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="submit" form="formCategory" class="btn btn-primary px-3">Найти</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>

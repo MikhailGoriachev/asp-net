@@ -1,0 +1,84 @@
+﻿@using Home_work.Models.Planets
+@model Planet
+
+
+<!-- Подробная информация о планете -->
+<table class="table table-hover table-bordered w-75 mx-auto my-4">
+    <thead>
+        <tr class="align-middle">
+            <th class="alignment-center bg-dark bg-opacity-25" colspan="2">Информация о планете</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr class="align-middle" >
+            <td class="w-50 alignment-center">Название</td>
+            <td class="alignment-center">@Model.Name</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Диаметр</td>
+            <td class="alignment-center">@Model.Diameter</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Орбитальный период</td>
+            @*<td class="alignment-center">@(Model.OrbitalPeriod is null ? "Нет данных" : Model.OrbitalPeriod)</td>*@
+            <td class="alignment-center">@Model.OrbitalPeriod</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Период вращения</td>
+            <td class="alignment-center">@Model.RotationPeriod</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Гравитация</td>
+            <td class="alignment-center">@Model.Gravity</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Население</td>
+            <td class="alignment-center">@Model.Population</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Климат</td>
+            <td class="alignment-center">@Model.Climate</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Тип поверхности</td>
+            <td class="alignment-center">@Model.Terrain</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Вода на поверхности</td>
+            <td class="alignment-center">@Model.SurfaceWater </td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Персонажи планеты</td>
+            <td class="alignment-center">
+
+                @if (Model.Residents.Count > 0) {
+                    <button class="btn btn-primary my-3" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#residentsList" aria-expanded="false" 
+                    aria-controls="filmsList">
+                    Показать список резидентов 
+                    <span class="badge bg-warning text-dark">@Model.Residents.Count</span>
+                    </button>
+
+                    <div class="collapse multi-collapse" id="residentsList">
+                        @foreach (string resident in Model.Residents) {
+                            <p>@resident</p>
+                        }
+                    </div>
+                }
+                else{ <span>Резиденты не заданы</span> }
+
+            </td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Дата создания планеты</td>
+            <td class="alignment-center">@($"{Model.Created:dd.MM.yyyy}")</td>
+        </tr>
+        <tr class="align-middle" >
+            <td class="alignment-center">Дата последнего редактирования</td>
+            <td class="alignment-center">@($"{Model.Edited:dd.MM.yyyy}")</td>
+        </tr>
+    </tbody>
+</table>

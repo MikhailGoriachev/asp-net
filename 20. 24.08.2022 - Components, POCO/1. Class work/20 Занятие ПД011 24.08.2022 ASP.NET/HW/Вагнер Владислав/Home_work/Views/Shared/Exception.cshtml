@@ -1,0 +1,11 @@
+﻿@using Home_work.Models.Clients
+@model Client
+@{
+    ViewBag.title = $"Страница исключения";
+    ViewBag.PageName = "ExceptionPage";
+}
+
+<h4>Произошла ошибка, мы работаем над решением проблемы!</h4>
+<p>
+    <b>Сообщение исключения: @ViewData["Message"]</b>
+</p>

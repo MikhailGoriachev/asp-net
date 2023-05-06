@@ -1,0 +1,30 @@
+﻿@model IQueryable<Homework.Models.Queries.Query09Result>
+
+@{
+    ViewBag.Title = "Итоговый запрос ";
+    Layout = "_Layout";
+}
+
+<h4 class="text-center color-1">Группировка по полю Код продавца из таблицы ПРОДАЖИ</h4>
+
+<table class="table table-striped">
+    <thead class="border-dark">
+    <tr>
+        <th>Продавец</th>
+        <th>Сред. цена продаж</th>
+        <th>Количество продаж</th>
+    </tr>
+    </thead>
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td>@item.Seller</td>
+            <td>@item.AvgPrice</td>
+            <td>@item.AmountSales</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>

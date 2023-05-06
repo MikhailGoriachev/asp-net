@@ -1,0 +1,19 @@
+﻿@* 
+    Вообще поиск представления для контроллера из области ведется по следующим путям:
+
+/Areas/Account/Views/Home/
+
+/Areas/Account/Views/Shared/
+
+/Views/Shared/
+
+   
+
+*@
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Area First. /Home/@ViewBag.Title</h3>
+
+<h4>@($"{DateTime.Now:dd-MM-yyyy HH:mm:ss}")</h4>

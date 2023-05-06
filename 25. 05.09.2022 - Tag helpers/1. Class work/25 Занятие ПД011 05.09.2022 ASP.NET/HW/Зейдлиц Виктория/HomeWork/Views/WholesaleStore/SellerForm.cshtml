@@ -1,0 +1,40 @@
+﻿@model HomeWork.Models.Seller
+
+
+@{
+    ViewBag.Title = ViewBag.IsAdd ? "Добавление продавца" : "Редактирование продавца";
+}
+
+    
+@*Форма для записи*@
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h4 class="text-center">@ViewBag.Title</h4>
+    <form method="post" asp-controller="WholesaleStore" asp-action="@(ViewBag.IsAdd ? "AddSeller" : "EditSeller")"
+         class="bg-light p-2">
+
+        <input type="hidden" asp-for="Id">
+
+        <div class="mt-2 mb-3">
+            <label asp-for="Surname">Фамилия</label>
+            <input type="text" asp-for="Surname" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="NameSeller">Имя</label>
+            <input type="text" asp-for="NameSeller" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Patronymic">Отчество</label>
+            <input type="text" asp-for="Patronymic" class="form-control">            
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Interest">Комиссионный процент</label>
+            <input type="number" asp-for="Interest" class="form-control">            
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger w-10rem" asp-controller="WholesaleStore" asp-action="Sellers">Отмена</a>
+    </form>
+</div>

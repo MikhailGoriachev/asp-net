@@ -1,0 +1,252 @@
+[
+  {
+    "$type": "RoutesForms.Models.Task02.Square, RoutesForms",
+    "_a": 7.0,
+    "A": 7.0,
+    "Id": 25,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Rectangle, RoutesForms",
+    "_a": 5.0,
+    "_b": 8.0,
+    "A": 5.0,
+    "B": 8.0,
+    "Id": 24,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Square, RoutesForms",
+    "_a": 8.0,
+    "A": 8.0,
+    "Id": 23,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Rectangle, RoutesForms",
+    "_a": 3.0,
+    "_b": 6.0,
+    "A": 3.0,
+    "B": 6.0,
+    "Id": 22,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 9.76454887807581,
+    "_b": 5.5249958599568325,
+    "_c": 7.978506592558002,
+    "A": 9.76454887807581,
+    "B": 5.5249958599568325,
+    "C": 7.978506592558002,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 9.76454887807581,
+      "Item2": 5.5249958599568325,
+      "Item3": 7.978506592558002
+    },
+    "Id": 20,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Square, RoutesForms",
+    "_a": 9.884960558211878,
+    "A": 9.884960558211878,
+    "Id": 19,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Square, RoutesForms",
+    "_a": 9.113743725751407,
+    "A": 9.113743725751407,
+    "Id": 18,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Square, RoutesForms",
+    "_a": 7.0597459934930065,
+    "A": 7.0597459934930065,
+    "Id": 17,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 4.012534732470538,
+    "_b": 6.313381357264417,
+    "_c": 8.442253997755355,
+    "A": 4.012534732470538,
+    "B": 6.313381357264417,
+    "C": 8.442253997755355,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 4.012534732470538,
+      "Item2": 6.313381357264417,
+      "Item3": 8.442253997755355
+    },
+    "Id": 16,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 5.395187345517421,
+    "_b": 5.072132871519836,
+    "_c": 1.9287987746898079,
+    "A": 5.395187345517421,
+    "B": 5.072132871519836,
+    "C": 1.9287987746898079,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 5.395187345517421,
+      "Item2": 5.072132871519836,
+      "Item3": 1.9287987746898079
+    },
+    "Id": 15,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Rectangle, RoutesForms",
+    "_a": 3.681146199200836,
+    "_b": 1.7067176181388635,
+    "A": 3.681146199200836,
+    "B": 1.7067176181388635,
+    "Id": 14,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 9.565420394095321,
+    "_b": 7.682858921905448,
+    "_c": 7.355574428269441,
+    "A": 9.565420394095321,
+    "B": 7.682858921905448,
+    "C": 7.355574428269441,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 9.565420394095321,
+      "Item2": 7.682858921905448,
+      "Item3": 7.355574428269441
+    },
+    "Id": 13,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Square, RoutesForms",
+    "_a": 7.0,
+    "A": 7.0,
+    "Id": 2,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Rectangle, RoutesForms",
+    "_a": 5.0,
+    "_b": 6.0,
+    "A": 5.0,
+    "B": 6.0,
+    "Id": 3,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Rectangle, RoutesForms",
+    "_a": 9.0,
+    "_b": 12.0,
+    "A": 9.0,
+    "B": 12.0,
+    "Id": 4,
+    "Type": "прямоугольник",
+    "Image": "rectangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 12.0,
+    "_b": 18.0,
+    "_c": 20.0,
+    "A": 12.0,
+    "B": 18.0,
+    "C": 20.0,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 12.0,
+      "Item2": 18.0,
+      "Item3": 20.0
+    },
+    "Id": 5,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 5.0,
+    "_b": 11.0,
+    "_c": 9.0,
+    "A": 5.0,
+    "B": 11.0,
+    "C": 9.0,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 5.0,
+      "Item2": 11.0,
+      "Item3": 9.0
+    },
+    "Id": 6,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Square, RoutesForms",
+    "_a": 15.0,
+    "A": 15.0,
+    "Id": 9,
+    "Type": "квадрат",
+    "Image": "square.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 24.0,
+    "_b": 20.0,
+    "_c": 22.0,
+    "A": 24.0,
+    "B": 20.0,
+    "C": 22.0,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 24.0,
+      "Item2": 20.0,
+      "Item3": 22.0
+    },
+    "Id": 11,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  },
+  {
+    "$type": "RoutesForms.Models.Task02.Triangle, RoutesForms",
+    "_a": 8.0,
+    "_b": 10.0,
+    "_c": 8.0,
+    "A": 8.0,
+    "B": 10.0,
+    "C": 8.0,
+    "Sides": {
+      "$type": "System.ValueTuple`3[[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib],[System.Double, System.Private.CoreLib]], System.Private.CoreLib",
+      "Item1": 8.0,
+      "Item2": 10.0,
+      "Item3": 8.0
+    },
+    "Id": 12,
+    "Type": "треугольник",
+    "Image": "triangle.png"
+  }
+]

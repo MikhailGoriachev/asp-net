@@ -1,0 +1,24 @@
+﻿@model System.Collections.Generic.IEnumerable<HomeWork.Models.UserPhoto>?
+
+<table class="table align-middle" id="clientsTableId">
+    <h5>Количество фото: @ViewBag.Count</h5>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Фото</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var userPhoto in Model)
+        {
+            <tr>
+                <td>@userPhoto.Id</td>
+                <td><img src="@userPhoto.ThumbnailUrl" alt="image" class="h-11rem"/></td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

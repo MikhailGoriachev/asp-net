@@ -1,0 +1,58 @@
+﻿@model Homework.Models.ViewModels.RouteInputForm
+
+@{
+    ViewBag.Title = "Ввод данных о маршруте";
+    Layout = "_Layout";
+}
+
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h3 class="text-center">Редактирование сведений о маршруте</h3>
+    <form class="bg-light p-5" asp-controller="Routes" asp-action="UpdateRoute" method="post">
+
+        <input asp-for="Route.Id" type="hidden" value="@Model!.Route.Id"/>
+
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Route.StartPoint"></label>
+            <input asp-for="Route.StartPoint" class="form-control"/>
+            <span asp-validation-for="Route.StartPoint" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.MiddlePoint"></label>
+            <input asp-for="Route.MiddlePoint" class="form-control"/>
+            <span asp-validation-for="Route.MiddlePoint" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.FinishPoint"></label>
+            <input asp-for="Route.FinishPoint" class="form-control"/>
+            <span asp-validation-for="Route.FinishPoint" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.Length"></label>
+            <input asp-for="Route.Length" class="form-control"/>
+            <span asp-validation-for="Route.Length" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.Difficulty"></label>
+            <select class="form-select" asp-for="Route.Difficulty" asp-items="Model.DifficultiesList"></select>
+            <span asp-validation-for="Route.Difficulty" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.InstructorId"></label>
+            <select class="form-select" asp-for="Route.InstructorId" asp-items="Model.InstructorsList"></select>
+            <span asp-validation-for="Route.InstructorId" class="text-danger"></span>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-controller="Routes" asp-action="index" class="btn btn-secondary ms-3">Отмена</a>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+

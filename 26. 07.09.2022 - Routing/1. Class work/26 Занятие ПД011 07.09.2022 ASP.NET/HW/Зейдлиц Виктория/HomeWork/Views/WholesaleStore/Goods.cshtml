@@ -1,0 +1,79 @@
+﻿@model HomeWork.Models.ViewModels.PaginationPageViewModel<HomeWork.Models.Good>
+
+@{
+    ViewBag.Title = "Наименование товара";
+        
+    ViewBag.MaxCountPages = 3;
+}
+
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+@* вывод коллекции наименования продуктов *@
+<table class="table table-striped">
+    <thead>
+           <tr>
+              <th>Ид</th>
+              <th>Наименование</th>
+              <th>
+                <a class="btn btn-success" asp-controller="WholesaleStore" asp-action="AddGood">
+                  <i class="bi bi-plus-lg"></i> Добавить
+                </a>
+              </th>
+           </tr>
+    </thead>
+    <tbody>
+        @foreach (var good in Model.Items)
+        {
+            <good-table goods="good"></good-table>
+        }
+    </tbody>
+</table>
+
+
+@* Навигация для пагинации *@
+<nav>
+    <ul class="pagination justify-content-center">
+
+        @* Переход на предыдущую страницу *@
+        <li class="page-item @(Model.PageViewModel.HasPrevPage ? "" : "disabled")"
+            title="Переход на предыдущую страницу">
+            <a class="page-link" asp-controller="WholesaleStore" asp-action="Goods"
+                asp-route-pageNumber="@(Model.PageViewModel.PageNumber - 1)">
+                <i class="bi bi-caret-left-fill"></i>
+            </a>
+        </li>
+
+        @* Переход на страницу под номером *@
+        @{
+            int dif = Model.PageViewModel.CountPages - Model.PageViewModel.PageNumber;
+            int half = ViewBag.MaxCountPages / 2;
+            int halfDif = half - dif;
+            int i = dif > half ? Model.PageViewModel.PageNumber - half : Model.PageViewModel.PageNumber - half - halfDif;
+            for (int n = 0; n < ViewBag.MaxCountPages && i <= Model.PageViewModel.CountPages; i++)
+            {
+                if (i > 0)
+                {
+                    n++;
+                    <li class="page-item @(i == Model.PageViewModel.PageNumber ? "active" : "")"
+                        title="Переход на страницу @i">
+                        <a class="page-link" asp-controller="WholesaleStore" asp-action="Goods"
+                            asp-route-pageNumber="@i">
+                            @i
+                        </a>
+                    </li>
+                }
+            }
+        }
+
+        @* Переход на следующую страницу *@
+        <li class="page-item @(Model.PageViewModel.HasNextPage ? "" : "disabled")"
+            title="Переход на следующую страницу">
+            <a class="page-link" asp-controller="WholesaleStore" asp-action="Goods"
+                asp-route-pageNumber="@(Model.PageViewModel.PageNumber + 1)">
+                <i class="bi bi-caret-right-fill"></i>
+            </a>
+        </li>
+
+    </ul>
+</nav>

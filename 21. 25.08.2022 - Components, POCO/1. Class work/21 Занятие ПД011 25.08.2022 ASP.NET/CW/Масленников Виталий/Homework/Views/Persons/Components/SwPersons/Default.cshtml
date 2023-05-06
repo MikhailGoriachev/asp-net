@@ -1,0 +1,23 @@
+﻿@model List<Homework.Models.Person>
+
+
+<table class="table mt-4 text-start" id="clientsTable">
+    <thead class="border-dark">
+    <tr>
+        <th>Name</th>
+        <th>BirthYear</th>
+        <th>Gender</th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.BirthYear</td>
+            <td>@item.Gender</td>
+        </tr>
+    }
+    </tbody>
+</table>

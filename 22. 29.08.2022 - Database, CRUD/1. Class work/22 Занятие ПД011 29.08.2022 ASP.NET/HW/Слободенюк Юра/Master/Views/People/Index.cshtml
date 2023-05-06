@@ -1,0 +1,73 @@
+﻿@model PeopleIndexViewModel
+@{
+    Layout = "_TaskLayout";
+    ViewBag.Title = "Задача №1";
+}
+
+@section Description
+{
+    @await Html.PartialAsync("_PeopleDescription")
+}
+
+<section class="mt-5 row gap-3">
+    <article class="col-2 card">
+        @await Html.PartialAsync("_RangeSelector", new RangeSelectorViewModel
+        {
+            Title = "Диапазон веса",
+            Action = "ByMass"
+        })
+    </article>
+    <article class="col-2 card">
+        @await Html.PartialAsync("_PeopleHomeworldSelector", Model.Characters)
+    </article>
+    <article class="col-3 card justify-content-start p-3">
+        <a class="btn btn-outline-primary mx-auto"
+           asp-action="MassAscending">
+            По возрастанию веса
+        </a>
+    </article>
+    <article class="col-3 ms-auto">
+        @await Html.PartialAsync("_PeopleStats", Model.Characters)
+    </article>
+</section>
+
+<section class="mt-4">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Рост</th>
+            <th scope="col">Вес</th>
+            <th scope="col">Планета</th>
+            <th scope="col">Пол</th>
+            <th scope="col">Родился</th>
+            <th scope="col">Детали</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var character in Model.Characters)
+        {
+            <tr>
+                <td>@character.Name</td>
+                <td>@character.Height</td>
+                <td>@character.Mass</td>
+                <td>@character.Homeworld</td>
+                <td>@character.Gender</td>
+                <td>@character.BirthYear</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@character.Id">
+                        <i class="fa-solid fa-info"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</section>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 3
+})

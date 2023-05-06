@@ -1,0 +1,55 @@
+﻿@model Homework.Models.Task1ViewModel
+@{
+    ViewBag.Title = "Задача 1";
+    Layout = "_Layout";
+}
+
+<h4 class="mt-5">Уравнение 1</h4>
+<img class="mt-4" src="~/images/task1_eq1.png" alt="Задание 1, уравнение 1"/>
+
+<div class="card mt-4" style="width: 18rem;">
+    <div class="card-header">
+        Уравнение 1
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            Параметры: x = @Model!.Equation1.X, y = @Model.Equation1.Y, z = @Model.Equation1.Z
+        </li>
+        <li class="list-group-item">
+            <div>Контрольные данные:</div>
+            a = @Model!.Equation1.ControlResultA, b = @Model!.Equation1.ControlResultB
+        </li>
+        <li class="list-group-item">
+            <div>Результат:</div>
+            a = @($"{Model!.Equation1.A:F6}"), b = @($"{Model!.Equation1.B:F6}")
+        </li>
+    </ul>
+    <div class="card-footer">
+        <a class="btn btn-secondary" asp-action="Equation1">Расчитать</a>
+    </div>
+</div>
+
+<h4 class="mt-5">Уравнение 2</h4>
+<img class="mt-4" src="~/images/task2_eq1.png" alt="Задание 2, уравнение 2"/>
+
+<div class="card mt-4" style="width: 18rem;">
+    <div class="card-header">
+        Уравнение 2
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            Параметры: x = @Model!.Equation2.X, y = @Model.Equation2.Y, z = @Model.Equation2.Z
+        </li>
+        <li class="list-group-item">
+            <div >Контрольные данные:</div>
+            a = @Model!.Equation2.ControlResultA, b = @Model!.Equation2.ControlResultB
+        </li>
+        <li class="list-group-item">
+            <div>Результат:</div>
+            a = @($"{Model!.Equation2.A:F6}"), b = @($"{Model!.Equation2.B:F7}")
+        </li>
+    </ul>
+    <div class="card-footer">
+        <a class="btn btn-secondary" asp-action="Equation2">Расчитать</a>
+    </div>
+</div>

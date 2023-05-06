@@ -1,0 +1,44 @@
+﻿@model List<Homework.Models.User>
+
+
+<table class="table mt-4 text-start" id="clientsTable">
+    <thead class="border-dark">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>UserName</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Website</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.UserName</td>
+            <td>@item.Phone</td>
+            <td><a href="mailto:@item.Email">@item.Email</a></td>
+            <td> <a href="https://@item.Website">@item.Website</a></td>
+            <td>
+                <a asp-controller="Users" asp-action="Posts" asp-route-id="@item.Id"
+                   class="btn btn-sm btn-outline-primary ms-2" title="Посты пользователя">
+                    Posts
+                </a>
+                <a asp-controller="Users" asp-action="Photos" asp-route-id="@item.Id"
+                   class="btn btn-sm btn-outline-primary ms-2" title="Посты пользователя">
+                    Photos
+                </a>
+                <a asp-controller="Users" asp-action="Tasks" asp-route-id="@item.Id"
+                   class="btn btn-sm btn-outline-primary ms-2" title="Посты пользователя">
+                    Todos
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,130 @@
+﻿@using Homework.Models.TravelCompany
+@model IEnumerable<Homework.Models.TravelCompany.Instructor>
+
+@{
+    ViewBag.Title = "Инструкторы";
+    Layout = "_Layout";
+}
+
+
+@*Панель кнопок для фильтрации/выборки*@
+<div class="navbar">
+    <div class="container-fluid justify-content-start gap-2">
+
+        <a asp-controller="Instructors"
+           asp-action="Index"
+           class="btn btn-sm btn-outline-secondary"
+           title="вывод коллекции в исходном порядке">
+            исходные данные
+        </a>
+
+        <a asp-controller="Instructors"
+           asp-action="OrderBy"
+           asp-route-property="@nameof(Instructor.Category)"
+           asp-route-sort="Desc"
+           class="btn btn-sm btn-outline-secondary"
+           title="вывод коллекции в порядке убывания категорий">
+            категория <i class="fa-solid fa-sort-down align-top"></i>
+        </a>
+
+        <a asp-controller="Instructors"
+           asp-action="OrderBy"
+           asp-route-property="@nameof(Instructor.Surname)"
+           asp-route-sort="Asc"
+           class="btn btn-sm btn-outline-secondary"
+           title="вывод коллекции упорядоченной в алфавитном порядке">
+            в алфавитном порядке <i class="fa-solid fa-sort-up align-bottom"></i>
+        </a>
+
+
+        <form asp-action="WhereCategory" class="row align-items-baseline g-3 ms-3">
+            <div class="col justify-content-start align-items-center">
+                <input type="hidden" name="point" value="Middle"/>
+                <label for="selCategory" class="fs-form-title">Категория:</label>
+                <select name="category" id="selCategory" asp-items="@ViewBag.Categories" class="form-control-sm ms-3"></select>
+                <button class="btn btn-sm btn-primary ms-2" type="submit"> выбрать</button>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+
+<table class="table mt-4 text-center" id="insTable">
+    <thead class="border-dark">
+    <tr>
+        <th>Id</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Дата рождения</th>
+        <th>Категория</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var instructor in Model!)
+    {
+        <tr>
+            <td>@instructor.Id</td>
+            <td>@instructor.Surname</td>
+            <td>@instructor.Name</td>
+            <td>@instructor.Patronymic</td>
+            <td>@($"{instructor.DoB:dd.MM.yyyy}")</td>
+            <td>@instructor.Category</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary ms-2"
+                        data-id="@instructor.Id" title="Информация об инструкторе"
+                        data-bs-toggle="modal" data-bs-target="#instrInfoModal">
+                    <i class="fa fa-info-circle" data-id="@instructor.Id" aria-hidden="true"></i>
+                </button>
+
+                <a asp-controller="Instructors" asp-action="EditInstructor"
+                   class="btn btn-sm btn-outline-primary ms-2"
+                   asp-route-id="@instructor.Id" title="Редактировать данные">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@*Модальное окно с информацией об инструкторе*@
+<div class="modal fade" id="instrInfoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Информация об инструкторе</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card m-1 p-1">
+                    <div class="card-header">
+                        <p class="d-flex justify-content-between">Инструктор: <strong id="shortName"></strong></p>
+                    </div>
+                    <div class="card-body bg-light">
+                        <ul class="list-unstyled">
+                            <li class="d-flex justify-content-between">Id: <strong id="id"></strong></li>
+                            <li class="d-flex justify-content-between">Фамилия: <strong id="surname"></strong></li>
+                            <li class="d-flex justify-content-between">Имя: <strong id="name"></strong></li>
+                            <li class="d-flex justify-content-between">Отчество: <strong id="patronymic"></strong></li>
+                            <li class="d-flex justify-content-between">Дата рождения: <strong id="dob"></strong></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <p class="d-flex justify-content-between">Категория: <strong id="category"></strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/instructorInfo.js"></script>

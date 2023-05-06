@@ -1,0 +1,19 @@
+@using Homework.Models.ViewModels
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Homework.Models.ViewModels.IndexViewModel<Homework.Models.Goods>
+
+@{
+    ViewData["Title"] = "Номенклатуры товаров";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    ViewBag.MaxCountPages = 5;
+}
+
+<goods-table items="Model!.Items"></goods-table>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 5
+})

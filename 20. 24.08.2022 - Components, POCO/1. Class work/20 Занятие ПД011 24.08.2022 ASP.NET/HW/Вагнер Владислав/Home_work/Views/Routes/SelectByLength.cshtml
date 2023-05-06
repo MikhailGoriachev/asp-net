@@ -1,0 +1,46 @@
+﻿@namespace Home_work.Models.Routes
+@model LenghtRange
+@using Home_work.Models
+@{
+    ViewBag.title = $"Форма задания диапазона протяженности";
+    ViewBag.PageName = "SelectByLength";
+}
+
+@section JqueryFiles{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+<section class="section-form">
+   
+    <fieldset>
+        <form method="post" asp-controller="Routes" 
+            asp-action="SelectByRange" 
+            id="formLengthRange"
+            class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg">
+
+            <!-- Диапазон -->
+            <div class="form-floating my-3 ">
+                <input asp-for="Min" class="form-control"/>
+                <label asp-for="Min"></label>
+                
+                <span asp-validation-for="Min" class="text-danger"></span>
+            </div>
+            <div class="mt-4 form-floating my-3 ">
+                <input asp-for="Max" class="form-control"/>
+                <label asp-for="Max"></label>
+
+                <span asp-validation-for="Max" class="text-danger"></span>
+            </div>
+
+          <!-- Кнопки управления -->
+            <input class="btn btn-success me-2"
+                   type="submit" value="Выбрать"/>
+            <a class="btn btn-danger" asp-controller="Routes" asp-action="Routes">Выход</a>
+            
+        </form>
+    </fieldset>
+
+</section>

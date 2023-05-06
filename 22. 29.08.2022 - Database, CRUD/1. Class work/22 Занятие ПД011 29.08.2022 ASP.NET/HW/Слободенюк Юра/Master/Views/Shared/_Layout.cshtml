@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="~/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/lib/bootstrap.min.css" >
+    <script defer src="~/lib/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/6bbf14962c.js" crossorigin="anonymous"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body class="min-vh-100 vh-100">
+    <header style="min-height: 10vh">
+        <nav class="navbar bg-light py-3">
+            <div class="container justify-content-center">
+                <ul class="nav nav-pills">
+                    <a class="nav-link" is-active asp-controller="Home" asp-action="Index">Главная</a>
+                    <a class="nav-link" is-active asp-controller="People" asp-action="Index">Персонажи</a>
+                    <a class="nav-link" is-active asp-controller="Planets" asp-action="Index">Планеты</a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container pb-4 pt-4" style="min-height: 80vh">
+        <div class="row align-items-center h-100">
+            @RenderBody()
+        </div>
+    </main>
+    
+    <script>
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    </script>
+</body>
+</html>

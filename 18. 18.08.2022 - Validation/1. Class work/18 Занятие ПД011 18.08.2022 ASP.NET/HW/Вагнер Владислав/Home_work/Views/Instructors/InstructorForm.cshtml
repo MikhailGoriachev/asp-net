@@ -1,0 +1,75 @@
+﻿@model Home_work.Models.Instructor
+@using Home_work.Models
+@{
+    ViewBag.title = $"Форма редактирования севедений об инструкторе";
+    ViewBag.PageName = "InstructorForm";
+}
+
+
+<section class="section-form">
+    <fieldset>
+        <!-- #region Форма для записи -->
+        <form method="post" asp-controller="Instructors" 
+        asp-action="FormSubmit" 
+        class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="Id">
+
+
+        <h4></h4>
+
+        <!-- Фамилия -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Surname"/>
+
+            <label asp-for="Surname"></label>
+        </div>
+
+        <!-- Имя -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Name"/>
+
+            <label asp-for="Name"></label>
+        </div>
+
+        <!-- Отчество -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="Patronymic"/>
+
+            <label asp-for="Patronymic"></label>
+        </div>
+       
+
+        <!-- Категория -->
+        <div class="form-floating my-3">
+            <select asp-for="Category" asp-items="@ViewBag.Categories" 
+            class="form-control form-select" 
+            required></select>
+            <label asp-for="Category"></label>
+        </div>
+        
+        <!-- Дата рождения -->
+        <div class="form-floating my-3 ">
+            
+            <input class="form-control" asp-for="BirthDate"/>
+
+            <label asp-for="BirthDate"></label>
+        </div>
+
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="Сохранить"/>
+
+        <a class="btn btn-danger" asp-controller="Instructors" asp-action="Default">Выход</a>
+
+    </form>
+        <!-- #endregion -->
+    </fieldset>
+
+</section>
+

@@ -1,0 +1,128 @@
+[
+  {
+    "Id": 1,
+    "Image": "cover1.jpg",
+    "Author": "Брэдбери Рэй",
+    "Title": "451° по Фаренгейту",
+    "Year": 1953,
+    "Amount": 40,
+    "Price": 400
+  },
+  {
+    "Id": 2,
+    "Image": "cover2.jpg",
+    "Author": "Бейтс Берт",
+    "Title": "Изучаем Java",
+    "Year": 2019,
+    "Amount": 19,
+    "Price": 1200
+  },
+  {
+    "Id": 3,
+    "Image": "cover3.jpg",
+    "Author": "Васильев А.Н.",
+    "Title": "Программирование на JavaScript",
+    "Year": 2019,
+    "Amount": 35,
+    "Price": 1900
+  },
+  {
+    "Id": 4,
+    "Image": "cover4.jpg",
+    "Author": "Радченко Н.А.",
+    "Title": "1С: Предприятие. Практическое пособие разработчика",
+    "Year": 2012,
+    "Amount": 18,
+    "Price": 1600
+  },
+  {
+    "Id": 5,
+    "Image": "cover5.jpg",
+    "Author": "Сонмез Джон",
+    "Title": "Путь программиста",
+    "Year": 2016,
+    "Amount": 25,
+    "Price": 500
+  },
+  {
+    "Id": 6,
+    "Image": "cover6.jpg",
+    "Author": "Цунэтомо Ямамото",
+    "Title": "Путь самурая (Хагакурэ)",
+    "Year": 2019,
+    "Amount": 8,
+    "Price": 1600
+  },
+  {
+    "Id": 7,
+    "Image": "cover7.jpg",
+    "Author": "Макконнелл Стив",
+    "Title": "Совершенный код",
+    "Year": 1993,
+    "Amount": 36,
+    "Price": 1100
+  },
+  {
+    "Id": 8,
+    "Image": "cover8.jpg",
+    "Author": "Кнут Эрвин",
+    "Title": "Искусство программирования",
+    "Year": 1968,
+    "Amount": 36,
+    "Price": 600
+  },
+  {
+    "Id": 9,
+    "Image": "cover9.jpg",
+    "Author": "Бек Кент",
+    "Title": "Refactoring",
+    "Year": 1999,
+    "Amount": 37,
+    "Price": 1600
+  },
+  {
+    "Id": 10,
+    "Image": "cover10.jpg",
+    "Author": "Эккель Брюс",
+    "Title": "Философия Java",
+    "Year": 1998,
+    "Amount": 1,
+    "Price": 1100
+  },
+  {
+    "Id": 11,
+    "Image": "cover11.jpg",
+    "Author": "Фролова Анна",
+    "Title": "Собачье счастье",
+    "Year": 2021,
+    "Amount": 8,
+    "Price": 400
+  },
+  {
+    "Id": 12,
+    "Image": "cover12.jpg",
+    "Author": "Чиннатхамби Кирупа",
+    "Title": "JavaScript с нуля",
+    "Year": 2021,
+    "Amount": 38,
+    "Price": 400
+  },
+  {
+    "Id": 13,
+    "Image": "cover13.jpg",
+    "Author": "Гамма Эрих",
+    "Title": "Design Patterns",
+    "Year": 1994,
+    "Amount": 27,
+    "Price": 700
+  },
+  {
+    "Id": 14,
+    "Image": "cover14.jpg",
+    "Author": "Фриман Эрик",
+    "Title": "Паттерны проектирования",
+    "Year": 2004,
+    "Amount": 11,
+    "Price": 1800
+  }
+]

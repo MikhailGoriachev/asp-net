@@ -1,0 +1,30 @@
+﻿@model IQueryable<Homework.Models.Route>
+
+@* Таблица с данными *@
+<table class="table text-center mt-3">
+    <thead class="fw-bold align-top">
+    <tr class="align-top">
+        <td>Страна</td>
+        <td>Цель поездки</td>
+        <td>Стоимость визы</td>
+        <td>Стоимость транспортных<br/> услуг</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model is not null && Model.AsEnumerable().Any()){
+        @foreach (var route in Model){
+            <tr>
+                <td>@route.Country!.Name</td>
+                <td>@route.Purpose!.Name</td>
+                <td>@route.Country!.VisaCost</td>
+                <td>@route.Country.TransferCost</td>
+                <td>@(route.Country!.DailyCost + route.DailyCost)</td>
+            </tr>
+        }
+    }else{
+        <tr><td colspan="5" class="text-primary text-center">Нет данных для отображения</td></tr>
+    }
+    </tbody>
+</table>

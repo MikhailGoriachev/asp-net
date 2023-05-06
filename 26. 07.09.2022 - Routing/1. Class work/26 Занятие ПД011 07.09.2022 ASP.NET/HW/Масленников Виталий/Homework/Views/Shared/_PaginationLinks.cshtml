@@ -1,0 +1,60 @@
+﻿@using Homework.TagHelpers
+@model Homework.Models.ViewModels.PaginationLinksViewModel
+@removeTagHelper Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@* Постраничная навигация *@
+    <nav>
+        <ul class="pagination justify-content-center">
+
+            @* Переход на первую страницу *@
+            <li class="page-item"  disabled-if="@(Model!.CurrentPage == 1)" title="Переход на первую страницу">
+                <a class="page-link"  asp-action="Index" add-routes="@Model!.AdditionalRouteParameters">
+                    <i class="bi bi-skip-start-fill"></i>
+                </a>
+            </li>
+
+            @* Переход на предыдущую страницу *@
+            <li class="page-item"  disabled-if="@(Model.CurrentPage == 1)" title="Переход на предыдущую страницу">
+                <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)"
+                   add-routes="@Model.AdditionalRouteParameters">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </li>
+
+            @* Переход на страницу под номером *@
+            @{
+                var start = Math.Clamp(Model.CurrentPage - Model.LinksCount, 1, Model.PagesCount);
+                var end = Model.CurrentPage + Model.LinksCount;
+
+                for (var i = start; i <= end && i <= Model.PagesCount; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")"
+                        title="Переход на страницу @i">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i"
+                           add-routes="@(Model.AdditionalRouteParameters)">
+                            @i
+                        </a>
+                    </li>
+                }
+            }
+
+            @* Переход на следующую страницу *@
+            <li class="page-item" disabled-if="@(Model.CurrentPage == Model.PagesCount)"
+                title="Переход на следующую страницу">
+                <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)" 
+                   add-routes="@Model.AdditionalRouteParameters">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </li>
+
+            @* Переход на последнюю страницу *@
+            <li class="page-item" disabled-if="@(Model.CurrentPage == Model.PagesCount)"
+                title="Переход на последнюю страницу">
+                <a class="page-link" asp-action="Index" asp-route-page="@(Model.PagesCount)" 
+                   add-routes="@Model.AdditionalRouteParameters">
+                    <i class="bi bi-skip-end-fill"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>

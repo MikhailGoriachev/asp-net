@@ -1,0 +1,30 @@
+﻿@model System.Collections.Generic.IReadOnlyCollection<Master.Models.Character>
+@{
+    var weights = @Model
+        .Select(x => int.TryParse(x.Mass, out var mass) ? mass : (int?)null)
+        .ToArray();
+
+    var averageWeight = weights.Average();
+    var maxWeight = weights.Max();
+    var minWeight = weights.Min();
+    var maxMinContrast = maxWeight - minWeight;
+}
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Средний вес
+        <span class="badge bg-primary rounded-pill">@averageWeight</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Минимальный вес
+        <span class="badge bg-primary rounded-pill">@minWeight</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Максимальный вес
+        <span class="badge bg-primary rounded-pill">@maxWeight</span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Разница весов
+        <span class="badge bg-primary rounded-pill">@maxMinContrast</span>
+    </li>
+</ul>

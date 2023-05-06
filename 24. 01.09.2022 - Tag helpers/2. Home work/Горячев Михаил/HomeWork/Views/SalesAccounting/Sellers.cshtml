@@ -1,0 +1,77 @@
+﻿@model HomeWork.Models.ViewModels.PaginationPageViewModel<HomeWork.Models.Seller>
+
+@{
+    ViewBag.Title = "Продавцы";
+
+    ViewBag.MaxCountPages = 5;
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <sellers-table items="Model.Items"></sellers-table>
+
+    @* Навигация для пагинации *@
+    <nav>
+        <ul class="pagination justify-content-center">
+
+            @* Переход на первую страницу *@
+            <li class="page-item @(Model.PageViewModel.PageNumber != 1 ? "" : "disabled")"
+                title="Переход на первую страницу">
+                <a class="page-link" asp-controller="SalesAccounting" asp-action="Sellers"
+                   asp-route-pageNumber="@(1)">
+                    <i class="bi bi-skip-start-fill"></i>
+                </a>
+            </li>
+
+            @* Переход на предыдущую страницу *@
+            <li class="page-item @(Model.PageViewModel.HasPrevPage ? "" : "disabled")"
+                title="Переход на предыдущую страницу">
+                <a class="page-link" asp-controller="SalesAccounting" asp-action="Sellers"
+                   asp-route-pageNumber="@(Model.PageViewModel.PageNumber - 1)">
+                    <i class="bi bi-caret-left-fill"></i>
+                </a>
+            </li>
+
+            @* Переход на страницу под номером *@
+            @{
+                int dif = Model.PageViewModel.CountPages - Model.PageViewModel.PageNumber;
+                int half = ViewBag.MaxCountPages / 2;
+                int halfDif = half - dif;
+                int i = dif > half ? Model.PageViewModel.PageNumber - half : Model.PageViewModel.PageNumber - half - halfDif;
+                for (int n = 0; n < ViewBag.MaxCountPages && i <= Model.PageViewModel.CountPages; i++)
+                {
+                    if (i > 0)
+                    {
+                        n++;
+                        <li class="page-item @(i == Model.PageViewModel.PageNumber ? "active" : "")"
+                            title="Переход на страницу @i">
+                            <a class="page-link" asp-controller="SalesAccounting" asp-action="Sellers"
+                               asp-route-pageNumber="@i">
+                                @i
+                            </a>
+                        </li>
+                    }
+                }
+            }
+
+            @* Переход на следующую страницу *@
+            <li class="page-item @(Model.PageViewModel.HasNextPage ? "" : "disabled")"
+                title="Переход на следующую страницу">
+                <a class="page-link" asp-controller="SalesAccounting" asp-action="Sellers"
+                   asp-route-pageNumber="@(Model.PageViewModel.PageNumber + 1)">
+                    <i class="bi bi-caret-right-fill"></i>
+                </a>
+            </li>
+
+            @* Переход на последнюю страницу *@
+            <li class="page-item @(Model.PageViewModel.PageNumber != Model.PageViewModel.CountPages ? "" : "disabled")"
+                title="Переход на последнюю страницу">
+                <a class="page-link" asp-controller="SalesAccounting" asp-action="Sellers"
+                   asp-route-pageNumber="@(Model.PageViewModel.CountPages)">
+                    <i class="bi bi-skip-end-fill"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</section>

@@ -1,0 +1,54 @@
+@model IEnumerable<Homework.Models.Travel>
+
+@{
+    ViewData["Header"] = "Поездки";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead class="border-dark fw-bold align-top">
+    <tr>
+        <td>Фамилия И.О<br/> клиента</td>
+        <td>Паспорт</td>
+        <td>Страна</td>
+        <td>Цель поездки</td>
+        <td>Стоимость 1 дня<br/> пребывания</td>
+        <td>Стоимость транспотных<br/> услуг</td>
+        <td>Стоимость оформления<br/> визы</td>
+        <td>Дата начала<br/> пребывания</td>
+        <td>Кол-во дней</td>
+        <td>Стоимость (полная)</td>
+        <th><a asp-action="Create">Добавить</a></th>
+    </tr>
+    </thead>
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td class="text-start text-nowrap">@item.Client!.FullName</td>
+                            <td>@item.Client.Passport</td>
+                            <td>@item.Route!.Country!.Name</td>
+                            <td>@item.Route!.Purpose!.Name</td>
+                            <td>@(item.Route.DailyCost + item.Route.Country.DailyCost)</td>
+                            <td>@(item.Route.Country.TransferCost)</td>
+                            <td>@(item.Route.Country.VisaCost)</td>
+                            <td>@($"{item.StartDate:dd.MM.yy}")</td>
+                            <td>@item.Duration</td>
+                            <td>@(Math.Ceiling((item.Duration * (item.Route!.DailyCost + item.Route!.Country!.DailyCost)
+                                              + item.Route.Country.TransferCost + item.Route.Country.VisaCost) * 1.03))
+                            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary ms-2">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

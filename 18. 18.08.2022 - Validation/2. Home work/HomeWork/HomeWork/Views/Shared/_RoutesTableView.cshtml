@@ -1,0 +1,116 @@
+﻿@model IEnumerable<HomeWork.Models.ViewModels.Routes.RouteViewModel>
+
+<table id="routesTableId" class="table align-middle">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Начальный пункт</th>
+        <th>Промежуточный пункт</th>
+        <th>Конечный пункт</th>
+        <th>Протяженность (км)</th>
+        <th>Сложнось</th>
+        <th>Инструктор</th>
+        <th>
+            <a class="btn btn-success" asp-controller="Routes" asp-action="AddRoute">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var route in Model)
+    {
+        <tr>
+            <td>@route.Id</td>
+            <td>@route.StartPoint</td>
+            <td>@route.MiddlePoint</td>
+            <td>@route.EndPoint</td>
+            <td>@($"{route.Length:n0}")</td>
+            <td>@route.Difficulty</td>
+            <td>@($"{route.Instructor!.Surname} {route.Instructor!.Name[0]}. {route.Instructor!.Patronymic[0]}.")</td>
+            <td>
+                <a class="btn btn-outline-primary" asp-controller="Routes" asp-action="EditRoute" asp-route-id="@route.Id"
+                   title="Изменить...">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-outline-danger" asp-controller="Routes" asp-action="RemoveRoute" asp-route-id="@route.Id"
+                   title="Удалить">
+                    <i class="bi bi-eraser-fill"></i>
+                </a>
+                <a class="btn btn-outline-success" data-route-id="@route.Id" title="Подробная информация..."
+                   data-bs-toggle="modal"
+                   data-bs-target="#routeModalId">
+                    <i data-route-id="@route.Id"
+                       class="bi bi-info-circle">
+                    </i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div id="routeModalId" class="modal fade">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Заголовок окна -->
+            <div class="modal-header">
+                <h5>Подробная информация</h5>
+            </div>
+
+            <div class="mx-5">
+
+                @* id *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Id:</label>
+                    <input id="routeId" class="form-control" readonly>
+                </div>
+
+                @* Начальный пункт *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Начальный пункт:</label>
+                    <input id="routeStartPoint" class="form-control" readonly>
+                </div>
+
+                @* Промежуточный пункт *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Промежуточный пункт:</label>
+                    <input id="routeMiddlePoint" class="form-control" readonly>
+                </div>
+
+                @* Конечный пункт *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Конечный пункт:</label>
+                    <input id="routeEndPoint" class="form-control" readonly>
+                </div>
+
+                @* Протяженность *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Протяженность:</label>
+                    <input id="routeLength" class="form-control" readonly>
+                </div>
+
+                @* Сложность *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Сложность:</label>
+                    <input id="routeDifficulty" class="form-control" readonly>
+                </div>
+
+                @* Инструктор *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Инструктор:</label>
+                    <input id="routeInstructor" class="form-control" readonly>
+                </div>
+
+            </div>
+
+            <!-- Подвал модального окна -->
+            <div class="modal-footer">
+                <input form="routeModalId" class="btn btn-danger" data-bs-dismiss="modal"
+                       type="reset" value="Закрыть"/>
+            </div>
+        </div>
+    </div>
+</div>

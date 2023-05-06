@@ -1,0 +1,58 @@
+﻿@* представление для вывода сведений из коллекции фигур *@
+@model IEnumerable<IFigure>
+@{
+    ViewBag.Title = "Коллекция геометичесих фигур";
+}
+
+<h4 class="text-center">@ViewBag.Header</h4>
+
+@* Вывод коллекции сведений о геометрических фигурах *@
+<table class="table table-bordered table-hover w-75 mx-auto">
+    <thead>
+        @*a align-middle выравнивание строки по центру, по вертикали *@
+        @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+        <tr class="bg-light text-black align-middle">
+            <th class="text-center">Ид. фигуры</th>
+            <th class="text-center">Изображенрие фигуры</th>
+            <th class="text-center">Размеры фигуры</th>
+            <th class="text-center">Периметр фигуры, ед.</th>
+            <th class="text-center">Площадь фигуры, ед<sup>2</sup>.</th>
+            <th class="text-center">
+                <a class="btn btn-success" asp-controller="Figures" asp-action="AddFigure">
+                    Добавить
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var figure in Model) {
+            @* align-middle выравнивание строки по центру, по вертикали *@
+            @* text-start, text-center, text-end выравнивание ячеек по горизонтали *@
+            <tr class="align-middle">
+                <td class="text-end">@figure.Id</td>
+                <td class="text-center">
+                    <img src="~/images/task02/@figure.Image"
+                         alt="изображение фигуры ид: @figure.Id"
+                         height="80" />
+                </td>
+                <td>@figure</td>
+                <td class="text-end">@($"{figure.Perimeter():f3}")</td>
+                <td class="text-end">@($"{figure.Area():f3}")</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-danger"
+                        asp-controller="Figures"
+                        asp-action="DeleteById"
+                        asp-route-id="@figure.Id" title="Удалить">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>                    
+                    <a class="btn btn-outline-warning ms-2"
+                        asp-controller="Figures"
+                        asp-action="UpdateById"
+                        asp-route-id="@figure.Id" title="Изменить...">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

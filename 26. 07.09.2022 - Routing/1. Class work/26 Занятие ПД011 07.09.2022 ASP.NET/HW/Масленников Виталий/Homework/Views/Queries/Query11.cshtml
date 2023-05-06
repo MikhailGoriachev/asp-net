@@ -1,0 +1,36 @@
+﻿@model IQueryable<Homework.Models.Queries.Query11Result>
+
+@{
+    ViewBag.Title = "Итоговый запрос ";
+    Layout = "_Layout";
+}
+
+<h4 class="text-center color-1">
+    Сумма и количество продаж, минимальная и максимальная стоимости продаж для всех продавцов
+</h4>
+
+<table class="table table-striped">
+    <thead class="border-dark">
+    <tr>
+        <th>Продавец</th>
+        <th>Мин. цена продажи</th>
+        <th>Макс. цена продажи</th>
+        <th>Количество продаж</th>
+        <th>Сумма продаж</th>
+    </tr>
+    </thead>
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td>@item.Seller.ShortName</td>
+            <td>@(item.MinSale != null ? item.MinSale : "нет данных")</td>
+            <td>@(item.MaxSale != null ? item.MaxSale : "нет данных")</td>
+            <td>@(item.AmountSales != null ? item.AmountSales : "нет данных")</td>
+            <td>@(item.SumSales != null ? item.SumSales : "нет данных")</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>

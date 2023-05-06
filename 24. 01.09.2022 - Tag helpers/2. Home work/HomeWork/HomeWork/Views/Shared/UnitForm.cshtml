@@ -1,0 +1,49 @@
+﻿@model HomeWork.Models.Unit
+
+@section Head
+{
+    @* скрипты валидации *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@{
+    ViewBag.Title = ViewBag.IsAdd ? "Добавление единицы измерения" : "Редактирование единицы измерения";
+}
+
+<section class="mx-auto my-4 bg-light shadow-sm border rounded-3 w-50 h-75 p-3">
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <hr/>
+
+    <!-- #region Форма для записи -->
+    <form method="post" asp-controller="Units" asp-action="@(ViewBag.IsAdd ? "AddUnit" : "EditUnit")"
+          asp-antiforgery="true" class="mx-auto">
+
+        <!-- Id -->
+        <input asp-for="Id">
+
+        <!-- Сокращённое название -->
+        <div class="form-floating my-3">
+            <input type="text" asp-for="ShortName" placeholder="Сокращённое название" class="form-control">
+            <label asp-for="ShortName"></label>
+            <span asp-validation-for="ShortName" class="text-danger"></span>
+        </div>
+
+        <!-- Полное название -->
+        <div class="form-floating my-3">
+            <input type="text" asp-for="LongName" placeholder="Полное название" class="form-control">
+            <label asp-for="LongName"></label>
+            <span asp-validation-for="LongName" clss="text-danger"></span>
+        </div>
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="@(ViewBag.IsAdd ? "Добавить" : "Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="SalesAccounting" asp-action="Units">Выход</a>
+
+    </form>
+    <!-- #endregion -->
+
+</section>

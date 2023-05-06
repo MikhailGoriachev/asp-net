@@ -1,0 +1,29 @@
+﻿@model IQueryable<WebApiDatabase.Models.Purchase>
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th>Ид</th>
+            <th>Наименование товара</th>
+            <th>Ед.измерения</th>
+            <th>Дата закупки</th>
+            <th>Цена закупки</th>
+            <th>Количество</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Good.NameGood</td>
+                <td title="@item.Unit!.Long">@item.Unit!.Short</td>
+                <td>@($"{item.DatePurchase:dd.MM.yyyy}")</td>
+                <td>@item.PricePurchase</td>
+                <td>@item.Amount</td>
+            </tr>
+        }
+    </tbody>
+</table>

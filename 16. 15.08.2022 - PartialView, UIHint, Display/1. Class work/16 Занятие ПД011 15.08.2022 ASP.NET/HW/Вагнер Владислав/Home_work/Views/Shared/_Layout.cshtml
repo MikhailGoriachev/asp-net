@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNetCore.Mvc.Controllers;
+
+@functions {
+
+    string IsActive(string page)
+    {
+        //Если сейчас выводится исходная коллекция, то в этои методе ничего
+        //не выделяем
+        bool DefaultOn = ViewBag.IsDefault ?? false;
+        return ViewBag.PageName.ToLower()==page.ToLower() && !DefaultOn?"active":"";
+    }
+
+    string IsDefault()
+    {
+        return ViewBag.IsDefault ?? false ? "active" : "";
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.title</title>
+
+
+    <!-- подключение bootstrap локально -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/styles/styles.css">
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Styles",false)
+
+    <!--Подключение удалённого шрифта через репозиторий Google Fonts-->
+    <link rel="stylesheet" href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap'>
+
+</head>
+<body>
+
+    @*Navbar*@
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home work</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link ms-3 @IsActive("Index")" asp-controller="Home" asp-action="Index">Главная</a>
+                </li>
+
+                
+                <!-- Исходные коллекции -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link mx-3 dropdown-toggle @IsDefault()"
+                    role="button"
+                    data-bs-toggle="dropdown">Исходные коллекции</a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarTask1Id">
+                        
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="Books">Коллекция книг</a></li>
+                        <li><a class="dropdown-item" asp-controller="Figures" asp-action="Figures">Коллекция фигур</a></li>
+
+                    </ul>
+                </li>
+                       
+                <!-- Книги -->
+                
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle @IsActive("books")" 
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="False">
+                        Книги
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarTask1Id">
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="OrderByAuthor">Книги по автору</a></li>
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="OrderByPubYear">Книги по году издания</a></li>
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="OrderByPriceDesc">Книги по убыванию цены</a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="SelectByMaxQuantity">Книги с макс. количеством экземпляров</a></li>
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="SelectByMinQuantity">Книги с мин. количеством экземпляров</a></li>
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="SelectOldest">Самые старые книги</a></li>
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="SelectNewest">Самые новые книги</a></li>
+
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="SelectMostExpensive">Самые дорогие книги</a></li>
+                        <li><a class="dropdown-item" asp-controller="Library" asp-action="SelectCheapest">Самые дешевые книги</a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item btn-danger" asp-controller="Library" asp-action="DeleteFile">Удалить JSON-файл</a></li>
+                    </ul>
+                </li>
+                       
+                <!-- Фигуры -->
+                
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle @IsActive("Figures")" 
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="False">
+                        Фигуры
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarTask1Id">
+                        <li><a class="dropdown-item" asp-controller="Figures" asp-action="SquaresByPerimeter">Квадраты по возрастанию периметра</a></li>
+                        <li><a class="dropdown-item" asp-controller="Figures" asp-action="RectsByPerimeterDesc">Прямоугольники по убыванию периметра</a></li>
+                        <li><a class="dropdown-item" asp-controller="Figures" asp-action="TriangelsReversed">Треугольники в обратном порядке</a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item" asp-controller="Figures" asp-action="OrderCollectionByArea">Коллекция по убыванию площади</a></li>
+                        <li><a class="dropdown-item" asp-controller="Figures" asp-action="OrderCollectionByType">Коллекция отсортированная по типу фигур</a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li><a class="dropdown-item btn-danger" asp-controller="Figures" asp-action="DeleteFile">Удалить JSON-файл</a></li>
+                    </ul>
+                </li>
+
+                <!-- Изменение типа вывода -->
+                @RenderSection("ViewTypeTumbler",false);
+            </ul>
+        </div>
+    </div>
+    </nav>
+    <main class="container mt-5">
+            @RenderBody()
+    </main>
+
+    <footer class="bg-dark">
+        <b>Разработчик:</b> Вагнер Владислав
+        <b><br>Группа:</b> ПД011
+        <b><br>Город:</b> Донецкая область,Макеевка.
+        <b><br>Год разработки:</b> 2022
+    </footer>
+</body>
+</html>

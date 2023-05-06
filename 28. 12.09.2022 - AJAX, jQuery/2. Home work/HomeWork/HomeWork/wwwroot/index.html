@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- #region Стили -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- #endregion -->
+
+    <!-- #region Скрипты -->
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- #endregion -->
+
+    <!-- заголовок -->
+    <title>Главная</title>
+
+    <!-- логотип -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/icon.svg">
+
+    <!-- скрипты -->
+    <script src="/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/js/queriesRef.js"></script>
+    <script src="/js/tablesRef.js"></script>
+</head>
+
+<body>
+
+<!-- #region Навигация -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid justify-content-center">
+        <!-- Логотип -->
+        <a class="navbar-brand mx-2" href="index.html">
+            <img class="logo" src="images/icon.svg" alt="logo">
+        </a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+
+                <!-- #region Ссылки на страницы -->
+
+                <!-- Главная -->
+                <li class="nav-item">
+                    <a class="nav-link mx-3 active" href="/index.html">Главная</a>
+                </li>
+
+                <!-- Данные -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="navbarDataId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                        Данные
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDataId">
+
+                        <!-- Клиенты -->
+                        <li>
+                            <a class="dropdown-item" id="clientsId" data-table-info="clients" href="#">Клиенты</a>
+                        </li>
+
+                        <!-- Страны -->
+                        <li>
+                            <a class="dropdown-item" id="countriesId" data-table-info="countries" href="#">Страны</a>
+                        </li>
+
+                        <!-- Цели поездки -->
+                        <li>
+                            <a class="dropdown-item" id="objectivesId" data-table-info="objectives" href="#">Цели поездки</a>
+                        </li>
+
+                        <!-- Маршруты -->
+                        <li>
+                            <a class="dropdown-item" id="routesId" data-table-info="routs" href="#">Маршруты</a>
+                        </li>
+
+                        <!-- Поездки -->
+                        <li>
+                            <a class="dropdown-item" id="visitsId" data-table-info="visits" href="#">Поездки</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <!-- Запросы -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                    id="navbarQueryId" role="button" data-bs-toggle="dropdown" aria-expanded="False">
+                    Запросы
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarQueryId">
+
+                        <!-- Запрос 1 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query01" id="query01Id" href="#">Запрос 1</a>
+                        </li>
+
+                        <!-- Запрос 2 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query02" id="query02Id" href="#">Запрос 2</a>
+                        </li>
+
+                        <!-- Запрос 3 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query03" id="query03Id" href="#">Запрос 3</a>
+                        </li>
+
+                        <!-- Запрос 4 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query04" id="query04Id" href="#">Запрос 4</a>
+                        </li>
+
+                        <!-- Запрос 5 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query05" id="query05Id" href="#">Запрос 5</a>
+                        </li>
+
+                        <!-- Запрос 6 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query06" id="query06Id" href="#">Запрос 6</a>
+                        </li>
+
+                        <!-- Запрос 7 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query07" id="query07Id" href="#">Запрос 7</a>
+                        </li>
+
+                        <!-- Запрос 8 -->
+                        <li>
+                            <a class="dropdown-item" data-query-info="query08" id="query08Id" href="#">Запрос 8</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<!-- #endregion -->
+
+<!-- #region Главная секция -->
+<main>
+
+    <section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+        <!-- #region Теоретическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Теоретическая часть
+            </summary>
+
+            <ul>
+                <li>Синхронная и асинхронная работа с объектом <b>XMLHttpRequest</b></li>
+                <li>Событие “load” в <b>AJAX</b> для получения данных от сервера</li>
+                <li>Использование jQuery для работы с <b>AJAX</b>-запросами</li>
+                <li>Передача и прием данных в jQuery при помощи метода load()</li>
+                <li>Варианты отправки данных на сервер в <b>AJAX</b></li>
+            </ul>
+
+        </details>
+        <!-- #endregion -->
+
+
+        <!-- #region Практическая часть -->
+        <details open>
+            <summary class="h5 text-primary">
+                Практическая часть
+            </summary>
+
+            <p>
+                Создать приложение ASP.NET Core WebAPI и набор html-страниц для работы с базой данных при помощи Entity
+                Framework Core 6. Стилизацию разметки выполняйте при помощи Bootstrap. Реализуйте вывод задания, вывод
+                всех записей таблиц базы данных.
+            </p>
+
+            <p>
+                Все таблицы должны быть проинициированы не менее чем 10 записями.
+            </p>
+
+            <p>
+                Требуется также выполнение запросов по заданию, запросы отправлять на сервер операцией PUT, параметры
+                вводить в формы (рекомендую формы в модальных окнах). AJAX-запросы пишите на чистом JS (vanilla JS)
+                или с использованием jQuery – на Ваш выбор.
+            </p>
+
+            <p>
+                Методы API-контроллера для реализации запросов должны возвращать разметку, выводить результаты всех
+                запросов в одну и ту же html-страницу.
+            </p>
+
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td>
+                            <i>База данных <b>«Туристическое агентство»</b></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Описание предметной области</b>
+                            Фирма предоставляет клиентам услуги по организации зарубежных поездок. При этом цели поездок
+                            могут быть различными (отдых, туризм, лечение и т.д.). При оформлении услуги устанавливается
+                            фиксированная стоимость 1 дня пребывания в той или иной стране.
+                            Стоимость поездки может быть вычислена как
+                            <b>
+                                Стоимость 1 дня пребывания * Количество дней
+                                пребывания + Стоимость транспортных услуг + Стоимость оформления визы
+                            </b>. Кроме того, клиент
+                            платит налог на добавленную стоимость (НДС) в размере 3% от стоимости поездки.
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bolder fst-italic">
+                            База данных должна включать как минимум таблицы КЛИЕНТЫ, МАРШРУТЫ, ПОЕЗДКИ, содержащие
+                            следующую информацию:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия клиента</td>
+                    </tr>
+                    <tr>
+                        <td>Имя клиента</td>
+                    </tr>
+                    <tr>
+                        <td>Отчество клиента</td>
+                    </tr>
+                    <tr>
+                        <td>Серия – номер паспорта клиента</td>
+                    </tr>
+                    <tr>
+                        <td>Страна назначения</td>
+                    </tr>
+                    <tr>
+                        <td>Цель поездки</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость 1 дня пребывания в стране назначения</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость транспортных услуг (определяется выбором страны)</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость оформления визы (определяется выбором страны)</td>
+                    </tr>
+                    <tr>
+                        <td>Дата начала пребывания в стране назначения</td>
+                    </tr>
+                    <tr>
+                        <td>Количество дней пребывания в стране назначения</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Номер запроса</th>
+                    <th>Тип запроса</th>
+                    <th>Какую задачу решает запрос</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Запрос на выборку</td>
+                    <td>Выбирает информацию о маршрутах с заданной целью поездки</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Запрос на выборку</td>
+                    <td>
+                        Выбирает информацию о маршрутах с заданной целью поездки и стоимостью транспортных услуг менее
+                        заданного значения
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Запрос на выборку</td>
+                    <td>
+                        Выбирает информацию о клиентах, совершивших поездки с заданным количеством дней пребывания в стране
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Запрос на выборку</td>
+                    <td>Выбирает информацию о маршрутах в заданную страну</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Запрос на выборку</td>
+                    <td>
+                        Выбирает информацию о странах, для которых стоимость оформления визы есть значение из некоторого
+                        диапазона
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Запрос на выборку</td>
+                    <td>
+                        Вычисляет для каждой поездки ее полную стоимость с НДС. Включает поля Страна назначения, Цель
+                        поездки, Дата начала поездки, Количество дней пребывания, Полная стоимость поездки. Сортировка по
+                        полю Страна назначения
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Итоговый запрос – агрегатные функции</td>
+                    <td>
+                        Выполняет группировку по полю Цель поездки. Определяет минимальную, среднюю и максимальную
+                        стоимость 1 дня пребывания
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Итоговый запрос – агрегатные функции</td>
+                    <td>
+                        Выполняет группировку по полю Страна назначения. Для каждой страны вычисляет среднее значение по
+                        полю Стоимость транспортных услуг
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <p>
+                Для таблицы <b>ПОЕЗДКИ</b> требуется реализовать добавление (метод <b>PUT</b>), редактирование (метод
+                <b>POST</b>) и удаление записей (метод <b>DELETE</b>).
+            </p>
+
+        </details>
+        <!-- #endregion -->
+
+        <!-- #region Дополнительно -->
+        <details open>
+            <summary class="h5 text-primary">
+                Дополнительно
+            </summary>
+
+            <p>
+                Запись занятия можно скачать по
+                <a href="https://cloud.mail.ru/public/9eQN/KDfVSenDN" target="_blank"><b>этой ссылке</b></a>,
+                материалы занятия в этом же архиве.
+            </p>
+
+        </details>
+        <!-- #endregion -->
+    </section>
+
+</main>
+<!-- #endregion -->
+
+<!-- #region Подвал-->
+<footer class="bg-dark shadow fs-6 text-white-50 p-5 pb-2">
+    <p>
+        Разработчик:
+        <a href="https://github.com/MikhailGoriachev" target="_bank">
+            <b>Горячев Михаил</b>
+        </a>
+    </p>
+    <p>Группа: <b>ПД011</b></p>
+    <p>Город: <b>Донецк</b></p>
+    <p>Год создания: <b>2022</b></p>
+    <p>
+        Поддержка:
+        <a href="mailto:goriachevmichael@gmail.com">
+            <b>goriachevmichael@gmail.com</b>
+        </a>
+    </p>
+
+</footer>
+<!-- #endregion -->
+</body>
+
+</html>

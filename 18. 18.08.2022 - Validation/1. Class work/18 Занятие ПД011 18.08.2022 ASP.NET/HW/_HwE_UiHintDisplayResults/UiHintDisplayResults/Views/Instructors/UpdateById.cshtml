@@ -1,0 +1,52 @@
+﻿@model UiHintDisplayResults.Models.Instructor
+@*
+    Форма редактирования сведений об инструкторе
+*@
+
+
+@* в форме задаем обработчик *@
+<div class="offset-3 col-6 mt-5 p-3 border-dark">
+    <h3 class="text-center">@ViewBag.Header</h3>
+    <form class="bg-light p-5" method="post"
+          asp-controller="Instructors" asp-action="Update">
+        
+        @* идентификатор инструктора, не меняем, но используем *@
+        <input asp-for="Id" type="hidden" value="@Model.Id"/>
+        
+        @* редактируемые поля *@
+        
+        @* фамилия инструктора *@
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Surname"></label>
+            <input  class="form-control" asp-for="Surname"/>
+        </div>       
+        
+        @* имя инструктора *@
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Name"></label>
+            <input  class="form-control" asp-for="Name"/>
+        </div>        
+        
+        @* отчество инструктора *@
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Patronymic"></label>
+            <input  class="form-control" asp-for="Patronymic"/>
+        </div>       
+        
+        @* дата рождения инструктора *@
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="BornDate"></label>
+            <input  class="form-control" asp-for="BornDate"/>
+        </div> 
+
+        @* категория инструктора *@
+        <div class="mb-3">
+            <label class="form-label" asp-for="Category"></label>
+            <select class="form-select" asp-for="Category" asp-items="@ViewBag.SelectCategories"></select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <button class="btn btn-secondary" type="reset">Сбросить</button>
+    </form>
+
+</div>

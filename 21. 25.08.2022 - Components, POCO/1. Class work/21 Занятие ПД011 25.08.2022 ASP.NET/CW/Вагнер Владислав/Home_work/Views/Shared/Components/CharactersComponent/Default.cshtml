@@ -1,0 +1,52 @@
+﻿@using Home_work.ViewModels
+@using Home_work.Models.Characters
+@model CharactersViewModel
+
+
+
+@* Вывод коллекции сведений об фотографиях пользователей *@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th class="alignment-center">Id</th>
+        <th class="alignment-center">Имя</th>
+        <th class="alignment-center">Пол</th>
+        <th class="alignment-center">Рост</th>
+        <th class="alignment-center">Вес</th>
+        <th class="alignment-center">Цвет волос</th>
+        <th class="alignment-center">Год рождения</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (Character character in Model.Characters)
+    {
+        <tr class="align-middle" >
+            <td class="alignment-center">@character.Id</td>
+            <td class="alignment-center">@character.Name</td>
+            <td class="alignment-center">@character.Gender</td>
+            <td class="alignment-center">@character.Height</td>
+            <td class="alignment-center">@character.Weight</td>
+            <td class="alignment-center">@character.HairColor</td>
+            <td class="alignment-center">@character.BirthYear</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h3>Итоговые значения</h3>
+
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+        <tr class="align-middle">
+            <th class="alignment-center bg-dark bg-opacity-25" colspan="2">Значения</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr class="align-middle" >
+            <td>Количество персонажей</td>
+            <td class="alignment-center">@Model.Count</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HomeWork.Models.IFigure>
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <h3>@ViewBag.Title</h3>
+
+    <table class="table align-middle">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Вид фигуры</th>
+            <th>Название</th>
+            <th>Стороны</th>
+            <th>Периметр</th>
+            <th>Площадь</th>
+            <th>
+                <a class="btn btn-success" asp-controller="Figures" asp-action="AddFigure">
+                    Добавить
+                </a>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var figure in Model)
+        {
+            <tr>
+                <td>@figure.Id</td>
+                <td class="text-center">
+                    <img class="h-7rem" src="~/images/figures/@figure.Image" alt="@figure.Image"/>
+                </td>
+                <td>@figure.Name</td>
+                <td>
+                    @foreach (var field in figure.ParamAndValue)
+                    {
+                        <li>@(field.Key): <b>@($"{field.Value:f5}")</b></li>
+                    }
+                </td>
+                <td>@($"{figure.Perimeter:f5}")</td>
+                <td>@($"{figure.Area:f5}")</td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-controller="Figures" asp-action="EditFigure" asp-route-id="@figure.Id"
+                       title="Изменить...">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a class="btn btn-outline-danger" asp-controller="Figures" asp-action="RemoveFigure" asp-route-id="@figure.Id"
+                       title="Удалить">
+                        <i class="bi bi-eraser-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</section>

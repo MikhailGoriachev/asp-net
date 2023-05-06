@@ -1,0 +1,10 @@
+﻿@model SelectList
+
+@{
+    ViewBag.Title = "Планеты";
+    Layout = "_Layout";
+}
+
+@{ await Html.RenderPartialAsync("Controls", Model); }
+
+@await Component.InvokeAsync(ViewBag.Component, ViewBag.ComponentParameters)

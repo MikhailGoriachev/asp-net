@@ -1,0 +1,10 @@
+﻿@model List<AsyncComponents.Model.User>
+
+
+<ul class="list-group w-50 mx-5">
+    @foreach (var item in Model) {
+        <li class="list-group-item">
+            @item.Name, @item.UserName, mailto: (<a href="mailto:@item.Email">@item.Email</a>)
+        </li>
+    }
+</ul>

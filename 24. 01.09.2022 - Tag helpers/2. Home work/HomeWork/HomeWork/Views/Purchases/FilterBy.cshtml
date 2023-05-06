@@ -1,0 +1,36 @@
+﻿@model HomeWork.Models.BindingModels.FilterByPurchasesBindingModel
+
+@{
+    ViewBag.Title = $"Закупки. Товар: \"{ViewBag.GoodsName}\", Ед. измерения \"{ViewBag.UnitName}\", Мин. цена: {ViewBag.MinPrice}, Макс. цена: {ViewBag.MaxPrice}";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <form method="get" asp-controller="Purchases" asp-action="FilterBy" class="d-flex align-items-center">
+        <div class="form-floating w-10rem">
+            <select asp-items="ViewBag.GoodsList" asp-for="GoodsId" class="form-control" required></select>
+            <label asp-for="GoodsId"></label>
+        </div>
+
+        <div class="form-floating mx-3 w-15rem">
+            <select asp-items="ViewBag.UnitList" asp-for="UnitId" class="form-control" required></select>
+            <label asp-for="UnitId"></label>
+        </div>
+
+        <div class="form-floating mx-3 w-15rem">
+            <input asp-for="MinPrice" class="form-control" placeholder="Мин. цена">
+            <label asp-for="MinPrice"></label>
+        </div>
+
+        <div class="form-floating mx-3 w-15rem">
+            <input asp-for="MaxPrice" class="form-control" placeholder="Макс. цена">
+            <label asp-for="MaxPrice"></label>
+        </div>
+
+        <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+        <a class="btn btn-warning" asp-controller="Purchases" asp-action="FilterBy">Сбросить</a>
+    </form>
+
+    <purchases-table items="@Model.Items"></purchases-table>
+</section>

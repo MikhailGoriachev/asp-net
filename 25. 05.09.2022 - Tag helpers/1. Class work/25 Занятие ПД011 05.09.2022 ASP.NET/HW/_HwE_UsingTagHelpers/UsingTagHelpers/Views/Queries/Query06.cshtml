@@ -1,0 +1,43 @@
+﻿@* Представление для запроса 6
+   Вычисляет прибыль от продажи за каждый проданный товар. Включает поля Дата продажи,
+   Наименование товара, Цена закупки, Цена продажи, Количество проданных единиц, Прибыль.
+   Сортировка по полю Наименование товара
+*@
+
+@model IOrderedEnumerable<UsingTagHelpers.Models.Queries.Query06Result>
+
+@{
+    ViewBag.Title = "Прибыль от продажи за каждый проданный товар";
+
+}
+
+<h4 class="text-center">@ViewBag.Title</h4>
+
+@* Вывод выборки данных *@
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Дата продажи</th>
+        <th>Наименование товара</th>
+        <th>Цена закупки</th>
+        <th>Цена продажи</th>
+        <th>Количество</th>
+        <th>Прибыль</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var sale in Model) {
+            <tr>
+                <td>@($"{sale.SellDate:dd/MM/yyyy}")</td>
+                <td>@sale.ProductName</td>
+                <td>@($"{sale.PurchasePrice:n2}")</td>
+                <td>@($"{sale.SellPrice:n2}")</td>
+                <td>@sale.Amount:n2</td>
+                <td>@($"{sale.Profit:n2}")</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

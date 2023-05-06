@@ -1,0 +1,49 @@
+﻿@model Homework.Models.ViewModels.RouteInputForm
+
+@{
+    ViewBag.Title = "Ввод данных о маршруте";
+    Layout = "_Layout";
+}
+
+<div class="offset-3 col-sm-4 mt-5 p-3 border-dark">
+    <h3 class="text-center">Редактирование сведений о маршруте</h3>
+    <form class="bg-light p-5" asp-controller="Routes" asp-action="UpdateRoute" method="post">
+        
+        <input asp-for="Route.Id" type="hidden" value="@Model!.Route.Id"/>
+        
+        <div class="mt-2 mb-3">
+            <label class="form-label" asp-for="Route.StartPoint"></label>
+            <input asp-for="Route.StartPoint" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.MiddlePoint"></label>
+            <input asp-for="Route.MiddlePoint" class="form-control"/>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.FinishPoint"></label>
+            <input asp-for="Route.FinishPoint" class="form-control"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.Length"></label>
+            <input asp-for="Route.Length" class="form-control"/>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.Difficulty"></label>
+            <select class="form-select" asp-for="Route.Difficulty" asp-items="Model.DifficultiesList"></select>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" asp-for="Route.InstructorId"></label>
+            <select class="form-select" asp-for="Route.InstructorId" asp-items="Model.InstructorsList"></select>
+        </div>
+        
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-controller="Routes" asp-action="index" class="btn btn-secondary">Отмена</a>
+    </form>
+
+</div>
+

@@ -1,0 +1,27 @@
+﻿@using HomeWork.Components
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model HomeWork.Models.BindingModels.IntBindingModel
+
+@{
+    ViewBag.Title = $"Запрос 4. Страна: \"{ViewBag.CountryName}\"";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <div class="d-lg-flex justify-content-between">
+
+        <form method="post" asp-controller="Queries" asp-action="Query04" class="d-flex align-items-center">
+
+            <div class="form-floating w-10rem">
+                <select asp-items="ViewBag.CountryList" asp-for="Value" class="form-control"></select>
+                <label asp-for="Value">Страна</label>
+            </div>
+
+            <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+            <a class="btn btn-warning" asp-controller="Queries" asp-action="Query04">Сбросить</a>
+        </form>
+    </div>
+
+    @await Component.InvokeAsync(typeof(Query04Component), new { CountryId = Model.Value })
+</section>

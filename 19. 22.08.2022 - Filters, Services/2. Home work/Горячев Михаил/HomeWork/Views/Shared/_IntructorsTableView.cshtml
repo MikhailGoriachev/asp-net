@@ -1,0 +1,99 @@
+﻿@model IEnumerable<HomeWork.Models.Instructor>
+
+<table class="table align-middle" id="instructorsTableId">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Дата рождения</th>
+        <th>Категория</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var instructor in Model)
+    {
+        <tr>
+            <td class="instructorId" data-instructor-id="@instructor.Id">@instructor.Id</td>
+            <td>@instructor.Surname</td>
+            <td>@instructor.Name</td>
+            <td>@instructor.Patronymic</td>
+            <td>@($"{instructor.DateOfBirth:dd.MM.yyyy}")</td>
+            <td>@instructor.Category</td>
+            <td>
+                <a class="btn btn-outline-primary" asp-controller="Instructors" asp-action="EditInstructor"
+                   asp-route-id="@instructor.Id" title="Изменить...">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-outline-success" data-instructor-id="@instructor.Id" title="Подробная информация..."
+                   data-bs-toggle="modal"
+                   data-bs-target="#instructorModalId">
+                    <i data-instructor-id="@instructor.Id"
+                       class="bi bi-info-circle">
+                    </i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div id="instructorModalId" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Заголовок окна -->
+            <div class="modal-header">
+                <h5>Подробная информация</h5>
+            </div>
+
+            <div class="mx-5">
+
+                @* id *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Id:</label>
+                    <input id="instId" class="form-control" readonly>
+                </div>
+
+                @* фамилия *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Фамилия:</label>
+                    <input id="instSurname" class="form-control" readonly>
+                </div>
+
+                @* имя *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Имя:</label>
+                    <input id="instName" class="form-control" readonly>
+                </div>
+
+                @* отчество *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Отчество:</label>
+                    <input id="instPatronymic" class="form-control" readonly>
+                </div>
+
+                @* дата рождения *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Дата рождения:</label>
+                    <input id="instDateOfBirth" type="text" class="form-control" readonly>
+                </div>
+
+                @* категория *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Категория:</label>
+                    <input id="instCategory" type="text" class="form-control" readonly>
+                </div>
+            </div>
+
+            <!-- Подвал модального окна -->
+            <div class="modal-footer">
+                <input form="instructorId" class="btn btn-danger" data-bs-dismiss="modal"
+                       type="reset" value="Закрыть"/>
+            </div>
+        </div>
+    </div>
+</div>

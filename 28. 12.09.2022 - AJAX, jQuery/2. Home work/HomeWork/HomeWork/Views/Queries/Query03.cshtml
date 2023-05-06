@@ -1,0 +1,27 @@
+﻿@using HomeWork.Components
+@model HomeWork.Models.BindingModels.IntBindingModel
+
+@{
+    ViewBag.Title = $"Запрос 3. Длительность (день): {ViewBag.Duration}";
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+    <h4 class="text-center">@ViewBag.Title</h4>
+
+    <div class="d-lg-flex justify-content-between">
+
+        <form method="post" id="formId" class="d-flex align-items-center">
+
+            <div class="form-floating w-15rem">
+                <input asp-for="Value" min="1" class="form-control" placeholder="Длительность (день)" required>
+                <label asp-for="Value">Длительность (день)</label>
+            </div>
+
+            <input class="btn btn-primary mx-3" type="submit" value="Выбрать">
+            <a class="btn btn-warning" id="formCancelBtn">Сбросить</a>
+        </form>
+
+    </div>
+
+    @await Component.InvokeAsync(typeof(Query03Component), new { Duration = Model.Value })
+</section>

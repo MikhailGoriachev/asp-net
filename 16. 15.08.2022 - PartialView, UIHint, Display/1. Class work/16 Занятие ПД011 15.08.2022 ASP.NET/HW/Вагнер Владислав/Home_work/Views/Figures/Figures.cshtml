@@ -1,0 +1,179 @@
+﻿@* представление для вывода коллекции фигур *@
+@model IEnumerable<IFigure>
+@using Home_work.Models.Figures
+@using Home_work.Utilities
+@{
+    ViewBag.title = "Геометрические фигуры";
+    ViewBag.PageName = "Figures";
+}
+
+
+<h4>@ViewBag.Header</h4>
+
+@*Кнопка переключения режима работы представления в Navbar*@
+@section ViewTypeTumbler{
+    
+    <li class="nav-item">
+        <a class="nav-link ms-3" asp-controller="Figures" asp-action="ShiftView" title="Переключение режима вывода фигур">
+        @(ViewBag.ShowCard is not null && !ViewBag.ShowCard?"Карточки":"Таблица")</a>
+    </li>
+}
+
+<!--Задание-->
+<details class="task-details">
+        <summary class="h5 text-primary">
+            Задание 2
+        </summary>
+
+        <p>
+            Требуется хранить в файле формата JSON в папке App_Data проекта коллекцию плоских геометрических фигур: 
+            квадраты, прямоугольники, разносторонние треугольники. Сведения о фигуре содержат: тип, изображение фигуры, ее размеры. 
+            Для фигуры надо также вычислять периметр и площадь.
+        </p>
+
+        <p>
+            Инициализация коллекции должна проводиться при отсутствии файла, 
+            формируйте не менее 10 фигур. 
+        </p>
+        <p>
+            Требуется реализовать функционал (удаление, добавление и изменение фигуры в коллекции 
+            подразумевает также сохранение коллекции в файле):
+        </p>
+        
+        <ul>
+            <li>Добавление фигуры в коллекцию, при этом тип и размеры фигуры генерируются в коде. 
+                Загружать изображение не требуется, формируйте его по типу фигуры</li>
+            <li>Редактирование только размеров фигуры в форме на отдельной странице</li>
+            <li>Удаление фигуры</li>
+            <li>Вывод всей коллекции в исходном порядке </li>
+            <li>Вывод только квадратов, упорядочивая их по возрастанию периметра</li>
+            <li>Вывод только прямоугольников, упорядочивая из по убыванию периметра</li>
+            <li>Вывод только треугольников, в обратном порядке по отношению 
+                к порядку в коллекции</li>
+            <li>Вывод всей коллекции, упорядоченной по убыванию площади</li>
+            <li>вывод всей коллекции, упорядоченной по типу фигур</li>
+        </ul>
+    </details>
+
+@*Переключение между карточками и таблицей*@
+@if (!ViewBag.ShowCard){
+
+    @* Вывод коллекции сведений о фигурах *@
+    <table class="table table-hover table-bordered w-80 mx-auto mb-5">
+        <thead>
+        <tr class="align-middle">
+            <th>Id</th>
+            <th>Изображение</th>
+            <th>Тип фиугры</th>
+            <th>Размеры фигуры</th>
+            <th>Площадь</th>
+            <th>Периметр</th>
+            @if (ViewBag.DontShowControls is null)
+            {
+                <th class="alignment-center">
+                    <a class="btn btn-success" asp-controller="Figures" asp-action="AddFigure">
+                        Добавить
+                    </a>
+                </th>
+            }
+        </tr>
+        </thead>
+        
+        <tbody>
+        @foreach (IFigure figure in Model)
+        {
+            <tr class="align-middle">
+                <td class="alignment-center">@figure.Id</td>
+                <td class="mx-auto alignment-center"><img src="~/images/figures/@Utils.FiguresIcons[figure.FigureType]"height="100"/></td>
+                <td>@figure.FigureType</td>
+                <td>@Html.Raw(figure.GetSize())</td>
+                <td>@($"{figure.Area():f2}")</td>
+                <td>@($"{figure.Perimeter():f2}")</td>
+                @if (ViewBag.DontShowControls is null)
+                {
+                    <td class="w-15">
+                        <a class="btn btn-sm btn-outline-danger d-block" asp-controller="Figures" asp-action="DeleteFigure" asp-route-id="@figure.Id">
+                            Удалить
+                        </a>
+                        <a class="btn btn-sm mt-3 btn-outline-primary d-block" asp-controller="Figures" asp-action="EditFigure" asp-route-id="@figure.Id">
+                            Редактировать
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+
+}
+
+@*Карточки*@
+else{
+
+    <div class="container">
+        @if (ViewBag.DontShowControls is null)
+            {
+                <a class="btn btn-success" asp-controller="Figures" asp-action="AddFigure">
+                    Добавить
+                </a>
+            }
+    </div>
+    
+    <!--Карточки -->
+    <div class="row">
+     @foreach (IFigure figure in Model)
+    {
+        <div class="card col-3 m-2">
+            <div class="card-body">
+                @*List-group*@
+                <ul class="list-group">
+
+                    <div class="alignment-center">
+                        <img src="~/images/figures/@Utils.FiguresIcons[figure.FigureType]" alt=@figure.FigureType />
+                    </div>
+
+                    <li class="list-group-item @(figure.FigureType.ToLower() != "квадрат"?"mt-5":"")">
+                        Тип фигуры: @figure.FigureType
+                    </li>
+                    <li class="list-group-item h-8-rem">
+                        Размеры:<br/>@Html.Raw(figure.GetSize())
+                    </li>
+                    <li class="list-group-item">
+                        Площадь:  @($"{figure.Area():f2}")
+                    </li>
+                    <li class="list-group-item">
+                        Периметр:  @($"{figure.Perimeter():f2}")
+                    </li>
+                    <li class="list-group-item">
+                        Id:  @figure.Id
+                    </li>
+
+                    @if (ViewBag.DontShowControls is null)
+                    {
+                        <li class="list-group-item">
+
+                            <a class="btn btn-outline-danger my-2 btn-sm" asp-controller="Figures" asp-action="DeleteFigure" asp-route-id="@figure.Id">
+                                Удалить
+                            </a>
+                            <a class="btn btn-outline-primary my-2 btn-sm" asp-controller="Figures" asp-action="EditFigure" asp-route-id="@figure.Id">
+                                Редактировать
+                            </a>
+
+                        </li>
+                    }
+                </ul>
+                @*List-group*@
+            </div>
+        </div>
+    }
+</div>
+}
+
+@if (Model.Count() <= 0)
+{
+ <div  class="alert alert-danger mt-2" role="alert" >
+     <b>Коллекция пуста</b>, удалите JSON-файл и обновите страницу, или добавляйте фигуры вручную!
+
+ </div>
+
+}

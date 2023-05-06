@@ -1,0 +1,100 @@
+﻿@using HomeWork.Models
+@model IEnumerable<HomeWork.Models.Visit>
+
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead>
+        <tr>
+            <th class="align-middle">
+                <a asp-controller="TouristAgency"
+                   asp-action="OrderByVisits"
+                   asp-route-sortState="@(ViewBag.IdSort ??= SortStateVisits.IdDesc)"
+                   asp-route-sortField="Id"
+                   asp-route-pageNumber="1">
+                    Id
+                    @if (ViewBag.SortField == "Id")
+                    {
+                        <i class="bi bi-caret-@(ViewBag.IdSort == SortStateVisits.IdDesc ? "up" : "down")-fill"></i>
+                    }
+                </a>
+            </th>
+            <th class="align-middle">Клиент</th>
+            <th class="align-middle">
+                <a asp-controller="TouristAgency"
+                   asp-action="OrderByVisits"
+                   asp-route-sortState="@(ViewBag.CountrySort ??= SortStateVisits.CountryAsc)"
+                   asp-route-sortField="Country"
+                   asp-route-pageNumber="1">
+                    Страна
+                    @if (ViewBag.SortField == "Country")
+                    {
+                        <i class="bi bi-caret-@(ViewBag.CountrySort == SortStateVisits.CountryDesc ? "up" : "down")-fill"></i>
+                    }
+                </a>
+            </th>
+            <th class="align-middle">Цель поездки</th>
+            <th class="align-middle">Стоим. 1 дня (&#8381;)</th>
+            <th class="align-middle">Транс. услуги (&#8381;)</th>
+            <th class="align-middle">Виза (&#8381;)</th>
+            <th class="align-middle">
+                <a asp-controller="TouristAgency"
+                   asp-action="OrderByVisits"
+                   asp-route-sortState="@(ViewBag.DateStartSort ??= SortStateVisits.DateStartAsc)"
+                   asp-route-sortField="DateStart"
+                   asp-route-pageNumber="1">
+                    Дата поездки
+                    @if (ViewBag.SortField == "DateStart")
+                    {
+                        <i class="bi bi-caret-@(ViewBag.DateStartSort == SortStateVisits.DateStartDesc ? "up" : "down")-fill"></i>
+                    }
+                </a>
+            </th>
+            <th class="align-middle">
+                <a asp-controller="TouristAgency"
+                   asp-action="OrderByVisits"
+                   asp-route-sortState="@(ViewBag.DurationSort ??= SortStateVisits.DurationAsc)"
+                   asp-route-sortField="Duration"
+                   asp-route-pageNumber="1">
+                    Длительность (день)
+                    @if (ViewBag.SortField == "Duration")
+                    {
+                        <i class="bi bi-caret-@(ViewBag.DurationSort == SortStateVisits.DurationDesc ? "up" : "down")-fill"></i>
+                    }
+                </a>
+            </th>
+            <th>
+                <a class="btn btn-success w-100" asp-controller="TouristAgency" asp-action="AddVisit">
+                    <i class="bi bi-plus-lg"></i> Добавить
+                </a>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var visit in Model)
+        {
+            <tr>
+                <th>@visit.Id</th>
+                <td>@visit.Client!.Surname @visit.Client!.Name![0]. @visit.Client!.Patronymic![0].</td>
+                <td>@visit.Route!.Country!.Name</td>
+                <td>@visit.Route.Objective!.Name</td>
+                <td>@($"{visit.Route.DailyCost:n2}")</td>
+                <td>@($"{visit.Route.Country.CostService:n2}")</td>
+                <td>@($"{visit.Route.Country.CostVisa:n2}")</td>
+                <td>@($"{visit.DateStart:dd.MM.yyyy}")</td>
+                <td>@visit.Duration</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-outline-primary me-3" asp-controller="TouristAgency" asp-action="EditVisit" asp-route-id="@visit.Id">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a class="btn btn-outline-danger" asp-controller="TouristAgency" asp-action="RemoveVisit" asp-route-id="@visit.Id">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

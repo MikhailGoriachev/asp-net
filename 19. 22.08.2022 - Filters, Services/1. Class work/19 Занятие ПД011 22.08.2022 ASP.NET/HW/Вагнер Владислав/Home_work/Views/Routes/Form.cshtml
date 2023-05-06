@@ -1,0 +1,96 @@
+﻿@namespace Home_work
+@model Models.Routes.Route
+@using Home_work.Models
+@{
+    ViewBag.title = $"Форма {(@ViewBag.AddingFormMode?"добавления":"редактирования")} маршрута";
+    ViewBag.PageName = "Form";
+}
+
+@section JqueryFiles{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+<section class="section-form">
+    <fieldset>
+        <!-- #region Форма для записи -->
+        <form method="post" asp-controller="Routes" 
+        asp-action="FormSubmit" 
+        asp-route-addingmode="@ViewBag.AddingFormMode" 
+        class="rounded-3 p-4 mx-auto w-50 my-5 shadow-lg">
+
+        <!-- Id -->
+        <input type="hidden" asp-for="Id">
+
+
+        <h4></h4>
+
+        <!-- Начальная точка -->
+        <div class="form-floating my-3 ">
+            <select class="form-control form-select" 
+            asp-for="StartingPoint" 
+            asp-items="@(ViewBag.AddingFormMode ? ViewBag.Points : ViewBag.StartingPoint)"></select>
+            <label asp-for="StartingPoint"></label>
+            <span asp-validation-for="StartingPoint" class="text-danger"></span>
+        </div>
+        
+        <!-- Промежуточная точка -->
+        <div class="form-floating my-3 ">
+            <select class="form-control form-select" 
+            asp-for="MiddlePoint" 
+            asp-items="@(ViewBag.AddingFormMode ? ViewBag.Points : ViewBag.MiddlePoint)"></select>
+
+            <label asp-for="StartingPoint"></label>
+            <span asp-validation-for="MiddlePoint" class="text-danger"></span>
+        </div>
+        
+        <!-- Конечная точка -->
+        <div class="form-floating my-3 ">
+            <select class="form-control form-select" 
+            asp-for="EndPoint" 
+            asp-items="@(ViewBag.AddingFormMode ? ViewBag.Points : ViewBag.EndPoint)"></select>
+           
+            <label asp-for="EndPoint"></label>
+
+            <span asp-validation-for="EndPoint" class="text-danger"></span>
+        </div>
+
+
+        <!-- Протяженность -->
+        <div class="form-floating my-3">
+            <input class="form-control" asp-for="Length"/>
+            <label asp-for="Length"></label>
+            
+            <span asp-validation-for="Length" class="text-danger"></span>
+        </div>
+        
+        <!-- Уровни сложности -->
+        <div class="form-floating my-3">
+            <select asp-for="Complexity" asp-items="@ViewBag.Complexity" 
+            class="form-control form-select" 
+            required></select>
+            <label asp-for="Complexity">Уровни сложности</label>
+            <span asp-validation-for="Complexity" class="text-danger"></span>
+        </div>
+        
+        <!-- Инструкторы -->
+        <div class="form-floating my-3">
+            <select name="instructorSelect" asp-items="@ViewBag.Instructors" 
+            class="form-control form-select" 
+            required></select>
+            <label asp-for="InstructorData"></label>
+        </div>
+
+
+        <!-- Кнопки управления -->
+        <input class="btn btn-success me-2"
+               type="submit" value="@(ViewBag.AddingFormMode?"Добавить":"Сохранить")"/>
+        <a class="btn btn-danger" asp-controller="Routes" asp-action="Routes">Выход</a>
+
+    </form>
+        <!-- #endregion -->
+    </fieldset>
+
+</section>

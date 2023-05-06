@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HomeWork.Models.Client>
+
+<table class="table table-hover align-middle">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Паспорт</th>
+        <th>
+            <a class="btn btn-success" asp-controller="TouristAgency" asp-action="AddClient">
+                <i class="bi bi-plus-lg"></i> Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var client in Model)
+    {
+        <tr>
+            <th>@client.Id</th>
+            <td>@client.Surname</td>
+            <td>@client.Name</td>
+            <td>@client.Patronymic</td>
+            <td>@client.Passport</td>
+            <td>
+                <a class="btn btn-outline-primary" asp-controller="TouristAgency" asp-action="EditClient" asp-route-id="@client.Id">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

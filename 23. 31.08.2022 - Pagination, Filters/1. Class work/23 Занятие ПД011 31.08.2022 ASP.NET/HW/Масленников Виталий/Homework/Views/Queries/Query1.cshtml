@@ -1,0 +1,15 @@
+﻿@model IQueryable<Homework.Models.Route>
+
+@{
+    ViewBag.Header = "Запрос на выборку";
+    Layout = "_Layout";
+}
+
+@* фильтр по цели поездки *@
+<form class="d-inline-block ms-3" asp-action="Query1">
+    <label class="form-label me-1 lead" for="selPurpose">Цель поездки: </label>
+    <select class="form-select-sm" name="purposeId" asp-items="ViewBag.purposesList" id="selPurpose"></select>
+    <button class="btn btn-sm btn-outline-secondary ms-2" type="submit">Показать</button>
+</form>
+
+@{ await Html.RenderPartialAsync("TravelsTable", Model); }

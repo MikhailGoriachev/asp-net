@@ -1,0 +1,46 @@
+@using Homework.Models.ViewModels
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Homework.Models.ViewModels.IndexViewModel<Homework.Models.Goods>
+
+@{
+    ViewData["Title"] = "Номенклатуры товаров";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    ViewBag.MaxCountPages = 5;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Наименование
+            </th>
+            <th>
+                <a asp-action="Create">Добавить</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model!.Items) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                 <a asp-action="Edit" asp-route-id="@item.Id"class="btn btn-sm btn-outline-primary ms-2"
+                                   title="Редактировать данные">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+    
+</table>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 5
+})

@@ -1,0 +1,12 @@
+﻿@model List<Homework.Models.Photo>
+
+<div class="display-6 mt-4">Фотографий: @ViewBag.Count</div>
+
+<div class="row mt-3">
+    @foreach (var item in Model!)
+    {
+        <div class="col-auto ms-2 mt-3">
+            <img src="@item.ThumbnailUrl" alt="Фото"/>
+        </div>
+    }
+</div>

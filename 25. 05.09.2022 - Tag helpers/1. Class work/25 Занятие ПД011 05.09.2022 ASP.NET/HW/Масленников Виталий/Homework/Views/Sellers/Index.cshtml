@@ -1,0 +1,45 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Homework.Models.ViewModels
+@model Homework.Models.ViewModels.IndexViewModel<Homework.Models.Seller>
+
+@{
+    ViewData["Title"] = "Продавцы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Паспорт</th>
+            <th>Комиссионные, %</th>
+            <th><a asp-action="Create">Добавить</a></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model!.Items) {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Surname</td>
+            <td>@item.Name</td>
+            <td>@item.Patronymic</td>
+            <td>@item.Passport</td>
+            <td>@item.Interest</td>
+            <td> <a asp-action="Edit" asp-route-id="@item.Id"class="btn btn-sm btn-outline-primary ms-2"
+                                   title="Редактировать данные">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a></td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_PaginationLinks", new PaginationLinksViewModel
+{
+    PagesCount = Model.PagesCount,
+    CurrentPage = Model.CurrentPage,
+    LinksCount = 5
+})

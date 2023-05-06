@@ -1,0 +1,208 @@
+﻿@* представление для вывода сведений об инструкторах *@
+@model IEnumerable<Instructor>
+@using Home_work.Infrastructure
+@{
+    ViewBag.title = "Инструкторы";
+    ViewBag.PageName = "Instructors";
+}
+
+
+
+<!--Задание-->
+<details class="task-details">
+<summary class="h5 text-primary">
+    Задание 1
+</summary>
+    <p>
+        <b>Задача 1. </b>
+        Туристическая фирма организует пешие маршруты по степным заказникам. 
+        Сведения о туристических маршрутах содержат: идентификатор маршрута, 
+        начальный пункт маршрута, обязательный промежуточный пункт маршрута, 
+        конечный пункт маршрута, протяженность маршрута в км (целое число), 
+        сложность маршрута (значение из ряда <b>А-, А, А+, В-, В, В+, С-, С, С+; А-</b> соответствует минимальной сложности,
+        <b>С+</b> соответствует максимальной сложности), фамилия и инициалы инструктора маршрута 
+        (всего на фирме работает пять инструкторов, не требуется редактировать сведения об инструкторах).
+    </p>
+
+    <p>
+        Сведения об инструкторах содержат: идентификатор инструктора, фамилия, имя, 
+        отчество, дата рождения, категория (<b>А, В, С;</b> А – низшая категория, С – высшая категория)..
+    </p>
+    <p>
+        Данные о маршрутах и инструкторах хранить в файле routes.json, instructors.json в папке App_Data. 
+        Требуется реализовать следующий функционал 
+        (критерии сортировки и выборки задавайте через переменные маршрута):
+    </p>
+
+    <ul>
+        <li>Добавление маршрута (в форме на отдельной странице)</li> 
+        <li>Редактирование сведений о маршруте (в форме на отдельной странице, это может быть та же страница, что страница добавления маршрута)
+        </li>
+        <li>Удаление сведений о маршруте</li>
+        <li>Вывод сведений о маршруте в порядке хранения в файле</li>
+        <li>Вывод сведений о маршруте по убыванию протяженности маршрута</li>
+        <li>Вывод сведений о маршруте по возрастанию протяженности маршрута</li>
+        <li>Вывод сведений о маршруте по возрастанию сложности</li>
+        <li>Вывод маршрутов с заданным начальным пунктом</li>
+        <li>Вывод маршрутов, проходящих через заданный промежуточный пункт</li>
+        <li>Вывод маршрутов с протяженностью, попадающей в заданный интервал</li>
+        <li>Вывод сведений об инструкторах в порядке хранения в файле</li>
+        <li>Вывод сведений об инструкторах в порядке убывания категорий</li>
+        <li>Вывод сведений об инструкторах в порядке убывания категорий</li>
+        <li>Вывод сведений об инструкторах в порядке убывания категорий</li>
+    </ul>
+</details>
+
+<h4>@ViewBag.Header</h4>
+@* Вывод коллекции сведений об инструкторах *@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5">
+    <thead>
+    <tr class="align-middle">
+        <th>Id</th>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Категория</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (Instructor instructor in Model)
+    {
+        <tr class="align-middle">
+            <td class="alignment-center">@instructor.Id</td>
+            <td>@instructor.Surname @instructor.Name @instructor.Patronymic</td>
+            <td>@($"{instructor.BirthDate:dd.MM.yyyy}")</td>
+            <td>@instructor.Category</td>
+            @if (ViewBag.ShowControls is null)
+            {
+                <td>
+                    <a class="btn btn-sm btn-outline-primary my-3 d-block" asp-controller="Instructors" asp-action="EditInstructor" asp-route-id="@instructor.Id">
+                        Редактировать
+                    </a>
+                    <a class="btn btn-sm btn-outline-info d-block" data-instructorId=@instructor.Id id="instructorDetails"
+                     data-bs-toggle="modal" data-bs-target="#instructor">
+                        Подробнее
+                    </a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (Model.Count() <= 0)
+{
+ <div  class="alert alert-danger mt-2" role="alert" >
+     <b>Коллекция пуста</b>, удалите JSON-файл и обновите страницу, или добавляйте фигуры вручную!
+
+ </div>
+
+}
+
+<!-- Модальное окно - выборка инструкторов по категории -->
+<div class="modal fade" id="inputCategory" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Введите промежуточную точку маршрута</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+        <form method="post" asp-controller="Instructors" 
+            asp-action="SelectByCategory"
+
+            id="formCategory"
+            class="rounded-3 mx-auto w-100 ">
+
+            <!-- Промежуточная точка -->
+            <div class="form-floating">
+                <input name="category" class="form-control"/>
+                <label for="category">Категоия инструктора</label>
+            </div>
+
+        </form>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="submit" form="formCategory" class="btn btn-primary px-3">Найти</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Модальное окно - сведенья об инструкторе -->
+<div class="modal fade" id="instructor" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Сведенья об инструкторе</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+          <p id="InsSurame"></p>
+          <p id="InsName"></p>
+          <p id="InsPatronymic"></p>
+          <p id="InsCategory"></p>
+          <p id="InsBirthDate"></p>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+@*Скрипт временно находится в основном CSHTML*@
+<script>
+    // вспомогательная функция для доступа к элементам DOM
+    $ = id => document.getElementById(id);
+
+    // объект для AJAX-запроса - чистый JavaScript
+    // AJAX - Asynchronous Javascript And XML 
+    let xhr = new XMLHttpRequest();
+
+    let btn = $("instructorDetails");
+    btn.addEventListener("click",
+        () => {
+
+
+            let value = btn.getAttribute("data-instructorId");
+            console.log(`Id: ${value}`);
+           
+            // открыть AJAX-запрос
+
+            xhr.open("GET", `/Instructors/GetInstructor?id=${value}`);
+
+            // отправить запрос
+            xhr.send();
+
+            //Прием данных
+            xhr.onload = () => {
+                let instructor = JSON.parse(xhr.response);
+
+                console.log(instructor);
+
+                $("InsSurame").innerHTML = `<b>Фамилия:</b> ${instructor.surname}`;
+                $("InsName").innerHTML = `<b>Имя:</b> ${instructor.name}`;
+                $("InsPatronymic").innerHTML = `<b>Отчество:</b> ${instructor.patronymic}`;
+                $("InsCategory").innerHTML = `<b>Категория:</b> ${instructor.category}`;
+                $("InsBirthDate").innerHTML = `<b>дата рождения:</b> ${instructor.birthDate}`;
+            };
+        });
+</script>

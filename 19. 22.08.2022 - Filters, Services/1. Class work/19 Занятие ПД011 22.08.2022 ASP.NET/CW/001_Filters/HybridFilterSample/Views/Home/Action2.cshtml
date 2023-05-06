@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Action2";
+}
+
+<h2>Гибридный фильтр. @ViewBag.Title</h2>
+
+@* имитация длительной обработки в процессе рендернига страницы на сервере *@
+@{
+    System.Threading.Thread.Sleep(2_000);
+}
+<br />
+<a asp-action="Index">На главную</a>

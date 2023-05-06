@@ -1,0 +1,45 @@
+﻿@model HomeWork.Models.ViewModels.Clients.SelectByRangeYearsOldViewModel
+
+@section NavBar
+{
+    @await Html.PartialAsync("_ClientsNavBarView")
+}
+
+@section Head
+{
+    @* скрипты валидации *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/js/clientInfo.js"></script>
+}
+
+<section class="mx-5 my-4 bg-light shadow-sm border rounded-3 h-75 p-3">
+
+    <h5 class="text-center">@ViewBag.Title</h5>
+
+    <form method="post" asp-controller="Clients" asp-action="SelectByRangeYearsOld" class="container-fluid align-items-center">
+
+        <div class="row">
+            <label asp-for="MinYears" class="form-label">Диапазон возраста (км):</label>
+
+            <input asp-for="MinYears" class="form-control w-10rem mx-3">
+            <input asp-for="MaxYears" class="form-control w-10rem mx-3">
+
+            <input class="btn btn-success w-10rem" type="submit" value="Выбрать">
+        </div>
+
+
+        <div class="row">
+            <span asp-validation-for="MaxYears" class="w-100 text-danger"></span>
+            <span asp-validation-for="MinYears" class="w-100 text-danger"></span>
+        </div>
+
+    </form>
+
+
+    @* Рендер таблицы *@
+    @await Html.PartialAsync("_ClientsTableView", Model.Clients)
+
+</section>

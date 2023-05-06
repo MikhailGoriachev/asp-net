@@ -1,0 +1,20 @@
+﻿@model List<Homework.Models.UserTask>
+
+<div class="row">
+    <div class="col-8 w-auto">
+        <ul class="list-group mb-4 mx-5">
+            @foreach (var item in Model!) {
+                <li class="list-group-item">
+                    <h4><i class="fa-regular fa-@(item.Completed ? "square-check" : "square")"></i> @item.Title </h4>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-auto">
+        <ul class="fs-5">
+            <li>Всего задач: @ViewBag.TasksCount</li>
+            <li>Завершено: @ViewBag.TasksCompleted</li>
+            <li>Не завершено: @ViewBag.TasksIncompleted</li>
+        </ul>
+    </div>
+</div>

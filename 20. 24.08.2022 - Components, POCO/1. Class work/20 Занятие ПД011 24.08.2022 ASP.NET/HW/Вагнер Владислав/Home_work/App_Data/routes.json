@@ -1,0 +1,87 @@
+[
+  {
+    "Id": 1,
+    "StartingPoint": "Марсель",
+    "MiddlePoint": "Помпеи",
+    "EndPoint": "Селангер",
+    "Complexity": "C+",
+    "Length": 187,
+    "InstructorData": {
+      "Id": 2,
+      "Surname": "Кротов",
+      "Name": "Евгений",
+      "Patronymic": "Вениаминович",
+      "Category": "A",
+      "SNP": "Кротов Е.В.",
+      "BirthDate": "1988-12-23T00:00:00"
+    }
+  },
+  {
+    "Id": 2,
+    "StartingPoint": "Будапешт",
+    "MiddlePoint": "Майнхед",
+    "EndPoint": "Тронхейме",
+    "Complexity": "C+",
+    "Length": 90,
+    "InstructorData": {
+      "Id": 2,
+      "Surname": "Кротов",
+      "Name": "Евгений",
+      "Patronymic": "Вениаминович",
+      "Category": "A",
+      "SNP": "Кротов Е.В.",
+      "BirthDate": "1988-12-23T00:00:00"
+    }
+  },
+  {
+    "Id": 3,
+    "StartingPoint": "Варшава",
+    "MiddlePoint": "Майнхед",
+    "EndPoint": "Тронхейме",
+    "Complexity": "C-",
+    "Length": 105,
+    "InstructorData": {
+      "Id": 3,
+      "Surname": "Островский",
+      "Name": "Назар",
+      "Patronymic": "Александрович",
+      "Category": "A",
+      "SNP": "Островский Н.А.",
+      "BirthDate": "1997-07-08T00:00:00"
+    }
+  },
+  {
+    "Id": 4,
+    "StartingPoint": "Марсель",
+    "MiddlePoint": "Селангер",
+    "EndPoint": "Тронхейме",
+    "Complexity": "A-",
+    "Length": 65,
+    "InstructorData": {
+      "Id": 2,
+      "Surname": "Кротов",
+      "Name": "Евгений",
+      "Patronymic": "Вениаминович",
+      "Category": "A",
+      "SNP": "Кротов Е.В.",
+      "BirthDate": "1988-12-23T00:00:00"
+    }
+  },
+  {
+    "Id": 5,
+    "StartingPoint": "Будапешт",
+    "MiddlePoint": "Варшава",
+    "EndPoint": "Тронхейме",
+    "Complexity": "B+",
+    "Length": 96,
+    "InstructorData": {
+      "Id": 2,
+      "Surname": "Кротов",
+      "Name": "Евгений",
+      "Patronymic": "Вениаминович",
+      "Category": "A",
+      "SNP": "Кротов Е.В.",
+      "BirthDate": "1988-12-23T00:00:00"
+    }
+  }
+]

@@ -1,0 +1,71 @@
+﻿@using ASP_NET_15_FormAspNet.Models
+@model IEnumerable<ASP_NET_15_FormAspNet.Models.Book>
+
+@{
+    string Active(string mode) => (string)ViewData["Mode"] == mode ? "" : "outline-";
+}
+
+@section Icons{ 
+   <link rel="shortcut icon" href="/imgs/koi-fish.png" type="image/x-icon" /> 
+} 
+
+@* Секция для команд в навигационном меню *@
+@section NavBarCommand{    
+<li class="nav-item border border-end-0 border-2 rounded-start border-primary border-opacity-75">
+    <a class="nav-link dropdown-toggle" href="#" role="button" 
+       data-bs-toggle="dropdown">Сортировки</a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="Index">Вывод исходной коллекции</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="OrderByFio">Вывод сведений о книгах, упорядоченных по фамилиям авторов</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="OrderByYear">Вывод сведений о книгах, упорядоченных по годам издания</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="OrderByDescendingPrice">Вывод сведений о книгах, упорядоченных по убыванию цены</a></li>
+    </ul>
+</li>
+
+<li class="nav-item border border-start-0 border-2 rounded-end border-primary border-opacity-75">
+    <a class="nav-link dropdown-toggle" href="#" role="button"
+       data-bs-toggle="dropdown">Выборки</a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="SelectByAmountMax">Вывод книг с максимальным кол-во экземпляров</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="SelectByAmountMin">Вывод книг с минимальным кол-во экземпляров</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="SelectByOldBook">Вывод самых старых книг</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="SelectByNewBook">Вывод самых новых книг</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="SelectByExpensiveBook">Вывод самых дорогих книг</a></li>
+        <li><a class="dropdown-item" asp-controller="Task" asp-action="SelectByCheapBook">Вывод самых дешевых книг</a></li>
+    </ul>
+</li>   
+}
+
+<div class="container col-10">
+    
+    <h4>@ViewBag.Title</h4> 
+    
+    <table class="table table-borderless table-hover">
+        <theader>
+            <tr class="bg-gradient border-3 border-top-0 border-start-0 border-end-0 border-secondary text-center align-middle">
+                <th>Ид</th>
+                <th>Обложка</th>
+                <th>Автор</th>
+                <th>Название</th>
+                <th>Год издания, год</th>
+                <th>Цена, рубли</th>
+                <th>Количество, штук</th>
+                <th><a class="btn btn-@Active("Add")primary" asp-controller="Task" asp-action="AddBook">Добавить</a></th>
+            </tr>
+        </theader>
+        <tbody>
+        @foreach (var book in Model) {
+            <tr class="text-center align-middle">
+                <td>@book.Id</td>
+                <td><img src="~/imgs/Task/@book.Cover" width="80px"/></td>
+                <td>@book.Fio</td>
+                <td>@book.Name</td>
+                <td>@book.Year</td>
+                <td>@book.Price</td>
+                <td>@book.Amount</td>
+                <td><a class="btn btn-@Active("Remove")danger"  asp-controller="Task" asp-action="RemoveBook" asp-route-id="@book.Id">Удалить</a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

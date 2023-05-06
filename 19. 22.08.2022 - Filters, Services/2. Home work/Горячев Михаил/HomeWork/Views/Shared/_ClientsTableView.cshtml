@@ -1,0 +1,141 @@
+﻿@model IEnumerable<HomeWork.Models.Client>
+
+<table class="table align-middle" id="clientsTableId">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Фото клиента</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Возраст (лет)</th>
+        <th>Номер телефона</th>
+        <th>Адрес электронной почты</th>
+        <th>Постоянный клиент (да/нет)</th>
+        <th>
+            <a class="btn btn-success w-100" asp-controller="Clients" asp-action="AddClient">
+                Добавить
+            </a>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var client in Model)
+    {
+        <tr>
+            <td>@client.Id</td>
+            <td>
+                <img src="~/images/persons/@client.ImageFile" alt="client@(client.Id)" class="h-7rem">
+            </td>
+            <td>@client.Surname</td>
+            <td>@client.Name</td>
+            <td>@client.Patronymic</td>
+            <td>@client.YearsOld</td>
+            <td>@client.TelNumber</td>
+            <td>@client.Mail</td>
+            <td>@(client.IsActive ? "да" : "нет")</td>
+            <td>
+                <a class="btn btn-outline-primary" asp-controller="Clients" asp-action="EditClient"
+                   asp-route-id="@client.Id" title="Изменить...">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+
+                <a class="btn btn-outline-dark" asp-controller="Clients" asp-action="EditClientPassword" asp-route-id="@client.Id"
+                   title="Задать новый пароль...">
+                    <i class="bi bi-key"></i>
+                </a>
+
+                <a class="btn btn-outline-danger" asp-controller="Clients" asp-action="RemoveClient" asp-route-id="@client.Id"
+                   title="Удалить">
+                    <i class="bi bi-eraser-fill"></i>
+                </a>
+
+                <a class="btn btn-outline-success" data-client-id="@client.Id" title="Подробная информация..."
+                   data-bs-toggle="modal"
+                   data-bs-target="#clientModalId">
+                    <i data-client-id="@client.Id"
+                       class="bi bi-info-circle">
+                    </i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div id="clientModalId" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Заголовок окна -->
+            <div class="modal-header">
+                <h5>Подробная информация</h5>
+            </div>
+
+            <div class="mx-5">
+
+                @* id *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Id:</label>
+                    <input id="clientId" class="form-control" readonly>
+                </div>
+
+                @* фамилия *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Фамилия:</label>
+                    <input id="clientSurname" class="form-control" readonly>
+                </div>
+
+                @* имя *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Имя:</label>
+                    <input id="clientName" class="form-control" readonly>
+                </div>
+
+                @* отчество *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Отчество:</label>
+                    <input id="clientPatronymic" class="form-control" readonly>
+                </div>
+
+                @* возраст *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Возраст (лет):</label>
+                    <input id="clientYearsOld" class="form-control" readonly>
+                </div>
+
+                @* номер телефона *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Номер телефона:</label>
+                    <input id="clientTelNumber" class="form-control" readonly>
+                </div>
+
+                @* Адрес эл.почты *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Адрес эл.почты:</label>
+                    <input id="clientMail" class="form-control" readonly>
+                </div>
+
+                @* Постоянный клиент (да/нет) *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Постоянный киент:</label>
+                    <input id="clientIsActive" class="form-control" readonly>
+                </div>
+
+                @* Пароль *@
+                <div class="input-group my-3">
+                    <label class="input-group-text w-10rem">Пароль:</label>
+                    <input id="clientPassword" class="form-control" readonly>
+                </div>
+
+            </div>
+
+            <!-- Подвал модального окна -->
+            <div class="modal-footer">
+                <input form="clientModalId" class="btn btn-danger" data-bs-dismiss="modal"
+                       type="reset" value="Закрыть"/>
+            </div>
+        </div>
+    </div>
+</div>

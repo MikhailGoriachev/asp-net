@@ -1,0 +1,217 @@
+﻿@* Прелставление для вывода сведений об клиентах *@
+@namespace Home_work
+@model IEnumerable<Client>
+@using Home_work.Models.Clients
+@using Home_work.Infrastructure
+@using System.IO
+@{
+    ViewBag.title = "Клиенты";
+    ViewBag.PageName = "Clients";
+}
+
+@section Head{
+    <script src="~/scripts/ClientDetails.js"></script>
+}
+
+<!--Задание-->
+<details class="task-details">
+    <summary class="h5 text-primary">
+        Задание 2
+    </summary>
+    <p>
+        <b>Задача 2. </b>
+        В приложение по <b>задаче 1</b> добавьте возможность работы с коллекцией клиентов туристической фирмы. 
+        Сведения о клиенте содержат идентификатор, фамилию, имя, 
+        отчество, возраст клиента в годах, номер телефона, 
+        адрес электронной почты, пароль, признак постоянного клиента, 
+        фотографию пользователя. При инициализации в коллекции клиентов должно быть не менее 12 записей.
+    </p>
+
+    <p>
+        Требуется хранить коллекцию сведений о клиентах в файле clients.json в папке App_Data. 
+        Также надо добавлять, изменять и удалять сведения о клиенте, 
+        в том числе загружать фотографию клиента на сервер. 
+        При удалении сведений о клиенте его фотография также должна удаляться с сервера. 
+    </p>
+
+    <p>
+        Для сведений о клиенте действуют следующие бизнес-правила:
+    </p>
+
+    <ul>
+        <li>Все поля обязательны для ввода (кроме идентификатора, 
+            это поле генерируется в коде для обеспечения уникальности)</li>
+        <li>Пароль должен быть от 8 до 28 символов в длину, хранить пароль 
+            в коллекции и в файле требуется в закодированном виде, 
+            для кодирования требуется применить операцию «Исключающее ИЛИ» каждого байта строки пароля и числа 42</li>
+        <li>Возраст клиента должен быть от 18 до 65 лет</li>
+    </ul>
+
+    <p>
+        Для коллекции сведений о клиентах реализуйте следующий функционал (критерии сортировки и выборки задавайте через переменные маршрута):
+    </p>
+
+    <ul>
+        <li>Вывод коллекции в порядке хранения в файле данных</li> 
+        <li>Вывод коллекции в алфавитном порядке</li> 
+        <li>Вывод коллекции по убыванию возраста</li>
+        
+        <li>Вывод сведений о клиентах с заданным диапазоном возраста 
+            (требуется валидация параметров на стороне клиента и на стороне сервера)</li>
+        <li>Вывод сведений о клиентах по фамилии</li>
+        <li>Вывод сведений о постоянных клиентах</li>
+
+        <li>Вывод сведений о клиенте, выбранном кнопкой (аналогично редактированию) 
+            в модальном «окне» на той же странице, что и сведения о маршрутах 
+            (используйте <b>AJAX</b>, возвращение <b>JSON</b> из метода действия контроллера)
+        </li>
+
+    </ul>
+</details>
+
+<h4>@ViewBag.Header</h4>
+@* Вывод коллекции сведений об клиентах *@
+<table class="table table-hover table-bordered w-80 mx-auto mb-5" id="ClientsTable">
+    <thead>
+    <tr class="align-middle">
+        <th>Id</th>
+        <th>Фото</th>
+        <th>ФИО клиента</th>
+        <th>Возраст</th>
+        <th>Номер телефона</th>
+        <th>Электронная почта</th>
+        <th>Постоянный клиент</th>
+        @if (ViewBag.ShowControls is null)
+        {
+            <th class="alignment-center">
+                <a class="btn btn-success" asp-controller="Clients" asp-action="AddClient">
+                    Добавить
+                </a>
+            </th>
+        }
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach (Client client in Model)
+    {
+        <tr class="align-middle" >
+            <td class="alignment-center">@client.Id</td>
+            <td class="alignment-center">
+                @*Если фото клиента не найдено, тогда вывести картинку по умолчанию*@
+                @if (File.Exists(System.IO.Path.Combine(@"wwwroot\images\clients",client.PhotoFile ?? ""))) {
+                    <img src="~/images/clients/@client.PhotoFile" alt="фотография клиента, id: @client.Id" height="100"/>
+                }
+                else{
+                    <img src="~/images/clients/default.jpg" alt="фотография клиента, id: @client.Id" height="100"/>
+                }
+            </td>
+            <td>@client.Surname @client.Name @client.Patronymic</td>
+            <td class="alignment-center">@client.Age</td>
+            <td class="alignment-center">@client.PhoneNumber</td>
+            <td class="alignment-center">@client.Email</td>
+            <td class="alignment-center">@(client.IsConstant?"Постоянный":"Не постоянный")</td>
+            @if (true@*ViewBag.ShowControls is null*@)
+            {
+                <td>
+                    <a class="btn btn-sm btn-outline-danger d-block" asp-controller="Clients" asp-action="DeleteClient" asp-route-value="@client.Id">
+                        Удалить
+                    </a>
+                    <a class="btn btn-sm btn-outline-primary my-3 d-block" asp-controller="Clients" asp-action="EditClient" asp-route-value="@client.Id">
+                        Редактировать
+                    </a>
+                    <a class="btn btn-sm btn-outline-info d-block" data-clientId="@client.Id"
+                     data-bs-toggle="modal" data-bs-target="#client">
+                        Подробнее
+                    </a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (Model.Count() <= 0)
+{
+ <div  class="alert alert-danger mt-2" role="alert" >
+     <b>Коллекция пуста</b>, либо ничего не найдено!
+
+ </div>
+
+}
+
+<!-- Модальное окно - выборка клиентов по фамилии -->
+<div class="modal fade" id="modalFormSurname" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Введите промежуточную точку маршрута</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+        <form method="post" asp-controller="Clients" 
+            asp-action="Selection"
+            asp-route-value="SelectBySurname"
+
+            id="formCategory"
+            class="rounded-3 mx-auto w-100 ">
+
+            <!-- Промежуточная точка -->
+            <div class="form-floating">
+                <select class="form-control form-select" name="Surname" asp-items="@ViewBag.SelectSurnames">
+                </select>
+                <label for="category">Фамилия клиента</label>
+            </div>
+
+        </form>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="submit" form="formCategory" class="btn btn-primary px-3">Найти</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Модальное окно - сведения о клиенте -->
+<div class="modal fade" id="client" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <!--Заголовок окна-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Сведения о клиенте</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      
+      <!--Основной контент-->
+      <div class="modal-body">
+          <p id="ClientPhoto" class="alignment-center"></p>
+          <p id="ClientSurame"></p>
+          <p id="ClientName"></p>
+          <p id="ClientPatronymic"></p>
+          <p id="ClientAge"></p>
+          <p id="ClientPhoneNumber"></p>
+          <p id="ClientEmail"></p>
+          <p id="ClientPassword"></p>
+          <p id="IsConstantClient"></p>
+      </div>
+
+      <!--Подвал окна-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<HomeWork.Models.Query08Result>
+
+<table class="table table-hover align-middle">
+    <thead>
+    <tr>
+        <th>Страна</th>
+        <th>Средняя стоимость транс. услуг (&#8381;)</th>
+        <th>Количество</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var result in Model)
+    {
+        <tr>
+            <th>@result.CountryName</th>
+            <td>@(result.AvgDailyCost != null ? $"{result.AvgDailyCost:n2}" : "нет данных")</td>
+            <td>@(result.Count != null ? $"{result.Count}" : "нет данных")</td>
+        </tr>
+    }
+    </tbody>
+</table>

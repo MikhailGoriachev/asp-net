@@ -1,0 +1,35 @@
+﻿@using EntityFrameworkInAspNetCoreMvcIntro.Models
+@model IEnumerable<EntityFrameworkInAspNetCoreMvcIntro.Models.User>
+
+<h1>Список пользователей сервиса (сортировка)</h1>
+<table>
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            <a asp-action="OrderBy" asp-route-sortOrder="@ViewBag.NameSort">
+                Имя
+            </a>
+        </th>
+        <th>
+            <a asp-action="OrderBy" asp-route-sortOrder="@ViewBag.AgeSort">
+                Возраст
+            </a>
+        </th>
+        <th>
+            <a asp-action="OrderBy" asp-route-sortOrder="@ViewBag.CompSort">
+                Компания
+            </a>
+        </th>
+    </tr>
+    @foreach (User u in Model)
+    {
+        <tr>
+            <td>@u.Id</td>
+            <td>@u.Name</td>
+            <td>@u.Age</td>
+            <td>@u.Company?.Name</td>
+        </tr>
+    }
+</table>

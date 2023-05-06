@@ -1,0 +1,49 @@
+﻿@model List<Homework.Models.Planet>
+
+<div class="mt-2 fs-5 color-3">
+    <span><b>Диаметр:</b>
+        min=<span class="color-1">@ViewBag.MinDiameter</span>,
+        max=<span class="color-1">@ViewBag.MaxDiameter</span>,
+        avg=<span class="color-1">@($"{(double)ViewBag.AvgDiameter:F2}")</span>;
+        </span>
+    <span class="ms-3"><b>Орбитальный период:</b>
+        min=<span class="color-1">@ViewBag.MinOrbital</span>,
+        max=<span class="color-1">@ViewBag.MaxOrbital</span>,
+        avg=<span class="color-1">@($"{(double)ViewBag.AvgOrbital:F2}")</span>;
+        </span>
+</div>
+
+<table class="table mt-4 text-start" id="clientsTable">
+    <thead class="border-dark">
+    <tr>
+        <th>Id</th>
+        <th>Названия</th>
+        <th>Климат</th>
+        <th>Диаметр</th>
+        <th>Орбитальный период</th>
+        <th>Поверхность</th>
+        <th>Население</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody class="color-2">
+    @foreach (var item in Model!)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Climate</td>
+            <td>@item.Diameter</td>
+            <td>@item.OrbitalPeriod</td>
+            <td>@item.Terrain</td>
+            <td>@item.Population</td>
+            <td> <a asp-controller="Planets" asp-action="PlanetInfo" asp-route-id="@item.Id"
+                    class="btn btn-sm btn-outline-primary ms-2" title="Информация о планете">
+                    <i class="fa fa-info-circle"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
